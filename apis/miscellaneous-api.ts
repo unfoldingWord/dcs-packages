@@ -48,7 +48,7 @@ export const MiscellaneousApiAxiosParamCreator = function (configuration?: Confi
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("access_token")
                     : await configuration.apiKey;
-                localVarQueryParameter["access_token"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarQueryParameter["access_token"] = localVarApiKeyValue;
             }
 
             // authentication AuthorizationHeaderToken required
@@ -77,7 +77,7 @@ export const MiscellaneousApiAxiosParamCreator = function (configuration?: Confi
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("sudo")
                     : await configuration.apiKey;
-                localVarQueryParameter["sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarQueryParameter["sudo"] = localVarApiKeyValue;
             }
 
             // authentication TOTPHeader required
@@ -93,7 +93,7 @@ export const MiscellaneousApiAxiosParamCreator = function (configuration?: Confi
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("token")
                     : await configuration.apiKey;
-                localVarQueryParameter["token"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarQueryParameter["token"] = localVarApiKeyValue;
             }
 
             const query = new URLSearchParams(localVarUrlObj.search);
@@ -135,7 +135,7 @@ export const MiscellaneousApiAxiosParamCreator = function (configuration?: Confi
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("access_token")
                     : await configuration.apiKey;
-                localVarQueryParameter["access_token"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarQueryParameter["access_token"] = localVarApiKeyValue;
             }
 
             // authentication AuthorizationHeaderToken required
@@ -164,7 +164,7 @@ export const MiscellaneousApiAxiosParamCreator = function (configuration?: Confi
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("sudo")
                     : await configuration.apiKey;
-                localVarQueryParameter["sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarQueryParameter["sudo"] = localVarApiKeyValue;
             }
 
             // authentication TOTPHeader required
@@ -180,7 +180,7 @@ export const MiscellaneousApiAxiosParamCreator = function (configuration?: Confi
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("token")
                     : await configuration.apiKey;
-                localVarQueryParameter["token"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarQueryParameter["token"] = localVarApiKeyValue;
             }
 
             const query = new URLSearchParams(localVarUrlObj.search);
@@ -222,7 +222,7 @@ export const MiscellaneousApiAxiosParamCreator = function (configuration?: Confi
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("access_token")
                     : await configuration.apiKey;
-                localVarQueryParameter["access_token"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarQueryParameter["access_token"] = localVarApiKeyValue;
             }
 
             // authentication AuthorizationHeaderToken required
@@ -251,7 +251,7 @@ export const MiscellaneousApiAxiosParamCreator = function (configuration?: Confi
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("sudo")
                     : await configuration.apiKey;
-                localVarQueryParameter["sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarQueryParameter["sudo"] = localVarApiKeyValue;
             }
 
             // authentication TOTPHeader required
@@ -267,7 +267,7 @@ export const MiscellaneousApiAxiosParamCreator = function (configuration?: Confi
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("token")
                     : await configuration.apiKey;
-                localVarQueryParameter["token"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarQueryParameter["token"] = localVarApiKeyValue;
             }
 
             const query = new URLSearchParams(localVarUrlObj.search);
@@ -310,7 +310,7 @@ export const MiscellaneousApiAxiosParamCreator = function (configuration?: Confi
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("access_token")
                     : await configuration.apiKey;
-                localVarQueryParameter["access_token"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarQueryParameter["access_token"] = localVarApiKeyValue;
             }
 
             // authentication AuthorizationHeaderToken required
@@ -339,7 +339,7 @@ export const MiscellaneousApiAxiosParamCreator = function (configuration?: Confi
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("sudo")
                     : await configuration.apiKey;
-                localVarQueryParameter["sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarQueryParameter["sudo"] = localVarApiKeyValue;
             }
 
             // authentication TOTPHeader required
@@ -355,7 +355,7 @@ export const MiscellaneousApiAxiosParamCreator = function (configuration?: Confi
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("token")
                     : await configuration.apiKey;
-                localVarQueryParameter["token"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarQueryParameter["token"] = localVarApiKeyValue;
             }
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -406,7 +406,7 @@ export const MiscellaneousApiAxiosParamCreator = function (configuration?: Confi
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("access_token")
                     : await configuration.apiKey;
-                localVarQueryParameter["access_token"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarQueryParameter["access_token"] = localVarApiKeyValue;
             }
 
             // authentication AuthorizationHeaderToken required
@@ -435,7 +435,7 @@ export const MiscellaneousApiAxiosParamCreator = function (configuration?: Confi
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("sudo")
                     : await configuration.apiKey;
-                localVarQueryParameter["sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarQueryParameter["sudo"] = localVarApiKeyValue;
             }
 
             // authentication TOTPHeader required
@@ -451,7 +451,7 @@ export const MiscellaneousApiAxiosParamCreator = function (configuration?: Confi
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("token")
                     : await configuration.apiKey;
-                localVarQueryParameter["token"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarQueryParameter["token"] = localVarApiKeyValue;
             }
 
             localVarHeaderParameter['Content-Type'] = 'text/plain';
