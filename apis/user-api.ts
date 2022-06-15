@@ -75,7 +75,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -88,7 +88,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -104,7 +104,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -166,7 +166,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -179,7 +179,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -195,7 +195,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -253,7 +253,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -266,7 +266,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -282,7 +282,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -341,7 +341,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -354,7 +354,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -370,7 +370,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -433,7 +433,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -446,7 +446,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -462,7 +462,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -536,7 +536,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -549,7 +549,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -565,7 +565,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -628,7 +628,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -641,7 +641,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -657,7 +657,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -726,7 +726,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -739,7 +739,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -755,7 +755,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -823,7 +823,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -836,7 +836,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -852,7 +852,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -922,7 +922,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -935,7 +935,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -951,7 +951,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -1015,7 +1015,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -1028,7 +1028,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -1044,7 +1044,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -1108,7 +1108,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -1121,7 +1121,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -1137,7 +1137,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -1201,7 +1201,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -1214,7 +1214,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -1230,7 +1230,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -1300,7 +1300,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -1313,7 +1313,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -1329,7 +1329,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -1393,7 +1393,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -1406,7 +1406,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -1422,7 +1422,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -1486,7 +1486,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -1499,7 +1499,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -1515,7 +1515,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -1575,7 +1575,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -1588,7 +1588,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -1604,7 +1604,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -1672,7 +1672,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -1685,7 +1685,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -1701,7 +1701,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -1769,7 +1769,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -1782,7 +1782,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -1798,7 +1798,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -1867,7 +1867,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -1880,7 +1880,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -1896,7 +1896,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -1968,7 +1968,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -1981,7 +1981,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -1997,7 +1997,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -2065,7 +2065,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -2078,7 +2078,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -2094,7 +2094,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -2162,7 +2162,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -2175,7 +2175,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -2191,7 +2191,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -2258,7 +2258,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -2271,7 +2271,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -2287,7 +2287,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -2350,7 +2350,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -2363,7 +2363,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -2379,7 +2379,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -2447,7 +2447,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -2460,7 +2460,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -2476,7 +2476,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -2546,7 +2546,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -2559,7 +2559,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -2575,7 +2575,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -2635,7 +2635,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -2648,7 +2648,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -2664,7 +2664,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -2746,7 +2746,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -2759,7 +2759,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -2775,7 +2775,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -2834,7 +2834,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -2847,7 +2847,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -2863,7 +2863,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -2931,7 +2931,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -2944,7 +2944,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -2960,7 +2960,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -3024,7 +3024,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -3037,7 +3037,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -3053,7 +3053,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -3111,7 +3111,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -3124,7 +3124,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -3140,7 +3140,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -3204,7 +3204,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -3217,7 +3217,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -3233,7 +3233,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -3297,7 +3297,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -3310,7 +3310,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -3326,7 +3326,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -3386,7 +3386,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -3399,7 +3399,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -3415,7 +3415,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -3483,7 +3483,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -3496,7 +3496,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -3512,7 +3512,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -3586,7 +3586,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -3599,7 +3599,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -3615,7 +3615,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -3681,7 +3681,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -3694,7 +3694,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -3710,7 +3710,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -3776,7 +3776,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -3789,7 +3789,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -3805,7 +3805,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -3879,7 +3879,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -3892,7 +3892,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -3908,7 +3908,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -3982,7 +3982,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -3995,7 +3995,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -4011,7 +4011,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -4086,7 +4086,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -4099,7 +4099,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -4115,7 +4115,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -4193,7 +4193,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -4206,7 +4206,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -4222,7 +4222,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -4296,7 +4296,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -4309,7 +4309,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -4325,7 +4325,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -4399,7 +4399,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -4412,7 +4412,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -4428,7 +4428,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -4496,7 +4496,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -4509,7 +4509,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -4525,7 +4525,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -4596,7 +4596,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -4609,7 +4609,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -4625,7 +4625,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -4714,7 +4714,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -4727,7 +4727,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -4743,7 +4743,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
@@ -4805,7 +4805,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
             // authentication BasicAuth required
@@ -4818,7 +4818,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Sudo")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["Sudo"] = localVarApiKeyValue;
             }
 
             // authentication SudoParam required
@@ -4834,7 +4834,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("X-GITEA-OTP")
                     : await configuration.apiKey;
-                localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
+                if (localVarApiKeyValue) localVarHeaderParameter["X-GITEA-OTP"] = localVarApiKeyValue;
             }
 
             // authentication Token required
