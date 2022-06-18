@@ -15,13 +15,18 @@
   "typings": "./dist/index.d.ts",
   "scripts": {
     "build": "tsc --outDir dist/",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "docmd": "npx typedoc --plugin typedoc-plugin-markdown --out documentation/ ./ --name dcs-js --namedAnchors true",
+    "dochtml": "npx typedoc --plugin none --out typedoc/ ./ --name dcs-js"
   },
   "dependencies": {
     "axios": "^0.21.1"
   },
   "devDependencies": {
     "@types/node": "^12.11.5",
-    "typescript": "^3.6.4"
+    "typedoc": "^0.22.17",
+    "typedoc-github-wiki-theme": "^1.0.1",
+    "typedoc-plugin-markdown": "^3.12.1",
+    "typescript": "^4.7.4"
   }
 }
