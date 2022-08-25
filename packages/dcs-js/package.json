@@ -1,0 +1,32 @@
+{
+  "name": "dcs-js",
+  "version": "1.2.2-beta.1",
+  "description": "OpenAPI client for DCS (Door43 Content Service)",
+  "author": "OpenAPI-Generator Contributors",
+  "keywords": [
+    "axios",
+    "typescript",
+    "openapi-client",
+    "openapi-generator",
+    "dcs"
+  ],
+  "license": "Unlicense",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --outDir dist/",
+    "prepublishOnly": "npm run build",
+    "docmd": "npx typedoc --plugin typedoc-plugin-markdown --out documentation/ ./ --name dcs-js --namedAnchors true",
+    "dochtml": "npx typedoc --plugin none --out typedoc/ ./ --name dcs-js"
+  },
+  "dependencies": {
+    "axios": "^0.21.1"
+  },
+  "devDependencies": {
+    "@types/node": "^12.11.5",
+    "typedoc": "^0.22.17",
+    "typedoc-github-wiki-theme": "^1.0.1",
+    "typedoc-plugin-markdown": "^3.12.1",
+    "typescript": "^4.7.4"
+  }
+}
