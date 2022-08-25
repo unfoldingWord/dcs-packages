@@ -152,7 +152,14 @@ const projects: Project[] = [
      *
      * 输出函数的函数名自定义方法，如果指定将覆盖默认的生成规则
      * */
-    // generateRequestFunctionName: (arg: GenerateRequestFunctionNameParameter) => string,
+    // generateRequestFunctionName: (arg: any) => {
+    //   const pathname: string = arg.pathname;
+    //   const data = arg.schema.paths[pathname];
+    //   const dataKeys = Object.keys(data);
+    //   return dataKeys.length === 1
+    //     ? data[dataKeys[0]].operationId
+    //     : pathname.replace(/[^a-zA-z]/g, "");
+    // },
 
     /**
      * if you need, use this option to generate your function all by your self
