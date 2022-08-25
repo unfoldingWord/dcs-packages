@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@types/node": "^12.11.5",
+    "ts-gear": "^4.10.0",
     "typedoc": "^0.22.17",
     "typedoc-github-wiki-theme": "^1.0.1",
     "typedoc-plugin-markdown": "^3.12.1",

@@ -1,0 +1,16 @@
+{
+  "name": "dcs-packages",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/unfoldingWord/dcs-packages.git",
+  "author": "Abel Perez <abelper54@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/**"
+  ],
+  "devDependencies": {
+    "nx": "14.5.10",
+    "@nrwl/nx-cloud": "latest"
+  }
+}
