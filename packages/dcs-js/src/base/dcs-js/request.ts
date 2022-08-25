@@ -23,6 +23,7 @@ import type {
   NotFound,
   OrganizationList,
   StringSlice,
+  UserList,
   CreateUserOption,
   User,
   TsgError,
@@ -45,26 +46,35 @@ import type {
   CreateHookOption,
   Hook,
   EditHookOption,
+  LabelList,
   CreateLabelOption,
   Label,
   EditLabelOption,
-  UserList,
+  RepositoryList,
+  TeamList,
   CreateTeamOption,
   Team,
   IssueList,
   MigrateRepoOptions,
   SearchResults,
   EditRepoOption,
+  BranchProtectionList,
   CreateBranchProtectionOption,
   BranchProtection,
   EditBranchProtectionOption,
+  BranchList,
   CreateBranchRepoOption,
   Branch,
+  AddCollaboratorOption,
   CommitList,
   EmptyRepository,
   CombinedStatus,
   CommitStatusList,
   ContentsListResponse,
+  ContentsResponse,
+  UpdateFileOptions,
+  FileResponse,
+  CreateFileOptions,
   DeleteFileOptions,
   FileDeleteResponse,
   CreateForkOption,
@@ -76,47 +86,60 @@ import type {
   AnnotatedTag,
   GitTreeResponse,
   GitHookList,
-  EditGitHookOption,
   GitHook,
+  EditGitHookOption,
   IssueTemplates,
   CreateIssueOption,
   Issue,
   CommentList,
-  EditIssueCommentOption,
   Comment,
+  EditIssueCommentOption,
+  ReactionList,
   EditReactionOption,
+  Reaction,
   EditIssueOption,
   CreateIssueCommentOption,
   EditDeadlineOption,
   IssueDeadline,
+  IssueLabelsOption,
   WatchInfo,
   TimelineList,
+  TrackedTimeList,
+  AddTimeOption,
+  TrackedTime,
+  DeployKeyList,
   DeployKey,
   LanguageStatistics,
+  MilestoneList,
   CreateMilestoneOption,
   Milestone,
   EditMilestoneOption,
+  PullRequestList,
   CreatePullRequestOption,
   PullRequest,
   EditPullRequestOption,
   MergePullRequestOption,
   PullReviewRequestOptions,
+  PullReviewList,
   CreatePullReviewOptions,
   PullReview,
+  SubmitPullReviewOptions,
   PullReviewCommentList,
   DismissPullReviewOptions,
+  ReleaseList,
   CreateReleaseOption,
   Release,
   EditReleaseOption,
+  AttachmentList,
   Attachment,
   EditAttachmentOptions,
   CreateStatusOption,
   CommitStatus,
+  TagList,
   CreateTagOption,
   Tag,
   Conflict,
-  TeamList,
-  TrackedTimeList,
+  TopicNames,
   RepoTopicOptions,
   InvalidTopicsError,
   TransferRepoOption,
@@ -130,20 +153,23 @@ import type {
   GeneralRepoSettings,
   GeneralUISettings,
   EditTeamOption,
-  RepositoryList,
   TopicListResponse,
+  OAuthApplicationList,
   CreateOAuthApplicationOptions,
   OAuthApplication,
+  EmailList,
+  CreateEmailOption,
   DeleteEmailOption,
   GPGKey,
-  CreateGPGKeyOption,
-  UserSettingsOptions,
-  UserSettings,
-  StopWatchList,
   GPGKeyList,
-  UserHeatmapData,
+  CreateGPGKeyOption,
   PublicKeyList,
+  UserSettings,
+  UserSettingsOptions,
+  StopWatchList,
+  UserHeatmapData,
   OrganizationPermissions,
+  AccessTokenList,
   CreateAccessTokenOption,
   AccessToken,
   ServerVersion,
@@ -353,8 +379,8 @@ export const adminUnadoptedList = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for adminunadoptedownerrepo */
-export interface AdminunadoptedownerrepoOption {
+/** @description request parameter type for adminAdoptRepository */
+export interface AdminAdoptRepositoryOption {
   /**
    * @description
    *   owner of the repo
@@ -371,30 +397,31 @@ export interface AdminunadoptedownerrepoOption {
   };
 }
 
-/** @description response type for adminunadoptedownerrepo */
-export interface AdminunadoptedownerrepoResponse {
+/** @description response type for adminAdoptRepository */
+export interface AdminAdoptRepositoryResponse {
   204: Empty;
   403: Forbidden;
+  404: NotFound;
 }
 
-export type AdminunadoptedownerrepoResponseSuccess =
-  AdminunadoptedownerrepoResponse[204];
+export type AdminAdoptRepositoryResponseSuccess =
+  AdminAdoptRepositoryResponse[204];
 /**
  * @description
- *   Delete unadopted files
+ *   Adopt unadopted files as a repository
  * @tags admin
  * @produces application/json
  */
-export const adminunadoptedownerrepo = /* #__PURE__ */ (() => {
-  const method = "delete";
+export const adminAdoptRepository = /* #__PURE__ */ (() => {
+  const method = "post";
   const url = "/admin/unadopted/:owner/:repo";
   function request(
-    option: AdminunadoptedownerrepoOption
-  ): Promise<AdminunadoptedownerrepoResponseSuccess> {
+    option: AdminAdoptRepositoryOption
+  ): Promise<AdminAdoptRepositoryResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<AdminunadoptedownerrepoResponseSuccess>;
+    }) as unknown as Promise<AdminAdoptRepositoryResponseSuccess>;
   }
 
   /** http method */
@@ -404,20 +431,125 @@ export const adminunadoptedownerrepo = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for adminusers */
-export interface AdminusersOption {
+/** @description request parameter type for adminDeleteUnadoptedRepository */
+export interface AdminDeleteUnadoptedRepositoryOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+  };
+}
+
+/** @description response type for adminDeleteUnadoptedRepository */
+export interface AdminDeleteUnadoptedRepositoryResponse {
+  204: Empty;
+  403: Forbidden;
+}
+
+export type AdminDeleteUnadoptedRepositoryResponseSuccess =
+  AdminDeleteUnadoptedRepositoryResponse[204];
+/**
+ * @description
+ *   Delete unadopted files
+ * @tags admin
+ * @produces application/json
+ */
+export const adminDeleteUnadoptedRepository = /* #__PURE__ */ (() => {
+  const method = "delete";
+  const url = "/admin/unadopted/:owner/:repo";
+  function request(
+    option: AdminDeleteUnadoptedRepositoryOption
+  ): Promise<AdminDeleteUnadoptedRepositoryResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<AdminDeleteUnadoptedRepositoryResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for adminGetAllUsers */
+export interface AdminGetAllUsersOption {
+  /**
+   * @description
+   *   If the user has one or more repos with the given language(s), the org will be in the results. Multiple lang's are ORed.
+   */
+  query?: {
+    /**
+        @description
+          If the user has one or more repos with the given language(s), the org will be in the results. Multiple lang's are ORed. */
+    lang?: string;
+    /**
+        @description
+          page number of results to return (1-based) */
+    page?: number;
+    /**
+        @description
+          page size of results */
+    limit?: number;
+  };
+}
+
+/** @description response type for adminGetAllUsers */
+export interface AdminGetAllUsersResponse {
+  200: UserList;
+  403: Forbidden;
+}
+
+export type AdminGetAllUsersResponseSuccess = AdminGetAllUsersResponse[200];
+/**
+ * @description
+ *   List all users
+ * @tags admin
+ * @produces application/json
+ */
+export const adminGetAllUsers = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/admin/users";
+  function request(
+    option?: AdminGetAllUsersOption
+  ): Promise<AdminGetAllUsersResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<AdminGetAllUsersResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for adminCreateUser */
+export interface AdminCreateUserOption {
   body?: CreateUserOption;
 }
 
-/** @description response type for adminusers */
-export interface AdminusersResponse {
+/** @description response type for adminCreateUser */
+export interface AdminCreateUserResponse {
   201: User;
   400: TsgError;
   403: Forbidden;
   422: ValidationError;
 }
 
-export type AdminusersResponseSuccess = AdminusersResponse[201];
+export type AdminCreateUserResponseSuccess = AdminCreateUserResponse[201];
 /**
  * @description
  *   Create a user
@@ -425,16 +557,16 @@ export type AdminusersResponseSuccess = AdminusersResponse[201];
  * @produces application/json
  * @consumes application/json
  */
-export const adminusers = /* #__PURE__ */ (() => {
+export const adminCreateUser = /* #__PURE__ */ (() => {
   const method = "post";
   const url = "/admin/users";
   function request(
-    option?: AdminusersOption
-  ): Promise<AdminusersResponseSuccess> {
+    option?: AdminCreateUserOption
+  ): Promise<AdminCreateUserResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<AdminusersResponseSuccess>;
+    }) as unknown as Promise<AdminCreateUserResponseSuccess>;
   }
 
   /** http method */
@@ -444,8 +576,55 @@ export const adminusers = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for adminusersusername */
-export interface AdminusersusernameOption {
+/** @description request parameter type for adminDeleteUser */
+export interface AdminDeleteUserOption {
+  /**
+   * @description
+   *   username of user to delete
+   */
+  path: {
+    /**
+        @description
+          username of user to delete */
+    username: string;
+  };
+}
+
+/** @description response type for adminDeleteUser */
+export interface AdminDeleteUserResponse {
+  204: Empty;
+  403: Forbidden;
+  422: ValidationError;
+}
+
+export type AdminDeleteUserResponseSuccess = AdminDeleteUserResponse[204];
+/**
+ * @description
+ *   Delete a user
+ * @tags admin
+ * @produces application/json
+ */
+export const adminDeleteUser = /* #__PURE__ */ (() => {
+  const method = "delete";
+  const url = "/admin/users/:username";
+  function request(
+    option: AdminDeleteUserOption
+  ): Promise<AdminDeleteUserResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<AdminDeleteUserResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for adminEditUser */
+export interface AdminEditUserOption {
   /**
    * @description
    *   username of user to edit
@@ -458,19 +637,19 @@ export interface AdminusersusernameOption {
   };
 }
 
-/** @description request parameter type for adminusersusername */
-export interface AdminusersusernameOption {
+/** @description request parameter type for adminEditUser */
+export interface AdminEditUserOption {
   body?: EditUserOption;
 }
 
-/** @description response type for adminusersusername */
-export interface AdminusersusernameResponse {
+/** @description response type for adminEditUser */
+export interface AdminEditUserResponse {
   200: User;
   403: Forbidden;
   422: ValidationError;
 }
 
-export type AdminusersusernameResponseSuccess = AdminusersusernameResponse[200];
+export type AdminEditUserResponseSuccess = AdminEditUserResponse[200];
 /**
  * @description
  *   Edit an existing user
@@ -478,16 +657,16 @@ export type AdminusersusernameResponseSuccess = AdminusersusernameResponse[200];
  * @produces application/json
  * @consumes application/json
  */
-export const adminusersusername = /* #__PURE__ */ (() => {
+export const adminEditUser = /* #__PURE__ */ (() => {
   const method = "patch";
   const url = "/admin/users/:username";
   function request(
-    option: AdminusersusernameOption
-  ): Promise<AdminusersusernameResponseSuccess> {
+    option: AdminEditUserOption
+  ): Promise<AdminEditUserResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<AdminusersusernameResponseSuccess>;
+    }) as unknown as Promise<AdminEditUserResponseSuccess>;
   }
 
   /** http method */
@@ -826,8 +1005,80 @@ export const getNodeInfo = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for notifications */
-export interface NotificationsOption {
+/** @description request parameter type for notifyGetList */
+export interface NotifyGetListOption {
+  /**
+   * @description
+   *   If true, show notifications marked as read. Default value is false
+   */
+  query?: {
+    /**
+        @description
+          If true, show notifications marked as read. Default value is false */
+    all?: boolean;
+    /**
+        @description
+          Show notifications with the provided status types. Options are: unread, read and/or pinned. Defaults to unread & pinned. */
+    "status-types"?: Array<string>;
+    /**
+        @description
+          filter notifications by subject type */
+    "subject-type"?: Array<GetNotificationsItems>;
+    /**
+        @description
+          Only show notifications updated after the given time. This is a timestamp in RFC 3339 format
+        @format date-time */
+    since?: string;
+    /**
+        @description
+          Only show notifications updated before the given time. This is a timestamp in RFC 3339 format
+        @format date-time */
+    before?: string;
+    /**
+        @description
+          page number of results to return (1-based) */
+    page?: number;
+    /**
+        @description
+          page size of results */
+    limit?: number;
+  };
+}
+
+/** @description response type for notifyGetList */
+export interface NotifyGetListResponse {
+  200: NotificationThreadList;
+}
+
+export type NotifyGetListResponseSuccess = NotifyGetListResponse[200];
+/**
+ * @description
+ *   List users's notification threads
+ * @tags notification
+ * @produces application/json
+ * @consumes application/json
+ */
+export const notifyGetList = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/notifications";
+  function request(
+    option?: NotifyGetListOption
+  ): Promise<NotifyGetListResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<NotifyGetListResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for notifyReadList */
+export interface NotifyReadListOption {
   /**
    * @description
    *   Describes the last point that notifications were checked. Anything updated since this time will not be updated.
@@ -854,12 +1105,12 @@ export interface NotificationsOption {
   };
 }
 
-/** @description response type for notifications */
-export interface NotificationsResponse {
+/** @description response type for notifyReadList */
+export interface NotifyReadListResponse {
   205: NotificationThreadList;
 }
 
-export type NotificationsResponseSuccess = NotificationsResponse[205];
+export type NotifyReadListResponseSuccess = NotifyReadListResponse[205];
 /**
  * @description
  *   Mark notification threads as read, pinned or unread
@@ -867,16 +1118,16 @@ export type NotificationsResponseSuccess = NotificationsResponse[205];
  * @produces application/json
  * @consumes application/json
  */
-export const notifications = /* #__PURE__ */ (() => {
+export const notifyReadList = /* #__PURE__ */ (() => {
   const method = "put";
   const url = "/notifications";
   function request(
-    option?: NotificationsOption
-  ): Promise<NotificationsResponseSuccess> {
+    option?: NotifyReadListOption
+  ): Promise<NotifyReadListResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<NotificationsResponseSuccess>;
+    }) as unknown as Promise<NotifyReadListResponseSuccess>;
   }
 
   /** http method */
@@ -913,8 +1164,8 @@ export const notifyNewAvailable = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for notificationsthreadsid */
-export interface NotificationsthreadsidOption {
+/** @description request parameter type for notifyGetThread */
+export interface NotifyGetThreadOption {
   /**
    * @description
    *   id of notification thread
@@ -927,8 +1178,56 @@ export interface NotificationsthreadsidOption {
   };
 }
 
-/** @description request parameter type for notificationsthreadsid */
-export interface NotificationsthreadsidOption {
+/** @description response type for notifyGetThread */
+export interface NotifyGetThreadResponse {
+  200: NotificationThread;
+  403: Forbidden;
+  404: NotFound;
+}
+
+export type NotifyGetThreadResponseSuccess = NotifyGetThreadResponse[200];
+/**
+ * @description
+ *   Get notification thread by ID
+ * @tags notification
+ * @produces application/json
+ * @consumes application/json
+ */
+export const notifyGetThread = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/notifications/threads/:id";
+  function request(
+    option: NotifyGetThreadOption
+  ): Promise<NotifyGetThreadResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<NotifyGetThreadResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for notifyReadThread */
+export interface NotifyReadThreadOption {
+  /**
+   * @description
+   *   id of notification thread
+   */
+  path: {
+    /**
+        @description
+          id of notification thread */
+    id: string;
+  };
+}
+
+/** @description request parameter type for notifyReadThread */
+export interface NotifyReadThreadOption {
   /**
    * @description
    *   Status to mark notifications as
@@ -943,15 +1242,14 @@ export interface NotificationsthreadsidOption {
   };
 }
 
-/** @description response type for notificationsthreadsid */
-export interface NotificationsthreadsidResponse {
+/** @description response type for notifyReadThread */
+export interface NotifyReadThreadResponse {
   205: NotificationThread;
   403: Forbidden;
   404: NotFound;
 }
 
-export type NotificationsthreadsidResponseSuccess =
-  NotificationsthreadsidResponse[205];
+export type NotifyReadThreadResponseSuccess = NotifyReadThreadResponse[205];
 /**
  * @description
  *   Mark notification thread as read by ID
@@ -959,16 +1257,16 @@ export type NotificationsthreadsidResponseSuccess =
  * @produces application/json
  * @consumes application/json
  */
-export const notificationsthreadsid = /* #__PURE__ */ (() => {
+export const notifyReadThread = /* #__PURE__ */ (() => {
   const method = "patch";
   const url = "/notifications/threads/:id";
   function request(
-    option: NotificationsthreadsidOption
-  ): Promise<NotificationsthreadsidResponseSuccess> {
+    option: NotifyReadThreadOption
+  ): Promise<NotifyReadThreadResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<NotificationsthreadsidResponseSuccess>;
+    }) as unknown as Promise<NotifyReadThreadResponseSuccess>;
   }
 
   /** http method */
@@ -978,21 +1276,74 @@ export const notificationsthreadsid = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for orgs */
-export interface OrgsOption {
+/** @description request parameter type for orgGetAll */
+export interface OrgGetAllOption {
+  /**
+   * @description
+   *   If the org has one or more repos with the given language(s), the org will be in the results. Multiple lang's are ORed.
+   */
+  query?: {
+    /**
+        @description
+          If the org has one or more repos with the given language(s), the org will be in the results. Multiple lang's are ORed. */
+    lang?: string;
+    /**
+        @description
+          page number of results to return (1-based) */
+    page?: number;
+    /**
+        @description
+          page size of results */
+    limit?: number;
+  };
+}
+
+/** @description response type for orgGetAll */
+export interface OrgGetAllResponse {
+  200: OrganizationList;
+}
+
+export type OrgGetAllResponseSuccess = OrgGetAllResponse[200];
+/**
+ * @description
+ *   Get list of organizations
+ * @tags organization
+ * @produces application/json
+ */
+export const orgGetAll = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/orgs";
+  function request(
+    option?: OrgGetAllOption
+  ): Promise<OrgGetAllResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<OrgGetAllResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for orgCreate */
+export interface OrgCreateOption {
   body: {
     organization: CreateOrgOption;
   };
 }
 
-/** @description response type for orgs */
-export interface OrgsResponse {
+/** @description response type for orgCreate */
+export interface OrgCreateResponse {
   201: Organization;
   403: Forbidden;
   422: ValidationError;
 }
 
-export type OrgsResponseSuccess = OrgsResponse[201];
+export type OrgCreateResponseSuccess = OrgCreateResponse[201];
 /**
  * @description
  *   Create an organization
@@ -1000,14 +1351,14 @@ export type OrgsResponseSuccess = OrgsResponse[201];
  * @produces application/json
  * @consumes application/json
  */
-export const orgs = /* #__PURE__ */ (() => {
+export const orgCreate = /* #__PURE__ */ (() => {
   const method = "post";
   const url = "/orgs";
-  function request(option: OrgsOption): Promise<OrgsResponseSuccess> {
+  function request(option: OrgCreateOption): Promise<OrgCreateResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<OrgsResponseSuccess>;
+    }) as unknown as Promise<OrgCreateResponseSuccess>;
   }
 
   /** http method */
@@ -1017,8 +1368,94 @@ export const orgs = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for orgsorg */
-export interface OrgsorgOption {
+/** @description request parameter type for orgGet */
+export interface OrgGetOption {
+  /**
+   * @description
+   *   name of the organization to get
+   */
+  path: {
+    /**
+        @description
+          name of the organization to get */
+    org: string;
+  };
+}
+
+/** @description response type for orgGet */
+export interface OrgGetResponse {
+  200: Organization;
+}
+
+export type OrgGetResponseSuccess = OrgGetResponse[200];
+/**
+ * @description
+ *   Get an organization
+ * @tags organization
+ * @produces application/json
+ */
+export const orgGet = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/orgs/:org";
+  function request(option: OrgGetOption): Promise<OrgGetResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<OrgGetResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for orgDelete */
+export interface OrgDeleteOption {
+  /**
+   * @description
+   *   organization that is to be deleted
+   */
+  path: {
+    /**
+        @description
+          organization that is to be deleted */
+    org: string;
+  };
+}
+
+/** @description response type for orgDelete */
+export interface OrgDeleteResponse {
+  204: Empty;
+}
+
+export type OrgDeleteResponseSuccess = OrgDeleteResponse[204];
+/**
+ * @description
+ *   Delete an organization
+ * @tags organization
+ * @produces application/json
+ */
+export const orgDelete = /* #__PURE__ */ (() => {
+  const method = "delete";
+  const url = "/orgs/:org";
+  function request(option: OrgDeleteOption): Promise<OrgDeleteResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<OrgDeleteResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for orgEdit */
+export interface OrgEditOption {
   /**
    * @description
    *   name of the organization to edit
@@ -1031,17 +1468,17 @@ export interface OrgsorgOption {
   };
 }
 
-/** @description request parameter type for orgsorg */
-export interface OrgsorgOption {
+/** @description request parameter type for orgEdit */
+export interface OrgEditOption {
   body: EditOrgOption;
 }
 
-/** @description response type for orgsorg */
-export interface OrgsorgResponse {
+/** @description response type for orgEdit */
+export interface OrgEditResponse {
   200: Organization;
 }
 
-export type OrgsorgResponseSuccess = OrgsorgResponse[200];
+export type OrgEditResponseSuccess = OrgEditResponse[200];
 /**
  * @description
  *   Edit an organization
@@ -1049,14 +1486,14 @@ export type OrgsorgResponseSuccess = OrgsorgResponse[200];
  * @produces application/json
  * @consumes application/json
  */
-export const orgsorg = /* #__PURE__ */ (() => {
+export const orgEdit = /* #__PURE__ */ (() => {
   const method = "patch";
   const url = "/orgs/:org";
-  function request(option: OrgsorgOption): Promise<OrgsorgResponseSuccess> {
+  function request(option: OrgEditOption): Promise<OrgEditResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<OrgsorgResponseSuccess>;
+    }) as unknown as Promise<OrgEditResponseSuccess>;
   }
 
   /** http method */
@@ -1180,8 +1617,108 @@ export const orgCreateHook = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for orgsorghooksid */
-export interface OrgsorghooksidOption {
+/** @description request parameter type for orgGetHook */
+export interface OrgGetHookOption {
+  /**
+   * @description
+   *   name of the organization
+   */
+  path: {
+    /**
+        @description
+          name of the organization */
+    org: string;
+    /**
+        @description
+          id of the hook to get
+        @format int64 */
+    id: number;
+  };
+}
+
+/** @description response type for orgGetHook */
+export interface OrgGetHookResponse {
+  200: Hook;
+}
+
+export type OrgGetHookResponseSuccess = OrgGetHookResponse[200];
+/**
+ * @description
+ *   Get a hook
+ * @tags organization
+ * @produces application/json
+ */
+export const orgGetHook = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/orgs/:org/hooks/:id";
+  function request(
+    option: OrgGetHookOption
+  ): Promise<OrgGetHookResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<OrgGetHookResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for orgDeleteHook */
+export interface OrgDeleteHookOption {
+  /**
+   * @description
+   *   name of the organization
+   */
+  path: {
+    /**
+        @description
+          name of the organization */
+    org: string;
+    /**
+        @description
+          id of the hook to delete
+        @format int64 */
+    id: number;
+  };
+}
+
+/** @description response type for orgDeleteHook */
+export interface OrgDeleteHookResponse {
+  204: Empty;
+}
+
+export type OrgDeleteHookResponseSuccess = OrgDeleteHookResponse[204];
+/**
+ * @description
+ *   Delete a hook
+ * @tags organization
+ * @produces application/json
+ */
+export const orgDeleteHook = /* #__PURE__ */ (() => {
+  const method = "delete";
+  const url = "/orgs/:org/hooks/:id";
+  function request(
+    option: OrgDeleteHookOption
+  ): Promise<OrgDeleteHookResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<OrgDeleteHookResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for orgEditHook */
+export interface OrgEditHookOption {
   /**
    * @description
    *   name of the organization
@@ -1199,17 +1736,17 @@ export interface OrgsorghooksidOption {
   };
 }
 
-/** @description request parameter type for orgsorghooksid */
-export interface OrgsorghooksidOption {
+/** @description request parameter type for orgEditHook */
+export interface OrgEditHookOption {
   body?: EditHookOption;
 }
 
-/** @description response type for orgsorghooksid */
-export interface OrgsorghooksidResponse {
+/** @description response type for orgEditHook */
+export interface OrgEditHookResponse {
   200: Hook;
 }
 
-export type OrgsorghooksidResponseSuccess = OrgsorghooksidResponse[200];
+export type OrgEditHookResponseSuccess = OrgEditHookResponse[200];
 /**
  * @description
  *   Update a hook
@@ -1217,16 +1754,16 @@ export type OrgsorghooksidResponseSuccess = OrgsorghooksidResponse[200];
  * @produces application/json
  * @consumes application/json
  */
-export const orgsorghooksid = /* #__PURE__ */ (() => {
+export const orgEditHook = /* #__PURE__ */ (() => {
   const method = "patch";
   const url = "/orgs/:org/hooks/:id";
   function request(
-    option: OrgsorghooksidOption
-  ): Promise<OrgsorghooksidResponseSuccess> {
+    option: OrgEditHookOption
+  ): Promise<OrgEditHookResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<OrgsorghooksidResponseSuccess>;
+    }) as unknown as Promise<OrgEditHookResponseSuccess>;
   }
 
   /** http method */
@@ -1236,8 +1773,8 @@ export const orgsorghooksid = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for orgsorglabels */
-export interface OrgsorglabelsOption {
+/** @description request parameter type for orgListLabels */
+export interface OrgListLabelsOption {
   /**
    * @description
    *   name of the organization
@@ -1250,35 +1787,46 @@ export interface OrgsorglabelsOption {
   };
 }
 
-/** @description request parameter type for orgsorglabels */
-export interface OrgsorglabelsOption {
-  body?: CreateLabelOption;
+/** @description request parameter type for orgListLabels */
+export interface OrgListLabelsOption {
+  /**
+   * @description
+   *   page number of results to return (1-based)
+   */
+  query?: {
+    /**
+        @description
+          page number of results to return (1-based) */
+    page?: number;
+    /**
+        @description
+          page size of results */
+    limit?: number;
+  };
 }
 
-/** @description response type for orgsorglabels */
-export interface OrgsorglabelsResponse {
-  201: Label;
-  422: ValidationError;
+/** @description response type for orgListLabels */
+export interface OrgListLabelsResponse {
+  200: LabelList;
 }
 
-export type OrgsorglabelsResponseSuccess = OrgsorglabelsResponse[201];
+export type OrgListLabelsResponseSuccess = OrgListLabelsResponse[200];
 /**
  * @description
- *   Create a label for an organization
+ *   List an organization's labels
  * @tags organization
  * @produces application/json
- * @consumes application/json
  */
-export const orgsorglabels = /* #__PURE__ */ (() => {
-  const method = "post";
+export const orgListLabels = /* #__PURE__ */ (() => {
+  const method = "get";
   const url = "/orgs/:org/labels";
   function request(
-    option: OrgsorglabelsOption
-  ): Promise<OrgsorglabelsResponseSuccess> {
+    option: OrgListLabelsOption
+  ): Promise<OrgListLabelsResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<OrgsorglabelsResponseSuccess>;
+    }) as unknown as Promise<OrgListLabelsResponseSuccess>;
   }
 
   /** http method */
@@ -1288,8 +1836,159 @@ export const orgsorglabels = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for orgsorglabelsid */
-export interface OrgsorglabelsidOption {
+/** @description request parameter type for orgCreateLabel */
+export interface OrgCreateLabelOption {
+  /**
+   * @description
+   *   name of the organization
+   */
+  path: {
+    /**
+        @description
+          name of the organization */
+    org: string;
+  };
+}
+
+/** @description request parameter type for orgCreateLabel */
+export interface OrgCreateLabelOption {
+  body?: CreateLabelOption;
+}
+
+/** @description response type for orgCreateLabel */
+export interface OrgCreateLabelResponse {
+  201: Label;
+  422: ValidationError;
+}
+
+export type OrgCreateLabelResponseSuccess = OrgCreateLabelResponse[201];
+/**
+ * @description
+ *   Create a label for an organization
+ * @tags organization
+ * @produces application/json
+ * @consumes application/json
+ */
+export const orgCreateLabel = /* #__PURE__ */ (() => {
+  const method = "post";
+  const url = "/orgs/:org/labels";
+  function request(
+    option: OrgCreateLabelOption
+  ): Promise<OrgCreateLabelResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<OrgCreateLabelResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for orgGetLabel */
+export interface OrgGetLabelOption {
+  /**
+   * @description
+   *   name of the organization
+   */
+  path: {
+    /**
+        @description
+          name of the organization */
+    org: string;
+    /**
+        @description
+          id of the label to get
+        @format int64 */
+    id: number;
+  };
+}
+
+/** @description response type for orgGetLabel */
+export interface OrgGetLabelResponse {
+  200: Label;
+}
+
+export type OrgGetLabelResponseSuccess = OrgGetLabelResponse[200];
+/**
+ * @description
+ *   Get a single label
+ * @tags organization
+ * @produces application/json
+ */
+export const orgGetLabel = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/orgs/:org/labels/:id";
+  function request(
+    option: OrgGetLabelOption
+  ): Promise<OrgGetLabelResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<OrgGetLabelResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for orgDeleteLabel */
+export interface OrgDeleteLabelOption {
+  /**
+   * @description
+   *   name of the organization
+   */
+  path: {
+    /**
+        @description
+          name of the organization */
+    org: string;
+    /**
+        @description
+          id of the label to delete
+        @format int64 */
+    id: number;
+  };
+}
+
+/** @description response type for orgDeleteLabel */
+export interface OrgDeleteLabelResponse {
+  204: Empty;
+}
+
+export type OrgDeleteLabelResponseSuccess = OrgDeleteLabelResponse[204];
+/**
+ * @description
+ *   Delete a label
+ * @tags organization
+ */
+export const orgDeleteLabel = /* #__PURE__ */ (() => {
+  const method = "delete";
+  const url = "/orgs/:org/labels/:id";
+  function request(
+    option: OrgDeleteLabelOption
+  ): Promise<OrgDeleteLabelResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<OrgDeleteLabelResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for orgEditLabel */
+export interface OrgEditLabelOption {
   /**
    * @description
    *   name of the organization
@@ -1307,18 +2006,18 @@ export interface OrgsorglabelsidOption {
   };
 }
 
-/** @description request parameter type for orgsorglabelsid */
-export interface OrgsorglabelsidOption {
+/** @description request parameter type for orgEditLabel */
+export interface OrgEditLabelOption {
   body?: EditLabelOption;
 }
 
-/** @description response type for orgsorglabelsid */
-export interface OrgsorglabelsidResponse {
+/** @description response type for orgEditLabel */
+export interface OrgEditLabelResponse {
   200: Label;
   422: ValidationError;
 }
 
-export type OrgsorglabelsidResponseSuccess = OrgsorglabelsidResponse[200];
+export type OrgEditLabelResponseSuccess = OrgEditLabelResponse[200];
 /**
  * @description
  *   Update a label
@@ -1326,16 +2025,16 @@ export type OrgsorglabelsidResponseSuccess = OrgsorglabelsidResponse[200];
  * @produces application/json
  * @consumes application/json
  */
-export const orgsorglabelsid = /* #__PURE__ */ (() => {
+export const orgEditLabel = /* #__PURE__ */ (() => {
   const method = "patch";
   const url = "/orgs/:org/labels/:id";
   function request(
-    option: OrgsorglabelsidOption
-  ): Promise<OrgsorglabelsidResponseSuccess> {
+    option: OrgEditLabelOption
+  ): Promise<OrgEditLabelResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<OrgsorglabelsidResponseSuccess>;
+    }) as unknown as Promise<OrgEditLabelResponseSuccess>;
   }
 
   /** http method */
@@ -1408,8 +2107,8 @@ export const orgListMembers = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for orgsorgmembersusername */
-export interface OrgsorgmembersusernameOption {
+/** @description request parameter type for orgIsMember */
+export interface OrgIsMemberOption {
   /**
    * @description
    *   name of the organization
@@ -1426,8 +2125,70 @@ export interface OrgsorgmembersusernameOption {
   };
 }
 
-/** @description response type for orgsorgmembersusername */
-export interface OrgsorgmembersusernameResponse {
+/** @description response type for orgIsMember */
+export interface OrgIsMemberResponse {
+  /**
+   * @description
+   *   user is a member
+   */
+  204: any;
+  /**
+   * @description
+   *   redirection to /orgs/{org}/public_members/{username}
+   */
+  302: any;
+  /**
+   * @description
+   *   user is not a member
+   */
+  404: any;
+}
+
+export type OrgIsMemberResponseSuccess = OrgIsMemberResponse[204];
+/**
+ * @description
+ *   Check if a user is a member of an organization
+ * @tags organization
+ */
+export const orgIsMember = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/orgs/:org/members/:username";
+  function request(
+    option: OrgIsMemberOption
+  ): Promise<OrgIsMemberResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<OrgIsMemberResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for orgDeleteMember */
+export interface OrgDeleteMemberOption {
+  /**
+   * @description
+   *   name of the organization
+   */
+  path: {
+    /**
+        @description
+          name of the organization */
+    org: string;
+    /**
+        @description
+          username of the user */
+    username: string;
+  };
+}
+
+/** @description response type for orgDeleteMember */
+export interface OrgDeleteMemberResponse {
   /**
    * @description
    *   member removed
@@ -1435,24 +2196,23 @@ export interface OrgsorgmembersusernameResponse {
   204: any;
 }
 
-export type OrgsorgmembersusernameResponseSuccess =
-  OrgsorgmembersusernameResponse[204];
+export type OrgDeleteMemberResponseSuccess = OrgDeleteMemberResponse[204];
 /**
  * @description
  *   Remove a member from an organization
  * @tags organization
  * @produces application/json
  */
-export const orgsorgmembersusername = /* #__PURE__ */ (() => {
+export const orgDeleteMember = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/orgs/:org/members/:username";
   function request(
-    option: OrgsorgmembersusernameOption
-  ): Promise<OrgsorgmembersusernameResponseSuccess> {
+    option: OrgDeleteMemberOption
+  ): Promise<OrgDeleteMemberResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<OrgsorgmembersusernameResponseSuccess>;
+    }) as unknown as Promise<OrgDeleteMemberResponseSuccess>;
   }
 
   /** http method */
@@ -1526,8 +2286,8 @@ export const orgListPublicMembers = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for orgsorgpublic_membersusername */
-export interface Orgsorgpublic_membersusernameOption {
+/** @description request parameter type for orgIsPublicMember */
+export interface OrgIsPublicMemberOption {
   /**
    * @description
    *   name of the organization
@@ -1544,30 +2304,140 @@ export interface Orgsorgpublic_membersusernameOption {
   };
 }
 
-/** @description response type for orgsorgpublic_membersusername */
-export interface Orgsorgpublic_membersusernameResponse {
+/** @description response type for orgIsPublicMember */
+export interface OrgIsPublicMemberResponse {
+  /**
+   * @description
+   *   user is a public member
+   */
+  204: any;
+  /**
+   * @description
+   *   user is not a public member
+   */
+  404: any;
+}
+
+export type OrgIsPublicMemberResponseSuccess = OrgIsPublicMemberResponse[204];
+/**
+ * @description
+ *   Check if a user is a public member of an organization
+ * @tags organization
+ */
+export const orgIsPublicMember = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/orgs/:org/public_members/:username";
+  function request(
+    option: OrgIsPublicMemberOption
+  ): Promise<OrgIsPublicMemberResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<OrgIsPublicMemberResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for orgPublicizeMember */
+export interface OrgPublicizeMemberOption {
+  /**
+   * @description
+   *   name of the organization
+   */
+  path: {
+    /**
+        @description
+          name of the organization */
+    org: string;
+    /**
+        @description
+          username of the user */
+    username: string;
+  };
+}
+
+/** @description response type for orgPublicizeMember */
+export interface OrgPublicizeMemberResponse {
+  /**
+   * @description
+   *   membership publicized
+   */
+  204: any;
+  403: Forbidden;
+}
+
+export type OrgPublicizeMemberResponseSuccess = OrgPublicizeMemberResponse[204];
+/**
+ * @description
+ *   Publicize a user's membership
+ * @tags organization
+ * @produces application/json
+ */
+export const orgPublicizeMember = /* #__PURE__ */ (() => {
+  const method = "put";
+  const url = "/orgs/:org/public_members/:username";
+  function request(
+    option: OrgPublicizeMemberOption
+  ): Promise<OrgPublicizeMemberResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<OrgPublicizeMemberResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for orgConcealMember */
+export interface OrgConcealMemberOption {
+  /**
+   * @description
+   *   name of the organization
+   */
+  path: {
+    /**
+        @description
+          name of the organization */
+    org: string;
+    /**
+        @description
+          username of the user */
+    username: string;
+  };
+}
+
+/** @description response type for orgConcealMember */
+export interface OrgConcealMemberResponse {
   204: Empty;
   403: Forbidden;
 }
 
-export type Orgsorgpublic_membersusernameResponseSuccess =
-  Orgsorgpublic_membersusernameResponse[204];
+export type OrgConcealMemberResponseSuccess = OrgConcealMemberResponse[204];
 /**
  * @description
  *   Conceal a user's membership
  * @tags organization
  * @produces application/json
  */
-export const orgsorgpublic_membersusername = /* #__PURE__ */ (() => {
+export const orgConcealMember = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/orgs/:org/public_members/:username";
   function request(
-    option: Orgsorgpublic_membersusernameOption
-  ): Promise<Orgsorgpublic_membersusernameResponseSuccess> {
+    option: OrgConcealMemberOption
+  ): Promise<OrgConcealMemberResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<Orgsorgpublic_membersusernameResponseSuccess>;
+    }) as unknown as Promise<OrgConcealMemberResponseSuccess>;
   }
 
   /** http method */
@@ -1577,61 +2447,8 @@ export const orgsorgpublic_membersusername = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for orgsorgrepos */
-export interface OrgsorgreposOption {
-  /**
-   * @description
-   *   name of organization
-   */
-  path: {
-    /**
-        @description
-          name of organization */
-    org: string;
-  };
-}
-
-/** @description request parameter type for orgsorgrepos */
-export interface OrgsorgreposOption {
-  body?: CreateRepoOption;
-}
-
-/** @description response type for orgsorgrepos */
-export interface OrgsorgreposResponse {
-  201: Repository;
-  403: Forbidden;
-  404: NotFound;
-}
-
-export type OrgsorgreposResponseSuccess = OrgsorgreposResponse[201];
-/**
- * @description
- *   Create a repository in an organization
- * @tags organization
- * @produces application/json
- * @consumes application/json
- */
-export const orgsorgrepos = /* #__PURE__ */ (() => {
-  const method = "post";
-  const url = "/orgs/:org/repos";
-  function request(
-    option: OrgsorgreposOption
-  ): Promise<OrgsorgreposResponseSuccess> {
-    return requester(url, {
-      method,
-      ...option,
-    }) as unknown as Promise<OrgsorgreposResponseSuccess>;
-  }
-
-  /** http method */
-  request.method = method;
-  /** request url */
-  request.url = url;
-  return request;
-})();
-
-/** @description request parameter type for orgsorgteams */
-export interface OrgsorgteamsOption {
+/** @description request parameter type for orgListRepos */
+export interface OrgListReposOption {
   /**
    * @description
    *   name of the organization
@@ -1644,18 +2461,197 @@ export interface OrgsorgteamsOption {
   };
 }
 
-/** @description request parameter type for orgsorgteams */
-export interface OrgsorgteamsOption {
+/** @description request parameter type for orgListRepos */
+export interface OrgListReposOption {
+  /**
+   * @description
+   *   page number of results to return (1-based)
+   */
+  query?: {
+    /**
+        @description
+          page number of results to return (1-based) */
+    page?: number;
+    /**
+        @description
+          page size of results */
+    limit?: number;
+  };
+}
+
+/** @description response type for orgListRepos */
+export interface OrgListReposResponse {
+  200: RepositoryList;
+}
+
+export type OrgListReposResponseSuccess = OrgListReposResponse[200];
+/**
+ * @description
+ *   List an organization's repos
+ * @tags organization
+ * @produces application/json
+ */
+export const orgListRepos = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/orgs/:org/repos";
+  function request(
+    option: OrgListReposOption
+  ): Promise<OrgListReposResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<OrgListReposResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for createOrgRepo */
+export interface CreateOrgRepoOption {
+  /**
+   * @description
+   *   name of organization
+   */
+  path: {
+    /**
+        @description
+          name of organization */
+    org: string;
+  };
+}
+
+/** @description request parameter type for createOrgRepo */
+export interface CreateOrgRepoOption {
+  body?: CreateRepoOption;
+}
+
+/** @description response type for createOrgRepo */
+export interface CreateOrgRepoResponse {
+  201: Repository;
+  403: Forbidden;
+  404: NotFound;
+}
+
+export type CreateOrgRepoResponseSuccess = CreateOrgRepoResponse[201];
+/**
+ * @description
+ *   Create a repository in an organization
+ * @tags organization
+ * @produces application/json
+ * @consumes application/json
+ */
+export const createOrgRepo = /* #__PURE__ */ (() => {
+  const method = "post";
+  const url = "/orgs/:org/repos";
+  function request(
+    option: CreateOrgRepoOption
+  ): Promise<CreateOrgRepoResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<CreateOrgRepoResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for orgListTeams */
+export interface OrgListTeamsOption {
+  /**
+   * @description
+   *   name of the organization
+   */
+  path: {
+    /**
+        @description
+          name of the organization */
+    org: string;
+  };
+}
+
+/** @description request parameter type for orgListTeams */
+export interface OrgListTeamsOption {
+  /**
+   * @description
+   *   page number of results to return (1-based)
+   */
+  query?: {
+    /**
+        @description
+          page number of results to return (1-based) */
+    page?: number;
+    /**
+        @description
+          page size of results */
+    limit?: number;
+  };
+}
+
+/** @description response type for orgListTeams */
+export interface OrgListTeamsResponse {
+  200: TeamList;
+}
+
+export type OrgListTeamsResponseSuccess = OrgListTeamsResponse[200];
+/**
+ * @description
+ *   List an organization's teams
+ * @tags organization
+ * @produces application/json
+ */
+export const orgListTeams = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/orgs/:org/teams";
+  function request(
+    option: OrgListTeamsOption
+  ): Promise<OrgListTeamsResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<OrgListTeamsResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for orgCreateTeam */
+export interface OrgCreateTeamOption {
+  /**
+   * @description
+   *   name of the organization
+   */
+  path: {
+    /**
+        @description
+          name of the organization */
+    org: string;
+  };
+}
+
+/** @description request parameter type for orgCreateTeam */
+export interface OrgCreateTeamOption {
   body?: CreateTeamOption;
 }
 
-/** @description response type for orgsorgteams */
-export interface OrgsorgteamsResponse {
+/** @description response type for orgCreateTeam */
+export interface OrgCreateTeamResponse {
   201: Team;
   422: ValidationError;
 }
 
-export type OrgsorgteamsResponseSuccess = OrgsorgteamsResponse[201];
+export type OrgCreateTeamResponseSuccess = OrgCreateTeamResponse[201];
 /**
  * @description
  *   Create a team
@@ -1663,16 +2659,16 @@ export type OrgsorgteamsResponseSuccess = OrgsorgteamsResponse[201];
  * @produces application/json
  * @consumes application/json
  */
-export const orgsorgteams = /* #__PURE__ */ (() => {
+export const orgCreateTeam = /* #__PURE__ */ (() => {
   const method = "post";
   const url = "/orgs/:org/teams";
   function request(
-    option: OrgsorgteamsOption
-  ): Promise<OrgsorgteamsResponseSuccess> {
+    option: OrgCreateTeamOption
+  ): Promise<OrgCreateTeamResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<OrgsorgteamsResponseSuccess>;
+    }) as unknown as Promise<OrgCreateTeamResponseSuccess>;
   }
 
   /** http method */
@@ -2045,8 +3041,105 @@ export const repoSearch = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepo */
-export interface ReposownerrepoOption {
+/** @description request parameter type for repoGet */
+export interface RepoGetOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+  };
+}
+
+/** @description response type for repoGet */
+export interface RepoGetResponse {
+  200: Repository;
+}
+
+export type RepoGetResponseSuccess = RepoGetResponse[200];
+/**
+ * @description
+ *   Get a repository
+ * @tags repository
+ * @produces application/json
+ */
+export const repoGet = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/repos/:owner/:repo";
+  function request(option: RepoGetOption): Promise<RepoGetResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoGetResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoDelete */
+export interface RepoDeleteOption {
+  /**
+   * @description
+   *   owner of the repo to delete
+   */
+  path: {
+    /**
+        @description
+          owner of the repo to delete */
+    owner: string;
+    /**
+        @description
+          name of the repo to delete */
+    repo: string;
+  };
+}
+
+/** @description response type for repoDelete */
+export interface RepoDeleteResponse {
+  204: Empty;
+  403: Forbidden;
+}
+
+export type RepoDeleteResponseSuccess = RepoDeleteResponse[204];
+/**
+ * @description
+ *   Delete a repository
+ * @tags repository
+ * @produces application/json
+ */
+export const repoDelete = /* #__PURE__ */ (() => {
+  const method = "delete";
+  const url = "/repos/:owner/:repo";
+  function request(
+    option: RepoDeleteOption
+  ): Promise<RepoDeleteResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoDeleteResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoEdit */
+export interface RepoEditOption {
   /**
    * @description
    *   owner of the repo to edit
@@ -2063,8 +3156,8 @@ export interface ReposownerrepoOption {
   };
 }
 
-/** @description request parameter type for reposownerrepo */
-export interface ReposownerrepoOption {
+/** @description request parameter type for repoEdit */
+export interface RepoEditOption {
   /**
    * @description
    *   Properties of a repo that you can edit
@@ -2072,30 +3165,28 @@ export interface ReposownerrepoOption {
   body?: EditRepoOption;
 }
 
-/** @description response type for reposownerrepo */
-export interface ReposownerrepoResponse {
+/** @description response type for repoEdit */
+export interface RepoEditResponse {
   200: Repository;
   403: Forbidden;
   422: ValidationError;
 }
 
-export type ReposownerrepoResponseSuccess = ReposownerrepoResponse[200];
+export type RepoEditResponseSuccess = RepoEditResponse[200];
 /**
  * @description
  *   Edit a repository's properties. Only fields that are set will be changed.
  * @tags repository
  * @produces application/json
  */
-export const reposownerrepo = /* #__PURE__ */ (() => {
+export const repoEdit = /* #__PURE__ */ (() => {
   const method = "patch";
   const url = "/repos/:owner/:repo";
-  function request(
-    option: ReposownerrepoOption
-  ): Promise<ReposownerrepoResponseSuccess> {
+  function request(option: RepoEditOption): Promise<RepoEditResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepoResponseSuccess>;
+    }) as unknown as Promise<RepoEditResponseSuccess>;
   }
 
   /** http method */
@@ -2212,8 +3303,8 @@ export const repoGetAssignees = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepobranch_protections */
-export interface Reposownerrepobranch_protectionsOption {
+/** @description request parameter type for repoListBranchProtection */
+export interface RepoListBranchProtectionOption {
   /**
    * @description
    *   owner of the repo
@@ -2230,38 +3321,29 @@ export interface Reposownerrepobranch_protectionsOption {
   };
 }
 
-/** @description request parameter type for reposownerrepobranch_protections */
-export interface Reposownerrepobranch_protectionsOption {
-  body?: CreateBranchProtectionOption;
+/** @description response type for repoListBranchProtection */
+export interface RepoListBranchProtectionResponse {
+  200: BranchProtectionList;
 }
 
-/** @description response type for reposownerrepobranch_protections */
-export interface Reposownerrepobranch_protectionsResponse {
-  201: BranchProtection;
-  403: Forbidden;
-  404: NotFound;
-  422: ValidationError;
-}
-
-export type Reposownerrepobranch_protectionsResponseSuccess =
-  Reposownerrepobranch_protectionsResponse[201];
+export type RepoListBranchProtectionResponseSuccess =
+  RepoListBranchProtectionResponse[200];
 /**
  * @description
- *   Create a branch protections for a repository
+ *   List branch protections for a repository
  * @tags repository
  * @produces application/json
- * @consumes application/json
  */
-export const reposownerrepobranch_protections = /* #__PURE__ */ (() => {
-  const method = "post";
+export const repoListBranchProtection = /* #__PURE__ */ (() => {
+  const method = "get";
   const url = "/repos/:owner/:repo/branch_protections";
   function request(
-    option: Reposownerrepobranch_protectionsOption
-  ): Promise<Reposownerrepobranch_protectionsResponseSuccess> {
+    option: RepoListBranchProtectionOption
+  ): Promise<RepoListBranchProtectionResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<Reposownerrepobranch_protectionsResponseSuccess>;
+    }) as unknown as Promise<RepoListBranchProtectionResponseSuccess>;
   }
 
   /** http method */
@@ -2271,8 +3353,67 @@ export const reposownerrepobranch_protections = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepobranch_protectionsname */
-export interface Reposownerrepobranch_protectionsnameOption {
+/** @description request parameter type for repoCreateBranchProtection */
+export interface RepoCreateBranchProtectionOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+  };
+}
+
+/** @description request parameter type for repoCreateBranchProtection */
+export interface RepoCreateBranchProtectionOption {
+  body?: CreateBranchProtectionOption;
+}
+
+/** @description response type for repoCreateBranchProtection */
+export interface RepoCreateBranchProtectionResponse {
+  201: BranchProtection;
+  403: Forbidden;
+  404: NotFound;
+  422: ValidationError;
+}
+
+export type RepoCreateBranchProtectionResponseSuccess =
+  RepoCreateBranchProtectionResponse[201];
+/**
+ * @description
+ *   Create a branch protections for a repository
+ * @tags repository
+ * @produces application/json
+ * @consumes application/json
+ */
+export const repoCreateBranchProtection = /* #__PURE__ */ (() => {
+  const method = "post";
+  const url = "/repos/:owner/:repo/branch_protections";
+  function request(
+    option: RepoCreateBranchProtectionOption
+  ): Promise<RepoCreateBranchProtectionResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoCreateBranchProtectionResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoGetBranchProtection */
+export interface RepoGetBranchProtectionOption {
   /**
    * @description
    *   owner of the repo
@@ -2293,37 +3434,30 @@ export interface Reposownerrepobranch_protectionsnameOption {
   };
 }
 
-/** @description request parameter type for reposownerrepobranch_protectionsname */
-export interface Reposownerrepobranch_protectionsnameOption {
-  body?: EditBranchProtectionOption;
-}
-
-/** @description response type for reposownerrepobranch_protectionsname */
-export interface Reposownerrepobranch_protectionsnameResponse {
+/** @description response type for repoGetBranchProtection */
+export interface RepoGetBranchProtectionResponse {
   200: BranchProtection;
   404: NotFound;
-  422: ValidationError;
 }
 
-export type Reposownerrepobranch_protectionsnameResponseSuccess =
-  Reposownerrepobranch_protectionsnameResponse[200];
+export type RepoGetBranchProtectionResponseSuccess =
+  RepoGetBranchProtectionResponse[200];
 /**
  * @description
- *   Edit a branch protections for a repository. Only fields that are set will be changed
+ *   Get a specific branch protection for the repository
  * @tags repository
  * @produces application/json
- * @consumes application/json
  */
-export const reposownerrepobranch_protectionsname = /* #__PURE__ */ (() => {
-  const method = "patch";
+export const repoGetBranchProtection = /* #__PURE__ */ (() => {
+  const method = "get";
   const url = "/repos/:owner/:repo/branch_protections/:name";
   function request(
-    option: Reposownerrepobranch_protectionsnameOption
-  ): Promise<Reposownerrepobranch_protectionsnameResponseSuccess> {
+    option: RepoGetBranchProtectionOption
+  ): Promise<RepoGetBranchProtectionResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<Reposownerrepobranch_protectionsnameResponseSuccess>;
+    }) as unknown as Promise<RepoGetBranchProtectionResponseSuccess>;
   }
 
   /** http method */
@@ -2333,8 +3467,125 @@ export const reposownerrepobranch_protectionsname = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepobranches */
-export interface ReposownerrepobranchesOption {
+/** @description request parameter type for repoDeleteBranchProtection */
+export interface RepoDeleteBranchProtectionOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          name of protected branch */
+    name: string;
+  };
+}
+
+/** @description response type for repoDeleteBranchProtection */
+export interface RepoDeleteBranchProtectionResponse {
+  204: Empty;
+  404: NotFound;
+}
+
+export type RepoDeleteBranchProtectionResponseSuccess =
+  RepoDeleteBranchProtectionResponse[204];
+/**
+ * @description
+ *   Delete a specific branch protection for the repository
+ * @tags repository
+ * @produces application/json
+ */
+export const repoDeleteBranchProtection = /* #__PURE__ */ (() => {
+  const method = "delete";
+  const url = "/repos/:owner/:repo/branch_protections/:name";
+  function request(
+    option: RepoDeleteBranchProtectionOption
+  ): Promise<RepoDeleteBranchProtectionResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoDeleteBranchProtectionResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoEditBranchProtection */
+export interface RepoEditBranchProtectionOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          name of protected branch */
+    name: string;
+  };
+}
+
+/** @description request parameter type for repoEditBranchProtection */
+export interface RepoEditBranchProtectionOption {
+  body?: EditBranchProtectionOption;
+}
+
+/** @description response type for repoEditBranchProtection */
+export interface RepoEditBranchProtectionResponse {
+  200: BranchProtection;
+  404: NotFound;
+  422: ValidationError;
+}
+
+export type RepoEditBranchProtectionResponseSuccess =
+  RepoEditBranchProtectionResponse[200];
+/**
+ * @description
+ *   Edit a branch protections for a repository. Only fields that are set will be changed
+ * @tags repository
+ * @produces application/json
+ * @consumes application/json
+ */
+export const repoEditBranchProtection = /* #__PURE__ */ (() => {
+  const method = "patch";
+  const url = "/repos/:owner/:repo/branch_protections/:name";
+  function request(
+    option: RepoEditBranchProtectionOption
+  ): Promise<RepoEditBranchProtectionResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoEditBranchProtectionResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoListBranches */
+export interface RepoListBranchesOption {
   /**
    * @description
    *   owner of the repo
@@ -2351,13 +3602,80 @@ export interface ReposownerrepobranchesOption {
   };
 }
 
-/** @description request parameter type for reposownerrepobranches */
-export interface ReposownerrepobranchesOption {
+/** @description request parameter type for repoListBranches */
+export interface RepoListBranchesOption {
+  /**
+   * @description
+   *   page number of results to return (1-based)
+   */
+  query?: {
+    /**
+        @description
+          page number of results to return (1-based) */
+    page?: number;
+    /**
+        @description
+          page size of results */
+    limit?: number;
+  };
+}
+
+/** @description response type for repoListBranches */
+export interface RepoListBranchesResponse {
+  200: BranchList;
+}
+
+export type RepoListBranchesResponseSuccess = RepoListBranchesResponse[200];
+/**
+ * @description
+ *   List a repository's branches
+ * @tags repository
+ * @produces application/json
+ */
+export const repoListBranches = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/repos/:owner/:repo/branches";
+  function request(
+    option: RepoListBranchesOption
+  ): Promise<RepoListBranchesResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoListBranchesResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoCreateBranch */
+export interface RepoCreateBranchOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+  };
+}
+
+/** @description request parameter type for repoCreateBranch */
+export interface RepoCreateBranchOption {
   body?: CreateBranchRepoOption;
 }
 
-/** @description response type for reposownerrepobranches */
-export interface ReposownerrepobranchesResponse {
+/** @description response type for repoCreateBranch */
+export interface RepoCreateBranchResponse {
   201: Branch;
   /**
    * @description
@@ -2371,8 +3689,7 @@ export interface ReposownerrepobranchesResponse {
   409: any;
 }
 
-export type ReposownerrepobranchesResponseSuccess =
-  ReposownerrepobranchesResponse[201];
+export type RepoCreateBranchResponseSuccess = RepoCreateBranchResponse[201];
 /**
  * @description
  *   Create a branch
@@ -2380,16 +3697,16 @@ export type ReposownerrepobranchesResponseSuccess =
  * @produces application/json
  * @consumes application/json
  */
-export const reposownerrepobranches = /* #__PURE__ */ (() => {
+export const repoCreateBranch = /* #__PURE__ */ (() => {
   const method = "post";
   const url = "/repos/:owner/:repo/branches";
   function request(
-    option: ReposownerrepobranchesOption
-  ): Promise<ReposownerrepobranchesResponseSuccess> {
+    option: RepoCreateBranchOption
+  ): Promise<RepoCreateBranchResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepobranchesResponseSuccess>;
+    }) as unknown as Promise<RepoCreateBranchResponseSuccess>;
   }
 
   /** http method */
@@ -2399,8 +3716,62 @@ export const reposownerrepobranches = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepobranchesbranch */
-export interface ReposownerrepobranchesbranchOption {
+/** @description request parameter type for repoGetBranch */
+export interface RepoGetBranchOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          branch to get */
+    branch: string;
+  };
+}
+
+/** @description response type for repoGetBranch */
+export interface RepoGetBranchResponse {
+  200: Branch;
+  404: NotFound;
+}
+
+export type RepoGetBranchResponseSuccess = RepoGetBranchResponse[200];
+/**
+ * @description
+ *   Retrieve a specific branch from a repository, including its effective branch protection
+ * @tags repository
+ * @produces application/json
+ */
+export const repoGetBranch = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/repos/:owner/:repo/branches/:branch";
+  function request(
+    option: RepoGetBranchOption
+  ): Promise<RepoGetBranchResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoGetBranchResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoDeleteBranch */
+export interface RepoDeleteBranchOption {
   /**
    * @description
    *   owner of the repo
@@ -2421,31 +3792,30 @@ export interface ReposownerrepobranchesbranchOption {
   };
 }
 
-/** @description response type for reposownerrepobranchesbranch */
-export interface ReposownerrepobranchesbranchResponse {
+/** @description response type for repoDeleteBranch */
+export interface RepoDeleteBranchResponse {
   204: Empty;
   403: TsgError;
   404: NotFound;
 }
 
-export type ReposownerrepobranchesbranchResponseSuccess =
-  ReposownerrepobranchesbranchResponse[204];
+export type RepoDeleteBranchResponseSuccess = RepoDeleteBranchResponse[204];
 /**
  * @description
  *   Delete a specific branch from a repository
  * @tags repository
  * @produces application/json
  */
-export const reposownerrepobranchesbranch = /* #__PURE__ */ (() => {
+export const repoDeleteBranch = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/branches/:branch";
   function request(
-    option: ReposownerrepobranchesbranchOption
-  ): Promise<ReposownerrepobranchesbranchResponseSuccess> {
+    option: RepoDeleteBranchOption
+  ): Promise<RepoDeleteBranchResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepobranchesbranchResponseSuccess>;
+    }) as unknown as Promise<RepoDeleteBranchResponseSuccess>;
   }
 
   /** http method */
@@ -2523,8 +3893,124 @@ export const repoListCollaborators = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepocollaboratorscollaborator */
-export interface ReposownerrepocollaboratorscollaboratorOption {
+/** @description request parameter type for repoCheckCollaborator */
+export interface RepoCheckCollaboratorOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          username of the collaborator */
+    collaborator: string;
+  };
+}
+
+/** @description response type for repoCheckCollaborator */
+export interface RepoCheckCollaboratorResponse {
+  204: Empty;
+  404: NotFound;
+  422: ValidationError;
+}
+
+export type RepoCheckCollaboratorResponseSuccess =
+  RepoCheckCollaboratorResponse[204];
+/**
+ * @description
+ *   Check if a user is a collaborator of a repository
+ * @tags repository
+ * @produces application/json
+ */
+export const repoCheckCollaborator = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/repos/:owner/:repo/collaborators/:collaborator";
+  function request(
+    option: RepoCheckCollaboratorOption
+  ): Promise<RepoCheckCollaboratorResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoCheckCollaboratorResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoAddCollaborator */
+export interface RepoAddCollaboratorOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          username of the collaborator to add */
+    collaborator: string;
+  };
+}
+
+/** @description request parameter type for repoAddCollaborator */
+export interface RepoAddCollaboratorOption {
+  body?: AddCollaboratorOption;
+}
+
+/** @description response type for repoAddCollaborator */
+export interface RepoAddCollaboratorResponse {
+  204: Empty;
+  422: ValidationError;
+}
+
+export type RepoAddCollaboratorResponseSuccess =
+  RepoAddCollaboratorResponse[204];
+/**
+ * @description
+ *   Add a collaborator to a repository
+ * @tags repository
+ * @produces application/json
+ */
+export const repoAddCollaborator = /* #__PURE__ */ (() => {
+  const method = "put";
+  const url = "/repos/:owner/:repo/collaborators/:collaborator";
+  function request(
+    option: RepoAddCollaboratorOption
+  ): Promise<RepoAddCollaboratorResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoAddCollaboratorResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoDeleteCollaborator */
+export interface RepoDeleteCollaboratorOption {
   /**
    * @description
    *   owner of the repo
@@ -2545,30 +4031,30 @@ export interface ReposownerrepocollaboratorscollaboratorOption {
   };
 }
 
-/** @description response type for reposownerrepocollaboratorscollaborator */
-export interface ReposownerrepocollaboratorscollaboratorResponse {
+/** @description response type for repoDeleteCollaborator */
+export interface RepoDeleteCollaboratorResponse {
   204: Empty;
   422: ValidationError;
 }
 
-export type ReposownerrepocollaboratorscollaboratorResponseSuccess =
-  ReposownerrepocollaboratorscollaboratorResponse[204];
+export type RepoDeleteCollaboratorResponseSuccess =
+  RepoDeleteCollaboratorResponse[204];
 /**
  * @description
  *   Delete a collaborator from a repository
  * @tags repository
  * @produces application/json
  */
-export const reposownerrepocollaboratorscollaborator = /* #__PURE__ */ (() => {
+export const repoDeleteCollaborator = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/collaborators/:collaborator";
   function request(
-    option: ReposownerrepocollaboratorscollaboratorOption
-  ): Promise<ReposownerrepocollaboratorscollaboratorResponseSuccess> {
+    option: RepoDeleteCollaboratorOption
+  ): Promise<RepoDeleteCollaboratorResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepocollaboratorscollaboratorResponseSuccess>;
+    }) as unknown as Promise<RepoDeleteCollaboratorResponseSuccess>;
   }
 
   /** http method */
@@ -2874,8 +4360,200 @@ export const repoGetContentsList = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepocontentsfilepath */
-export interface ReposownerrepocontentsfilepathOption {
+/** @description request parameter type for repoGetContents */
+export interface RepoGetContentsOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          path of the dir, file, symlink or submodule in the repo */
+    filepath: string;
+  };
+}
+
+/** @description request parameter type for repoGetContents */
+export interface RepoGetContentsOption {
+  /**
+   * @description
+   *   The name of the commit/branch/tag. Default the repository’s default branch (usually master)
+   */
+  query?: {
+    /**
+        @description
+          The name of the commit/branch/tag. Default the repository’s default branch (usually master) */
+    ref?: string;
+  };
+}
+
+/** @description response type for repoGetContents */
+export interface RepoGetContentsResponse {
+  200: ContentsResponse;
+  404: NotFound;
+}
+
+export type RepoGetContentsResponseSuccess = RepoGetContentsResponse[200];
+/**
+ * @description
+ *   Gets the metadata and contents (if a file) of an entry in a repository, or a list of entries if a dir
+ * @tags repository
+ * @produces application/json
+ */
+export const repoGetContents = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/repos/:owner/:repo/contents/:filepath";
+  function request(
+    option: RepoGetContentsOption
+  ): Promise<RepoGetContentsResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoGetContentsResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoUpdateFile */
+export interface RepoUpdateFileOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          path of the file to update */
+    filepath: string;
+  };
+}
+
+/** @description request parameter type for repoUpdateFile */
+export interface RepoUpdateFileOption {
+  body: UpdateFileOptions;
+}
+
+/** @description response type for repoUpdateFile */
+export interface RepoUpdateFileResponse {
+  200: FileResponse;
+  403: TsgError;
+  404: NotFound;
+  422: TsgError;
+}
+
+export type RepoUpdateFileResponseSuccess = RepoUpdateFileResponse[200];
+/**
+ * @description
+ *   Update a file in a repository
+ * @tags repository
+ * @produces application/json
+ * @consumes application/json
+ */
+export const repoUpdateFile = /* #__PURE__ */ (() => {
+  const method = "put";
+  const url = "/repos/:owner/:repo/contents/:filepath";
+  function request(
+    option: RepoUpdateFileOption
+  ): Promise<RepoUpdateFileResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoUpdateFileResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoCreateFile */
+export interface RepoCreateFileOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          path of the file to create */
+    filepath: string;
+  };
+}
+
+/** @description request parameter type for repoCreateFile */
+export interface RepoCreateFileOption {
+  body: CreateFileOptions;
+}
+
+/** @description response type for repoCreateFile */
+export interface RepoCreateFileResponse {
+  201: FileResponse;
+  403: TsgError;
+  404: NotFound;
+  422: TsgError;
+}
+
+export type RepoCreateFileResponseSuccess = RepoCreateFileResponse[201];
+/**
+ * @description
+ *   Create a file in a repository
+ * @tags repository
+ * @produces application/json
+ * @consumes application/json
+ */
+export const repoCreateFile = /* #__PURE__ */ (() => {
+  const method = "post";
+  const url = "/repos/:owner/:repo/contents/:filepath";
+  function request(
+    option: RepoCreateFileOption
+  ): Promise<RepoCreateFileResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoCreateFileResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoDeleteFile */
+export interface RepoDeleteFileOption {
   /**
    * @description
    *   owner of the repo
@@ -2896,21 +4574,20 @@ export interface ReposownerrepocontentsfilepathOption {
   };
 }
 
-/** @description request parameter type for reposownerrepocontentsfilepath */
-export interface ReposownerrepocontentsfilepathOption {
+/** @description request parameter type for repoDeleteFile */
+export interface RepoDeleteFileOption {
   body: DeleteFileOptions;
 }
 
-/** @description response type for reposownerrepocontentsfilepath */
-export interface ReposownerrepocontentsfilepathResponse {
+/** @description response type for repoDeleteFile */
+export interface RepoDeleteFileResponse {
   200: FileDeleteResponse;
   400: TsgError;
   403: TsgError;
   404: TsgError;
 }
 
-export type ReposownerrepocontentsfilepathResponseSuccess =
-  ReposownerrepocontentsfilepathResponse[200];
+export type RepoDeleteFileResponseSuccess = RepoDeleteFileResponse[200];
 /**
  * @description
  *   Delete a file in a repository
@@ -2918,16 +4595,16 @@ export type ReposownerrepocontentsfilepathResponseSuccess =
  * @produces application/json
  * @consumes application/json
  */
-export const reposownerrepocontentsfilepath = /* #__PURE__ */ (() => {
+export const repoDeleteFile = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/contents/:filepath";
   function request(
-    option: ReposownerrepocontentsfilepathOption
-  ): Promise<ReposownerrepocontentsfilepathResponseSuccess> {
+    option: RepoDeleteFileOption
+  ): Promise<RepoDeleteFileResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepocontentsfilepathResponseSuccess>;
+    }) as unknown as Promise<RepoDeleteFileResponseSuccess>;
   }
 
   /** http method */
@@ -2996,8 +4673,73 @@ export const repoGetEditorConfig = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepoforks */
-export interface ReposownerrepoforksOption {
+/** @description request parameter type for listForks */
+export interface ListForksOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+  };
+}
+
+/** @description request parameter type for listForks */
+export interface ListForksOption {
+  /**
+   * @description
+   *   page number of results to return (1-based)
+   */
+  query?: {
+    /**
+        @description
+          page number of results to return (1-based) */
+    page?: number;
+    /**
+        @description
+          page size of results */
+    limit?: number;
+  };
+}
+
+/** @description response type for listForks */
+export interface ListForksResponse {
+  200: RepositoryList;
+}
+
+export type ListForksResponseSuccess = ListForksResponse[200];
+/**
+ * @description
+ *   List a repository's forks
+ * @tags repository
+ * @produces application/json
+ */
+export const listForks = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/repos/:owner/:repo/forks";
+  function request(option: ListForksOption): Promise<ListForksResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<ListForksResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for createFork */
+export interface CreateForkOption {
   /**
    * @description
    *   owner of the repo to fork
@@ -3014,13 +4756,13 @@ export interface ReposownerrepoforksOption {
   };
 }
 
-/** @description request parameter type for reposownerrepoforks */
-export interface ReposownerrepoforksOption {
+/** @description request parameter type for createFork */
+export interface CreateForkOption {
   body?: CreateForkOption;
 }
 
-/** @description response type for reposownerrepoforks */
-export interface ReposownerrepoforksResponse {
+/** @description response type for createFork */
+export interface CreateForkResponse {
   202: Repository;
   403: Forbidden;
   /**
@@ -3031,24 +4773,23 @@ export interface ReposownerrepoforksResponse {
   422: ValidationError;
 }
 
-export type ReposownerrepoforksResponseSuccess =
-  ReposownerrepoforksResponse[202];
+export type CreateForkResponseSuccess = CreateForkResponse[202];
 /**
  * @description
  *   Fork a repository
  * @tags repository
  * @produces application/json
  */
-export const reposownerrepoforks = /* #__PURE__ */ (() => {
+export const createFork = /* #__PURE__ */ (() => {
   const method = "post";
   const url = "/repos/:owner/:repo/forks";
   function request(
-    option: ReposownerrepoforksOption
-  ): Promise<ReposownerrepoforksResponseSuccess> {
+    option: CreateForkOption
+  ): Promise<CreateForkResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepoforksResponseSuccess>;
+    }) as unknown as Promise<CreateForkResponseSuccess>;
   }
 
   /** http method */
@@ -3512,8 +5253,8 @@ export const GetTree = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepohooks */
-export interface ReposownerrepohooksOption {
+/** @description request parameter type for repoListHooks */
+export interface RepoListHooksOption {
   /**
    * @description
    *   owner of the repo
@@ -3530,18 +5271,84 @@ export interface ReposownerrepohooksOption {
   };
 }
 
-/** @description request parameter type for reposownerrepohooks */
-export interface ReposownerrepohooksOption {
+/** @description request parameter type for repoListHooks */
+export interface RepoListHooksOption {
+  /**
+   * @description
+   *   page number of results to return (1-based)
+   */
+  query?: {
+    /**
+        @description
+          page number of results to return (1-based) */
+    page?: number;
+    /**
+        @description
+          page size of results */
+    limit?: number;
+  };
+}
+
+/** @description response type for repoListHooks */
+export interface RepoListHooksResponse {
+  200: HookList;
+}
+
+export type RepoListHooksResponseSuccess = RepoListHooksResponse[200];
+/**
+ * @description
+ *   List the hooks in a repository
+ * @tags repository
+ * @produces application/json
+ */
+export const repoListHooks = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/repos/:owner/:repo/hooks";
+  function request(
+    option: RepoListHooksOption
+  ): Promise<RepoListHooksResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoListHooksResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoCreateHook */
+export interface RepoCreateHookOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+  };
+}
+
+/** @description request parameter type for repoCreateHook */
+export interface RepoCreateHookOption {
   body?: CreateHookOption;
 }
 
-/** @description response type for reposownerrepohooks */
-export interface ReposownerrepohooksResponse {
+/** @description response type for repoCreateHook */
+export interface RepoCreateHookResponse {
   201: Hook;
 }
 
-export type ReposownerrepohooksResponseSuccess =
-  ReposownerrepohooksResponse[201];
+export type RepoCreateHookResponseSuccess = RepoCreateHookResponse[201];
 /**
  * @description
  *   Create a hook
@@ -3549,16 +5356,16 @@ export type ReposownerrepohooksResponseSuccess =
  * @produces application/json
  * @consumes application/json
  */
-export const reposownerrepohooks = /* #__PURE__ */ (() => {
+export const repoCreateHook = /* #__PURE__ */ (() => {
   const method = "post";
   const url = "/repos/:owner/:repo/hooks";
   function request(
-    option: ReposownerrepohooksOption
-  ): Promise<ReposownerrepohooksResponseSuccess> {
+    option: RepoCreateHookOption
+  ): Promise<RepoCreateHookResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepohooksResponseSuccess>;
+    }) as unknown as Promise<RepoCreateHookResponseSuccess>;
   }
 
   /** http method */
@@ -3617,8 +5424,8 @@ export const repoListGitHooks = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepohooksgitid */
-export interface ReposownerrepohooksgitidOption {
+/** @description request parameter type for repoGetGitHook */
+export interface RepoGetGitHookOption {
   /**
    * @description
    *   owner of the repo
@@ -3639,35 +5446,29 @@ export interface ReposownerrepohooksgitidOption {
   };
 }
 
-/** @description request parameter type for reposownerrepohooksgitid */
-export interface ReposownerrepohooksgitidOption {
-  body?: EditGitHookOption;
-}
-
-/** @description response type for reposownerrepohooksgitid */
-export interface ReposownerrepohooksgitidResponse {
+/** @description response type for repoGetGitHook */
+export interface RepoGetGitHookResponse {
   200: GitHook;
   404: NotFound;
 }
 
-export type ReposownerrepohooksgitidResponseSuccess =
-  ReposownerrepohooksgitidResponse[200];
+export type RepoGetGitHookResponseSuccess = RepoGetGitHookResponse[200];
 /**
  * @description
- *   Edit a Git hook in a repository
+ *   Get a Git hook
  * @tags repository
  * @produces application/json
  */
-export const reposownerrepohooksgitid = /* #__PURE__ */ (() => {
-  const method = "patch";
+export const repoGetGitHook = /* #__PURE__ */ (() => {
+  const method = "get";
   const url = "/repos/:owner/:repo/hooks/git/:id";
   function request(
-    option: ReposownerrepohooksgitidOption
-  ): Promise<ReposownerrepohooksgitidResponseSuccess> {
+    option: RepoGetGitHookOption
+  ): Promise<RepoGetGitHookResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepohooksgitidResponseSuccess>;
+    }) as unknown as Promise<RepoGetGitHookResponseSuccess>;
   }
 
   /** http method */
@@ -3677,8 +5478,231 @@ export const reposownerrepohooksgitid = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepohooksid */
-export interface ReposownerrepohooksidOption {
+/** @description request parameter type for repoDeleteGitHook */
+export interface RepoDeleteGitHookOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          id of the hook to get */
+    id: string;
+  };
+}
+
+/** @description response type for repoDeleteGitHook */
+export interface RepoDeleteGitHookResponse {
+  204: Empty;
+  404: NotFound;
+}
+
+export type RepoDeleteGitHookResponseSuccess = RepoDeleteGitHookResponse[204];
+/**
+ * @description
+ *   Delete a Git hook in a repository
+ * @tags repository
+ * @produces application/json
+ */
+export const repoDeleteGitHook = /* #__PURE__ */ (() => {
+  const method = "delete";
+  const url = "/repos/:owner/:repo/hooks/git/:id";
+  function request(
+    option: RepoDeleteGitHookOption
+  ): Promise<RepoDeleteGitHookResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoDeleteGitHookResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoEditGitHook */
+export interface RepoEditGitHookOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          id of the hook to get */
+    id: string;
+  };
+}
+
+/** @description request parameter type for repoEditGitHook */
+export interface RepoEditGitHookOption {
+  body?: EditGitHookOption;
+}
+
+/** @description response type for repoEditGitHook */
+export interface RepoEditGitHookResponse {
+  200: GitHook;
+  404: NotFound;
+}
+
+export type RepoEditGitHookResponseSuccess = RepoEditGitHookResponse[200];
+/**
+ * @description
+ *   Edit a Git hook in a repository
+ * @tags repository
+ * @produces application/json
+ */
+export const repoEditGitHook = /* #__PURE__ */ (() => {
+  const method = "patch";
+  const url = "/repos/:owner/:repo/hooks/git/:id";
+  function request(
+    option: RepoEditGitHookOption
+  ): Promise<RepoEditGitHookResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoEditGitHookResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoGetHook */
+export interface RepoGetHookOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          id of the hook to get
+        @format int64 */
+    id: number;
+  };
+}
+
+/** @description response type for repoGetHook */
+export interface RepoGetHookResponse {
+  200: Hook;
+  404: NotFound;
+}
+
+export type RepoGetHookResponseSuccess = RepoGetHookResponse[200];
+/**
+ * @description
+ *   Get a hook
+ * @tags repository
+ * @produces application/json
+ */
+export const repoGetHook = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/repos/:owner/:repo/hooks/:id";
+  function request(
+    option: RepoGetHookOption
+  ): Promise<RepoGetHookResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoGetHookResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoDeleteHook */
+export interface RepoDeleteHookOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          id of the hook to delete
+        @format int64 */
+    id: number;
+  };
+}
+
+/** @description response type for repoDeleteHook */
+export interface RepoDeleteHookResponse {
+  204: Empty;
+  404: NotFound;
+}
+
+export type RepoDeleteHookResponseSuccess = RepoDeleteHookResponse[204];
+/**
+ * @description
+ *   Delete a hook in a repository
+ * @tags repository
+ * @produces application/json
+ */
+export const repoDeleteHook = /* #__PURE__ */ (() => {
+  const method = "delete";
+  const url = "/repos/:owner/:repo/hooks/:id";
+  function request(
+    option: RepoDeleteHookOption
+  ): Promise<RepoDeleteHookResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoDeleteHookResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoEditHook */
+export interface RepoEditHookOption {
   /**
    * @description
    *   owner of the repo
@@ -3700,34 +5724,33 @@ export interface ReposownerrepohooksidOption {
   };
 }
 
-/** @description request parameter type for reposownerrepohooksid */
-export interface ReposownerrepohooksidOption {
+/** @description request parameter type for repoEditHook */
+export interface RepoEditHookOption {
   body?: EditHookOption;
 }
 
-/** @description response type for reposownerrepohooksid */
-export interface ReposownerrepohooksidResponse {
+/** @description response type for repoEditHook */
+export interface RepoEditHookResponse {
   200: Hook;
 }
 
-export type ReposownerrepohooksidResponseSuccess =
-  ReposownerrepohooksidResponse[200];
+export type RepoEditHookResponseSuccess = RepoEditHookResponse[200];
 /**
  * @description
  *   Edit a hook in a repository
  * @tags repository
  * @produces application/json
  */
-export const reposownerrepohooksid = /* #__PURE__ */ (() => {
+export const repoEditHook = /* #__PURE__ */ (() => {
   const method = "patch";
   const url = "/repos/:owner/:repo/hooks/:id";
   function request(
-    option: ReposownerrepohooksidOption
-  ): Promise<ReposownerrepohooksidResponseSuccess> {
+    option: RepoEditHookOption
+  ): Promise<RepoEditHookResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepohooksidResponseSuccess>;
+    }) as unknown as Promise<RepoEditHookResponseSuccess>;
   }
 
   /** http method */
@@ -3841,8 +5864,8 @@ export const repoGetIssueTemplates = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepoissues */
-export interface ReposownerrepoissuesOption {
+/** @description request parameter type for issueListIssues */
+export interface IssueListIssuesOption {
   /**
    * @description
    *   owner of the repo
@@ -3859,21 +5882,129 @@ export interface ReposownerrepoissuesOption {
   };
 }
 
-/** @description request parameter type for reposownerrepoissues */
-export interface ReposownerrepoissuesOption {
+/** @description request parameter type for issueListIssues */
+export interface IssueListIssuesOption {
+  /**
+   * @description
+   *   whether issue is open or closed
+   */
+  query?: {
+    /**
+        @description
+          whether issue is open or closed */
+    state?: GetReposOwnerRepoIssuesState;
+    /**
+        @description
+          comma separated list of labels. Fetch only issues that have any of this labels. Non existent labels are discarded */
+    labels?: string;
+    /**
+        @description
+          search string */
+    q?: string;
+    /**
+        @description
+          filter by type (issues / pulls) if set */
+    type?: GetReposOwnerRepoIssuesType;
+    /**
+        @description
+          comma separated list of milestone names or ids. It uses names and fall back to ids. Fetch only issues that have any of this milestones. Non existent milestones are discarded */
+    milestones?: string;
+    /**
+        @description
+          Only show items updated after the given time. This is a timestamp in RFC 3339 format
+        @format date-time */
+    since?: string;
+    /**
+        @description
+          Only show items updated before the given time. This is a timestamp in RFC 3339 format
+        @format date-time */
+    before?: string;
+    /**
+        @description
+          Only show items which were created by the the given user */
+    created_by?: string;
+    /**
+        @description
+          Only show items for which the given user is assigned */
+    assigned_by?: string;
+    /**
+        @description
+          Only show items in which the given user was mentioned */
+    mentioned_by?: string;
+    /**
+        @description
+          page number of results to return (1-based) */
+    page?: number;
+    /**
+        @description
+          page size of results */
+    limit?: number;
+  };
+}
+
+/** @description response type for issueListIssues */
+export interface IssueListIssuesResponse {
+  200: IssueList;
+}
+
+export type IssueListIssuesResponseSuccess = IssueListIssuesResponse[200];
+/**
+ * @description
+ *   List a repository's issues
+ * @tags issue
+ * @produces application/json
+ */
+export const issueListIssues = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/repos/:owner/:repo/issues";
+  function request(
+    option: IssueListIssuesOption
+  ): Promise<IssueListIssuesResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<IssueListIssuesResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for issueCreateIssue */
+export interface IssueCreateIssueOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+  };
+}
+
+/** @description request parameter type for issueCreateIssue */
+export interface IssueCreateIssueOption {
   body?: CreateIssueOption;
 }
 
-/** @description response type for reposownerrepoissues */
-export interface ReposownerrepoissuesResponse {
+/** @description response type for issueCreateIssue */
+export interface IssueCreateIssueResponse {
   201: Issue;
   403: Forbidden;
   412: TsgError;
   422: ValidationError;
 }
 
-export type ReposownerrepoissuesResponseSuccess =
-  ReposownerrepoissuesResponse[201];
+export type IssueCreateIssueResponseSuccess = IssueCreateIssueResponse[201];
 /**
  * @description
  *   Create an issue. If using deadline only the date will be taken into account, and time of day ignored.
@@ -3881,16 +6012,16 @@ export type ReposownerrepoissuesResponseSuccess =
  * @produces application/json
  * @consumes application/json
  */
-export const reposownerrepoissues = /* #__PURE__ */ (() => {
+export const issueCreateIssue = /* #__PURE__ */ (() => {
   const method = "post";
   const url = "/repos/:owner/:repo/issues";
   function request(
-    option: ReposownerrepoissuesOption
-  ): Promise<ReposownerrepoissuesResponseSuccess> {
+    option: IssueCreateIssueOption
+  ): Promise<IssueCreateIssueResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepoissuesResponseSuccess>;
+    }) as unknown as Promise<IssueCreateIssueResponseSuccess>;
   }
 
   /** http method */
@@ -3979,8 +6110,121 @@ export const issueGetRepoComments = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepoissuescommentsid */
-export interface ReposownerrepoissuescommentsidOption {
+/** @description request parameter type for issueGetComment */
+export interface IssueGetCommentOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          id of the comment
+        @format int64 */
+    id: number;
+  };
+}
+
+/** @description response type for issueGetComment */
+export interface IssueGetCommentResponse {
+  200: Comment;
+  204: Empty;
+  403: Forbidden;
+  404: NotFound;
+}
+
+export type IssueGetCommentResponseSuccess = IssueGetCommentResponse[200];
+/**
+ * @description
+ *   Get a comment
+ * @tags issue
+ * @produces application/json
+ * @consumes application/json
+ */
+export const issueGetComment = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/repos/:owner/:repo/issues/comments/:id";
+  function request(
+    option: IssueGetCommentOption
+  ): Promise<IssueGetCommentResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<IssueGetCommentResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for issueDeleteComment */
+export interface IssueDeleteCommentOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          id of comment to delete
+        @format int64 */
+    id: number;
+  };
+}
+
+/** @description response type for issueDeleteComment */
+export interface IssueDeleteCommentResponse {
+  204: Empty;
+  403: Forbidden;
+  404: NotFound;
+}
+
+export type IssueDeleteCommentResponseSuccess = IssueDeleteCommentResponse[204];
+/**
+ * @description
+ *   Delete a comment
+ * @tags issue
+ */
+export const issueDeleteComment = /* #__PURE__ */ (() => {
+  const method = "delete";
+  const url = "/repos/:owner/:repo/issues/comments/:id";
+  function request(
+    option: IssueDeleteCommentOption
+  ): Promise<IssueDeleteCommentResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<IssueDeleteCommentResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for issueEditComment */
+export interface IssueEditCommentOption {
   /**
    * @description
    *   owner of the repo
@@ -4002,21 +6246,20 @@ export interface ReposownerrepoissuescommentsidOption {
   };
 }
 
-/** @description request parameter type for reposownerrepoissuescommentsid */
-export interface ReposownerrepoissuescommentsidOption {
+/** @description request parameter type for issueEditComment */
+export interface IssueEditCommentOption {
   body?: EditIssueCommentOption;
 }
 
-/** @description response type for reposownerrepoissuescommentsid */
-export interface ReposownerrepoissuescommentsidResponse {
+/** @description response type for issueEditComment */
+export interface IssueEditCommentResponse {
   200: Comment;
   204: Empty;
   403: Forbidden;
   404: NotFound;
 }
 
-export type ReposownerrepoissuescommentsidResponseSuccess =
-  ReposownerrepoissuescommentsidResponse[200];
+export type IssueEditCommentResponseSuccess = IssueEditCommentResponse[200];
 /**
  * @description
  *   Edit a comment
@@ -4024,16 +6267,16 @@ export type ReposownerrepoissuescommentsidResponseSuccess =
  * @produces application/json
  * @consumes application/json
  */
-export const reposownerrepoissuescommentsid = /* #__PURE__ */ (() => {
+export const issueEditComment = /* #__PURE__ */ (() => {
   const method = "patch";
   const url = "/repos/:owner/:repo/issues/comments/:id";
   function request(
-    option: ReposownerrepoissuescommentsidOption
-  ): Promise<ReposownerrepoissuescommentsidResponseSuccess> {
+    option: IssueEditCommentOption
+  ): Promise<IssueEditCommentResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepoissuescommentsidResponseSuccess>;
+    }) as unknown as Promise<IssueEditCommentResponseSuccess>;
   }
 
   /** http method */
@@ -4043,8 +6286,8 @@ export const reposownerrepoissuescommentsid = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepoissuescommentsidreactions */
-export interface ReposownerrepoissuescommentsidreactionsOption {
+/** @description request parameter type for issueGetCommentReactions */
+export interface IssueGetCommentReactionsOption {
   /**
    * @description
    *   owner of the repo
@@ -4066,38 +6309,31 @@ export interface ReposownerrepoissuescommentsidreactionsOption {
   };
 }
 
-/** @description request parameter type for reposownerrepoissuescommentsidreactions */
-export interface ReposownerrepoissuescommentsidreactionsOption {
-  body?: {
-    content?: EditReactionOption;
-  };
-}
-
-/** @description response type for reposownerrepoissuescommentsidreactions */
-export interface ReposownerrepoissuescommentsidreactionsResponse {
-  200: Empty;
+/** @description response type for issueGetCommentReactions */
+export interface IssueGetCommentReactionsResponse {
+  200: ReactionList;
   403: Forbidden;
 }
 
-export type ReposownerrepoissuescommentsidreactionsResponseSuccess =
-  ReposownerrepoissuescommentsidreactionsResponse[200];
+export type IssueGetCommentReactionsResponseSuccess =
+  IssueGetCommentReactionsResponse[200];
 /**
  * @description
- *   Remove a reaction from a comment of an issue
+ *   Get a list of reactions from a comment of an issue
  * @tags issue
  * @produces application/json
  * @consumes application/json
  */
-export const reposownerrepoissuescommentsidreactions = /* #__PURE__ */ (() => {
-  const method = "delete";
+export const issueGetCommentReactions = /* #__PURE__ */ (() => {
+  const method = "get";
   const url = "/repos/:owner/:repo/issues/comments/:id/reactions";
   function request(
-    option: ReposownerrepoissuescommentsidreactionsOption
-  ): Promise<ReposownerrepoissuescommentsidreactionsResponseSuccess> {
+    option: IssueGetCommentReactionsOption
+  ): Promise<IssueGetCommentReactionsResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepoissuescommentsidreactionsResponseSuccess>;
+    }) as unknown as Promise<IssueGetCommentReactionsResponseSuccess>;
   }
 
   /** http method */
@@ -4107,8 +6343,192 @@ export const reposownerrepoissuescommentsidreactions = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepoissuesindex */
-export interface ReposownerrepoissuesindexOption {
+/** @description request parameter type for issuePostCommentReaction */
+export interface IssuePostCommentReactionOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          id of the comment to edit
+        @format int64 */
+    id: number;
+  };
+}
+
+/** @description request parameter type for issuePostCommentReaction */
+export interface IssuePostCommentReactionOption {
+  body?: {
+    content?: EditReactionOption;
+  };
+}
+
+/** @description response type for issuePostCommentReaction */
+export interface IssuePostCommentReactionResponse {
+  200: Reaction;
+  201: Reaction;
+  403: Forbidden;
+}
+
+export type IssuePostCommentReactionResponseSuccess =
+  IssuePostCommentReactionResponse[200];
+/**
+ * @description
+ *   Add a reaction to a comment of an issue
+ * @tags issue
+ * @produces application/json
+ * @consumes application/json
+ */
+export const issuePostCommentReaction = /* #__PURE__ */ (() => {
+  const method = "post";
+  const url = "/repos/:owner/:repo/issues/comments/:id/reactions";
+  function request(
+    option: IssuePostCommentReactionOption
+  ): Promise<IssuePostCommentReactionResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<IssuePostCommentReactionResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for issueDeleteCommentReaction */
+export interface IssueDeleteCommentReactionOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          id of the comment to edit
+        @format int64 */
+    id: number;
+  };
+}
+
+/** @description request parameter type for issueDeleteCommentReaction */
+export interface IssueDeleteCommentReactionOption {
+  body?: {
+    content?: EditReactionOption;
+  };
+}
+
+/** @description response type for issueDeleteCommentReaction */
+export interface IssueDeleteCommentReactionResponse {
+  200: Empty;
+  403: Forbidden;
+}
+
+export type IssueDeleteCommentReactionResponseSuccess =
+  IssueDeleteCommentReactionResponse[200];
+/**
+ * @description
+ *   Remove a reaction from a comment of an issue
+ * @tags issue
+ * @produces application/json
+ * @consumes application/json
+ */
+export const issueDeleteCommentReaction = /* #__PURE__ */ (() => {
+  const method = "delete";
+  const url = "/repos/:owner/:repo/issues/comments/:id/reactions";
+  function request(
+    option: IssueDeleteCommentReactionOption
+  ): Promise<IssueDeleteCommentReactionResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<IssueDeleteCommentReactionResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for issueGetIssue */
+export interface IssueGetIssueOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          index of the issue to get
+        @format int64 */
+    index: number;
+  };
+}
+
+/** @description response type for issueGetIssue */
+export interface IssueGetIssueResponse {
+  200: Issue;
+  404: NotFound;
+}
+
+export type IssueGetIssueResponseSuccess = IssueGetIssueResponse[200];
+/**
+ * @description
+ *   Get an issue
+ * @tags issue
+ * @produces application/json
+ */
+export const issueGetIssue = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/repos/:owner/:repo/issues/:index";
+  function request(
+    option: IssueGetIssueOption
+  ): Promise<IssueGetIssueResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<IssueGetIssueResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for issueEditIssue */
+export interface IssueEditIssueOption {
   /**
    * @description
    *   owner of the repo
@@ -4130,21 +6550,20 @@ export interface ReposownerrepoissuesindexOption {
   };
 }
 
-/** @description request parameter type for reposownerrepoissuesindex */
-export interface ReposownerrepoissuesindexOption {
+/** @description request parameter type for issueEditIssue */
+export interface IssueEditIssueOption {
   body?: EditIssueOption;
 }
 
-/** @description response type for reposownerrepoissuesindex */
-export interface ReposownerrepoissuesindexResponse {
+/** @description response type for issueEditIssue */
+export interface IssueEditIssueResponse {
   201: Issue;
   403: Forbidden;
   404: NotFound;
   412: TsgError;
 }
 
-export type ReposownerrepoissuesindexResponseSuccess =
-  ReposownerrepoissuesindexResponse[201];
+export type IssueEditIssueResponseSuccess = IssueEditIssueResponse[201];
 /**
  * @description
  *   Edit an issue. If using deadline only the date will be taken into account, and time of day ignored.
@@ -4152,16 +6571,16 @@ export type ReposownerrepoissuesindexResponseSuccess =
  * @produces application/json
  * @consumes application/json
  */
-export const reposownerrepoissuesindex = /* #__PURE__ */ (() => {
+export const issueEditIssue = /* #__PURE__ */ (() => {
   const method = "patch";
   const url = "/repos/:owner/:repo/issues/:index";
   function request(
-    option: ReposownerrepoissuesindexOption
-  ): Promise<ReposownerrepoissuesindexResponseSuccess> {
+    option: IssueEditIssueOption
+  ): Promise<IssueEditIssueResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepoissuesindexResponseSuccess>;
+    }) as unknown as Promise<IssueEditIssueResponseSuccess>;
   }
 
   /** http method */
@@ -4171,8 +6590,8 @@ export const reposownerrepoissuesindex = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepoissuesindexcomments */
-export interface ReposownerrepoissuesindexcommentsOption {
+/** @description request parameter type for issueGetComments */
+export interface IssueGetCommentsOption {
   /**
    * @description
    *   owner of the repo
@@ -4194,19 +6613,93 @@ export interface ReposownerrepoissuesindexcommentsOption {
   };
 }
 
-/** @description request parameter type for reposownerrepoissuesindexcomments */
-export interface ReposownerrepoissuesindexcommentsOption {
+/** @description request parameter type for issueGetComments */
+export interface IssueGetCommentsOption {
+  /**
+   * @description
+   *   if provided, only comments updated since the specified time are returned.
+   * @format date-time
+   */
+  query?: {
+    /**
+        @description
+          if provided, only comments updated since the specified time are returned.
+        @format date-time */
+    since?: string;
+    /**
+        @description
+          if provided, only comments updated before the provided time are returned.
+        @format date-time */
+    before?: string;
+  };
+}
+
+/** @description response type for issueGetComments */
+export interface IssueGetCommentsResponse {
+  200: CommentList;
+}
+
+export type IssueGetCommentsResponseSuccess = IssueGetCommentsResponse[200];
+/**
+ * @description
+ *   List all comments on an issue
+ * @tags issue
+ * @produces application/json
+ */
+export const issueGetComments = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/repos/:owner/:repo/issues/:index/comments";
+  function request(
+    option: IssueGetCommentsOption
+  ): Promise<IssueGetCommentsResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<IssueGetCommentsResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for issueCreateComment */
+export interface IssueCreateCommentOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          index of the issue
+        @format int64 */
+    index: number;
+  };
+}
+
+/** @description request parameter type for issueCreateComment */
+export interface IssueCreateCommentOption {
   body?: CreateIssueCommentOption;
 }
 
-/** @description response type for reposownerrepoissuesindexcomments */
-export interface ReposownerrepoissuesindexcommentsResponse {
+/** @description response type for issueCreateComment */
+export interface IssueCreateCommentResponse {
   201: Comment;
   403: Forbidden;
 }
 
-export type ReposownerrepoissuesindexcommentsResponseSuccess =
-  ReposownerrepoissuesindexcommentsResponse[201];
+export type IssueCreateCommentResponseSuccess = IssueCreateCommentResponse[201];
 /**
  * @description
  *   Add a comment to an issue
@@ -4214,16 +6707,16 @@ export type ReposownerrepoissuesindexcommentsResponseSuccess =
  * @produces application/json
  * @consumes application/json
  */
-export const reposownerrepoissuesindexcomments = /* #__PURE__ */ (() => {
+export const issueCreateComment = /* #__PURE__ */ (() => {
   const method = "post";
   const url = "/repos/:owner/:repo/issues/:index/comments";
   function request(
-    option: ReposownerrepoissuesindexcommentsOption
-  ): Promise<ReposownerrepoissuesindexcommentsResponseSuccess> {
+    option: IssueCreateCommentOption
+  ): Promise<IssueCreateCommentResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepoissuesindexcommentsResponseSuccess>;
+    }) as unknown as Promise<IssueCreateCommentResponseSuccess>;
   }
 
   /** http method */
@@ -4296,8 +6789,8 @@ export const issueEditIssueDeadline = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepoissuesindexlabels */
-export interface ReposownerrepoissuesindexlabelsOption {
+/** @description request parameter type for issueGetLabels */
+export interface IssueGetLabelsOption {
   /**
    * @description
    *   owner of the repo
@@ -4319,30 +6812,206 @@ export interface ReposownerrepoissuesindexlabelsOption {
   };
 }
 
-/** @description response type for reposownerrepoissuesindexlabels */
-export interface ReposownerrepoissuesindexlabelsResponse {
+/** @description response type for issueGetLabels */
+export interface IssueGetLabelsResponse {
+  200: LabelList;
+  404: NotFound;
+}
+
+export type IssueGetLabelsResponseSuccess = IssueGetLabelsResponse[200];
+/**
+ * @description
+ *   Get an issue's labels
+ * @tags issue
+ * @produces application/json
+ */
+export const issueGetLabels = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/repos/:owner/:repo/issues/:index/labels";
+  function request(
+    option: IssueGetLabelsOption
+  ): Promise<IssueGetLabelsResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<IssueGetLabelsResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for issueReplaceLabels */
+export interface IssueReplaceLabelsOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          index of the issue
+        @format int64 */
+    index: number;
+  };
+}
+
+/** @description request parameter type for issueReplaceLabels */
+export interface IssueReplaceLabelsOption {
+  body?: IssueLabelsOption;
+}
+
+/** @description response type for issueReplaceLabels */
+export interface IssueReplaceLabelsResponse {
+  200: LabelList;
+  403: Forbidden;
+}
+
+export type IssueReplaceLabelsResponseSuccess = IssueReplaceLabelsResponse[200];
+/**
+ * @description
+ *   Replace an issue's labels
+ * @tags issue
+ * @produces application/json
+ * @consumes application/json
+ */
+export const issueReplaceLabels = /* #__PURE__ */ (() => {
+  const method = "put";
+  const url = "/repos/:owner/:repo/issues/:index/labels";
+  function request(
+    option: IssueReplaceLabelsOption
+  ): Promise<IssueReplaceLabelsResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<IssueReplaceLabelsResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for issueAddLabel */
+export interface IssueAddLabelOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          index of the issue
+        @format int64 */
+    index: number;
+  };
+}
+
+/** @description request parameter type for issueAddLabel */
+export interface IssueAddLabelOption {
+  body?: IssueLabelsOption;
+}
+
+/** @description response type for issueAddLabel */
+export interface IssueAddLabelResponse {
+  200: LabelList;
+  403: Forbidden;
+}
+
+export type IssueAddLabelResponseSuccess = IssueAddLabelResponse[200];
+/**
+ * @description
+ *   Add a label to an issue
+ * @tags issue
+ * @produces application/json
+ * @consumes application/json
+ */
+export const issueAddLabel = /* #__PURE__ */ (() => {
+  const method = "post";
+  const url = "/repos/:owner/:repo/issues/:index/labels";
+  function request(
+    option: IssueAddLabelOption
+  ): Promise<IssueAddLabelResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<IssueAddLabelResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for issueClearLabels */
+export interface IssueClearLabelsOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          index of the issue
+        @format int64 */
+    index: number;
+  };
+}
+
+/** @description response type for issueClearLabels */
+export interface IssueClearLabelsResponse {
   204: Empty;
   403: Forbidden;
 }
 
-export type ReposownerrepoissuesindexlabelsResponseSuccess =
-  ReposownerrepoissuesindexlabelsResponse[204];
+export type IssueClearLabelsResponseSuccess = IssueClearLabelsResponse[204];
 /**
  * @description
  *   Remove all labels from an issue
  * @tags issue
  * @produces application/json
  */
-export const reposownerrepoissuesindexlabels = /* #__PURE__ */ (() => {
+export const issueClearLabels = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/issues/:index/labels";
   function request(
-    option: ReposownerrepoissuesindexlabelsOption
-  ): Promise<ReposownerrepoissuesindexlabelsResponseSuccess> {
+    option: IssueClearLabelsOption
+  ): Promise<IssueClearLabelsResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepoissuesindexlabelsResponseSuccess>;
+    }) as unknown as Promise<IssueClearLabelsResponseSuccess>;
   }
 
   /** http method */
@@ -4413,8 +7082,8 @@ export const issueRemoveLabel = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepoissuesindexreactions */
-export interface ReposownerrepoissuesindexreactionsOption {
+/** @description request parameter type for issueGetIssueReactions */
+export interface IssueGetIssueReactionsOption {
   /**
    * @description
    *   owner of the repo
@@ -4436,21 +7105,161 @@ export interface ReposownerrepoissuesindexreactionsOption {
   };
 }
 
-/** @description request parameter type for reposownerrepoissuesindexreactions */
-export interface ReposownerrepoissuesindexreactionsOption {
+/** @description request parameter type for issueGetIssueReactions */
+export interface IssueGetIssueReactionsOption {
+  /**
+   * @description
+   *   page number of results to return (1-based)
+   */
+  query?: {
+    /**
+        @description
+          page number of results to return (1-based) */
+    page?: number;
+    /**
+        @description
+          page size of results */
+    limit?: number;
+  };
+}
+
+/** @description response type for issueGetIssueReactions */
+export interface IssueGetIssueReactionsResponse {
+  200: ReactionList;
+  403: Forbidden;
+}
+
+export type IssueGetIssueReactionsResponseSuccess =
+  IssueGetIssueReactionsResponse[200];
+/**
+ * @description
+ *   Get a list reactions of an issue
+ * @tags issue
+ * @produces application/json
+ * @consumes application/json
+ */
+export const issueGetIssueReactions = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/repos/:owner/:repo/issues/:index/reactions";
+  function request(
+    option: IssueGetIssueReactionsOption
+  ): Promise<IssueGetIssueReactionsResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<IssueGetIssueReactionsResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for issuePostIssueReaction */
+export interface IssuePostIssueReactionOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          index of the issue
+        @format int64 */
+    index: number;
+  };
+}
+
+/** @description request parameter type for issuePostIssueReaction */
+export interface IssuePostIssueReactionOption {
   body?: {
     content?: EditReactionOption;
   };
 }
 
-/** @description response type for reposownerrepoissuesindexreactions */
-export interface ReposownerrepoissuesindexreactionsResponse {
+/** @description response type for issuePostIssueReaction */
+export interface IssuePostIssueReactionResponse {
+  200: Reaction;
+  201: Reaction;
+  403: Forbidden;
+}
+
+export type IssuePostIssueReactionResponseSuccess =
+  IssuePostIssueReactionResponse[200];
+/**
+ * @description
+ *   Add a reaction to an issue
+ * @tags issue
+ * @produces application/json
+ * @consumes application/json
+ */
+export const issuePostIssueReaction = /* #__PURE__ */ (() => {
+  const method = "post";
+  const url = "/repos/:owner/:repo/issues/:index/reactions";
+  function request(
+    option: IssuePostIssueReactionOption
+  ): Promise<IssuePostIssueReactionResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<IssuePostIssueReactionResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for issueDeleteIssueReaction */
+export interface IssueDeleteIssueReactionOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          index of the issue
+        @format int64 */
+    index: number;
+  };
+}
+
+/** @description request parameter type for issueDeleteIssueReaction */
+export interface IssueDeleteIssueReactionOption {
+  body?: {
+    content?: EditReactionOption;
+  };
+}
+
+/** @description response type for issueDeleteIssueReaction */
+export interface IssueDeleteIssueReactionResponse {
   200: Empty;
   403: Forbidden;
 }
 
-export type ReposownerrepoissuesindexreactionsResponseSuccess =
-  ReposownerrepoissuesindexreactionsResponse[200];
+export type IssueDeleteIssueReactionResponseSuccess =
+  IssueDeleteIssueReactionResponse[200];
 /**
  * @description
  *   Remove a reaction from an issue
@@ -4458,16 +7267,16 @@ export type ReposownerrepoissuesindexreactionsResponseSuccess =
  * @produces application/json
  * @consumes application/json
  */
-export const reposownerrepoissuesindexreactions = /* #__PURE__ */ (() => {
+export const issueDeleteIssueReaction = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/issues/:index/reactions";
   function request(
-    option: ReposownerrepoissuesindexreactionsOption
-  ): Promise<ReposownerrepoissuesindexreactionsResponseSuccess> {
+    option: IssueDeleteIssueReactionOption
+  ): Promise<IssueDeleteIssueReactionResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepoissuesindexreactionsResponseSuccess>;
+    }) as unknown as Promise<IssueDeleteIssueReactionResponseSuccess>;
   }
 
   /** http method */
@@ -4808,8 +7617,83 @@ export const issueCheckSubscription = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepoissuesindexsubscriptionsuser */
-export interface ReposownerrepoissuesindexsubscriptionsuserOption {
+/** @description request parameter type for issueAddSubscription */
+export interface IssueAddSubscriptionOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          index of the issue
+        @format int64 */
+    index: number;
+    /**
+        @description
+          user to subscribe */
+    user: string;
+  };
+}
+
+/** @description response type for issueAddSubscription */
+export interface IssueAddSubscriptionResponse {
+  /**
+   * @description
+   *   Already subscribed
+   */
+  200: any;
+  /**
+   * @description
+   *   Successfully Subscribed
+   */
+  201: any;
+  /**
+   * @description
+   *   User can only subscribe itself if he is no admin
+   */
+  304: any;
+  404: NotFound;
+}
+
+export type IssueAddSubscriptionResponseSuccess =
+  IssueAddSubscriptionResponse[200];
+/**
+ * @description
+ *   Subscribe user to issue
+ * @tags issue
+ * @produces application/json
+ * @consumes application/json
+ */
+export const issueAddSubscription = /* #__PURE__ */ (() => {
+  const method = "put";
+  const url = "/repos/:owner/:repo/issues/:index/subscriptions/:user";
+  function request(
+    option: IssueAddSubscriptionOption
+  ): Promise<IssueAddSubscriptionResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<IssueAddSubscriptionResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for issueDeleteSubscription */
+export interface IssueDeleteSubscriptionOption {
   /**
    * @description
    *   owner of the repo
@@ -4835,8 +7719,8 @@ export interface ReposownerrepoissuesindexsubscriptionsuserOption {
   };
 }
 
-/** @description response type for reposownerrepoissuesindexsubscriptionsuser */
-export interface ReposownerrepoissuesindexsubscriptionsuserResponse {
+/** @description response type for issueDeleteSubscription */
+export interface IssueDeleteSubscriptionResponse {
   /**
    * @description
    *   Already unsubscribed
@@ -4855,8 +7739,8 @@ export interface ReposownerrepoissuesindexsubscriptionsuserResponse {
   404: NotFound;
 }
 
-export type ReposownerrepoissuesindexsubscriptionsuserResponseSuccess =
-  ReposownerrepoissuesindexsubscriptionsuserResponse[200];
+export type IssueDeleteSubscriptionResponseSuccess =
+  IssueDeleteSubscriptionResponse[200];
 /**
  * @description
  *   Unsubscribe user from issue
@@ -4864,25 +7748,24 @@ export type ReposownerrepoissuesindexsubscriptionsuserResponseSuccess =
  * @produces application/json
  * @consumes application/json
  */
-export const reposownerrepoissuesindexsubscriptionsuser =
-  /* #__PURE__ */ (() => {
-    const method = "delete";
-    const url = "/repos/:owner/:repo/issues/:index/subscriptions/:user";
-    function request(
-      option: ReposownerrepoissuesindexsubscriptionsuserOption
-    ): Promise<ReposownerrepoissuesindexsubscriptionsuserResponseSuccess> {
-      return requester(url, {
-        method,
-        ...option,
-      }) as unknown as Promise<ReposownerrepoissuesindexsubscriptionsuserResponseSuccess>;
-    }
+export const issueDeleteSubscription = /* #__PURE__ */ (() => {
+  const method = "delete";
+  const url = "/repos/:owner/:repo/issues/:index/subscriptions/:user";
+  function request(
+    option: IssueDeleteSubscriptionOption
+  ): Promise<IssueDeleteSubscriptionResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<IssueDeleteSubscriptionResponseSuccess>;
+  }
 
-    /** http method */
-    request.method = method;
-    /** request url */
-    request.url = url;
-    return request;
-  })();
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
 
 /** @description request parameter type for issueGetCommentsAndTimeline */
 export interface IssueGetCommentsAndTimelineOption {
@@ -4968,8 +7851,157 @@ export const issueGetCommentsAndTimeline = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepoissuesindextimes */
-export interface ReposownerrepoissuesindextimesOption {
+/** @description request parameter type for issueTrackedTimes */
+export interface IssueTrackedTimesOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          index of the issue
+        @format int64 */
+    index: number;
+  };
+}
+
+/** @description request parameter type for issueTrackedTimes */
+export interface IssueTrackedTimesOption {
+  /**
+   * @description
+   *   optional filter by user (available for issue managers)
+   */
+  query?: {
+    /**
+        @description
+          optional filter by user (available for issue managers) */
+    user?: string;
+    /**
+        @description
+          Only show times updated after the given time. This is a timestamp in RFC 3339 format
+        @format date-time */
+    since?: string;
+    /**
+        @description
+          Only show times updated before the given time. This is a timestamp in RFC 3339 format
+        @format date-time */
+    before?: string;
+    /**
+        @description
+          page number of results to return (1-based) */
+    page?: number;
+    /**
+        @description
+          page size of results */
+    limit?: number;
+  };
+}
+
+/** @description response type for issueTrackedTimes */
+export interface IssueTrackedTimesResponse {
+  200: TrackedTimeList;
+  404: NotFound;
+}
+
+export type IssueTrackedTimesResponseSuccess = IssueTrackedTimesResponse[200];
+/**
+ * @description
+ *   List an issue's tracked times
+ * @tags issue
+ * @produces application/json
+ */
+export const issueTrackedTimes = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/repos/:owner/:repo/issues/:index/times";
+  function request(
+    option: IssueTrackedTimesOption
+  ): Promise<IssueTrackedTimesResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<IssueTrackedTimesResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for issueAddTime */
+export interface IssueAddTimeOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          index of the issue
+        @format int64 */
+    index: number;
+  };
+}
+
+/** @description request parameter type for issueAddTime */
+export interface IssueAddTimeOption {
+  body?: AddTimeOption;
+}
+
+/** @description response type for issueAddTime */
+export interface IssueAddTimeResponse {
+  200: TrackedTime;
+  400: TsgError;
+  403: Forbidden;
+}
+
+export type IssueAddTimeResponseSuccess = IssueAddTimeResponse[200];
+/**
+ * @description
+ *   Add tracked time to a issue
+ * @tags issue
+ * @produces application/json
+ * @consumes application/json
+ */
+export const issueAddTime = /* #__PURE__ */ (() => {
+  const method = "post";
+  const url = "/repos/:owner/:repo/issues/:index/times";
+  function request(
+    option: IssueAddTimeOption
+  ): Promise<IssueAddTimeResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<IssueAddTimeResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for issueResetTime */
+export interface IssueResetTimeOption {
   /**
    * @description
    *   owner of the repo
@@ -4991,15 +8023,14 @@ export interface ReposownerrepoissuesindextimesOption {
   };
 }
 
-/** @description response type for reposownerrepoissuesindextimes */
-export interface ReposownerrepoissuesindextimesResponse {
+/** @description response type for issueResetTime */
+export interface IssueResetTimeResponse {
   204: Empty;
   400: TsgError;
   403: Forbidden;
 }
 
-export type ReposownerrepoissuesindextimesResponseSuccess =
-  ReposownerrepoissuesindextimesResponse[204];
+export type IssueResetTimeResponseSuccess = IssueResetTimeResponse[204];
 /**
  * @description
  *   Reset a tracked time of an issue
@@ -5007,16 +8038,16 @@ export type ReposownerrepoissuesindextimesResponseSuccess =
  * @produces application/json
  * @consumes application/json
  */
-export const reposownerrepoissuesindextimes = /* #__PURE__ */ (() => {
+export const issueResetTime = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/issues/:index/times";
   function request(
-    option: ReposownerrepoissuesindextimesOption
-  ): Promise<ReposownerrepoissuesindextimesResponseSuccess> {
+    option: IssueResetTimeOption
+  ): Promise<IssueResetTimeResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepoissuesindextimesResponseSuccess>;
+    }) as unknown as Promise<IssueResetTimeResponseSuccess>;
   }
 
   /** http method */
@@ -5088,8 +8119,8 @@ export const issueDeleteTime = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepokeys */
-export interface ReposownerrepokeysOption {
+/** @description request parameter type for repoListKeys */
+export interface RepoListKeysOption {
   /**
    * @description
    *   owner of the repo
@@ -5106,35 +8137,54 @@ export interface ReposownerrepokeysOption {
   };
 }
 
-/** @description request parameter type for reposownerrepokeys */
-export interface ReposownerrepokeysOption {
-  body?: CreateKeyOption;
+/** @description request parameter type for repoListKeys */
+export interface RepoListKeysOption {
+  /**
+   * @description
+   *   the key_id to search for
+   */
+  query?: {
+    /**
+        @description
+          the key_id to search for */
+    key_id?: number;
+    /**
+        @description
+          fingerprint of the key */
+    fingerprint?: string;
+    /**
+        @description
+          page number of results to return (1-based) */
+    page?: number;
+    /**
+        @description
+          page size of results */
+    limit?: number;
+  };
 }
 
-/** @description response type for reposownerrepokeys */
-export interface ReposownerrepokeysResponse {
-  201: DeployKey;
-  422: ValidationError;
+/** @description response type for repoListKeys */
+export interface RepoListKeysResponse {
+  200: DeployKeyList;
 }
 
-export type ReposownerrepokeysResponseSuccess = ReposownerrepokeysResponse[201];
+export type RepoListKeysResponseSuccess = RepoListKeysResponse[200];
 /**
  * @description
- *   Add a key to a repository
+ *   List a repository's keys
  * @tags repository
  * @produces application/json
- * @consumes application/json
  */
-export const reposownerrepokeys = /* #__PURE__ */ (() => {
-  const method = "post";
+export const repoListKeys = /* #__PURE__ */ (() => {
+  const method = "get";
   const url = "/repos/:owner/:repo/keys";
   function request(
-    option: ReposownerrepokeysOption
-  ): Promise<ReposownerrepokeysResponseSuccess> {
+    option: RepoListKeysOption
+  ): Promise<RepoListKeysResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepokeysResponseSuccess>;
+    }) as unknown as Promise<RepoListKeysResponseSuccess>;
   }
 
   /** http method */
@@ -5144,8 +8194,118 @@ export const reposownerrepokeys = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepokeysid */
-export interface ReposownerrepokeysidOption {
+/** @description request parameter type for repoCreateKey */
+export interface RepoCreateKeyOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+  };
+}
+
+/** @description request parameter type for repoCreateKey */
+export interface RepoCreateKeyOption {
+  body?: CreateKeyOption;
+}
+
+/** @description response type for repoCreateKey */
+export interface RepoCreateKeyResponse {
+  201: DeployKey;
+  422: ValidationError;
+}
+
+export type RepoCreateKeyResponseSuccess = RepoCreateKeyResponse[201];
+/**
+ * @description
+ *   Add a key to a repository
+ * @tags repository
+ * @produces application/json
+ * @consumes application/json
+ */
+export const repoCreateKey = /* #__PURE__ */ (() => {
+  const method = "post";
+  const url = "/repos/:owner/:repo/keys";
+  function request(
+    option: RepoCreateKeyOption
+  ): Promise<RepoCreateKeyResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoCreateKeyResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoGetKey */
+export interface RepoGetKeyOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          id of the key to get
+        @format int64 */
+    id: number;
+  };
+}
+
+/** @description response type for repoGetKey */
+export interface RepoGetKeyResponse {
+  200: DeployKey;
+}
+
+export type RepoGetKeyResponseSuccess = RepoGetKeyResponse[200];
+/**
+ * @description
+ *   Get a repository's key by id
+ * @tags repository
+ * @produces application/json
+ */
+export const repoGetKey = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/repos/:owner/:repo/keys/:id";
+  function request(
+    option: RepoGetKeyOption
+  ): Promise<RepoGetKeyResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoGetKeyResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoDeleteKey */
+export interface RepoDeleteKeyOption {
   /**
    * @description
    *   owner of the repo
@@ -5167,29 +8327,28 @@ export interface ReposownerrepokeysidOption {
   };
 }
 
-/** @description response type for reposownerrepokeysid */
-export interface ReposownerrepokeysidResponse {
+/** @description response type for repoDeleteKey */
+export interface RepoDeleteKeyResponse {
   204: Empty;
   403: Forbidden;
 }
 
-export type ReposownerrepokeysidResponseSuccess =
-  ReposownerrepokeysidResponse[204];
+export type RepoDeleteKeyResponseSuccess = RepoDeleteKeyResponse[204];
 /**
  * @description
  *   Delete a key from a repository
  * @tags repository
  */
-export const reposownerrepokeysid = /* #__PURE__ */ (() => {
+export const repoDeleteKey = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/keys/:id";
   function request(
-    option: ReposownerrepokeysidOption
-  ): Promise<ReposownerrepokeysidResponseSuccess> {
+    option: RepoDeleteKeyOption
+  ): Promise<RepoDeleteKeyResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepokeysidResponseSuccess>;
+    }) as unknown as Promise<RepoDeleteKeyResponseSuccess>;
   }
 
   /** http method */
@@ -5199,8 +8358,8 @@ export const reposownerrepokeysid = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepolabels */
-export interface ReposownerrepolabelsOption {
+/** @description request parameter type for issueListLabels */
+export interface IssueListLabelsOption {
   /**
    * @description
    *   owner of the repo
@@ -5217,36 +8376,46 @@ export interface ReposownerrepolabelsOption {
   };
 }
 
-/** @description request parameter type for reposownerrepolabels */
-export interface ReposownerrepolabelsOption {
-  body?: CreateLabelOption;
+/** @description request parameter type for issueListLabels */
+export interface IssueListLabelsOption {
+  /**
+   * @description
+   *   page number of results to return (1-based)
+   */
+  query?: {
+    /**
+        @description
+          page number of results to return (1-based) */
+    page?: number;
+    /**
+        @description
+          page size of results */
+    limit?: number;
+  };
 }
 
-/** @description response type for reposownerrepolabels */
-export interface ReposownerrepolabelsResponse {
-  201: Label;
-  422: ValidationError;
+/** @description response type for issueListLabels */
+export interface IssueListLabelsResponse {
+  200: LabelList;
 }
 
-export type ReposownerrepolabelsResponseSuccess =
-  ReposownerrepolabelsResponse[201];
+export type IssueListLabelsResponseSuccess = IssueListLabelsResponse[200];
 /**
  * @description
- *   Create a label
+ *   Get all of a repository's labels
  * @tags issue
  * @produces application/json
- * @consumes application/json
  */
-export const reposownerrepolabels = /* #__PURE__ */ (() => {
-  const method = "post";
+export const issueListLabels = /* #__PURE__ */ (() => {
+  const method = "get";
   const url = "/repos/:owner/:repo/labels";
   function request(
-    option: ReposownerrepolabelsOption
-  ): Promise<ReposownerrepolabelsResponseSuccess> {
+    option: IssueListLabelsOption
+  ): Promise<IssueListLabelsResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepolabelsResponseSuccess>;
+    }) as unknown as Promise<IssueListLabelsResponseSuccess>;
   }
 
   /** http method */
@@ -5256,8 +8425,171 @@ export const reposownerrepolabels = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepolabelsid */
-export interface ReposownerrepolabelsidOption {
+/** @description request parameter type for issueCreateLabel */
+export interface IssueCreateLabelOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+  };
+}
+
+/** @description request parameter type for issueCreateLabel */
+export interface IssueCreateLabelOption {
+  body?: CreateLabelOption;
+}
+
+/** @description response type for issueCreateLabel */
+export interface IssueCreateLabelResponse {
+  201: Label;
+  422: ValidationError;
+}
+
+export type IssueCreateLabelResponseSuccess = IssueCreateLabelResponse[201];
+/**
+ * @description
+ *   Create a label
+ * @tags issue
+ * @produces application/json
+ * @consumes application/json
+ */
+export const issueCreateLabel = /* #__PURE__ */ (() => {
+  const method = "post";
+  const url = "/repos/:owner/:repo/labels";
+  function request(
+    option: IssueCreateLabelOption
+  ): Promise<IssueCreateLabelResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<IssueCreateLabelResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for issueGetLabel */
+export interface IssueGetLabelOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          id of the label to get
+        @format int64 */
+    id: number;
+  };
+}
+
+/** @description response type for issueGetLabel */
+export interface IssueGetLabelResponse {
+  200: Label;
+}
+
+export type IssueGetLabelResponseSuccess = IssueGetLabelResponse[200];
+/**
+ * @description
+ *   Get a single label
+ * @tags issue
+ * @produces application/json
+ */
+export const issueGetLabel = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/repos/:owner/:repo/labels/:id";
+  function request(
+    option: IssueGetLabelOption
+  ): Promise<IssueGetLabelResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<IssueGetLabelResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for issueDeleteLabel */
+export interface IssueDeleteLabelOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          id of the label to delete
+        @format int64 */
+    id: number;
+  };
+}
+
+/** @description response type for issueDeleteLabel */
+export interface IssueDeleteLabelResponse {
+  204: Empty;
+}
+
+export type IssueDeleteLabelResponseSuccess = IssueDeleteLabelResponse[204];
+/**
+ * @description
+ *   Delete a label
+ * @tags issue
+ */
+export const issueDeleteLabel = /* #__PURE__ */ (() => {
+  const method = "delete";
+  const url = "/repos/:owner/:repo/labels/:id";
+  function request(
+    option: IssueDeleteLabelOption
+  ): Promise<IssueDeleteLabelResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<IssueDeleteLabelResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for issueEditLabel */
+export interface IssueEditLabelOption {
   /**
    * @description
    *   owner of the repo
@@ -5279,19 +8611,18 @@ export interface ReposownerrepolabelsidOption {
   };
 }
 
-/** @description request parameter type for reposownerrepolabelsid */
-export interface ReposownerrepolabelsidOption {
+/** @description request parameter type for issueEditLabel */
+export interface IssueEditLabelOption {
   body?: EditLabelOption;
 }
 
-/** @description response type for reposownerrepolabelsid */
-export interface ReposownerrepolabelsidResponse {
+/** @description response type for issueEditLabel */
+export interface IssueEditLabelResponse {
   200: Label;
   422: ValidationError;
 }
 
-export type ReposownerrepolabelsidResponseSuccess =
-  ReposownerrepolabelsidResponse[200];
+export type IssueEditLabelResponseSuccess = IssueEditLabelResponse[200];
 /**
  * @description
  *   Update a label
@@ -5299,16 +8630,16 @@ export type ReposownerrepolabelsidResponseSuccess =
  * @produces application/json
  * @consumes application/json
  */
-export const reposownerrepolabelsid = /* #__PURE__ */ (() => {
+export const issueEditLabel = /* #__PURE__ */ (() => {
   const method = "patch";
   const url = "/repos/:owner/:repo/labels/:id";
   function request(
-    option: ReposownerrepolabelsidOption
-  ): Promise<ReposownerrepolabelsidResponseSuccess> {
+    option: IssueEditLabelOption
+  ): Promise<IssueEditLabelResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepolabelsidResponseSuccess>;
+    }) as unknown as Promise<IssueEditLabelResponseSuccess>;
   }
 
   /** http method */
@@ -5368,8 +8699,8 @@ export const repoGetLanguages = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepomilestones */
-export interface ReposownerrepomilestonesOption {
+/** @description request parameter type for issueGetMilestonesList */
+export interface IssueGetMilestonesListOption {
   /**
    * @description
    *   owner of the repo
@@ -5386,35 +8717,55 @@ export interface ReposownerrepomilestonesOption {
   };
 }
 
-/** @description request parameter type for reposownerrepomilestones */
-export interface ReposownerrepomilestonesOption {
-  body?: CreateMilestoneOption;
+/** @description request parameter type for issueGetMilestonesList */
+export interface IssueGetMilestonesListOption {
+  /**
+   * @description
+   *   Milestone state, Recognised values are open, closed and all. Defaults to "open"
+   */
+  query?: {
+    /**
+        @description
+          Milestone state, Recognised values are open, closed and all. Defaults to "open" */
+    state?: string;
+    /**
+        @description
+          filter by milestone name */
+    name?: string;
+    /**
+        @description
+          page number of results to return (1-based) */
+    page?: number;
+    /**
+        @description
+          page size of results */
+    limit?: number;
+  };
 }
 
-/** @description response type for reposownerrepomilestones */
-export interface ReposownerrepomilestonesResponse {
-  201: Milestone;
+/** @description response type for issueGetMilestonesList */
+export interface IssueGetMilestonesListResponse {
+  200: MilestoneList;
 }
 
-export type ReposownerrepomilestonesResponseSuccess =
-  ReposownerrepomilestonesResponse[201];
+export type IssueGetMilestonesListResponseSuccess =
+  IssueGetMilestonesListResponse[200];
 /**
  * @description
- *   Create a milestone
+ *   Get all of a repository's opened milestones
  * @tags issue
  * @produces application/json
- * @consumes application/json
  */
-export const reposownerrepomilestones = /* #__PURE__ */ (() => {
-  const method = "post";
+export const issueGetMilestonesList = /* #__PURE__ */ (() => {
+  const method = "get";
   const url = "/repos/:owner/:repo/milestones";
   function request(
-    option: ReposownerrepomilestonesOption
-  ): Promise<ReposownerrepomilestonesResponseSuccess> {
+    option: IssueGetMilestonesListOption
+  ): Promise<IssueGetMilestonesListResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepomilestonesResponseSuccess>;
+    }) as unknown as Promise<IssueGetMilestonesListResponseSuccess>;
   }
 
   /** http method */
@@ -5424,8 +8775,170 @@ export const reposownerrepomilestones = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepomilestonesid */
-export interface ReposownerrepomilestonesidOption {
+/** @description request parameter type for issueCreateMilestone */
+export interface IssueCreateMilestoneOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+  };
+}
+
+/** @description request parameter type for issueCreateMilestone */
+export interface IssueCreateMilestoneOption {
+  body?: CreateMilestoneOption;
+}
+
+/** @description response type for issueCreateMilestone */
+export interface IssueCreateMilestoneResponse {
+  201: Milestone;
+}
+
+export type IssueCreateMilestoneResponseSuccess =
+  IssueCreateMilestoneResponse[201];
+/**
+ * @description
+ *   Create a milestone
+ * @tags issue
+ * @produces application/json
+ * @consumes application/json
+ */
+export const issueCreateMilestone = /* #__PURE__ */ (() => {
+  const method = "post";
+  const url = "/repos/:owner/:repo/milestones";
+  function request(
+    option: IssueCreateMilestoneOption
+  ): Promise<IssueCreateMilestoneResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<IssueCreateMilestoneResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for issueGetMilestone */
+export interface IssueGetMilestoneOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          the milestone to get, identified by ID and if not available by name */
+    id: string;
+  };
+}
+
+/** @description response type for issueGetMilestone */
+export interface IssueGetMilestoneResponse {
+  200: Milestone;
+}
+
+export type IssueGetMilestoneResponseSuccess = IssueGetMilestoneResponse[200];
+/**
+ * @description
+ *   Get a milestone
+ * @tags issue
+ * @produces application/json
+ */
+export const issueGetMilestone = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/repos/:owner/:repo/milestones/:id";
+  function request(
+    option: IssueGetMilestoneOption
+  ): Promise<IssueGetMilestoneResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<IssueGetMilestoneResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for issueDeleteMilestone */
+export interface IssueDeleteMilestoneOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          the milestone to delete, identified by ID and if not available by name */
+    id: string;
+  };
+}
+
+/** @description response type for issueDeleteMilestone */
+export interface IssueDeleteMilestoneResponse {
+  204: Empty;
+}
+
+export type IssueDeleteMilestoneResponseSuccess =
+  IssueDeleteMilestoneResponse[204];
+/**
+ * @description
+ *   Delete a milestone
+ * @tags issue
+ */
+export const issueDeleteMilestone = /* #__PURE__ */ (() => {
+  const method = "delete";
+  const url = "/repos/:owner/:repo/milestones/:id";
+  function request(
+    option: IssueDeleteMilestoneOption
+  ): Promise<IssueDeleteMilestoneResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<IssueDeleteMilestoneResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for issueEditMilestone */
+export interface IssueEditMilestoneOption {
   /**
    * @description
    *   owner of the repo
@@ -5446,18 +8959,17 @@ export interface ReposownerrepomilestonesidOption {
   };
 }
 
-/** @description request parameter type for reposownerrepomilestonesid */
-export interface ReposownerrepomilestonesidOption {
+/** @description request parameter type for issueEditMilestone */
+export interface IssueEditMilestoneOption {
   body?: EditMilestoneOption;
 }
 
-/** @description response type for reposownerrepomilestonesid */
-export interface ReposownerrepomilestonesidResponse {
+/** @description response type for issueEditMilestone */
+export interface IssueEditMilestoneResponse {
   200: Milestone;
 }
 
-export type ReposownerrepomilestonesidResponseSuccess =
-  ReposownerrepomilestonesidResponse[200];
+export type IssueEditMilestoneResponseSuccess = IssueEditMilestoneResponse[200];
 /**
  * @description
  *   Update a milestone
@@ -5465,16 +8977,16 @@ export type ReposownerrepomilestonesidResponseSuccess =
  * @produces application/json
  * @consumes application/json
  */
-export const reposownerrepomilestonesid = /* #__PURE__ */ (() => {
+export const issueEditMilestone = /* #__PURE__ */ (() => {
   const method = "patch";
   const url = "/repos/:owner/:repo/milestones/:id";
   function request(
-    option: ReposownerrepomilestonesidOption
-  ): Promise<ReposownerrepomilestonesidResponseSuccess> {
+    option: IssueEditMilestoneOption
+  ): Promise<IssueEditMilestoneResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepomilestonesidResponseSuccess>;
+    }) as unknown as Promise<IssueEditMilestoneResponseSuccess>;
   }
 
   /** http method */
@@ -5534,8 +9046,8 @@ export const repoMirrorSync = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerreponotifications */
-export interface ReposownerreponotificationsOption {
+/** @description request parameter type for notifyGetRepoList */
+export interface NotifyGetRepoListOption {
   /**
    * @description
    *   owner of the repo
@@ -5552,8 +9064,98 @@ export interface ReposownerreponotificationsOption {
   };
 }
 
-/** @description request parameter type for reposownerreponotifications */
-export interface ReposownerreponotificationsOption {
+/** @description request parameter type for notifyGetRepoList */
+export interface NotifyGetRepoListOption {
+  /**
+   * @description
+   *   If true, show notifications marked as read. Default value is false
+   */
+  query?: {
+    /**
+        @description
+          If true, show notifications marked as read. Default value is false */
+    all?: boolean;
+    /**
+        @description
+          Show notifications with the provided status types. Options are: unread, read and/or pinned. Defaults to unread & pinned */
+    "status-types"?: Array<string>;
+    /**
+        @description
+          filter notifications by subject type */
+    "subject-type"?: Array<GetReposOwnerRepoNotificationsItems>;
+    /**
+        @description
+          Only show notifications updated after the given time. This is a timestamp in RFC 3339 format
+        @format date-time */
+    since?: string;
+    /**
+        @description
+          Only show notifications updated before the given time. This is a timestamp in RFC 3339 format
+        @format date-time */
+    before?: string;
+    /**
+        @description
+          page number of results to return (1-based) */
+    page?: number;
+    /**
+        @description
+          page size of results */
+    limit?: number;
+  };
+}
+
+/** @description response type for notifyGetRepoList */
+export interface NotifyGetRepoListResponse {
+  200: NotificationThreadList;
+}
+
+export type NotifyGetRepoListResponseSuccess = NotifyGetRepoListResponse[200];
+/**
+ * @description
+ *   List users's notification threads on a specific repo
+ * @tags notification
+ * @produces application/json
+ * @consumes application/json
+ */
+export const notifyGetRepoList = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/repos/:owner/:repo/notifications";
+  function request(
+    option: NotifyGetRepoListOption
+  ): Promise<NotifyGetRepoListResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<NotifyGetRepoListResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for notifyReadRepoList */
+export interface NotifyReadRepoListOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+  };
+}
+
+/** @description request parameter type for notifyReadRepoList */
+export interface NotifyReadRepoListOption {
   /**
    * @description
    *   If true, mark all notifications on this repo. Default value is false
@@ -5579,13 +9181,12 @@ export interface ReposownerreponotificationsOption {
   };
 }
 
-/** @description response type for reposownerreponotifications */
-export interface ReposownerreponotificationsResponse {
+/** @description response type for notifyReadRepoList */
+export interface NotifyReadRepoListResponse {
   205: NotificationThreadList;
 }
 
-export type ReposownerreponotificationsResponseSuccess =
-  ReposownerreponotificationsResponse[205];
+export type NotifyReadRepoListResponseSuccess = NotifyReadRepoListResponse[205];
 /**
  * @description
  *   Mark notification threads as read, pinned or unread on a specific repo
@@ -5593,16 +9194,16 @@ export type ReposownerreponotificationsResponseSuccess =
  * @produces application/json
  * @consumes application/json
  */
-export const reposownerreponotifications = /* #__PURE__ */ (() => {
+export const notifyReadRepoList = /* #__PURE__ */ (() => {
   const method = "put";
   const url = "/repos/:owner/:repo/notifications";
   function request(
-    option: ReposownerreponotificationsOption
-  ): Promise<ReposownerreponotificationsResponseSuccess> {
+    option: NotifyReadRepoListOption
+  ): Promise<NotifyReadRepoListResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerreponotificationsResponseSuccess>;
+    }) as unknown as Promise<NotifyReadRepoListResponseSuccess>;
   }
 
   /** http method */
@@ -5612,8 +9213,8 @@ export const reposownerreponotifications = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepopulls */
-export interface ReposownerrepopullsOption {
+/** @description request parameter type for repoListPullRequests */
+export interface RepoListPullRequestsOption {
   /**
    * @description
    *   owner of the repo
@@ -5630,37 +9231,64 @@ export interface ReposownerrepopullsOption {
   };
 }
 
-/** @description request parameter type for reposownerrepopulls */
-export interface ReposownerrepopullsOption {
-  body?: CreatePullRequestOption;
+/** @description request parameter type for repoListPullRequests */
+export interface RepoListPullRequestsOption {
+  /**
+   * @description
+   *   State of pull request: open or closed (optional)
+   */
+  query?: {
+    /**
+        @description
+          State of pull request: open or closed (optional) */
+    state?: GetReposOwnerRepoPullsState;
+    /**
+        @description
+          Type of sort */
+    sort?: GetReposOwnerRepoPullsSort;
+    /**
+        @description
+          ID of the milestone
+        @format int64 */
+    milestone?: number;
+    /**
+        @description
+          Label IDs */
+    labels?: Array<number>;
+    /**
+        @description
+          page number of results to return (1-based) */
+    page?: number;
+    /**
+        @description
+          page size of results */
+    limit?: number;
+  };
 }
 
-/** @description response type for reposownerrepopulls */
-export interface ReposownerrepopullsResponse {
-  201: PullRequest;
-  409: TsgError;
-  422: ValidationError;
+/** @description response type for repoListPullRequests */
+export interface RepoListPullRequestsResponse {
+  200: PullRequestList;
 }
 
-export type ReposownerrepopullsResponseSuccess =
-  ReposownerrepopullsResponse[201];
+export type RepoListPullRequestsResponseSuccess =
+  RepoListPullRequestsResponse[200];
 /**
  * @description
- *   Create a pull request
+ *   List a repo's pull requests
  * @tags repository
  * @produces application/json
- * @consumes application/json
  */
-export const reposownerrepopulls = /* #__PURE__ */ (() => {
-  const method = "post";
+export const repoListPullRequests = /* #__PURE__ */ (() => {
+  const method = "get";
   const url = "/repos/:owner/:repo/pulls";
   function request(
-    option: ReposownerrepopullsOption
-  ): Promise<ReposownerrepopullsResponseSuccess> {
+    option: RepoListPullRequestsOption
+  ): Promise<RepoListPullRequestsResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepopullsResponseSuccess>;
+    }) as unknown as Promise<RepoListPullRequestsResponseSuccess>;
   }
 
   /** http method */
@@ -5670,8 +9298,121 @@ export const reposownerrepopulls = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepopullsindex */
-export interface ReposownerrepopullsindexOption {
+/** @description request parameter type for repoCreatePullRequest */
+export interface RepoCreatePullRequestOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+  };
+}
+
+/** @description request parameter type for repoCreatePullRequest */
+export interface RepoCreatePullRequestOption {
+  body?: CreatePullRequestOption;
+}
+
+/** @description response type for repoCreatePullRequest */
+export interface RepoCreatePullRequestResponse {
+  201: PullRequest;
+  409: TsgError;
+  422: ValidationError;
+}
+
+export type RepoCreatePullRequestResponseSuccess =
+  RepoCreatePullRequestResponse[201];
+/**
+ * @description
+ *   Create a pull request
+ * @tags repository
+ * @produces application/json
+ * @consumes application/json
+ */
+export const repoCreatePullRequest = /* #__PURE__ */ (() => {
+  const method = "post";
+  const url = "/repos/:owner/:repo/pulls";
+  function request(
+    option: RepoCreatePullRequestOption
+  ): Promise<RepoCreatePullRequestResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoCreatePullRequestResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoGetPullRequest */
+export interface RepoGetPullRequestOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          index of the pull request to get
+        @format int64 */
+    index: number;
+  };
+}
+
+/** @description response type for repoGetPullRequest */
+export interface RepoGetPullRequestResponse {
+  200: PullRequest;
+  404: NotFound;
+}
+
+export type RepoGetPullRequestResponseSuccess = RepoGetPullRequestResponse[200];
+/**
+ * @description
+ *   Get a pull request
+ * @tags repository
+ * @produces application/json
+ */
+export const repoGetPullRequest = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/repos/:owner/:repo/pulls/:index";
+  function request(
+    option: RepoGetPullRequestOption
+  ): Promise<RepoGetPullRequestResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoGetPullRequestResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoEditPullRequest */
+export interface RepoEditPullRequestOption {
   /**
    * @description
    *   owner of the repo
@@ -5693,13 +9434,13 @@ export interface ReposownerrepopullsindexOption {
   };
 }
 
-/** @description request parameter type for reposownerrepopullsindex */
-export interface ReposownerrepopullsindexOption {
+/** @description request parameter type for repoEditPullRequest */
+export interface RepoEditPullRequestOption {
   body?: EditPullRequestOption;
 }
 
-/** @description response type for reposownerrepopullsindex */
-export interface ReposownerrepopullsindexResponse {
+/** @description response type for repoEditPullRequest */
+export interface RepoEditPullRequestResponse {
   201: PullRequest;
   403: Forbidden;
   409: TsgError;
@@ -5707,8 +9448,8 @@ export interface ReposownerrepopullsindexResponse {
   422: ValidationError;
 }
 
-export type ReposownerrepopullsindexResponseSuccess =
-  ReposownerrepopullsindexResponse[201];
+export type RepoEditPullRequestResponseSuccess =
+  RepoEditPullRequestResponse[201];
 /**
  * @description
  *   Update a pull request. If using deadline only the date will be taken into account, and time of day ignored.
@@ -5716,16 +9457,16 @@ export type ReposownerrepopullsindexResponseSuccess =
  * @produces application/json
  * @consumes application/json
  */
-export const reposownerrepopullsindex = /* #__PURE__ */ (() => {
+export const repoEditPullRequest = /* #__PURE__ */ (() => {
   const method = "patch";
   const url = "/repos/:owner/:repo/pulls/:index";
   function request(
-    option: ReposownerrepopullsindexOption
-  ): Promise<ReposownerrepopullsindexResponseSuccess> {
+    option: RepoEditPullRequestOption
+  ): Promise<RepoEditPullRequestResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepopullsindexResponseSuccess>;
+    }) as unknown as Promise<RepoEditPullRequestResponseSuccess>;
   }
 
   /** http method */
@@ -5883,8 +9624,72 @@ export const repoGetPullRequestCommits = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepopullsindexmerge */
-export interface ReposownerrepopullsindexmergeOption {
+/** @description request parameter type for repoPullRequestIsMerged */
+export interface RepoPullRequestIsMergedOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          index of the pull request
+        @format int64 */
+    index: number;
+  };
+}
+
+/** @description response type for repoPullRequestIsMerged */
+export interface RepoPullRequestIsMergedResponse {
+  /**
+   * @description
+   *   pull request has been merged
+   */
+  204: any;
+  /**
+   * @description
+   *   pull request has not been merged
+   */
+  404: any;
+}
+
+export type RepoPullRequestIsMergedResponseSuccess =
+  RepoPullRequestIsMergedResponse[204];
+/**
+ * @description
+ *   Check if a pull request has been merged
+ * @tags repository
+ * @produces application/json
+ */
+export const repoPullRequestIsMerged = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/repos/:owner/:repo/pulls/:index/merge";
+  function request(
+    option: RepoPullRequestIsMergedOption
+  ): Promise<RepoPullRequestIsMergedResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoPullRequestIsMergedResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoMergePullRequest */
+export interface RepoMergePullRequestOption {
   /**
    * @description
    *   owner of the repo
@@ -5906,36 +9711,36 @@ export interface ReposownerrepopullsindexmergeOption {
   };
 }
 
-/** @description request parameter type for reposownerrepopullsindexmerge */
-export interface ReposownerrepopullsindexmergeOption {
+/** @description request parameter type for repoMergePullRequest */
+export interface RepoMergePullRequestOption {
   body?: MergePullRequestOption;
 }
 
-/** @description response type for reposownerrepopullsindexmerge */
-export interface ReposownerrepopullsindexmergeResponse {
+/** @description response type for repoMergePullRequest */
+export interface RepoMergePullRequestResponse {
   200: Empty;
   405: Empty;
   409: TsgError;
 }
 
-export type ReposownerrepopullsindexmergeResponseSuccess =
-  ReposownerrepopullsindexmergeResponse[200];
+export type RepoMergePullRequestResponseSuccess =
+  RepoMergePullRequestResponse[200];
 /**
  * @description
  *   Merge a pull request
  * @tags repository
  * @produces application/json
  */
-export const reposownerrepopullsindexmerge = /* #__PURE__ */ (() => {
+export const repoMergePullRequest = /* #__PURE__ */ (() => {
   const method = "post";
   const url = "/repos/:owner/:repo/pulls/:index/merge";
   function request(
-    option: ReposownerrepopullsindexmergeOption
-  ): Promise<ReposownerrepopullsindexmergeResponseSuccess> {
+    option: RepoMergePullRequestOption
+  ): Promise<RepoMergePullRequestResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepopullsindexmergeResponseSuccess>;
+    }) as unknown as Promise<RepoMergePullRequestResponseSuccess>;
   }
 
   /** http method */
@@ -5945,8 +9750,8 @@ export const reposownerrepopullsindexmerge = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepopullsindexrequested_reviewers */
-export interface Reposownerrepopullsindexrequested_reviewersOption {
+/** @description request parameter type for repoCreatePullReviewRequests */
+export interface RepoCreatePullReviewRequestsOption {
   /**
    * @description
    *   owner of the repo
@@ -5968,48 +9773,109 @@ export interface Reposownerrepopullsindexrequested_reviewersOption {
   };
 }
 
-/** @description request parameter type for reposownerrepopullsindexrequested_reviewers */
-export interface Reposownerrepopullsindexrequested_reviewersOption {
+/** @description request parameter type for repoCreatePullReviewRequests */
+export interface RepoCreatePullReviewRequestsOption {
   body: PullReviewRequestOptions;
 }
 
-/** @description response type for reposownerrepopullsindexrequested_reviewers */
-export interface Reposownerrepopullsindexrequested_reviewersResponse {
+/** @description response type for repoCreatePullReviewRequests */
+export interface RepoCreatePullReviewRequestsResponse {
+  201: PullReviewList;
+  404: NotFound;
+  422: ValidationError;
+}
+
+export type RepoCreatePullReviewRequestsResponseSuccess =
+  RepoCreatePullReviewRequestsResponse[201];
+/**
+ * @description
+ *   create review requests for a pull request
+ * @tags repository
+ * @produces application/json
+ */
+export const repoCreatePullReviewRequests = /* #__PURE__ */ (() => {
+  const method = "post";
+  const url = "/repos/:owner/:repo/pulls/:index/requested_reviewers";
+  function request(
+    option: RepoCreatePullReviewRequestsOption
+  ): Promise<RepoCreatePullReviewRequestsResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoCreatePullReviewRequestsResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoDeletePullReviewRequests */
+export interface RepoDeletePullReviewRequestsOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          index of the pull request
+        @format int64 */
+    index: number;
+  };
+}
+
+/** @description request parameter type for repoDeletePullReviewRequests */
+export interface RepoDeletePullReviewRequestsOption {
+  body: PullReviewRequestOptions;
+}
+
+/** @description response type for repoDeletePullReviewRequests */
+export interface RepoDeletePullReviewRequestsResponse {
   204: Empty;
   404: NotFound;
   422: ValidationError;
 }
 
-export type Reposownerrepopullsindexrequested_reviewersResponseSuccess =
-  Reposownerrepopullsindexrequested_reviewersResponse[204];
+export type RepoDeletePullReviewRequestsResponseSuccess =
+  RepoDeletePullReviewRequestsResponse[204];
 /**
  * @description
  *   cancel review requests for a pull request
  * @tags repository
  * @produces application/json
  */
-export const reposownerrepopullsindexrequested_reviewers =
-  /* #__PURE__ */ (() => {
-    const method = "delete";
-    const url = "/repos/:owner/:repo/pulls/:index/requested_reviewers";
-    function request(
-      option: Reposownerrepopullsindexrequested_reviewersOption
-    ): Promise<Reposownerrepopullsindexrequested_reviewersResponseSuccess> {
-      return requester(url, {
-        method,
-        ...option,
-      }) as unknown as Promise<Reposownerrepopullsindexrequested_reviewersResponseSuccess>;
-    }
+export const repoDeletePullReviewRequests = /* #__PURE__ */ (() => {
+  const method = "delete";
+  const url = "/repos/:owner/:repo/pulls/:index/requested_reviewers";
+  function request(
+    option: RepoDeletePullReviewRequestsOption
+  ): Promise<RepoDeletePullReviewRequestsResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoDeletePullReviewRequestsResponseSuccess>;
+  }
 
-    /** http method */
-    request.method = method;
-    /** request url */
-    request.url = url;
-    return request;
-  })();
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
 
-/** @description request parameter type for reposownerrepopullsindexreviews */
-export interface ReposownerrepopullsindexreviewsOption {
+/** @description request parameter type for repoListPullReviews */
+export interface RepoListPullReviewsOption {
   /**
    * @description
    *   owner of the repo
@@ -6031,36 +9897,48 @@ export interface ReposownerrepopullsindexreviewsOption {
   };
 }
 
-/** @description request parameter type for reposownerrepopullsindexreviews */
-export interface ReposownerrepopullsindexreviewsOption {
-  body: CreatePullReviewOptions;
+/** @description request parameter type for repoListPullReviews */
+export interface RepoListPullReviewsOption {
+  /**
+   * @description
+   *   page number of results to return (1-based)
+   */
+  query?: {
+    /**
+        @description
+          page number of results to return (1-based) */
+    page?: number;
+    /**
+        @description
+          page size of results */
+    limit?: number;
+  };
 }
 
-/** @description response type for reposownerrepopullsindexreviews */
-export interface ReposownerrepopullsindexreviewsResponse {
-  200: PullReview;
+/** @description response type for repoListPullReviews */
+export interface RepoListPullReviewsResponse {
+  200: PullReviewList;
   404: NotFound;
-  422: ValidationError;
 }
 
-export type ReposownerrepopullsindexreviewsResponseSuccess =
-  ReposownerrepopullsindexreviewsResponse[200];
+export type RepoListPullReviewsResponseSuccess =
+  RepoListPullReviewsResponse[200];
 /**
  * @description
- *   Create a review to an pull request
+ *   List all reviews for a pull request
  * @tags repository
  * @produces application/json
  */
-export const reposownerrepopullsindexreviews = /* #__PURE__ */ (() => {
-  const method = "post";
+export const repoListPullReviews = /* #__PURE__ */ (() => {
+  const method = "get";
   const url = "/repos/:owner/:repo/pulls/:index/reviews";
   function request(
-    option: ReposownerrepopullsindexreviewsOption
-  ): Promise<ReposownerrepopullsindexreviewsResponseSuccess> {
+    option: RepoListPullReviewsOption
+  ): Promise<RepoListPullReviewsResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepopullsindexreviewsResponseSuccess>;
+    }) as unknown as Promise<RepoListPullReviewsResponseSuccess>;
   }
 
   /** http method */
@@ -6070,8 +9948,70 @@ export const reposownerrepopullsindexreviews = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepopullsindexreviewsid */
-export interface ReposownerrepopullsindexreviewsidOption {
+/** @description request parameter type for repoCreatePullReview */
+export interface RepoCreatePullReviewOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          index of the pull request
+        @format int64 */
+    index: number;
+  };
+}
+
+/** @description request parameter type for repoCreatePullReview */
+export interface RepoCreatePullReviewOption {
+  body: CreatePullReviewOptions;
+}
+
+/** @description response type for repoCreatePullReview */
+export interface RepoCreatePullReviewResponse {
+  200: PullReview;
+  404: NotFound;
+  422: ValidationError;
+}
+
+export type RepoCreatePullReviewResponseSuccess =
+  RepoCreatePullReviewResponse[200];
+/**
+ * @description
+ *   Create a review to an pull request
+ * @tags repository
+ * @produces application/json
+ */
+export const repoCreatePullReview = /* #__PURE__ */ (() => {
+  const method = "post";
+  const url = "/repos/:owner/:repo/pulls/:index/reviews";
+  function request(
+    option: RepoCreatePullReviewOption
+  ): Promise<RepoCreatePullReviewResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoCreatePullReviewResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoGetPullReview */
+export interface RepoGetPullReviewOption {
   /**
    * @description
    *   owner of the repo
@@ -6098,31 +10038,158 @@ export interface ReposownerrepopullsindexreviewsidOption {
   };
 }
 
-/** @description response type for reposownerrepopullsindexreviewsid */
-export interface ReposownerrepopullsindexreviewsidResponse {
+/** @description response type for repoGetPullReview */
+export interface RepoGetPullReviewResponse {
+  200: PullReview;
+  404: NotFound;
+}
+
+export type RepoGetPullReviewResponseSuccess = RepoGetPullReviewResponse[200];
+/**
+ * @description
+ *   Get a specific review for a pull request
+ * @tags repository
+ * @produces application/json
+ */
+export const repoGetPullReview = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/repos/:owner/:repo/pulls/:index/reviews/:id";
+  function request(
+    option: RepoGetPullReviewOption
+  ): Promise<RepoGetPullReviewResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoGetPullReviewResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoSubmitPullReview */
+export interface RepoSubmitPullReviewOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          index of the pull request
+        @format int64 */
+    index: number;
+    /**
+        @description
+          id of the review
+        @format int64 */
+    id: number;
+  };
+}
+
+/** @description request parameter type for repoSubmitPullReview */
+export interface RepoSubmitPullReviewOption {
+  body: SubmitPullReviewOptions;
+}
+
+/** @description response type for repoSubmitPullReview */
+export interface RepoSubmitPullReviewResponse {
+  200: PullReview;
+  404: NotFound;
+  422: ValidationError;
+}
+
+export type RepoSubmitPullReviewResponseSuccess =
+  RepoSubmitPullReviewResponse[200];
+/**
+ * @description
+ *   Submit a pending review to an pull request
+ * @tags repository
+ * @produces application/json
+ */
+export const repoSubmitPullReview = /* #__PURE__ */ (() => {
+  const method = "post";
+  const url = "/repos/:owner/:repo/pulls/:index/reviews/:id";
+  function request(
+    option: RepoSubmitPullReviewOption
+  ): Promise<RepoSubmitPullReviewResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoSubmitPullReviewResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoDeletePullReview */
+export interface RepoDeletePullReviewOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          index of the pull request
+        @format int64 */
+    index: number;
+    /**
+        @description
+          id of the review
+        @format int64 */
+    id: number;
+  };
+}
+
+/** @description response type for repoDeletePullReview */
+export interface RepoDeletePullReviewResponse {
   204: Empty;
   403: Forbidden;
   404: NotFound;
 }
 
-export type ReposownerrepopullsindexreviewsidResponseSuccess =
-  ReposownerrepopullsindexreviewsidResponse[204];
+export type RepoDeletePullReviewResponseSuccess =
+  RepoDeletePullReviewResponse[204];
 /**
  * @description
  *   Delete a specific review from a pull request
  * @tags repository
  * @produces application/json
  */
-export const reposownerrepopullsindexreviewsid = /* #__PURE__ */ (() => {
+export const repoDeletePullReview = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/pulls/:index/reviews/:id";
   function request(
-    option: ReposownerrepopullsindexreviewsidOption
-  ): Promise<ReposownerrepopullsindexreviewsidResponseSuccess> {
+    option: RepoDeletePullReviewOption
+  ): Promise<RepoDeletePullReviewResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepopullsindexreviewsidResponseSuccess>;
+    }) as unknown as Promise<RepoDeletePullReviewResponseSuccess>;
   }
 
   /** http method */
@@ -6467,8 +10534,8 @@ export const repoGetRawFile = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerreporeleases */
-export interface ReposownerreporeleasesOption {
+/** @description request parameter type for repoListReleases */
+export interface RepoListReleasesOption {
   /**
    * @description
    *   owner of the repo
@@ -6485,37 +10552,58 @@ export interface ReposownerreporeleasesOption {
   };
 }
 
-/** @description request parameter type for reposownerreporeleases */
-export interface ReposownerreporeleasesOption {
-  body?: CreateReleaseOption;
+/** @description request parameter type for repoListReleases */
+export interface RepoListReleasesOption {
+  /**
+   * @description
+   *   filter (exclude / include) drafts, if you dont have repo write access none will show
+   */
+  query?: {
+    /**
+        @description
+          filter (exclude / include) drafts, if you dont have repo write access none will show */
+    draft?: boolean;
+    /**
+        @description
+          filter (exclude / include) pre-releases */
+    "pre-release"?: boolean;
+    /**
+        @description
+          page size of results, deprecated - use limit */
+    per_page?: number;
+    /**
+        @description
+          page number of results to return (1-based) */
+    page?: number;
+    /**
+        @description
+          page size of results */
+    limit?: number;
+  };
 }
 
-/** @description response type for reposownerreporeleases */
-export interface ReposownerreporeleasesResponse {
-  201: Release;
-  404: NotFound;
-  409: TsgError;
+/** @description response type for repoListReleases */
+export interface RepoListReleasesResponse {
+  200: ReleaseList;
 }
 
-export type ReposownerreporeleasesResponseSuccess =
-  ReposownerreporeleasesResponse[201];
+export type RepoListReleasesResponseSuccess = RepoListReleasesResponse[200];
 /**
  * @description
- *   Create a release
+ *   List a repo's releases
  * @tags repository
  * @produces application/json
- * @consumes application/json
  */
-export const reposownerreporeleases = /* #__PURE__ */ (() => {
-  const method = "post";
+export const repoListReleases = /* #__PURE__ */ (() => {
+  const method = "get";
   const url = "/repos/:owner/:repo/releases";
   function request(
-    option: ReposownerreporeleasesOption
-  ): Promise<ReposownerreporeleasesResponseSuccess> {
+    option: RepoListReleasesOption
+  ): Promise<RepoListReleasesResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerreporeleasesResponseSuccess>;
+    }) as unknown as Promise<RepoListReleasesResponseSuccess>;
   }
 
   /** http method */
@@ -6525,8 +10613,120 @@ export const reposownerreporeleases = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerreporeleasestagstag */
-export interface ReposownerreporeleasestagstagOption {
+/** @description request parameter type for repoCreateRelease */
+export interface RepoCreateReleaseOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+  };
+}
+
+/** @description request parameter type for repoCreateRelease */
+export interface RepoCreateReleaseOption {
+  body?: CreateReleaseOption;
+}
+
+/** @description response type for repoCreateRelease */
+export interface RepoCreateReleaseResponse {
+  201: Release;
+  404: NotFound;
+  409: TsgError;
+}
+
+export type RepoCreateReleaseResponseSuccess = RepoCreateReleaseResponse[201];
+/**
+ * @description
+ *   Create a release
+ * @tags repository
+ * @produces application/json
+ * @consumes application/json
+ */
+export const repoCreateRelease = /* #__PURE__ */ (() => {
+  const method = "post";
+  const url = "/repos/:owner/:repo/releases";
+  function request(
+    option: RepoCreateReleaseOption
+  ): Promise<RepoCreateReleaseResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoCreateReleaseResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoGetReleaseByTag */
+export interface RepoGetReleaseByTagOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          tag name of the release to get */
+    tag: string;
+  };
+}
+
+/** @description response type for repoGetReleaseByTag */
+export interface RepoGetReleaseByTagResponse {
+  200: Release;
+  404: NotFound;
+}
+
+export type RepoGetReleaseByTagResponseSuccess =
+  RepoGetReleaseByTagResponse[200];
+/**
+ * @description
+ *   Get a release by tag name
+ * @tags repository
+ * @produces application/json
+ */
+export const repoGetReleaseByTag = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/repos/:owner/:repo/releases/tags/:tag";
+  function request(
+    option: RepoGetReleaseByTagOption
+  ): Promise<RepoGetReleaseByTagResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoGetReleaseByTagResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoDeleteReleaseByTag */
+export interface RepoDeleteReleaseByTagOption {
   /**
    * @description
    *   owner of the repo
@@ -6547,30 +10747,30 @@ export interface ReposownerreporeleasestagstagOption {
   };
 }
 
-/** @description response type for reposownerreporeleasestagstag */
-export interface ReposownerreporeleasestagstagResponse {
+/** @description response type for repoDeleteReleaseByTag */
+export interface RepoDeleteReleaseByTagResponse {
   204: Empty;
   404: NotFound;
   405: Empty;
 }
 
-export type ReposownerreporeleasestagstagResponseSuccess =
-  ReposownerreporeleasestagstagResponse[204];
+export type RepoDeleteReleaseByTagResponseSuccess =
+  RepoDeleteReleaseByTagResponse[204];
 /**
  * @description
  *   Delete a release by tag name
  * @tags repository
  */
-export const reposownerreporeleasestagstag = /* #__PURE__ */ (() => {
+export const repoDeleteReleaseByTag = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/releases/tags/:tag";
   function request(
-    option: ReposownerreporeleasestagstagOption
-  ): Promise<ReposownerreporeleasestagstagResponseSuccess> {
+    option: RepoDeleteReleaseByTagOption
+  ): Promise<RepoDeleteReleaseByTagResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerreporeleasestagstagResponseSuccess>;
+    }) as unknown as Promise<RepoDeleteReleaseByTagResponseSuccess>;
   }
 
   /** http method */
@@ -6580,8 +10780,118 @@ export const reposownerreporeleasestagstag = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerreporeleasesid */
-export interface ReposownerreporeleasesidOption {
+/** @description request parameter type for repoGetRelease */
+export interface RepoGetReleaseOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          id of the release to get
+        @format int64 */
+    id: number;
+  };
+}
+
+/** @description response type for repoGetRelease */
+export interface RepoGetReleaseResponse {
+  200: Release;
+  404: NotFound;
+}
+
+export type RepoGetReleaseResponseSuccess = RepoGetReleaseResponse[200];
+/**
+ * @description
+ *   Get a release
+ * @tags repository
+ * @produces application/json
+ */
+export const repoGetRelease = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/repos/:owner/:repo/releases/:id";
+  function request(
+    option: RepoGetReleaseOption
+  ): Promise<RepoGetReleaseResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoGetReleaseResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoDeleteRelease */
+export interface RepoDeleteReleaseOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          id of the release to delete
+        @format int64 */
+    id: number;
+  };
+}
+
+/** @description response type for repoDeleteRelease */
+export interface RepoDeleteReleaseResponse {
+  204: Empty;
+  404: NotFound;
+  405: Empty;
+}
+
+export type RepoDeleteReleaseResponseSuccess = RepoDeleteReleaseResponse[204];
+/**
+ * @description
+ *   Delete a release
+ * @tags repository
+ */
+export const repoDeleteRelease = /* #__PURE__ */ (() => {
+  const method = "delete";
+  const url = "/repos/:owner/:repo/releases/:id";
+  function request(
+    option: RepoDeleteReleaseOption
+  ): Promise<RepoDeleteReleaseResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoDeleteReleaseResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoEditRelease */
+export interface RepoEditReleaseOption {
   /**
    * @description
    *   owner of the repo
@@ -6603,19 +10913,18 @@ export interface ReposownerreporeleasesidOption {
   };
 }
 
-/** @description request parameter type for reposownerreporeleasesid */
-export interface ReposownerreporeleasesidOption {
+/** @description request parameter type for repoEditRelease */
+export interface RepoEditReleaseOption {
   body?: EditReleaseOption;
 }
 
-/** @description response type for reposownerreporeleasesid */
-export interface ReposownerreporeleasesidResponse {
+/** @description response type for repoEditRelease */
+export interface RepoEditReleaseResponse {
   200: Release;
   404: NotFound;
 }
 
-export type ReposownerreporeleasesidResponseSuccess =
-  ReposownerreporeleasesidResponse[200];
+export type RepoEditReleaseResponseSuccess = RepoEditReleaseResponse[200];
 /**
  * @description
  *   Update a release
@@ -6623,16 +10932,16 @@ export type ReposownerreporeleasesidResponseSuccess =
  * @produces application/json
  * @consumes application/json
  */
-export const reposownerreporeleasesid = /* #__PURE__ */ (() => {
+export const repoEditRelease = /* #__PURE__ */ (() => {
   const method = "patch";
   const url = "/repos/:owner/:repo/releases/:id";
   function request(
-    option: ReposownerreporeleasesidOption
-  ): Promise<ReposownerreporeleasesidResponseSuccess> {
+    option: RepoEditReleaseOption
+  ): Promise<RepoEditReleaseResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerreporeleasesidResponseSuccess>;
+    }) as unknown as Promise<RepoEditReleaseResponseSuccess>;
   }
 
   /** http method */
@@ -6642,8 +10951,8 @@ export const reposownerreporeleasesid = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerreporeleasesidassets */
-export interface ReposownerreporeleasesidassetsOption {
+/** @description request parameter type for repoListReleaseAttachments */
+export interface RepoListReleaseAttachmentsOption {
   /**
    * @description
    *   owner of the repo
@@ -6665,8 +10974,63 @@ export interface ReposownerreporeleasesidassetsOption {
   };
 }
 
-/** @description request parameter type for reposownerreporeleasesidassets */
-export interface ReposownerreporeleasesidassetsOption {
+/** @description response type for repoListReleaseAttachments */
+export interface RepoListReleaseAttachmentsResponse {
+  200: AttachmentList;
+}
+
+export type RepoListReleaseAttachmentsResponseSuccess =
+  RepoListReleaseAttachmentsResponse[200];
+/**
+ * @description
+ *   List release's attachments
+ * @tags repository
+ * @produces application/json
+ */
+export const repoListReleaseAttachments = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/repos/:owner/:repo/releases/:id/assets";
+  function request(
+    option: RepoListReleaseAttachmentsOption
+  ): Promise<RepoListReleaseAttachmentsResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoListReleaseAttachmentsResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoCreateReleaseAttachment */
+export interface RepoCreateReleaseAttachmentOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          id of the release
+        @format int64 */
+    id: number;
+  };
+}
+
+/** @description request parameter type for repoCreateReleaseAttachment */
+export interface RepoCreateReleaseAttachmentOption {
   /**
    * @description
    *   name of the attachment
@@ -6679,8 +11043,8 @@ export interface ReposownerreporeleasesidassetsOption {
   };
 }
 
-/** @description request parameter type for reposownerreporeleasesidassets */
-export interface ReposownerreporeleasesidassetsOption {
+/** @description request parameter type for repoCreateReleaseAttachment */
+export interface RepoCreateReleaseAttachmentOption {
   /**
    * @description
    *   attachment to upload
@@ -6693,14 +11057,14 @@ export interface ReposownerreporeleasesidassetsOption {
   };
 }
 
-/** @description response type for reposownerreporeleasesidassets */
-export interface ReposownerreporeleasesidassetsResponse {
+/** @description response type for repoCreateReleaseAttachment */
+export interface RepoCreateReleaseAttachmentResponse {
   201: Attachment;
   400: TsgError;
 }
 
-export type ReposownerreporeleasesidassetsResponseSuccess =
-  ReposownerreporeleasesidassetsResponse[201];
+export type RepoCreateReleaseAttachmentResponseSuccess =
+  RepoCreateReleaseAttachmentResponse[201];
 /**
  * @description
  *   Create a release attachment
@@ -6708,16 +11072,16 @@ export type ReposownerreporeleasesidassetsResponseSuccess =
  * @produces application/json
  * @consumes multipart/form-data
  */
-export const reposownerreporeleasesidassets = /* #__PURE__ */ (() => {
+export const repoCreateReleaseAttachment = /* #__PURE__ */ (() => {
   const method = "post";
   const url = "/repos/:owner/:repo/releases/:id/assets";
   function request(
-    option: ReposownerreporeleasesidassetsOption
-  ): Promise<ReposownerreporeleasesidassetsResponseSuccess> {
+    option: RepoCreateReleaseAttachmentOption
+  ): Promise<RepoCreateReleaseAttachmentResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerreporeleasesidassetsResponseSuccess>;
+    }) as unknown as Promise<RepoCreateReleaseAttachmentResponseSuccess>;
   }
 
   /** http method */
@@ -6727,8 +11091,128 @@ export const reposownerreporeleasesidassets = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerreporeleasesidassetsattachment_id */
-export interface Reposownerreporeleasesidassetsattachment_idOption {
+/** @description request parameter type for repoGetReleaseAttachment */
+export interface RepoGetReleaseAttachmentOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          id of the release
+        @format int64 */
+    id: number;
+    /**
+        @description
+          id of the attachment to get
+        @format int64 */
+    attachment_id: number;
+  };
+}
+
+/** @description response type for repoGetReleaseAttachment */
+export interface RepoGetReleaseAttachmentResponse {
+  200: Attachment;
+}
+
+export type RepoGetReleaseAttachmentResponseSuccess =
+  RepoGetReleaseAttachmentResponse[200];
+/**
+ * @description
+ *   Get a release attachment
+ * @tags repository
+ * @produces application/json
+ */
+export const repoGetReleaseAttachment = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/repos/:owner/:repo/releases/:id/assets/:attachment_id";
+  function request(
+    option: RepoGetReleaseAttachmentOption
+  ): Promise<RepoGetReleaseAttachmentResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoGetReleaseAttachmentResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoDeleteReleaseAttachment */
+export interface RepoDeleteReleaseAttachmentOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          id of the release
+        @format int64 */
+    id: number;
+    /**
+        @description
+          id of the attachment to delete
+        @format int64 */
+    attachment_id: number;
+  };
+}
+
+/** @description response type for repoDeleteReleaseAttachment */
+export interface RepoDeleteReleaseAttachmentResponse {
+  204: Empty;
+}
+
+export type RepoDeleteReleaseAttachmentResponseSuccess =
+  RepoDeleteReleaseAttachmentResponse[204];
+/**
+ * @description
+ *   Delete a release attachment
+ * @tags repository
+ * @produces application/json
+ */
+export const repoDeleteReleaseAttachment = /* #__PURE__ */ (() => {
+  const method = "delete";
+  const url = "/repos/:owner/:repo/releases/:id/assets/:attachment_id";
+  function request(
+    option: RepoDeleteReleaseAttachmentOption
+  ): Promise<RepoDeleteReleaseAttachmentResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoDeleteReleaseAttachmentResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoEditReleaseAttachment */
+export interface RepoEditReleaseAttachmentOption {
   /**
    * @description
    *   owner of the repo
@@ -6755,18 +11239,18 @@ export interface Reposownerreporeleasesidassetsattachment_idOption {
   };
 }
 
-/** @description request parameter type for reposownerreporeleasesidassetsattachment_id */
-export interface Reposownerreporeleasesidassetsattachment_idOption {
+/** @description request parameter type for repoEditReleaseAttachment */
+export interface RepoEditReleaseAttachmentOption {
   body?: EditAttachmentOptions;
 }
 
-/** @description response type for reposownerreporeleasesidassetsattachment_id */
-export interface Reposownerreporeleasesidassetsattachment_idResponse {
+/** @description response type for repoEditReleaseAttachment */
+export interface RepoEditReleaseAttachmentResponse {
   201: Attachment;
 }
 
-export type Reposownerreporeleasesidassetsattachment_idResponseSuccess =
-  Reposownerreporeleasesidassetsattachment_idResponse[201];
+export type RepoEditReleaseAttachmentResponseSuccess =
+  RepoEditReleaseAttachmentResponse[201];
 /**
  * @description
  *   Edit a release attachment
@@ -6774,25 +11258,24 @@ export type Reposownerreporeleasesidassetsattachment_idResponseSuccess =
  * @produces application/json
  * @consumes application/json
  */
-export const reposownerreporeleasesidassetsattachment_id =
-  /* #__PURE__ */ (() => {
-    const method = "patch";
-    const url = "/repos/:owner/:repo/releases/:id/assets/:attachment_id";
-    function request(
-      option: Reposownerreporeleasesidassetsattachment_idOption
-    ): Promise<Reposownerreporeleasesidassetsattachment_idResponseSuccess> {
-      return requester(url, {
-        method,
-        ...option,
-      }) as unknown as Promise<Reposownerreporeleasesidassetsattachment_idResponseSuccess>;
-    }
+export const repoEditReleaseAttachment = /* #__PURE__ */ (() => {
+  const method = "patch";
+  const url = "/repos/:owner/:repo/releases/:id/assets/:attachment_id";
+  function request(
+    option: RepoEditReleaseAttachmentOption
+  ): Promise<RepoEditReleaseAttachmentResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoEditReleaseAttachmentResponseSuccess>;
+  }
 
-    /** http method */
-    request.method = method;
-    /** request url */
-    request.url = url;
-    return request;
-  })();
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
 
 /** @description request parameter type for repoGetReviewers */
 export interface RepoGetReviewersOption {
@@ -6963,8 +11446,8 @@ export const repoListStargazers = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepostatusessha */
-export interface ReposownerrepostatusesshaOption {
+/** @description request parameter type for repoListStatuses */
+export interface RepoListStatusesOption {
   /**
    * @description
    *   owner of the repo
@@ -6985,35 +11468,114 @@ export interface ReposownerrepostatusesshaOption {
   };
 }
 
-/** @description request parameter type for reposownerrepostatusessha */
-export interface ReposownerrepostatusesshaOption {
+/** @description request parameter type for repoListStatuses */
+export interface RepoListStatusesOption {
+  /**
+   * @description
+   *   type of sort
+   */
+  query?: {
+    /**
+        @description
+          type of sort */
+    sort?: GetReposOwnerRepoStatusesShaSort;
+    /**
+        @description
+          type of state */
+    state?: GetReposOwnerRepoStatusesShaState;
+    /**
+        @description
+          page number of results to return (1-based) */
+    page?: number;
+    /**
+        @description
+          page size of results */
+    limit?: number;
+  };
+}
+
+/** @description response type for repoListStatuses */
+export interface RepoListStatusesResponse {
+  200: CommitStatusList;
+  400: TsgError;
+}
+
+export type RepoListStatusesResponseSuccess = RepoListStatusesResponse[200];
+/**
+ * @description
+ *   Get a commit's statuses
+ * @tags repository
+ * @produces application/json
+ */
+export const repoListStatuses = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/repos/:owner/:repo/statuses/:sha";
+  function request(
+    option: RepoListStatusesOption
+  ): Promise<RepoListStatusesResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoListStatusesResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoCreateStatus */
+export interface RepoCreateStatusOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          sha of the commit */
+    sha: string;
+  };
+}
+
+/** @description request parameter type for repoCreateStatus */
+export interface RepoCreateStatusOption {
   body?: CreateStatusOption;
 }
 
-/** @description response type for reposownerrepostatusessha */
-export interface ReposownerrepostatusesshaResponse {
+/** @description response type for repoCreateStatus */
+export interface RepoCreateStatusResponse {
   201: CommitStatus;
   400: TsgError;
 }
 
-export type ReposownerrepostatusesshaResponseSuccess =
-  ReposownerrepostatusesshaResponse[201];
+export type RepoCreateStatusResponseSuccess = RepoCreateStatusResponse[201];
 /**
  * @description
  *   Create a commit status
  * @tags repository
  * @produces application/json
  */
-export const reposownerrepostatusessha = /* #__PURE__ */ (() => {
+export const repoCreateStatus = /* #__PURE__ */ (() => {
   const method = "post";
   const url = "/repos/:owner/:repo/statuses/:sha";
   function request(
-    option: ReposownerrepostatusesshaOption
-  ): Promise<ReposownerrepostatusesshaResponseSuccess> {
+    option: RepoCreateStatusOption
+  ): Promise<RepoCreateStatusResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepostatusesshaResponseSuccess>;
+    }) as unknown as Promise<RepoCreateStatusResponseSuccess>;
   }
 
   /** http method */
@@ -7091,8 +11653,8 @@ export const repoListSubscribers = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerreposubscription */
-export interface ReposownerreposubscriptionOption {
+/** @description request parameter type for userCurrentCheckSubscription */
+export interface UserCurrentCheckSubscriptionOption {
   /**
    * @description
    *   owner of the repo
@@ -7109,28 +11671,33 @@ export interface ReposownerreposubscriptionOption {
   };
 }
 
-/** @description response type for reposownerreposubscription */
-export interface ReposownerreposubscriptionResponse {
-  204: Empty;
+/** @description response type for userCurrentCheckSubscription */
+export interface UserCurrentCheckSubscriptionResponse {
+  200: WatchInfo;
+  /**
+   * @description
+   *   User is not watching this repo or repo do not exist
+   */
+  404: any;
 }
 
-export type ReposownerreposubscriptionResponseSuccess =
-  ReposownerreposubscriptionResponse[204];
+export type UserCurrentCheckSubscriptionResponseSuccess =
+  UserCurrentCheckSubscriptionResponse[200];
 /**
  * @description
- *   Unwatch a repo
+ *   Check if the current user is watching a repo
  * @tags repository
  */
-export const reposownerreposubscription = /* #__PURE__ */ (() => {
-  const method = "delete";
+export const userCurrentCheckSubscription = /* #__PURE__ */ (() => {
+  const method = "get";
   const url = "/repos/:owner/:repo/subscription";
   function request(
-    option: ReposownerreposubscriptionOption
-  ): Promise<ReposownerreposubscriptionResponseSuccess> {
+    option: UserCurrentCheckSubscriptionOption
+  ): Promise<UserCurrentCheckSubscriptionResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerreposubscriptionResponseSuccess>;
+    }) as unknown as Promise<UserCurrentCheckSubscriptionResponseSuccess>;
   }
 
   /** http method */
@@ -7140,8 +11707,8 @@ export const reposownerreposubscription = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepotags */
-export interface ReposownerrepotagsOption {
+/** @description request parameter type for userCurrentPutSubscription */
+export interface UserCurrentPutSubscriptionOption {
   /**
    * @description
    *   owner of the repo
@@ -7158,36 +11725,201 @@ export interface ReposownerrepotagsOption {
   };
 }
 
-/** @description request parameter type for reposownerrepotags */
-export interface ReposownerrepotagsOption {
+/** @description response type for userCurrentPutSubscription */
+export interface UserCurrentPutSubscriptionResponse {
+  200: WatchInfo;
+}
+
+export type UserCurrentPutSubscriptionResponseSuccess =
+  UserCurrentPutSubscriptionResponse[200];
+/**
+ * @description
+ *   Watch a repo
+ * @tags repository
+ */
+export const userCurrentPutSubscription = /* #__PURE__ */ (() => {
+  const method = "put";
+  const url = "/repos/:owner/:repo/subscription";
+  function request(
+    option: UserCurrentPutSubscriptionOption
+  ): Promise<UserCurrentPutSubscriptionResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<UserCurrentPutSubscriptionResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for userCurrentDeleteSubscription */
+export interface UserCurrentDeleteSubscriptionOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+  };
+}
+
+/** @description response type for userCurrentDeleteSubscription */
+export interface UserCurrentDeleteSubscriptionResponse {
+  204: Empty;
+}
+
+export type UserCurrentDeleteSubscriptionResponseSuccess =
+  UserCurrentDeleteSubscriptionResponse[204];
+/**
+ * @description
+ *   Unwatch a repo
+ * @tags repository
+ */
+export const userCurrentDeleteSubscription = /* #__PURE__ */ (() => {
+  const method = "delete";
+  const url = "/repos/:owner/:repo/subscription";
+  function request(
+    option: UserCurrentDeleteSubscriptionOption
+  ): Promise<UserCurrentDeleteSubscriptionResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<UserCurrentDeleteSubscriptionResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoListTags */
+export interface RepoListTagsOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+  };
+}
+
+/** @description request parameter type for repoListTags */
+export interface RepoListTagsOption {
+  /**
+   * @description
+   *   page number of results to return (1-based)
+   */
+  query?: {
+    /**
+        @description
+          page number of results to return (1-based) */
+    page?: number;
+    /**
+        @description
+          page size of results, default maximum page size is 50 */
+    limit?: number;
+  };
+}
+
+/** @description response type for repoListTags */
+export interface RepoListTagsResponse {
+  200: TagList;
+}
+
+export type RepoListTagsResponseSuccess = RepoListTagsResponse[200];
+/**
+ * @description
+ *   List a repository's tags
+ * @tags repository
+ * @produces application/json
+ */
+export const repoListTags = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/repos/:owner/:repo/tags";
+  function request(
+    option: RepoListTagsOption
+  ): Promise<RepoListTagsResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoListTagsResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoCreateTag */
+export interface RepoCreateTagOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+  };
+}
+
+/** @description request parameter type for repoCreateTag */
+export interface RepoCreateTagOption {
   body?: CreateTagOption;
 }
 
-/** @description response type for reposownerrepotags */
-export interface ReposownerrepotagsResponse {
+/** @description response type for repoCreateTag */
+export interface RepoCreateTagResponse {
   200: Tag;
   404: NotFound;
   405: Empty;
   409: Conflict;
 }
 
-export type ReposownerrepotagsResponseSuccess = ReposownerrepotagsResponse[200];
+export type RepoCreateTagResponseSuccess = RepoCreateTagResponse[200];
 /**
  * @description
  *   Create a new git tag in a repository
  * @tags repository
  * @produces application/json
  */
-export const reposownerrepotags = /* #__PURE__ */ (() => {
+export const repoCreateTag = /* #__PURE__ */ (() => {
   const method = "post";
   const url = "/repos/:owner/:repo/tags";
   function request(
-    option: ReposownerrepotagsOption
-  ): Promise<ReposownerrepotagsResponseSuccess> {
+    option: RepoCreateTagOption
+  ): Promise<RepoCreateTagResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepotagsResponseSuccess>;
+    }) as unknown as Promise<RepoCreateTagResponseSuccess>;
   }
 
   /** http method */
@@ -7197,8 +11929,62 @@ export const reposownerrepotags = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepotagstag */
-export interface ReposownerrepotagstagOption {
+/** @description request parameter type for repoGetTag */
+export interface RepoGetTagOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          name of tag */
+    tag: string;
+  };
+}
+
+/** @description response type for repoGetTag */
+export interface RepoGetTagResponse {
+  200: Tag;
+  404: NotFound;
+}
+
+export type RepoGetTagResponseSuccess = RepoGetTagResponse[200];
+/**
+ * @description
+ *   Get the tag of a repository by tag name
+ * @tags repository
+ * @produces application/json
+ */
+export const repoGetTag = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/repos/:owner/:repo/tags/:tag";
+  function request(
+    option: RepoGetTagOption
+  ): Promise<RepoGetTagResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoGetTagResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoDeleteTag */
+export interface RepoDeleteTagOption {
   /**
    * @description
    *   owner of the repo
@@ -7219,32 +12005,31 @@ export interface ReposownerrepotagstagOption {
   };
 }
 
-/** @description response type for reposownerrepotagstag */
-export interface ReposownerrepotagstagResponse {
+/** @description response type for repoDeleteTag */
+export interface RepoDeleteTagResponse {
   204: Empty;
   404: NotFound;
   405: Empty;
   409: Conflict;
 }
 
-export type ReposownerrepotagstagResponseSuccess =
-  ReposownerrepotagstagResponse[204];
+export type RepoDeleteTagResponseSuccess = RepoDeleteTagResponse[204];
 /**
  * @description
  *   Delete a repository's tag by name
  * @tags repository
  * @produces application/json
  */
-export const reposownerrepotagstag = /* #__PURE__ */ (() => {
+export const repoDeleteTag = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/tags/:tag";
   function request(
-    option: ReposownerrepotagstagOption
-  ): Promise<ReposownerrepotagstagResponseSuccess> {
+    option: RepoDeleteTagOption
+  ): Promise<RepoDeleteTagResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepotagstagResponseSuccess>;
+    }) as unknown as Promise<RepoDeleteTagResponseSuccess>;
   }
 
   /** http method */
@@ -7303,8 +12088,8 @@ export const repoListTeams = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepoteamsteam */
-export interface ReposownerrepoteamsteamOption {
+/** @description request parameter type for repoCheckTeam */
+export interface RepoCheckTeamOption {
   /**
    * @description
    *   owner of the repo
@@ -7325,31 +12110,140 @@ export interface ReposownerrepoteamsteamOption {
   };
 }
 
-/** @description response type for reposownerrepoteamsteam */
-export interface ReposownerrepoteamsteamResponse {
+/** @description response type for repoCheckTeam */
+export interface RepoCheckTeamResponse {
+  200: Team;
+  404: NotFound;
+  405: TsgError;
+}
+
+export type RepoCheckTeamResponseSuccess = RepoCheckTeamResponse[200];
+/**
+ * @description
+ *   Check if a team is assigned to a repository
+ * @tags repository
+ * @produces application/json
+ */
+export const repoCheckTeam = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/repos/:owner/:repo/teams/:team";
+  function request(
+    option: RepoCheckTeamOption
+  ): Promise<RepoCheckTeamResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoCheckTeamResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoAddTeam */
+export interface RepoAddTeamOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          team name */
+    team: string;
+  };
+}
+
+/** @description response type for repoAddTeam */
+export interface RepoAddTeamResponse {
   204: Empty;
   405: TsgError;
   422: ValidationError;
 }
 
-export type ReposownerrepoteamsteamResponseSuccess =
-  ReposownerrepoteamsteamResponse[204];
+export type RepoAddTeamResponseSuccess = RepoAddTeamResponse[204];
+/**
+ * @description
+ *   Add a team to a repository
+ * @tags repository
+ * @produces application/json
+ */
+export const repoAddTeam = /* #__PURE__ */ (() => {
+  const method = "put";
+  const url = "/repos/:owner/:repo/teams/:team";
+  function request(
+    option: RepoAddTeamOption
+  ): Promise<RepoAddTeamResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoAddTeamResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoDeleteTeam */
+export interface RepoDeleteTeamOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          team name */
+    team: string;
+  };
+}
+
+/** @description response type for repoDeleteTeam */
+export interface RepoDeleteTeamResponse {
+  204: Empty;
+  405: TsgError;
+  422: ValidationError;
+}
+
+export type RepoDeleteTeamResponseSuccess = RepoDeleteTeamResponse[204];
 /**
  * @description
  *   Delete a team from a repository
  * @tags repository
  * @produces application/json
  */
-export const reposownerrepoteamsteam = /* #__PURE__ */ (() => {
+export const repoDeleteTeam = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/teams/:team";
   function request(
-    option: ReposownerrepoteamsteamOption
-  ): Promise<ReposownerrepoteamsteamResponseSuccess> {
+    option: RepoDeleteTeamOption
+  ): Promise<RepoDeleteTeamResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepoteamsteamResponseSuccess>;
+    }) as unknown as Promise<RepoDeleteTeamResponseSuccess>;
   }
 
   /** http method */
@@ -7442,8 +12336,8 @@ export const repoTrackedTimes = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepotopics */
-export interface ReposownerrepotopicsOption {
+/** @description request parameter type for repoListTopics */
+export interface RepoListTopicsOption {
   /**
    * @description
    *   owner of the repo
@@ -7460,35 +12354,46 @@ export interface ReposownerrepotopicsOption {
   };
 }
 
-/** @description request parameter type for reposownerrepotopics */
-export interface ReposownerrepotopicsOption {
-  body?: RepoTopicOptions;
+/** @description request parameter type for repoListTopics */
+export interface RepoListTopicsOption {
+  /**
+   * @description
+   *   page number of results to return (1-based)
+   */
+  query?: {
+    /**
+        @description
+          page number of results to return (1-based) */
+    page?: number;
+    /**
+        @description
+          page size of results */
+    limit?: number;
+  };
 }
 
-/** @description response type for reposownerrepotopics */
-export interface ReposownerrepotopicsResponse {
-  204: Empty;
-  422: InvalidTopicsError;
+/** @description response type for repoListTopics */
+export interface RepoListTopicsResponse {
+  200: TopicNames;
 }
 
-export type ReposownerrepotopicsResponseSuccess =
-  ReposownerrepotopicsResponse[204];
+export type RepoListTopicsResponseSuccess = RepoListTopicsResponse[200];
 /**
  * @description
- *   Replace list of topics for a repository
+ *   Get list of topics that a repository has
  * @tags repository
  * @produces application/json
  */
-export const reposownerrepotopics = /* #__PURE__ */ (() => {
-  const method = "put";
+export const repoListTopics = /* #__PURE__ */ (() => {
+  const method = "get";
   const url = "/repos/:owner/:repo/topics";
   function request(
-    option: ReposownerrepotopicsOption
-  ): Promise<ReposownerrepotopicsResponseSuccess> {
+    option: RepoListTopicsOption
+  ): Promise<RepoListTopicsResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepotopicsResponseSuccess>;
+    }) as unknown as Promise<RepoListTopicsResponseSuccess>;
   }
 
   /** http method */
@@ -7498,8 +12403,117 @@ export const reposownerrepotopics = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepotopicstopic */
-export interface ReposownerrepotopicstopicOption {
+/** @description request parameter type for repoUpdateTopics */
+export interface RepoUpdateTopicsOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+  };
+}
+
+/** @description request parameter type for repoUpdateTopics */
+export interface RepoUpdateTopicsOption {
+  body?: RepoTopicOptions;
+}
+
+/** @description response type for repoUpdateTopics */
+export interface RepoUpdateTopicsResponse {
+  204: Empty;
+  422: InvalidTopicsError;
+}
+
+export type RepoUpdateTopicsResponseSuccess = RepoUpdateTopicsResponse[204];
+/**
+ * @description
+ *   Replace list of topics for a repository
+ * @tags repository
+ * @produces application/json
+ */
+export const repoUpdateTopics = /* #__PURE__ */ (() => {
+  const method = "put";
+  const url = "/repos/:owner/:repo/topics";
+  function request(
+    option: RepoUpdateTopicsOption
+  ): Promise<RepoUpdateTopicsResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoUpdateTopicsResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoAddTopic */
+export interface RepoAddTopicOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          name of the topic to add */
+    topic: string;
+  };
+}
+
+/** @description response type for repoAddTopic */
+export interface RepoAddTopicResponse {
+  204: Empty;
+  422: InvalidTopicsError;
+}
+
+export type RepoAddTopicResponseSuccess = RepoAddTopicResponse[204];
+/**
+ * @description
+ *   Add a topic to a repository
+ * @tags repository
+ * @produces application/json
+ */
+export const repoAddTopic = /* #__PURE__ */ (() => {
+  const method = "put";
+  const url = "/repos/:owner/:repo/topics/:topic";
+  function request(
+    option: RepoAddTopicOption
+  ): Promise<RepoAddTopicResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoAddTopicResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoDeleteTopic */
+export interface RepoDeleteTopicOption {
   /**
    * @description
    *   owner of the repo
@@ -7520,30 +12534,29 @@ export interface ReposownerrepotopicstopicOption {
   };
 }
 
-/** @description response type for reposownerrepotopicstopic */
-export interface ReposownerrepotopicstopicResponse {
+/** @description response type for repoDeleteTopic */
+export interface RepoDeleteTopicResponse {
   204: Empty;
   422: InvalidTopicsError;
 }
 
-export type ReposownerrepotopicstopicResponseSuccess =
-  ReposownerrepotopicstopicResponse[204];
+export type RepoDeleteTopicResponseSuccess = RepoDeleteTopicResponse[204];
 /**
  * @description
  *   Delete a topic from a repository
  * @tags repository
  * @produces application/json
  */
-export const reposownerrepotopicstopic = /* #__PURE__ */ (() => {
+export const repoDeleteTopic = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/topics/:topic";
   function request(
-    option: ReposownerrepotopicstopicOption
-  ): Promise<ReposownerrepotopicstopicResponseSuccess> {
+    option: RepoDeleteTopicOption
+  ): Promise<RepoDeleteTopicResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepotopicstopicResponseSuccess>;
+    }) as unknown as Promise<RepoDeleteTopicResponseSuccess>;
   }
 
   /** http method */
@@ -7772,8 +12785,8 @@ export const repoCreateWikiPage = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for reposownerrepowikipagepageName */
-export interface ReposownerrepowikipagepageNameOption {
+/** @description request parameter type for repoGetWikiPage */
+export interface RepoGetWikiPageOption {
   /**
    * @description
    *   owner of the repo
@@ -7794,36 +12807,143 @@ export interface ReposownerrepowikipagepageNameOption {
   };
 }
 
-/** @description request parameter type for reposownerrepowikipagepageName */
-export interface ReposownerrepowikipagepageNameOption {
+/** @description response type for repoGetWikiPage */
+export interface RepoGetWikiPageResponse {
+  200: WikiPage;
+  404: NotFound;
+}
+
+export type RepoGetWikiPageResponseSuccess = RepoGetWikiPageResponse[200];
+/**
+ * @description
+ *   Get a wiki page
+ * @tags repository
+ * @produces application/json
+ */
+export const repoGetWikiPage = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/repos/:owner/:repo/wiki/page/:pageName";
+  function request(
+    option: RepoGetWikiPageOption
+  ): Promise<RepoGetWikiPageResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoGetWikiPageResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoDeleteWikiPage */
+export interface RepoDeleteWikiPageOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          name of the page */
+    pageName: string;
+  };
+}
+
+/** @description response type for repoDeleteWikiPage */
+export interface RepoDeleteWikiPageResponse {
+  204: Empty;
+  403: Forbidden;
+  404: NotFound;
+}
+
+export type RepoDeleteWikiPageResponseSuccess = RepoDeleteWikiPageResponse[204];
+/**
+ * @description
+ *   Delete a wiki page
+ * @tags repository
+ */
+export const repoDeleteWikiPage = /* #__PURE__ */ (() => {
+  const method = "delete";
+  const url = "/repos/:owner/:repo/wiki/page/:pageName";
+  function request(
+    option: RepoDeleteWikiPageOption
+  ): Promise<RepoDeleteWikiPageResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<RepoDeleteWikiPageResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for repoEditWikiPage */
+export interface RepoEditWikiPageOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+    /**
+        @description
+          name of the page */
+    pageName: string;
+  };
+}
+
+/** @description request parameter type for repoEditWikiPage */
+export interface RepoEditWikiPageOption {
   body?: CreateWikiPageOptions;
 }
 
-/** @description response type for reposownerrepowikipagepageName */
-export interface ReposownerrepowikipagepageNameResponse {
+/** @description response type for repoEditWikiPage */
+export interface RepoEditWikiPageResponse {
   200: WikiPage;
   400: TsgError;
   403: Forbidden;
 }
 
-export type ReposownerrepowikipagepageNameResponseSuccess =
-  ReposownerrepowikipagepageNameResponse[200];
+export type RepoEditWikiPageResponseSuccess = RepoEditWikiPageResponse[200];
 /**
  * @description
  *   Edit a wiki page
  * @tags repository
  * @consumes application/json
  */
-export const reposownerrepowikipagepageName = /* #__PURE__ */ (() => {
+export const repoEditWikiPage = /* #__PURE__ */ (() => {
   const method = "patch";
   const url = "/repos/:owner/:repo/wiki/page/:pageName";
   function request(
-    option: ReposownerrepowikipagepageNameOption
-  ): Promise<ReposownerrepowikipagepageNameResponseSuccess> {
+    option: RepoEditWikiPageOption
+  ): Promise<RepoEditWikiPageResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<ReposownerrepowikipagepageNameResponseSuccess>;
+    }) as unknown as Promise<RepoEditWikiPageResponseSuccess>;
   }
 
   /** http method */
@@ -8228,8 +13348,105 @@ export const getSigningKey = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for teamsid */
-export interface TeamsidOption {
+/** @description request parameter type for orgGetTeam */
+export interface OrgGetTeamOption {
+  /**
+   * @description
+   *   id of the team to get
+   * @format int64
+   */
+  path: {
+    /**
+        @description
+          id of the team to get
+        @format int64 */
+    id: number;
+  };
+}
+
+/** @description response type for orgGetTeam */
+export interface OrgGetTeamResponse {
+  200: Team;
+}
+
+export type OrgGetTeamResponseSuccess = OrgGetTeamResponse[200];
+/**
+ * @description
+ *   Get a team
+ * @tags organization
+ * @produces application/json
+ */
+export const orgGetTeam = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/teams/:id";
+  function request(
+    option: OrgGetTeamOption
+  ): Promise<OrgGetTeamResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<OrgGetTeamResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for orgDeleteTeam */
+export interface OrgDeleteTeamOption {
+  /**
+   * @description
+   *   id of the team to delete
+   * @format int64
+   */
+  path: {
+    /**
+        @description
+          id of the team to delete
+        @format int64 */
+    id: number;
+  };
+}
+
+/** @description response type for orgDeleteTeam */
+export interface OrgDeleteTeamResponse {
+  /**
+   * @description
+   *   team deleted
+   */
+  204: any;
+}
+
+export type OrgDeleteTeamResponseSuccess = OrgDeleteTeamResponse[204];
+/**
+ * @description
+ *   Delete a team
+ * @tags organization
+ */
+export const orgDeleteTeam = /* #__PURE__ */ (() => {
+  const method = "delete";
+  const url = "/teams/:id";
+  function request(
+    option: OrgDeleteTeamOption
+  ): Promise<OrgDeleteTeamResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<OrgDeleteTeamResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for orgEditTeam */
+export interface OrgEditTeamOption {
   /**
    * @description
    *   id of the team to edit
@@ -8242,17 +13459,17 @@ export interface TeamsidOption {
   };
 }
 
-/** @description request parameter type for teamsid */
-export interface TeamsidOption {
+/** @description request parameter type for orgEditTeam */
+export interface OrgEditTeamOption {
   body?: EditTeamOption;
 }
 
-/** @description response type for teamsid */
-export interface TeamsidResponse {
+/** @description response type for orgEditTeam */
+export interface OrgEditTeamResponse {
   200: Team;
 }
 
-export type TeamsidResponseSuccess = TeamsidResponse[200];
+export type OrgEditTeamResponseSuccess = OrgEditTeamResponse[200];
 /**
  * @description
  *   Edit a team
@@ -8260,14 +13477,16 @@ export type TeamsidResponseSuccess = TeamsidResponse[200];
  * @produces application/json
  * @consumes application/json
  */
-export const teamsid = /* #__PURE__ */ (() => {
+export const orgEditTeam = /* #__PURE__ */ (() => {
   const method = "patch";
   const url = "/teams/:id";
-  function request(option: TeamsidOption): Promise<TeamsidResponseSuccess> {
+  function request(
+    option: OrgEditTeamOption
+  ): Promise<OrgEditTeamResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<TeamsidResponseSuccess>;
+    }) as unknown as Promise<OrgEditTeamResponseSuccess>;
   }
 
   /** http method */
@@ -8342,8 +13561,112 @@ export const orgListTeamMembers = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for teamsidmembersusername */
-export interface TeamsidmembersusernameOption {
+/** @description request parameter type for orgListTeamMember */
+export interface OrgListTeamMemberOption {
+  /**
+   * @description
+   *   id of the team
+   * @format int64
+   */
+  path: {
+    /**
+        @description
+          id of the team
+        @format int64 */
+    id: number;
+    /**
+        @description
+          username of the member to list */
+    username: string;
+  };
+}
+
+/** @description response type for orgListTeamMember */
+export interface OrgListTeamMemberResponse {
+  200: User;
+  404: NotFound;
+}
+
+export type OrgListTeamMemberResponseSuccess = OrgListTeamMemberResponse[200];
+/**
+ * @description
+ *   List a particular member of team
+ * @tags organization
+ * @produces application/json
+ */
+export const orgListTeamMember = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/teams/:id/members/:username";
+  function request(
+    option: OrgListTeamMemberOption
+  ): Promise<OrgListTeamMemberResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<OrgListTeamMemberResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for orgAddTeamMember */
+export interface OrgAddTeamMemberOption {
+  /**
+   * @description
+   *   id of the team
+   * @format int64
+   */
+  path: {
+    /**
+        @description
+          id of the team
+        @format int64 */
+    id: number;
+    /**
+        @description
+          username of the user to add */
+    username: string;
+  };
+}
+
+/** @description response type for orgAddTeamMember */
+export interface OrgAddTeamMemberResponse {
+  204: Empty;
+  404: NotFound;
+}
+
+export type OrgAddTeamMemberResponseSuccess = OrgAddTeamMemberResponse[204];
+/**
+ * @description
+ *   Add a team member
+ * @tags organization
+ * @produces application/json
+ */
+export const orgAddTeamMember = /* #__PURE__ */ (() => {
+  const method = "put";
+  const url = "/teams/:id/members/:username";
+  function request(
+    option: OrgAddTeamMemberOption
+  ): Promise<OrgAddTeamMemberResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<OrgAddTeamMemberResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for orgRemoveTeamMember */
+export interface OrgRemoveTeamMemberOption {
   /**
    * @description
    *   id of the team
@@ -8362,30 +13685,30 @@ export interface TeamsidmembersusernameOption {
   };
 }
 
-/** @description response type for teamsidmembersusername */
-export interface TeamsidmembersusernameResponse {
+/** @description response type for orgRemoveTeamMember */
+export interface OrgRemoveTeamMemberResponse {
   204: Empty;
   404: NotFound;
 }
 
-export type TeamsidmembersusernameResponseSuccess =
-  TeamsidmembersusernameResponse[204];
+export type OrgRemoveTeamMemberResponseSuccess =
+  OrgRemoveTeamMemberResponse[204];
 /**
  * @description
  *   Remove a team member
  * @tags organization
  * @produces application/json
  */
-export const teamsidmembersusername = /* #__PURE__ */ (() => {
+export const orgRemoveTeamMember = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/teams/:id/members/:username";
   function request(
-    option: TeamsidmembersusernameOption
-  ): Promise<TeamsidmembersusernameResponseSuccess> {
+    option: OrgRemoveTeamMemberOption
+  ): Promise<OrgRemoveTeamMemberResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<TeamsidmembersusernameResponseSuccess>;
+    }) as unknown as Promise<OrgRemoveTeamMemberResponseSuccess>;
   }
 
   /** http method */
@@ -8460,8 +13783,65 @@ export const orgListTeamRepos = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for teamsidreposorgrepo */
-export interface TeamsidreposorgrepoOption {
+/** @description request parameter type for orgAddTeamRepository */
+export interface OrgAddTeamRepositoryOption {
+  /**
+   * @description
+   *   id of the team
+   * @format int64
+   */
+  path: {
+    /**
+        @description
+          id of the team
+        @format int64 */
+    id: number;
+    /**
+        @description
+          organization that owns the repo to add */
+    org: string;
+    /**
+        @description
+          name of the repo to add */
+    repo: string;
+  };
+}
+
+/** @description response type for orgAddTeamRepository */
+export interface OrgAddTeamRepositoryResponse {
+  204: Empty;
+  403: Forbidden;
+}
+
+export type OrgAddTeamRepositoryResponseSuccess =
+  OrgAddTeamRepositoryResponse[204];
+/**
+ * @description
+ *   Add a repository to a team
+ * @tags organization
+ * @produces application/json
+ */
+export const orgAddTeamRepository = /* #__PURE__ */ (() => {
+  const method = "put";
+  const url = "/teams/:id/repos/:org/:repo";
+  function request(
+    option: OrgAddTeamRepositoryOption
+  ): Promise<OrgAddTeamRepositoryResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<OrgAddTeamRepositoryResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for orgRemoveTeamRepository */
+export interface OrgRemoveTeamRepositoryOption {
   /**
    * @description
    *   id of the team
@@ -8484,14 +13864,14 @@ export interface TeamsidreposorgrepoOption {
   };
 }
 
-/** @description response type for teamsidreposorgrepo */
-export interface TeamsidreposorgrepoResponse {
+/** @description response type for orgRemoveTeamRepository */
+export interface OrgRemoveTeamRepositoryResponse {
   204: Empty;
   403: Forbidden;
 }
 
-export type TeamsidreposorgrepoResponseSuccess =
-  TeamsidreposorgrepoResponse[204];
+export type OrgRemoveTeamRepositoryResponseSuccess =
+  OrgRemoveTeamRepositoryResponse[204];
 /**
  * @description
  *   This does not delete the repository, it only removes the repository from the team.
@@ -8499,16 +13879,16 @@ export type TeamsidreposorgrepoResponseSuccess =
  * @tags organization
  * @produces application/json
  */
-export const teamsidreposorgrepo = /* #__PURE__ */ (() => {
+export const orgRemoveTeamRepository = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/teams/:id/repos/:org/:repo";
   function request(
-    option: TeamsidreposorgrepoOption
-  ): Promise<TeamsidreposorgrepoResponseSuccess> {
+    option: OrgRemoveTeamRepositoryOption
+  ): Promise<OrgRemoveTeamRepositoryResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<TeamsidreposorgrepoResponseSuccess>;
+    }) as unknown as Promise<OrgRemoveTeamRepositoryResponseSuccess>;
   }
 
   /** http method */
@@ -8600,35 +13980,47 @@ export const userGetCurrent = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userapplicationsoauth */
-export interface UserapplicationsoauthOption {
-  body: CreateOAuthApplicationOptions;
+/** @description request parameter type for userGetOauth2Application */
+export interface UserGetOauth2ApplicationOption {
+  /**
+   * @description
+   *   page number of results to return (1-based)
+   */
+  query?: {
+    /**
+        @description
+          page number of results to return (1-based) */
+    page?: number;
+    /**
+        @description
+          page size of results */
+    limit?: number;
+  };
 }
 
-/** @description response type for userapplicationsoauth */
-export interface UserapplicationsoauthResponse {
-  201: OAuthApplication;
-  400: TsgError;
+/** @description response type for userGetOauth2Application */
+export interface UserGetOauth2ApplicationResponse {
+  200: OAuthApplicationList;
 }
 
-export type UserapplicationsoauthResponseSuccess =
-  UserapplicationsoauthResponse[201];
+export type UserGetOauth2ApplicationResponseSuccess =
+  UserGetOauth2ApplicationResponse[200];
 /**
  * @description
- *   creates a new OAuth2 application
+ *   List the authenticated user's oauth2 applications
  * @tags user
  * @produces application/json
  */
-export const userapplicationsoauth = /* #__PURE__ */ (() => {
-  const method = "post";
+export const userGetOauth2Application = /* #__PURE__ */ (() => {
+  const method = "get";
   const url = "/user/applications/oauth2";
   function request(
-    option: UserapplicationsoauthOption
-  ): Promise<UserapplicationsoauthResponseSuccess> {
+    option?: UserGetOauth2ApplicationOption
+  ): Promise<UserGetOauth2ApplicationResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<UserapplicationsoauthResponseSuccess>;
+    }) as unknown as Promise<UserGetOauth2ApplicationResponseSuccess>;
   }
 
   /** http method */
@@ -8638,8 +14030,144 @@ export const userapplicationsoauth = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userapplicationsoauthid */
-export interface UserapplicationsoauthidOption {
+/** @description request parameter type for userCreateOAuth2Application */
+export interface UserCreateOAuth2ApplicationOption {
+  body: CreateOAuthApplicationOptions;
+}
+
+/** @description response type for userCreateOAuth2Application */
+export interface UserCreateOAuth2ApplicationResponse {
+  201: OAuthApplication;
+  400: TsgError;
+}
+
+export type UserCreateOAuth2ApplicationResponseSuccess =
+  UserCreateOAuth2ApplicationResponse[201];
+/**
+ * @description
+ *   creates a new OAuth2 application
+ * @tags user
+ * @produces application/json
+ */
+export const userCreateOAuth2Application = /* #__PURE__ */ (() => {
+  const method = "post";
+  const url = "/user/applications/oauth2";
+  function request(
+    option: UserCreateOAuth2ApplicationOption
+  ): Promise<UserCreateOAuth2ApplicationResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<UserCreateOAuth2ApplicationResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for userGetOAuth2Application */
+export interface UserGetOAuth2ApplicationOption {
+  /**
+   * @description
+   *   Application ID to be found
+   * @format int64
+   */
+  path: {
+    /**
+        @description
+          Application ID to be found
+        @format int64 */
+    id: number;
+  };
+}
+
+/** @description response type for userGetOAuth2Application */
+export interface UserGetOAuth2ApplicationResponse {
+  200: OAuthApplication;
+  404: NotFound;
+}
+
+export type UserGetOAuth2ApplicationResponseSuccess =
+  UserGetOAuth2ApplicationResponse[200];
+/**
+ * @description
+ *   get an OAuth2 Application
+ * @tags user
+ * @produces application/json
+ */
+export const userGetOAuth2Application = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/user/applications/oauth2/:id";
+  function request(
+    option: UserGetOAuth2ApplicationOption
+  ): Promise<UserGetOAuth2ApplicationResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<UserGetOAuth2ApplicationResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for userDeleteOAuth2Application */
+export interface UserDeleteOAuth2ApplicationOption {
+  /**
+   * @description
+   *   token to be deleted
+   * @format int64
+   */
+  path: {
+    /**
+        @description
+          token to be deleted
+        @format int64 */
+    id: number;
+  };
+}
+
+/** @description response type for userDeleteOAuth2Application */
+export interface UserDeleteOAuth2ApplicationResponse {
+  204: Empty;
+  404: NotFound;
+}
+
+export type UserDeleteOAuth2ApplicationResponseSuccess =
+  UserDeleteOAuth2ApplicationResponse[204];
+/**
+ * @description
+ *   delete an OAuth2 Application
+ * @tags user
+ * @produces application/json
+ */
+export const userDeleteOAuth2Application = /* #__PURE__ */ (() => {
+  const method = "delete";
+  const url = "/user/applications/oauth2/:id";
+  function request(
+    option: UserDeleteOAuth2ApplicationOption
+  ): Promise<UserDeleteOAuth2ApplicationResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<UserDeleteOAuth2ApplicationResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for userUpdateOAuth2Application */
+export interface UserUpdateOAuth2ApplicationOption {
   /**
    * @description
    *   application to be updated
@@ -8654,35 +14182,35 @@ export interface UserapplicationsoauthidOption {
   };
 }
 
-/** @description request parameter type for userapplicationsoauthid */
-export interface UserapplicationsoauthidOption {
+/** @description request parameter type for userUpdateOAuth2Application */
+export interface UserUpdateOAuth2ApplicationOption {
   body: CreateOAuthApplicationOptions;
 }
 
-/** @description response type for userapplicationsoauthid */
-export interface UserapplicationsoauthidResponse {
+/** @description response type for userUpdateOAuth2Application */
+export interface UserUpdateOAuth2ApplicationResponse {
   200: OAuthApplication;
   404: NotFound;
 }
 
-export type UserapplicationsoauthidResponseSuccess =
-  UserapplicationsoauthidResponse[200];
+export type UserUpdateOAuth2ApplicationResponseSuccess =
+  UserUpdateOAuth2ApplicationResponse[200];
 /**
  * @description
  *   update an OAuth2 Application, this includes regenerating the client secret
  * @tags user
  * @produces application/json
  */
-export const userapplicationsoauthid = /* #__PURE__ */ (() => {
+export const userUpdateOAuth2Application = /* #__PURE__ */ (() => {
   const method = "patch";
   const url = "/user/applications/oauth2/:id";
   function request(
-    option: UserapplicationsoauthidOption
-  ): Promise<UserapplicationsoauthidResponseSuccess> {
+    option: UserUpdateOAuth2ApplicationOption
+  ): Promise<UserUpdateOAuth2ApplicationResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<UserapplicationsoauthidResponseSuccess>;
+    }) as unknown as Promise<UserUpdateOAuth2ApplicationResponseSuccess>;
   }
 
   /** http method */
@@ -8692,34 +14220,99 @@ export const userapplicationsoauthid = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for useremails */
-export interface UseremailsOption {
+/** @description response type for userListEmails */
+export interface UserListEmailsResponse {
+  200: EmailList;
+}
+
+export type UserListEmailsResponseSuccess = UserListEmailsResponse[200];
+/**
+ * @description
+ *   List the authenticated user's email addresses
+ * @tags user
+ * @produces application/json
+ */
+export const userListEmails = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/user/emails";
+  function request(): Promise<UserListEmailsResponseSuccess> {
+    return requester(url, {
+      method,
+    }) as unknown as Promise<UserListEmailsResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for userAddEmail */
+export interface UserAddEmailOption {
+  body?: CreateEmailOption;
+}
+
+/** @description response type for userAddEmail */
+export interface UserAddEmailResponse {
+  201: EmailList;
+  422: ValidationError;
+}
+
+export type UserAddEmailResponseSuccess = UserAddEmailResponse[201];
+/**
+ * @description
+ *   Add email addresses
+ * @tags user
+ * @produces application/json
+ */
+export const userAddEmail = /* #__PURE__ */ (() => {
+  const method = "post";
+  const url = "/user/emails";
+  function request(
+    option?: UserAddEmailOption
+  ): Promise<UserAddEmailResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<UserAddEmailResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for userDeleteEmail */
+export interface UserDeleteEmailOption {
   body?: DeleteEmailOption;
 }
 
-/** @description response type for useremails */
-export interface UseremailsResponse {
+/** @description response type for userDeleteEmail */
+export interface UserDeleteEmailResponse {
   204: Empty;
   404: NotFound;
 }
 
-export type UseremailsResponseSuccess = UseremailsResponse[204];
+export type UserDeleteEmailResponseSuccess = UserDeleteEmailResponse[204];
 /**
  * @description
  *   Delete email addresses
  * @tags user
  * @produces application/json
  */
-export const useremails = /* #__PURE__ */ (() => {
+export const userDeleteEmail = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/user/emails";
   function request(
-    option?: UseremailsOption
-  ): Promise<UseremailsResponseSuccess> {
+    option?: UserDeleteEmailOption
+  ): Promise<UserDeleteEmailResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<UseremailsResponseSuccess>;
+    }) as unknown as Promise<UserDeleteEmailResponseSuccess>;
   }
 
   /** http method */
@@ -8829,8 +14422,99 @@ export const userCurrentListFollowing = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userfollowingusername */
-export interface UserfollowingusernameOption {
+/** @description request parameter type for userCurrentCheckFollowing */
+export interface UserCurrentCheckFollowingOption {
+  /**
+   * @description
+   *   username of followed user
+   */
+  path: {
+    /**
+        @description
+          username of followed user */
+    username: string;
+  };
+}
+
+/** @description response type for userCurrentCheckFollowing */
+export interface UserCurrentCheckFollowingResponse {
+  204: Empty;
+  404: NotFound;
+}
+
+export type UserCurrentCheckFollowingResponseSuccess =
+  UserCurrentCheckFollowingResponse[204];
+/**
+ * @description
+ *   Check whether a user is followed by the authenticated user
+ * @tags user
+ */
+export const userCurrentCheckFollowing = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/user/following/:username";
+  function request(
+    option: UserCurrentCheckFollowingOption
+  ): Promise<UserCurrentCheckFollowingResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<UserCurrentCheckFollowingResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for userCurrentPutFollow */
+export interface UserCurrentPutFollowOption {
+  /**
+   * @description
+   *   username of user to follow
+   */
+  path: {
+    /**
+        @description
+          username of user to follow */
+    username: string;
+  };
+}
+
+/** @description response type for userCurrentPutFollow */
+export interface UserCurrentPutFollowResponse {
+  204: Empty;
+}
+
+export type UserCurrentPutFollowResponseSuccess =
+  UserCurrentPutFollowResponse[204];
+/**
+ * @description
+ *   Follow a user
+ * @tags user
+ */
+export const userCurrentPutFollow = /* #__PURE__ */ (() => {
+  const method = "put";
+  const url = "/user/following/:username";
+  function request(
+    option: UserCurrentPutFollowOption
+  ): Promise<UserCurrentPutFollowResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<UserCurrentPutFollowResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for userCurrentDeleteFollow */
+export interface UserCurrentDeleteFollowOption {
   /**
    * @description
    *   username of user to unfollow
@@ -8843,28 +14527,28 @@ export interface UserfollowingusernameOption {
   };
 }
 
-/** @description response type for userfollowingusername */
-export interface UserfollowingusernameResponse {
+/** @description response type for userCurrentDeleteFollow */
+export interface UserCurrentDeleteFollowResponse {
   204: Empty;
 }
 
-export type UserfollowingusernameResponseSuccess =
-  UserfollowingusernameResponse[204];
+export type UserCurrentDeleteFollowResponseSuccess =
+  UserCurrentDeleteFollowResponse[204];
 /**
  * @description
  *   Unfollow a user
  * @tags user
  */
-export const userfollowingusername = /* #__PURE__ */ (() => {
+export const userCurrentDeleteFollow = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/user/following/:username";
   function request(
-    option: UserfollowingusernameOption
-  ): Promise<UserfollowingusernameResponseSuccess> {
+    option: UserCurrentDeleteFollowOption
+  ): Promise<UserCurrentDeleteFollowResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<UserfollowingusernameResponseSuccess>;
+    }) as unknown as Promise<UserCurrentDeleteFollowResponseSuccess>;
   }
 
   /** http method */
@@ -8935,21 +14619,72 @@ export const userVerifyGPGKey = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for usergpg_keys */
-export interface Usergpg_keysOption {
+/** @description request parameter type for userCurrentListGPGKeys */
+export interface UserCurrentListGPGKeysOption {
+  /**
+   * @description
+   *   page number of results to return (1-based)
+   */
+  query?: {
+    /**
+        @description
+          page number of results to return (1-based) */
+    page?: number;
+    /**
+        @description
+          page size of results */
+    limit?: number;
+  };
+}
+
+/** @description response type for userCurrentListGPGKeys */
+export interface UserCurrentListGPGKeysResponse {
+  200: GPGKeyList;
+}
+
+export type UserCurrentListGPGKeysResponseSuccess =
+  UserCurrentListGPGKeysResponse[200];
+/**
+ * @description
+ *   List the authenticated user's GPG keys
+ * @tags user
+ * @produces application/json
+ */
+export const userCurrentListGPGKeys = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/user/gpg_keys";
+  function request(
+    option?: UserCurrentListGPGKeysOption
+  ): Promise<UserCurrentListGPGKeysResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<UserCurrentListGPGKeysResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for userCurrentPostGPGKey */
+export interface UserCurrentPostGPGKeyOption {
   body?: {
     Form?: CreateGPGKeyOption;
   };
 }
 
-/** @description response type for usergpg_keys */
-export interface Usergpg_keysResponse {
+/** @description response type for userCurrentPostGPGKey */
+export interface UserCurrentPostGPGKeyResponse {
   201: GPGKey;
   404: NotFound;
   422: ValidationError;
 }
 
-export type Usergpg_keysResponseSuccess = Usergpg_keysResponse[201];
+export type UserCurrentPostGPGKeyResponseSuccess =
+  UserCurrentPostGPGKeyResponse[201];
 /**
  * @description
  *   Create a GPG key
@@ -8957,16 +14692,16 @@ export type Usergpg_keysResponseSuccess = Usergpg_keysResponse[201];
  * @produces application/json
  * @consumes application/json
  */
-export const usergpg_keys = /* #__PURE__ */ (() => {
+export const userCurrentPostGPGKey = /* #__PURE__ */ (() => {
   const method = "post";
   const url = "/user/gpg_keys";
   function request(
-    option?: Usergpg_keysOption
-  ): Promise<Usergpg_keysResponseSuccess> {
+    option?: UserCurrentPostGPGKeyOption
+  ): Promise<UserCurrentPostGPGKeyResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<Usergpg_keysResponseSuccess>;
+    }) as unknown as Promise<UserCurrentPostGPGKeyResponseSuccess>;
   }
 
   /** http method */
@@ -8976,8 +14711,57 @@ export const usergpg_keys = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for usergpg_keysid */
-export interface Usergpg_keysidOption {
+/** @description request parameter type for userCurrentGetGPGKey */
+export interface UserCurrentGetGPGKeyOption {
+  /**
+   * @description
+   *   id of key to get
+   * @format int64
+   */
+  path: {
+    /**
+        @description
+          id of key to get
+        @format int64 */
+    id: number;
+  };
+}
+
+/** @description response type for userCurrentGetGPGKey */
+export interface UserCurrentGetGPGKeyResponse {
+  200: GPGKey;
+  404: NotFound;
+}
+
+export type UserCurrentGetGPGKeyResponseSuccess =
+  UserCurrentGetGPGKeyResponse[200];
+/**
+ * @description
+ *   Get a GPG key
+ * @tags user
+ * @produces application/json
+ */
+export const userCurrentGetGPGKey = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/user/gpg_keys/:id";
+  function request(
+    option: UserCurrentGetGPGKeyOption
+  ): Promise<UserCurrentGetGPGKeyResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<UserCurrentGetGPGKeyResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for userCurrentDeleteGPGKey */
+export interface UserCurrentDeleteGPGKeyOption {
   /**
    * @description
    *   id of key to delete
@@ -8992,30 +14776,31 @@ export interface Usergpg_keysidOption {
   };
 }
 
-/** @description response type for usergpg_keysid */
-export interface Usergpg_keysidResponse {
+/** @description response type for userCurrentDeleteGPGKey */
+export interface UserCurrentDeleteGPGKeyResponse {
   204: Empty;
   403: Forbidden;
   404: NotFound;
 }
 
-export type Usergpg_keysidResponseSuccess = Usergpg_keysidResponse[204];
+export type UserCurrentDeleteGPGKeyResponseSuccess =
+  UserCurrentDeleteGPGKeyResponse[204];
 /**
  * @description
  *   Remove a GPG key
  * @tags user
  * @produces application/json
  */
-export const usergpg_keysid = /* #__PURE__ */ (() => {
+export const userCurrentDeleteGPGKey = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/user/gpg_keys/:id";
   function request(
-    option: Usergpg_keysidOption
-  ): Promise<Usergpg_keysidResponseSuccess> {
+    option: UserCurrentDeleteGPGKeyOption
+  ): Promise<UserCurrentDeleteGPGKeyResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<Usergpg_keysidResponseSuccess>;
+    }) as unknown as Promise<UserCurrentDeleteGPGKeyResponseSuccess>;
   }
 
   /** http method */
@@ -9025,18 +14810,72 @@ export const usergpg_keysid = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userkeys */
-export interface UserkeysOption {
+/** @description request parameter type for userCurrentListKeys */
+export interface UserCurrentListKeysOption {
+  /**
+   * @description
+   *   fingerprint of the key
+   */
+  query?: {
+    /**
+        @description
+          fingerprint of the key */
+    fingerprint?: string;
+    /**
+        @description
+          page number of results to return (1-based) */
+    page?: number;
+    /**
+        @description
+          page size of results */
+    limit?: number;
+  };
+}
+
+/** @description response type for userCurrentListKeys */
+export interface UserCurrentListKeysResponse {
+  200: PublicKeyList;
+}
+
+export type UserCurrentListKeysResponseSuccess =
+  UserCurrentListKeysResponse[200];
+/**
+ * @description
+ *   List the authenticated user's public keys
+ * @tags user
+ * @produces application/json
+ */
+export const userCurrentListKeys = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/user/keys";
+  function request(
+    option?: UserCurrentListKeysOption
+  ): Promise<UserCurrentListKeysResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<UserCurrentListKeysResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for userCurrentPostKey */
+export interface UserCurrentPostKeyOption {
   body?: CreateKeyOption;
 }
 
-/** @description response type for userkeys */
-export interface UserkeysResponse {
+/** @description response type for userCurrentPostKey */
+export interface UserCurrentPostKeyResponse {
   201: PublicKey;
   422: ValidationError;
 }
 
-export type UserkeysResponseSuccess = UserkeysResponse[201];
+export type UserCurrentPostKeyResponseSuccess = UserCurrentPostKeyResponse[201];
 /**
  * @description
  *   Create a public key
@@ -9044,14 +14883,16 @@ export type UserkeysResponseSuccess = UserkeysResponse[201];
  * @produces application/json
  * @consumes application/json
  */
-export const userkeys = /* #__PURE__ */ (() => {
+export const userCurrentPostKey = /* #__PURE__ */ (() => {
   const method = "post";
   const url = "/user/keys";
-  function request(option?: UserkeysOption): Promise<UserkeysResponseSuccess> {
+  function request(
+    option?: UserCurrentPostKeyOption
+  ): Promise<UserCurrentPostKeyResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<UserkeysResponseSuccess>;
+    }) as unknown as Promise<UserCurrentPostKeyResponseSuccess>;
   }
 
   /** http method */
@@ -9061,8 +14902,56 @@ export const userkeys = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userkeysid */
-export interface UserkeysidOption {
+/** @description request parameter type for userCurrentGetKey */
+export interface UserCurrentGetKeyOption {
+  /**
+   * @description
+   *   id of key to get
+   * @format int64
+   */
+  path: {
+    /**
+        @description
+          id of key to get
+        @format int64 */
+    id: number;
+  };
+}
+
+/** @description response type for userCurrentGetKey */
+export interface UserCurrentGetKeyResponse {
+  200: PublicKey;
+  404: NotFound;
+}
+
+export type UserCurrentGetKeyResponseSuccess = UserCurrentGetKeyResponse[200];
+/**
+ * @description
+ *   Get a public key
+ * @tags user
+ * @produces application/json
+ */
+export const userCurrentGetKey = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/user/keys/:id";
+  function request(
+    option: UserCurrentGetKeyOption
+  ): Promise<UserCurrentGetKeyResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<UserCurrentGetKeyResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for userCurrentDeleteKey */
+export interface UserCurrentDeleteKeyOption {
   /**
    * @description
    *   id of key to delete
@@ -9077,30 +14966,31 @@ export interface UserkeysidOption {
   };
 }
 
-/** @description response type for userkeysid */
-export interface UserkeysidResponse {
+/** @description response type for userCurrentDeleteKey */
+export interface UserCurrentDeleteKeyResponse {
   204: Empty;
   403: Forbidden;
   404: NotFound;
 }
 
-export type UserkeysidResponseSuccess = UserkeysidResponse[204];
+export type UserCurrentDeleteKeyResponseSuccess =
+  UserCurrentDeleteKeyResponse[204];
 /**
  * @description
  *   Delete a public key
  * @tags user
  * @produces application/json
  */
-export const userkeysid = /* #__PURE__ */ (() => {
+export const userCurrentDeleteKey = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/user/keys/:id";
   function request(
-    option: UserkeysidOption
-  ): Promise<UserkeysidResponseSuccess> {
+    option: UserCurrentDeleteKeyOption
+  ): Promise<UserCurrentDeleteKeyResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<UserkeysidResponseSuccess>;
+    }) as unknown as Promise<UserCurrentDeleteKeyResponseSuccess>;
   }
 
   /** http method */
@@ -9160,40 +15050,47 @@ export const orgListCurrentUserOrgs = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userrepos */
-export interface UserreposOption {
-  body?: CreateRepoOption;
-}
-
-/** @description response type for userrepos */
-export interface UserreposResponse {
-  201: Repository;
+/** @description request parameter type for userCurrentListRepos */
+export interface UserCurrentListReposOption {
   /**
    * @description
-   *   The repository with the same name already exists.
+   *   page number of results to return (1-based)
    */
-  409: any;
-  422: ValidationError;
+  query?: {
+    /**
+        @description
+          page number of results to return (1-based) */
+    page?: number;
+    /**
+        @description
+          page size of results */
+    limit?: number;
+  };
 }
 
-export type UserreposResponseSuccess = UserreposResponse[201];
+/** @description response type for userCurrentListRepos */
+export interface UserCurrentListReposResponse {
+  200: RepositoryList;
+}
+
+export type UserCurrentListReposResponseSuccess =
+  UserCurrentListReposResponse[200];
 /**
  * @description
- *   Create a repository
- * @tags repository,user
+ *   List the repos that the authenticated user owns
+ * @tags user
  * @produces application/json
- * @consumes application/json
  */
-export const userrepos = /* #__PURE__ */ (() => {
-  const method = "post";
+export const userCurrentListRepos = /* #__PURE__ */ (() => {
+  const method = "get";
   const url = "/user/repos";
   function request(
-    option?: UserreposOption
-  ): Promise<UserreposResponseSuccess> {
+    option?: UserCurrentListReposOption
+  ): Promise<UserCurrentListReposResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<UserreposResponseSuccess>;
+    }) as unknown as Promise<UserCurrentListReposResponseSuccess>;
   }
 
   /** http method */
@@ -9203,33 +15100,105 @@ export const userrepos = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for usersettings */
-export interface UsersettingsOption {
-  body?: UserSettingsOptions;
+/** @description request parameter type for createCurrentUserRepo */
+export interface CreateCurrentUserRepoOption {
+  body?: CreateRepoOption;
 }
 
-/** @description response type for usersettings */
-export interface UsersettingsResponse {
+/** @description response type for createCurrentUserRepo */
+export interface CreateCurrentUserRepoResponse {
+  201: Repository;
+  /**
+   * @description
+   *   The repository with the same name already exists.
+   */
+  409: any;
+  422: ValidationError;
+}
+
+export type CreateCurrentUserRepoResponseSuccess =
+  CreateCurrentUserRepoResponse[201];
+/**
+ * @description
+ *   Create a repository
+ * @tags repository,user
+ * @produces application/json
+ * @consumes application/json
+ */
+export const createCurrentUserRepo = /* #__PURE__ */ (() => {
+  const method = "post";
+  const url = "/user/repos";
+  function request(
+    option?: CreateCurrentUserRepoOption
+  ): Promise<CreateCurrentUserRepoResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<CreateCurrentUserRepoResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description response type for getUserSettings */
+export interface GetUserSettingsResponse {
   200: UserSettings;
 }
 
-export type UsersettingsResponseSuccess = UsersettingsResponse[200];
+export type GetUserSettingsResponseSuccess = GetUserSettingsResponse[200];
+/**
+ * @description
+ *   Get user settings
+ * @tags user
+ * @produces application/json
+ */
+export const getUserSettings = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/user/settings";
+  function request(): Promise<GetUserSettingsResponseSuccess> {
+    return requester(url, {
+      method,
+    }) as unknown as Promise<GetUserSettingsResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for updateUserSettings */
+export interface UpdateUserSettingsOption {
+  body?: UserSettingsOptions;
+}
+
+/** @description response type for updateUserSettings */
+export interface UpdateUserSettingsResponse {
+  200: UserSettings;
+}
+
+export type UpdateUserSettingsResponseSuccess = UpdateUserSettingsResponse[200];
 /**
  * @description
  *   Update user settings
  * @tags user
  * @produces application/json
  */
-export const usersettings = /* #__PURE__ */ (() => {
+export const updateUserSettings = /* #__PURE__ */ (() => {
   const method = "patch";
   const url = "/user/settings";
   function request(
-    option?: UsersettingsOption
-  ): Promise<UsersettingsResponseSuccess> {
+    option?: UpdateUserSettingsOption
+  ): Promise<UpdateUserSettingsResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<UsersettingsResponseSuccess>;
+    }) as unknown as Promise<UpdateUserSettingsResponseSuccess>;
   }
 
   /** http method */
@@ -9289,8 +15258,106 @@ export const userCurrentListStarred = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userstarredownerrepo */
-export interface UserstarredownerrepoOption {
+/** @description request parameter type for userCurrentCheckStarring */
+export interface UserCurrentCheckStarringOption {
+  /**
+   * @description
+   *   owner of the repo
+   */
+  path: {
+    /**
+        @description
+          owner of the repo */
+    owner: string;
+    /**
+        @description
+          name of the repo */
+    repo: string;
+  };
+}
+
+/** @description response type for userCurrentCheckStarring */
+export interface UserCurrentCheckStarringResponse {
+  204: Empty;
+  404: NotFound;
+}
+
+export type UserCurrentCheckStarringResponseSuccess =
+  UserCurrentCheckStarringResponse[204];
+/**
+ * @description
+ *   Whether the authenticated is starring the repo
+ * @tags user
+ */
+export const userCurrentCheckStarring = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/user/starred/:owner/:repo";
+  function request(
+    option: UserCurrentCheckStarringOption
+  ): Promise<UserCurrentCheckStarringResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<UserCurrentCheckStarringResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for userCurrentPutStar */
+export interface UserCurrentPutStarOption {
+  /**
+   * @description
+   *   owner of the repo to star
+   */
+  path: {
+    /**
+        @description
+          owner of the repo to star */
+    owner: string;
+    /**
+        @description
+          name of the repo to star */
+    repo: string;
+  };
+}
+
+/** @description response type for userCurrentPutStar */
+export interface UserCurrentPutStarResponse {
+  204: Empty;
+}
+
+export type UserCurrentPutStarResponseSuccess = UserCurrentPutStarResponse[204];
+/**
+ * @description
+ *   Star the given repo
+ * @tags user
+ */
+export const userCurrentPutStar = /* #__PURE__ */ (() => {
+  const method = "put";
+  const url = "/user/starred/:owner/:repo";
+  function request(
+    option: UserCurrentPutStarOption
+  ): Promise<UserCurrentPutStarResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<UserCurrentPutStarResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for userCurrentDeleteStar */
+export interface UserCurrentDeleteStarOption {
   /**
    * @description
    *   owner of the repo to unstar
@@ -9307,28 +15374,28 @@ export interface UserstarredownerrepoOption {
   };
 }
 
-/** @description response type for userstarredownerrepo */
-export interface UserstarredownerrepoResponse {
+/** @description response type for userCurrentDeleteStar */
+export interface UserCurrentDeleteStarResponse {
   204: Empty;
 }
 
-export type UserstarredownerrepoResponseSuccess =
-  UserstarredownerrepoResponse[204];
+export type UserCurrentDeleteStarResponseSuccess =
+  UserCurrentDeleteStarResponse[204];
 /**
  * @description
  *   Unstar the given repo
  * @tags user
  */
-export const userstarredownerrepo = /* #__PURE__ */ (() => {
+export const userCurrentDeleteStar = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/user/starred/:owner/:repo";
   function request(
-    option: UserstarredownerrepoOption
-  ): Promise<UserstarredownerrepoResponseSuccess> {
+    option: UserCurrentDeleteStarOption
+  ): Promise<UserCurrentDeleteStarResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<UserstarredownerrepoResponseSuccess>;
+    }) as unknown as Promise<UserCurrentDeleteStarResponseSuccess>;
   }
 
   /** http method */
@@ -10309,8 +16376,71 @@ export const userListSubscriptions = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for usersusernametokens */
-export interface UsersusernametokensOption {
+/** @description request parameter type for userGetTokens */
+export interface UserGetTokensOption {
+  /**
+   * @description
+   *   username of user
+   */
+  path: {
+    /**
+        @description
+          username of user */
+    username: string;
+  };
+}
+
+/** @description request parameter type for userGetTokens */
+export interface UserGetTokensOption {
+  /**
+   * @description
+   *   page number of results to return (1-based)
+   */
+  query?: {
+    /**
+        @description
+          page number of results to return (1-based) */
+    page?: number;
+    /**
+        @description
+          page size of results */
+    limit?: number;
+  };
+}
+
+/** @description response type for userGetTokens */
+export interface UserGetTokensResponse {
+  200: AccessTokenList;
+}
+
+export type UserGetTokensResponseSuccess = UserGetTokensResponse[200];
+/**
+ * @description
+ *   List the authenticated user's access tokens
+ * @tags user
+ * @produces application/json
+ */
+export const userGetTokens = /* #__PURE__ */ (() => {
+  const method = "get";
+  const url = "/users/:username/tokens";
+  function request(
+    option: UserGetTokensOption
+  ): Promise<UserGetTokensResponseSuccess> {
+    return requester(url, {
+      method,
+      ...option,
+    }) as unknown as Promise<UserGetTokensResponseSuccess>;
+  }
+
+  /** http method */
+  request.method = method;
+  /** request url */
+  request.url = url;
+  return request;
+})();
+
+/** @description request parameter type for userCreateToken */
+export interface UserCreateTokenOption {
   /**
    * @description
    *   username of user
@@ -10325,21 +16455,20 @@ export interface UsersusernametokensOption {
   };
 }
 
-/** @description request parameter type for usersusernametokens */
-export interface UsersusernametokensOption {
+/** @description request parameter type for userCreateToken */
+export interface UserCreateTokenOption {
   body?: {
     userCreateToken?: CreateAccessTokenOption;
   };
 }
 
-/** @description response type for usersusernametokens */
-export interface UsersusernametokensResponse {
+/** @description response type for userCreateToken */
+export interface UserCreateTokenResponse {
   201: AccessToken;
   400: TsgError;
 }
 
-export type UsersusernametokensResponseSuccess =
-  UsersusernametokensResponse[201];
+export type UserCreateTokenResponseSuccess = UserCreateTokenResponse[201];
 /**
  * @description
  *   Create an access token
@@ -10347,16 +16476,16 @@ export type UsersusernametokensResponseSuccess =
  * @produces application/json
  * @consumes application/json
  */
-export const usersusernametokens = /* #__PURE__ */ (() => {
+export const userCreateToken = /* #__PURE__ */ (() => {
   const method = "post";
   const url = "/users/:username/tokens";
   function request(
-    option: UsersusernametokensOption
-  ): Promise<UsersusernametokensResponseSuccess> {
+    option: UserCreateTokenOption
+  ): Promise<UserCreateTokenResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<UsersusernametokensResponseSuccess>;
+    }) as unknown as Promise<UserCreateTokenResponseSuccess>;
   }
 
   /** http method */
