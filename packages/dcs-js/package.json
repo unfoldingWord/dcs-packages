@@ -3,6 +3,20 @@
   "version": "1.2.2-beta.1",
   "description": "OpenAPI client for DCS (Door43 Content Service)",
   "author": "OpenAPI-Generator Contributors",
+  "type": "module",
+  "files": [
+    "dist/*"
+  ],
+  "exports": {
+    "./base": {
+      "import": "./dist/base.js",
+      "require": "./dist/base.cjs"
+    },
+    "./catalog-next": {
+      "import": "./dist/catalog-next.js",
+      "require": "./dist/catalog-next.cjs"
+    }
+  },
   "keywords": [
     "axios",
     "typescript",
@@ -10,16 +24,20 @@
     "openapi-generator",
     "dcs"
   ],
-  "license": "Unlicense",
-  "main": "./dist/index.js",
+  "license": "MIT",
   "typings": "./dist/index.d.ts",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsc --outDir dist/",
-    "prepublishOnly": "npm run build",
+    "dev": "vite serve",
+    "build": "node scripts/build.mjs && tsc --outDir dist/",
+    "preview": "vite preview",
+    "prepublishOnly": "yarn run build",
     "docmd": "npx typedoc --plugin typedoc-plugin-markdown --out documentation/ ./ --name dcs-js --namedAnchors true",
     "dochtml": "npx typedoc --plugin none --out typedoc/ ./ --name dcs-js"
   },
   "dependencies": {
+    "@types/prettier": "^2.7.0",
+    "@types/swagger-schema-official": "^2.0.22",
     "axios": "^0.21.1"
   },
   "devDependencies": {
@@ -28,6 +46,7 @@
     "typedoc": "^0.22.17",
     "typedoc-github-wiki-theme": "^1.0.1",
     "typedoc-plugin-markdown": "^3.12.1",
-    "typescript": "^4.7.4"
+    "typescript": "^4.7.4",
+    "vite": "^3.0.9"
   }
 }
