@@ -2,7 +2,7 @@
 /* tslint:disable */
 /** Do not modify manually.
 content is generated automatically by `ts-gear`. */
-import requester from "./requester.ts";
+import { requester as requester } from "../../requester";
 import type {
   GetNotificationsItems,
   GetReposOwnerRepoCommitsRefStatusesSort,
@@ -175,23 +175,16 @@ import type {
   ServerVersion,
 } from "./definition";
 
-/** @description request parameter type for adminCronList */
-export interface AdminCronListOption {
+export type AdminCronListOption = {
   /**
-   * @description
-   *   page number of results to return (1-based)
-   */
-  query?: {
-    /**
-        @description
-          page number of results to return (1-based) */
-    page?: number;
-    /**
-        @description
-          page size of results */
-    limit?: number;
-  };
-}
+    @description
+      page number of results to return (1-based) */
+  page?: number;
+  /**
+    @description
+      page size of results */
+  limit?: number;
+};
 
 /** @description response type for adminCronList */
 export interface AdminCronListResponse {
@@ -214,7 +207,7 @@ export const adminCronList = /* #__PURE__ */ (() => {
   ): Promise<AdminCronListResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      query: option,
     }) as unknown as Promise<AdminCronListResponseSuccess>;
   }
 
@@ -225,19 +218,12 @@ export const adminCronList = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for adminCronRun */
-export interface AdminCronRunOption {
+export type AdminCronRunOption = {
   /**
-   * @description
-   *   task to run
-   */
-  path: {
-    /**
-        @description
-          task to run */
-    task: string;
-  };
-}
+    @description
+      task to run */
+  task: string;
+};
 
 /** @description response type for adminCronRun */
 export interface AdminCronRunResponse {
@@ -256,11 +242,11 @@ export const adminCronRun = /* #__PURE__ */ (() => {
   const method = "post";
   const url = "/admin/cron/:task";
   function request(
-    option: AdminCronRunOption
+    option?: AdminCronRunOption
   ): Promise<AdminCronRunResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<AdminCronRunResponseSuccess>;
   }
 
@@ -271,27 +257,20 @@ export const adminCronRun = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for adminGetAllOrgs */
-export interface AdminGetAllOrgsOption {
+export type AdminGetAllOrgsOption = {
   /**
-   * @description
-   *   If the org has one or more repos with the given language(s), the org will be in the results. Multiple lang's are ORed.
-   */
-  query?: {
-    /**
-        @description
-          If the org has one or more repos with the given language(s), the org will be in the results. Multiple lang's are ORed. */
-    lang?: string;
-    /**
-        @description
-          page number of results to return (1-based) */
-    page?: number;
-    /**
-        @description
-          page size of results */
-    limit?: number;
-  };
-}
+    @description
+      If the org has one or more repos with the given language(s), the org will be in the results. Multiple lang's are ORed. */
+  lang?: string;
+  /**
+    @description
+      page number of results to return (1-based) */
+  page?: number;
+  /**
+    @description
+      page size of results */
+  limit?: number;
+};
 
 /** @description response type for adminGetAllOrgs */
 export interface AdminGetAllOrgsResponse {
@@ -314,7 +293,7 @@ export const adminGetAllOrgs = /* #__PURE__ */ (() => {
   ): Promise<AdminGetAllOrgsResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      query: option,
     }) as unknown as Promise<AdminGetAllOrgsResponseSuccess>;
   }
 
@@ -325,27 +304,20 @@ export const adminGetAllOrgs = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for adminUnadoptedList */
-export interface AdminUnadoptedListOption {
+export type AdminUnadoptedListOption = {
   /**
-   * @description
-   *   page number of results to return (1-based)
-   */
-  query?: {
-    /**
-        @description
-          page number of results to return (1-based) */
-    page?: number;
-    /**
-        @description
-          page size of results */
-    limit?: number;
-    /**
-        @description
-          pattern of repositories to search for */
-    pattern?: string;
-  };
-}
+    @description
+      page number of results to return (1-based) */
+  page?: number;
+  /**
+    @description
+      page size of results */
+  limit?: number;
+  /**
+    @description
+      pattern of repositories to search for */
+  pattern?: string;
+};
 
 /** @description response type for adminUnadoptedList */
 export interface AdminUnadoptedListResponse {
@@ -368,7 +340,7 @@ export const adminUnadoptedList = /* #__PURE__ */ (() => {
   ): Promise<AdminUnadoptedListResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      query: option,
     }) as unknown as Promise<AdminUnadoptedListResponseSuccess>;
   }
 
@@ -379,23 +351,16 @@ export const adminUnadoptedList = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for adminAdoptRepository */
-export interface AdminAdoptRepositoryOption {
+export type AdminAdoptRepositoryOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+};
 
 /** @description response type for adminAdoptRepository */
 export interface AdminAdoptRepositoryResponse {
@@ -416,11 +381,11 @@ export const adminAdoptRepository = /* #__PURE__ */ (() => {
   const method = "post";
   const url = "/admin/unadopted/:owner/:repo";
   function request(
-    option: AdminAdoptRepositoryOption
+    option?: AdminAdoptRepositoryOption
   ): Promise<AdminAdoptRepositoryResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<AdminAdoptRepositoryResponseSuccess>;
   }
 
@@ -431,23 +396,16 @@ export const adminAdoptRepository = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for adminDeleteUnadoptedRepository */
-export interface AdminDeleteUnadoptedRepositoryOption {
+export type AdminDeleteUnadoptedRepositoryOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+};
 
 /** @description response type for adminDeleteUnadoptedRepository */
 export interface AdminDeleteUnadoptedRepositoryResponse {
@@ -467,11 +425,11 @@ export const adminDeleteUnadoptedRepository = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/admin/unadopted/:owner/:repo";
   function request(
-    option: AdminDeleteUnadoptedRepositoryOption
+    option?: AdminDeleteUnadoptedRepositoryOption
   ): Promise<AdminDeleteUnadoptedRepositoryResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<AdminDeleteUnadoptedRepositoryResponseSuccess>;
   }
 
@@ -482,27 +440,20 @@ export const adminDeleteUnadoptedRepository = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for adminGetAllUsers */
-export interface AdminGetAllUsersOption {
+export type AdminGetAllUsersOption = {
   /**
-   * @description
-   *   If the user has one or more repos with the given language(s), the org will be in the results. Multiple lang's are ORed.
-   */
-  query?: {
-    /**
-        @description
-          If the user has one or more repos with the given language(s), the org will be in the results. Multiple lang's are ORed. */
-    lang?: string;
-    /**
-        @description
-          page number of results to return (1-based) */
-    page?: number;
-    /**
-        @description
-          page size of results */
-    limit?: number;
-  };
-}
+    @description
+      If the user has one or more repos with the given language(s), the org will be in the results. Multiple lang's are ORed. */
+  lang?: string;
+  /**
+    @description
+      page number of results to return (1-based) */
+  page?: number;
+  /**
+    @description
+      page size of results */
+  limit?: number;
+};
 
 /** @description response type for adminGetAllUsers */
 export interface AdminGetAllUsersResponse {
@@ -525,7 +476,7 @@ export const adminGetAllUsers = /* #__PURE__ */ (() => {
   ): Promise<AdminGetAllUsersResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      query: option,
     }) as unknown as Promise<AdminGetAllUsersResponseSuccess>;
   }
 
@@ -536,10 +487,7 @@ export const adminGetAllUsers = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for adminCreateUser */
-export interface AdminCreateUserOption {
-  body?: CreateUserOption;
-}
+export type AdminCreateUserOption = CreateUserOption;
 
 /** @description response type for adminCreateUser */
 export interface AdminCreateUserResponse {
@@ -565,7 +513,7 @@ export const adminCreateUser = /* #__PURE__ */ (() => {
   ): Promise<AdminCreateUserResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      body: option,
     }) as unknown as Promise<AdminCreateUserResponseSuccess>;
   }
 
@@ -576,19 +524,12 @@ export const adminCreateUser = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for adminDeleteUser */
-export interface AdminDeleteUserOption {
+export type AdminDeleteUserOption = {
   /**
-   * @description
-   *   username of user to delete
-   */
-  path: {
-    /**
-        @description
-          username of user to delete */
-    username: string;
-  };
-}
+    @description
+      username of user to delete */
+  username: string;
+};
 
 /** @description response type for adminDeleteUser */
 export interface AdminDeleteUserResponse {
@@ -608,11 +549,11 @@ export const adminDeleteUser = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/admin/users/:username";
   function request(
-    option: AdminDeleteUserOption
+    option?: AdminDeleteUserOption
   ): Promise<AdminDeleteUserResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<AdminDeleteUserResponseSuccess>;
   }
 
@@ -732,24 +673,17 @@ export const adminCreatePublicKey = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for adminDeleteUserPublicKey */
-export interface AdminDeleteUserPublicKeyOption {
+export type AdminDeleteUserPublicKeyOption = {
   /**
-   * @description
-   *   username of user
-   */
-  path: {
-    /**
-        @description
-          username of user */
-    username: string;
-    /**
-        @description
-          id of the key to delete
-        @format int64 */
-    id: number;
-  };
-}
+    @description
+      username of user */
+  username: string;
+  /**
+    @description
+      id of the key to delete
+    @format int64 */
+  id: number;
+};
 
 /** @description response type for adminDeleteUserPublicKey */
 export interface AdminDeleteUserPublicKeyResponse {
@@ -770,11 +704,11 @@ export const adminDeleteUserPublicKey = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/admin/users/:username/keys/:id";
   function request(
-    option: AdminDeleteUserPublicKeyOption
+    option?: AdminDeleteUserPublicKeyOption
   ): Promise<AdminDeleteUserPublicKeyResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<AdminDeleteUserPublicKeyResponseSuccess>;
   }
 
@@ -897,10 +831,7 @@ export const adminCreateRepo = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for renderMarkdown */
-export interface RenderMarkdownOption {
-  body?: MarkdownOption;
-}
+export type RenderMarkdownOption = MarkdownOption;
 
 /** @description response type for renderMarkdown */
 export interface RenderMarkdownResponse {
@@ -924,7 +855,7 @@ export const renderMarkdown = /* #__PURE__ */ (() => {
   ): Promise<RenderMarkdownResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      body: option,
     }) as unknown as Promise<RenderMarkdownResponseSuccess>;
   }
 
@@ -935,14 +866,7 @@ export const renderMarkdown = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for renderMarkdownRaw */
-export interface RenderMarkdownRawOption {
-  /**
-   * @description
-   *   Request body to render
-   */
-  body: string;
-}
+export type RenderMarkdownRawOption = string;
 
 /** @description response type for renderMarkdownRaw */
 export interface RenderMarkdownRawResponse {
@@ -962,11 +886,11 @@ export const renderMarkdownRaw = /* #__PURE__ */ (() => {
   const method = "post";
   const url = "/markdown/raw";
   function request(
-    option: RenderMarkdownRawOption
+    option?: RenderMarkdownRawOption
   ): Promise<RenderMarkdownRawResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      body: option,
     }) as unknown as Promise<RenderMarkdownRawResponseSuccess>;
   }
 
@@ -1005,45 +929,38 @@ export const getNodeInfo = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for notifyGetList */
-export interface NotifyGetListOption {
+export type NotifyGetListOption = {
   /**
-   * @description
-   *   If true, show notifications marked as read. Default value is false
-   */
-  query?: {
-    /**
-        @description
-          If true, show notifications marked as read. Default value is false */
-    all?: boolean;
-    /**
-        @description
-          Show notifications with the provided status types. Options are: unread, read and/or pinned. Defaults to unread & pinned. */
-    "status-types"?: Array<string>;
-    /**
-        @description
-          filter notifications by subject type */
-    "subject-type"?: Array<GetNotificationsItems>;
-    /**
-        @description
-          Only show notifications updated after the given time. This is a timestamp in RFC 3339 format
-        @format date-time */
-    since?: string;
-    /**
-        @description
-          Only show notifications updated before the given time. This is a timestamp in RFC 3339 format
-        @format date-time */
-    before?: string;
-    /**
-        @description
-          page number of results to return (1-based) */
-    page?: number;
-    /**
-        @description
-          page size of results */
-    limit?: number;
-  };
-}
+    @description
+      If true, show notifications marked as read. Default value is false */
+  all?: boolean;
+  /**
+    @description
+      Show notifications with the provided status types. Options are: unread, read and/or pinned. Defaults to unread & pinned. */
+  "status-types"?: Array<string>;
+  /**
+    @description
+      filter notifications by subject type */
+  "subject-type"?: Array<GetNotificationsItems>;
+  /**
+    @description
+      Only show notifications updated after the given time. This is a timestamp in RFC 3339 format
+    @format date-time */
+  since?: string;
+  /**
+    @description
+      Only show notifications updated before the given time. This is a timestamp in RFC 3339 format
+    @format date-time */
+  before?: string;
+  /**
+    @description
+      page number of results to return (1-based) */
+  page?: number;
+  /**
+    @description
+      page size of results */
+  limit?: number;
+};
 
 /** @description response type for notifyGetList */
 export interface NotifyGetListResponse {
@@ -1066,7 +983,7 @@ export const notifyGetList = /* #__PURE__ */ (() => {
   ): Promise<NotifyGetListResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      query: option,
     }) as unknown as Promise<NotifyGetListResponseSuccess>;
   }
 
@@ -1077,33 +994,25 @@ export const notifyGetList = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for notifyReadList */
-export interface NotifyReadListOption {
+export type NotifyReadListOption = {
   /**
-   * @description
-   *   Describes the last point that notifications were checked. Anything updated since this time will not be updated.
-   * @format date-time
-   */
-  query?: {
-    /**
-        @description
-          Describes the last point that notifications were checked. Anything updated since this time will not be updated.
-        @format date-time */
-    last_read_at?: string;
-    /**
-        @description
-          If true, mark all notifications on this repo. Default value is false */
-    all?: string;
-    /**
-        @description
-          Mark notifications with the provided status types. Options are: unread, read and/or pinned. Defaults to unread. */
-    "status-types"?: Array<string>;
-    /**
-        @description
-          Status to mark notifications as, Defaults to read. */
-    "to-status"?: string;
-  };
-}
+    @description
+      Describes the last point that notifications were checked. Anything updated since this time will not be updated.
+    @format date-time */
+  last_read_at?: string;
+  /**
+    @description
+      If true, mark all notifications on this repo. Default value is false */
+  all?: string;
+  /**
+    @description
+      Mark notifications with the provided status types. Options are: unread, read and/or pinned. Defaults to unread. */
+  "status-types"?: Array<string>;
+  /**
+    @description
+      Status to mark notifications as, Defaults to read. */
+  "to-status"?: string;
+};
 
 /** @description response type for notifyReadList */
 export interface NotifyReadListResponse {
@@ -1126,7 +1035,7 @@ export const notifyReadList = /* #__PURE__ */ (() => {
   ): Promise<NotifyReadListResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      query: option,
     }) as unknown as Promise<NotifyReadListResponseSuccess>;
   }
 
@@ -1164,19 +1073,12 @@ export const notifyNewAvailable = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for notifyGetThread */
-export interface NotifyGetThreadOption {
+export type NotifyGetThreadOption = {
   /**
-   * @description
-   *   id of notification thread
-   */
-  path: {
-    /**
-        @description
-          id of notification thread */
-    id: string;
-  };
-}
+    @description
+      id of notification thread */
+  id: string;
+};
 
 /** @description response type for notifyGetThread */
 export interface NotifyGetThreadResponse {
@@ -1197,11 +1099,11 @@ export const notifyGetThread = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/notifications/threads/:id";
   function request(
-    option: NotifyGetThreadOption
+    option?: NotifyGetThreadOption
   ): Promise<NotifyGetThreadResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<NotifyGetThreadResponseSuccess>;
   }
 
@@ -1276,27 +1178,20 @@ export const notifyReadThread = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for orgGetAll */
-export interface OrgGetAllOption {
+export type OrgGetAllOption = {
   /**
-   * @description
-   *   If the org has one or more repos with the given language(s), the org will be in the results. Multiple lang's are ORed.
-   */
-  query?: {
-    /**
-        @description
-          If the org has one or more repos with the given language(s), the org will be in the results. Multiple lang's are ORed. */
-    lang?: string;
-    /**
-        @description
-          page number of results to return (1-based) */
-    page?: number;
-    /**
-        @description
-          page size of results */
-    limit?: number;
-  };
-}
+    @description
+      If the org has one or more repos with the given language(s), the org will be in the results. Multiple lang's are ORed. */
+  lang?: string;
+  /**
+    @description
+      page number of results to return (1-based) */
+  page?: number;
+  /**
+    @description
+      page size of results */
+  limit?: number;
+};
 
 /** @description response type for orgGetAll */
 export interface OrgGetAllResponse {
@@ -1318,7 +1213,7 @@ export const orgGetAll = /* #__PURE__ */ (() => {
   ): Promise<OrgGetAllResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      query: option,
     }) as unknown as Promise<OrgGetAllResponseSuccess>;
   }
 
@@ -1329,12 +1224,9 @@ export const orgGetAll = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for orgCreate */
-export interface OrgCreateOption {
-  body: {
-    organization: CreateOrgOption;
-  };
-}
+export type OrgCreateOption = {
+  organization: CreateOrgOption;
+};
 
 /** @description response type for orgCreate */
 export interface OrgCreateResponse {
@@ -1354,10 +1246,12 @@ export type OrgCreateResponseSuccess = OrgCreateResponse[201];
 export const orgCreate = /* #__PURE__ */ (() => {
   const method = "post";
   const url = "/orgs";
-  function request(option: OrgCreateOption): Promise<OrgCreateResponseSuccess> {
+  function request(
+    option?: OrgCreateOption
+  ): Promise<OrgCreateResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      body: option,
     }) as unknown as Promise<OrgCreateResponseSuccess>;
   }
 
@@ -1368,19 +1262,12 @@ export const orgCreate = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for orgGet */
-export interface OrgGetOption {
+export type OrgGetOption = {
   /**
-   * @description
-   *   name of the organization to get
-   */
-  path: {
-    /**
-        @description
-          name of the organization to get */
-    org: string;
-  };
-}
+    @description
+      name of the organization to get */
+  org: string;
+};
 
 /** @description response type for orgGet */
 export interface OrgGetResponse {
@@ -1397,10 +1284,10 @@ export type OrgGetResponseSuccess = OrgGetResponse[200];
 export const orgGet = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/orgs/:org";
-  function request(option: OrgGetOption): Promise<OrgGetResponseSuccess> {
+  function request(option?: OrgGetOption): Promise<OrgGetResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<OrgGetResponseSuccess>;
   }
 
@@ -1411,19 +1298,12 @@ export const orgGet = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for orgDelete */
-export interface OrgDeleteOption {
+export type OrgDeleteOption = {
   /**
-   * @description
-   *   organization that is to be deleted
-   */
-  path: {
-    /**
-        @description
-          organization that is to be deleted */
-    org: string;
-  };
-}
+    @description
+      organization that is to be deleted */
+  org: string;
+};
 
 /** @description response type for orgDelete */
 export interface OrgDeleteResponse {
@@ -1440,10 +1320,12 @@ export type OrgDeleteResponseSuccess = OrgDeleteResponse[204];
 export const orgDelete = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/orgs/:org";
-  function request(option: OrgDeleteOption): Promise<OrgDeleteResponseSuccess> {
+  function request(
+    option?: OrgDeleteOption
+  ): Promise<OrgDeleteResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<OrgDeleteResponseSuccess>;
   }
 
@@ -1617,24 +1499,17 @@ export const orgCreateHook = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for orgGetHook */
-export interface OrgGetHookOption {
+export type OrgGetHookOption = {
   /**
-   * @description
-   *   name of the organization
-   */
-  path: {
-    /**
-        @description
-          name of the organization */
-    org: string;
-    /**
-        @description
-          id of the hook to get
-        @format int64 */
-    id: number;
-  };
-}
+    @description
+      name of the organization */
+  org: string;
+  /**
+    @description
+      id of the hook to get
+    @format int64 */
+  id: number;
+};
 
 /** @description response type for orgGetHook */
 export interface OrgGetHookResponse {
@@ -1652,11 +1527,11 @@ export const orgGetHook = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/orgs/:org/hooks/:id";
   function request(
-    option: OrgGetHookOption
+    option?: OrgGetHookOption
   ): Promise<OrgGetHookResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<OrgGetHookResponseSuccess>;
   }
 
@@ -1667,24 +1542,17 @@ export const orgGetHook = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for orgDeleteHook */
-export interface OrgDeleteHookOption {
+export type OrgDeleteHookOption = {
   /**
-   * @description
-   *   name of the organization
-   */
-  path: {
-    /**
-        @description
-          name of the organization */
-    org: string;
-    /**
-        @description
-          id of the hook to delete
-        @format int64 */
-    id: number;
-  };
-}
+    @description
+      name of the organization */
+  org: string;
+  /**
+    @description
+      id of the hook to delete
+    @format int64 */
+  id: number;
+};
 
 /** @description response type for orgDeleteHook */
 export interface OrgDeleteHookResponse {
@@ -1702,11 +1570,11 @@ export const orgDeleteHook = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/orgs/:org/hooks/:id";
   function request(
-    option: OrgDeleteHookOption
+    option?: OrgDeleteHookOption
   ): Promise<OrgDeleteHookResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<OrgDeleteHookResponseSuccess>;
   }
 
@@ -1888,24 +1756,17 @@ export const orgCreateLabel = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for orgGetLabel */
-export interface OrgGetLabelOption {
+export type OrgGetLabelOption = {
   /**
-   * @description
-   *   name of the organization
-   */
-  path: {
-    /**
-        @description
-          name of the organization */
-    org: string;
-    /**
-        @description
-          id of the label to get
-        @format int64 */
-    id: number;
-  };
-}
+    @description
+      name of the organization */
+  org: string;
+  /**
+    @description
+      id of the label to get
+    @format int64 */
+  id: number;
+};
 
 /** @description response type for orgGetLabel */
 export interface OrgGetLabelResponse {
@@ -1923,11 +1784,11 @@ export const orgGetLabel = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/orgs/:org/labels/:id";
   function request(
-    option: OrgGetLabelOption
+    option?: OrgGetLabelOption
   ): Promise<OrgGetLabelResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<OrgGetLabelResponseSuccess>;
   }
 
@@ -1938,24 +1799,17 @@ export const orgGetLabel = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for orgDeleteLabel */
-export interface OrgDeleteLabelOption {
+export type OrgDeleteLabelOption = {
   /**
-   * @description
-   *   name of the organization
-   */
-  path: {
-    /**
-        @description
-          name of the organization */
-    org: string;
-    /**
-        @description
-          id of the label to delete
-        @format int64 */
-    id: number;
-  };
-}
+    @description
+      name of the organization */
+  org: string;
+  /**
+    @description
+      id of the label to delete
+    @format int64 */
+  id: number;
+};
 
 /** @description response type for orgDeleteLabel */
 export interface OrgDeleteLabelResponse {
@@ -1972,11 +1826,11 @@ export const orgDeleteLabel = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/orgs/:org/labels/:id";
   function request(
-    option: OrgDeleteLabelOption
+    option?: OrgDeleteLabelOption
   ): Promise<OrgDeleteLabelResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<OrgDeleteLabelResponseSuccess>;
   }
 
@@ -2107,23 +1961,16 @@ export const orgListMembers = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for orgIsMember */
-export interface OrgIsMemberOption {
+export type OrgIsMemberOption = {
   /**
-   * @description
-   *   name of the organization
-   */
-  path: {
-    /**
-        @description
-          name of the organization */
-    org: string;
-    /**
-        @description
-          username of the user */
-    username: string;
-  };
-}
+    @description
+      name of the organization */
+  org: string;
+  /**
+    @description
+      username of the user */
+  username: string;
+};
 
 /** @description response type for orgIsMember */
 export interface OrgIsMemberResponse {
@@ -2154,11 +2001,11 @@ export const orgIsMember = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/orgs/:org/members/:username";
   function request(
-    option: OrgIsMemberOption
+    option?: OrgIsMemberOption
   ): Promise<OrgIsMemberResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<OrgIsMemberResponseSuccess>;
   }
 
@@ -2169,23 +2016,16 @@ export const orgIsMember = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for orgDeleteMember */
-export interface OrgDeleteMemberOption {
+export type OrgDeleteMemberOption = {
   /**
-   * @description
-   *   name of the organization
-   */
-  path: {
-    /**
-        @description
-          name of the organization */
-    org: string;
-    /**
-        @description
-          username of the user */
-    username: string;
-  };
-}
+    @description
+      name of the organization */
+  org: string;
+  /**
+    @description
+      username of the user */
+  username: string;
+};
 
 /** @description response type for orgDeleteMember */
 export interface OrgDeleteMemberResponse {
@@ -2207,11 +2047,11 @@ export const orgDeleteMember = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/orgs/:org/members/:username";
   function request(
-    option: OrgDeleteMemberOption
+    option?: OrgDeleteMemberOption
   ): Promise<OrgDeleteMemberResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<OrgDeleteMemberResponseSuccess>;
   }
 
@@ -2286,23 +2126,16 @@ export const orgListPublicMembers = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for orgIsPublicMember */
-export interface OrgIsPublicMemberOption {
+export type OrgIsPublicMemberOption = {
   /**
-   * @description
-   *   name of the organization
-   */
-  path: {
-    /**
-        @description
-          name of the organization */
-    org: string;
-    /**
-        @description
-          username of the user */
-    username: string;
-  };
-}
+    @description
+      name of the organization */
+  org: string;
+  /**
+    @description
+      username of the user */
+  username: string;
+};
 
 /** @description response type for orgIsPublicMember */
 export interface OrgIsPublicMemberResponse {
@@ -2328,11 +2161,11 @@ export const orgIsPublicMember = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/orgs/:org/public_members/:username";
   function request(
-    option: OrgIsPublicMemberOption
+    option?: OrgIsPublicMemberOption
   ): Promise<OrgIsPublicMemberResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<OrgIsPublicMemberResponseSuccess>;
   }
 
@@ -2343,23 +2176,16 @@ export const orgIsPublicMember = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for orgPublicizeMember */
-export interface OrgPublicizeMemberOption {
+export type OrgPublicizeMemberOption = {
   /**
-   * @description
-   *   name of the organization
-   */
-  path: {
-    /**
-        @description
-          name of the organization */
-    org: string;
-    /**
-        @description
-          username of the user */
-    username: string;
-  };
-}
+    @description
+      name of the organization */
+  org: string;
+  /**
+    @description
+      username of the user */
+  username: string;
+};
 
 /** @description response type for orgPublicizeMember */
 export interface OrgPublicizeMemberResponse {
@@ -2382,11 +2208,11 @@ export const orgPublicizeMember = /* #__PURE__ */ (() => {
   const method = "put";
   const url = "/orgs/:org/public_members/:username";
   function request(
-    option: OrgPublicizeMemberOption
+    option?: OrgPublicizeMemberOption
   ): Promise<OrgPublicizeMemberResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<OrgPublicizeMemberResponseSuccess>;
   }
 
@@ -2397,23 +2223,16 @@ export const orgPublicizeMember = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for orgConcealMember */
-export interface OrgConcealMemberOption {
+export type OrgConcealMemberOption = {
   /**
-   * @description
-   *   name of the organization
-   */
-  path: {
-    /**
-        @description
-          name of the organization */
-    org: string;
-    /**
-        @description
-          username of the user */
-    username: string;
-  };
-}
+    @description
+      name of the organization */
+  org: string;
+  /**
+    @description
+      username of the user */
+  username: string;
+};
 
 /** @description response type for orgConcealMember */
 export interface OrgConcealMemberResponse {
@@ -2432,11 +2251,11 @@ export const orgConcealMember = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/orgs/:org/public_members/:username";
   function request(
-    option: OrgConcealMemberOption
+    option?: OrgConcealMemberOption
   ): Promise<OrgConcealMemberResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<OrgConcealMemberResponseSuccess>;
   }
 
@@ -2756,82 +2575,75 @@ export const teamSearch = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for issueSearchIssues */
-export interface IssueSearchIssuesOption {
+export type IssueSearchIssuesOption = {
   /**
-   * @description
-   *   whether issue is open or closed
-   */
-  query?: {
-    /**
-        @description
-          whether issue is open or closed */
-    state?: string;
-    /**
-        @description
-          comma separated list of labels. Fetch only issues that have any of this labels. Non existent labels are discarded */
-    labels?: string;
-    /**
-        @description
-          comma separated list of milestone names. Fetch only issues that have any of this milestones. Non existent are discarded */
-    milestones?: string;
-    /**
-        @description
-          search string */
-    q?: string;
-    /**
-        @description
-          repository to prioritize in the results
-        @format int64 */
-    priority_repo_id?: number;
-    /**
-        @description
-          filter by type (issues / pulls) if set */
-    type?: string;
-    /**
-        @description
-          Only show notifications updated after the given time. This is a timestamp in RFC 3339 format
-        @format date-time */
-    since?: string;
-    /**
-        @description
-          Only show notifications updated before the given time. This is a timestamp in RFC 3339 format
-        @format date-time */
-    before?: string;
-    /**
-        @description
-          filter (issues / pulls) assigned to you, default is false */
-    assigned?: boolean;
-    /**
-        @description
-          filter (issues / pulls) created by you, default is false */
-    created?: boolean;
-    /**
-        @description
-          filter (issues / pulls) mentioning you, default is false */
-    mentioned?: boolean;
-    /**
-        @description
-          filter pulls requesting your review, default is false */
-    review_requested?: boolean;
-    /**
-        @description
-          filter by owner */
-    owner?: string;
-    /**
-        @description
-          filter by team (requires organization owner parameter to be provided) */
-    team?: string;
-    /**
-        @description
-          page number of results to return (1-based) */
-    page?: number;
-    /**
-        @description
-          page size of results */
-    limit?: number;
-  };
-}
+    @description
+      whether issue is open or closed */
+  state?: string;
+  /**
+    @description
+      comma separated list of labels. Fetch only issues that have any of this labels. Non existent labels are discarded */
+  labels?: string;
+  /**
+    @description
+      comma separated list of milestone names. Fetch only issues that have any of this milestones. Non existent are discarded */
+  milestones?: string;
+  /**
+    @description
+      search string */
+  q?: string;
+  /**
+    @description
+      repository to prioritize in the results
+    @format int64 */
+  priority_repo_id?: number;
+  /**
+    @description
+      filter by type (issues / pulls) if set */
+  type?: string;
+  /**
+    @description
+      Only show notifications updated after the given time. This is a timestamp in RFC 3339 format
+    @format date-time */
+  since?: string;
+  /**
+    @description
+      Only show notifications updated before the given time. This is a timestamp in RFC 3339 format
+    @format date-time */
+  before?: string;
+  /**
+    @description
+      filter (issues / pulls) assigned to you, default is false */
+  assigned?: boolean;
+  /**
+    @description
+      filter (issues / pulls) created by you, default is false */
+  created?: boolean;
+  /**
+    @description
+      filter (issues / pulls) mentioning you, default is false */
+  mentioned?: boolean;
+  /**
+    @description
+      filter pulls requesting your review, default is false */
+  review_requested?: boolean;
+  /**
+    @description
+      filter by owner */
+  owner?: string;
+  /**
+    @description
+      filter by team (requires organization owner parameter to be provided) */
+  team?: string;
+  /**
+    @description
+      page number of results to return (1-based) */
+  page?: number;
+  /**
+    @description
+      page size of results */
+  limit?: number;
+};
 
 /** @description response type for issueSearchIssues */
 export interface IssueSearchIssuesResponse {
@@ -2853,7 +2665,7 @@ export const issueSearchIssues = /* #__PURE__ */ (() => {
   ): Promise<IssueSearchIssuesResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      query: option,
     }) as unknown as Promise<IssueSearchIssuesResponseSuccess>;
   }
 
@@ -2864,10 +2676,7 @@ export const issueSearchIssues = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoMigrate */
-export interface RepoMigrateOption {
-  body?: MigrateRepoOptions;
-}
+export type RepoMigrateOption = MigrateRepoOptions;
 
 /** @description response type for repoMigrate */
 export interface RepoMigrateResponse {
@@ -2892,7 +2701,7 @@ export const repoMigrate = /* #__PURE__ */ (() => {
   ): Promise<RepoMigrateResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      body: option,
     }) as unknown as Promise<RepoMigrateResponseSuccess>;
   }
 
@@ -2903,111 +2712,104 @@ export const repoMigrate = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoSearch */
-export interface RepoSearchOption {
+export type RepoSearchOption = {
   /**
-   * @description
-   *   keyword
-   */
-  query?: {
-    /**
-        @description
-          keyword */
-    q?: string;
-    /**
-        @description
-          Limit search to repositories with keyword as topic */
-    topic?: boolean;
-    /**
-        @description
-          include search of keyword within repository description (defaults to false) */
-    includeDesc?: boolean;
-    /**
-        @description
-          search only for repos that the user with the given id owns or contributes to
-        @format int64 */
-    uid?: number;
-    /**
-        @description
-          repo owner to prioritize in the results
-        @format int64 */
-    priority_owner_id?: number;
-    /**
-        @description
-          search only for repos that belong to the given team id
-        @format int64 */
-    team_id?: number;
-    /**
-        @description
-          search only for repos that the user with the given id has starred
-        @format int64 */
-    starredBy?: number;
-    /**
-        @description
-          include private repositories this user has access to (defaults to true) */
-    private?: boolean;
-    /**
-        @description
-          show only pubic, private or all repositories (defaults to all) */
-    is_private?: boolean;
-    /**
-        @description
-          include template repositories this user has access to (defaults to true) */
-    template?: boolean;
-    /**
-        @description
-          show only archived, non-archived or all repositories (defaults to all) */
-    archived?: boolean;
-    /**
-        @description
-          type of repository to search for. Supported values are "fork", "source", "mirror" and "collaborative" */
-    mode?: string;
-    /**
-        @description
-          if `uid` is given, search only for repos that the user owns */
-    exclusive?: boolean;
-    /**
-        @description
-          name of the repo. Multiple repo's are ORed. */
-    repo?: string;
-    /**
-        @description
-          owner of the repo. Multiple owner's are ORed. */
-    owner?: string;
-    /**
-        @description
-          If the repo is a resource of the given language(s), the repo will be in the results. Multiple lang's are ORed. */
-    lang?: string;
-    /**
-        @description
-          resource subject. Multiple subject's are ORed. */
-    subject?: string;
-    /**
-        @description
-          book (project id) that exist in a resource. If the resource contains the the book, its repository will be included in the results. Multiple book's are ORed. */
-    book?: string;
-    /**
-        @description
-          if false, q value will only be searched for in the repo name, owner, description and title and subject; otherwise search all values of the manifest file. (defaults to false) */
-    includeMetadata?: boolean;
-    /**
-        @description
-          sort repos by attribute. Supported values are "alpha", "created", "updated", "size", and "id". Default is "alpha" */
-    sort?: string;
-    /**
-        @description
-          sort order, either "asc" (ascending) or "desc" (descending). Default is "asc", ignored if "sort" is not specified. */
-    order?: string;
-    /**
-        @description
-          page number of results to return (1-based) */
-    page?: number;
-    /**
-        @description
-          page size of results */
-    limit?: number;
-  };
-}
+    @description
+      keyword */
+  q?: string;
+  /**
+    @description
+      Limit search to repositories with keyword as topic */
+  topic?: boolean;
+  /**
+    @description
+      include search of keyword within repository description (defaults to false) */
+  includeDesc?: boolean;
+  /**
+    @description
+      search only for repos that the user with the given id owns or contributes to
+    @format int64 */
+  uid?: number;
+  /**
+    @description
+      repo owner to prioritize in the results
+    @format int64 */
+  priority_owner_id?: number;
+  /**
+    @description
+      search only for repos that belong to the given team id
+    @format int64 */
+  team_id?: number;
+  /**
+    @description
+      search only for repos that the user with the given id has starred
+    @format int64 */
+  starredBy?: number;
+  /**
+    @description
+      include private repositories this user has access to (defaults to true) */
+  private?: boolean;
+  /**
+    @description
+      show only pubic, private or all repositories (defaults to all) */
+  is_private?: boolean;
+  /**
+    @description
+      include template repositories this user has access to (defaults to true) */
+  template?: boolean;
+  /**
+    @description
+      show only archived, non-archived or all repositories (defaults to all) */
+  archived?: boolean;
+  /**
+    @description
+      type of repository to search for. Supported values are "fork", "source", "mirror" and "collaborative" */
+  mode?: string;
+  /**
+    @description
+      if `uid` is given, search only for repos that the user owns */
+  exclusive?: boolean;
+  /**
+    @description
+      name of the repo. Multiple repo's are ORed. */
+  repo?: string;
+  /**
+    @description
+      owner of the repo. Multiple owner's are ORed. */
+  owner?: string;
+  /**
+    @description
+      If the repo is a resource of the given language(s), the repo will be in the results. Multiple lang's are ORed. */
+  lang?: string;
+  /**
+    @description
+      resource subject. Multiple subject's are ORed. */
+  subject?: string;
+  /**
+    @description
+      book (project id) that exist in a resource. If the resource contains the the book, its repository will be included in the results. Multiple book's are ORed. */
+  book?: string;
+  /**
+    @description
+      if false, q value will only be searched for in the repo name, owner, description and title and subject; otherwise search all values of the manifest file. (defaults to false) */
+  includeMetadata?: boolean;
+  /**
+    @description
+      sort repos by attribute. Supported values are "alpha", "created", "updated", "size", and "id". Default is "alpha" */
+  sort?: string;
+  /**
+    @description
+      sort order, either "asc" (ascending) or "desc" (descending). Default is "asc", ignored if "sort" is not specified. */
+  order?: string;
+  /**
+    @description
+      page number of results to return (1-based) */
+  page?: number;
+  /**
+    @description
+      page size of results */
+  limit?: number;
+};
 
 /** @description response type for repoSearch */
 export interface RepoSearchResponse {
@@ -3030,7 +2832,7 @@ export const repoSearch = /* #__PURE__ */ (() => {
   ): Promise<RepoSearchResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      query: option,
     }) as unknown as Promise<RepoSearchResponseSuccess>;
   }
 
@@ -3041,23 +2843,16 @@ export const repoSearch = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoGet */
-export interface RepoGetOption {
+export type RepoGetOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+};
 
 /** @description response type for repoGet */
 export interface RepoGetResponse {
@@ -3074,10 +2869,10 @@ export type RepoGetResponseSuccess = RepoGetResponse[200];
 export const repoGet = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo";
-  function request(option: RepoGetOption): Promise<RepoGetResponseSuccess> {
+  function request(option?: RepoGetOption): Promise<RepoGetResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoGetResponseSuccess>;
   }
 
@@ -3088,23 +2883,16 @@ export const repoGet = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoDelete */
-export interface RepoDeleteOption {
+export type RepoDeleteOption = {
   /**
-   * @description
-   *   owner of the repo to delete
-   */
-  path: {
-    /**
-        @description
-          owner of the repo to delete */
-    owner: string;
-    /**
-        @description
-          name of the repo to delete */
-    repo: string;
-  };
-}
+    @description
+      owner of the repo to delete */
+  owner: string;
+  /**
+    @description
+      name of the repo to delete */
+  repo: string;
+};
 
 /** @description response type for repoDelete */
 export interface RepoDeleteResponse {
@@ -3123,11 +2911,11 @@ export const repoDelete = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo";
   function request(
-    option: RepoDeleteOption
+    option?: RepoDeleteOption
   ): Promise<RepoDeleteResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoDeleteResponseSuccess>;
   }
 
@@ -3196,27 +2984,20 @@ export const repoEdit = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoGetArchive */
-export interface RepoGetArchiveOption {
+export type RepoGetArchiveOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          the git reference for download with attached archive format (e.g. master.zip) */
-    archive: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      the git reference for download with attached archive format (e.g. master.zip) */
+  archive: string;
+};
 
 /** @description response type for repoGetArchive */
 export interface RepoGetArchiveResponse {
@@ -3239,11 +3020,11 @@ export const repoGetArchive = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/archive/:archive";
   function request(
-    option: RepoGetArchiveOption
+    option?: RepoGetArchiveOption
   ): Promise<RepoGetArchiveResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoGetArchiveResponseSuccess>;
   }
 
@@ -3254,23 +3035,16 @@ export const repoGetArchive = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoGetAssignees */
-export interface RepoGetAssigneesOption {
+export type RepoGetAssigneesOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+};
 
 /** @description response type for repoGetAssignees */
 export interface RepoGetAssigneesResponse {
@@ -3288,11 +3062,11 @@ export const repoGetAssignees = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/assignees";
   function request(
-    option: RepoGetAssigneesOption
+    option?: RepoGetAssigneesOption
   ): Promise<RepoGetAssigneesResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoGetAssigneesResponseSuccess>;
   }
 
@@ -3303,23 +3077,16 @@ export const repoGetAssignees = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoListBranchProtection */
-export interface RepoListBranchProtectionOption {
+export type RepoListBranchProtectionOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+};
 
 /** @description response type for repoListBranchProtection */
 export interface RepoListBranchProtectionResponse {
@@ -3338,11 +3105,11 @@ export const repoListBranchProtection = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/branch_protections";
   function request(
-    option: RepoListBranchProtectionOption
+    option?: RepoListBranchProtectionOption
   ): Promise<RepoListBranchProtectionResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoListBranchProtectionResponseSuccess>;
   }
 
@@ -3412,27 +3179,20 @@ export const repoCreateBranchProtection = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoGetBranchProtection */
-export interface RepoGetBranchProtectionOption {
+export type RepoGetBranchProtectionOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          name of protected branch */
-    name: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      name of protected branch */
+  name: string;
+};
 
 /** @description response type for repoGetBranchProtection */
 export interface RepoGetBranchProtectionResponse {
@@ -3452,11 +3212,11 @@ export const repoGetBranchProtection = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/branch_protections/:name";
   function request(
-    option: RepoGetBranchProtectionOption
+    option?: RepoGetBranchProtectionOption
   ): Promise<RepoGetBranchProtectionResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoGetBranchProtectionResponseSuccess>;
   }
 
@@ -3467,27 +3227,20 @@ export const repoGetBranchProtection = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoDeleteBranchProtection */
-export interface RepoDeleteBranchProtectionOption {
+export type RepoDeleteBranchProtectionOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          name of protected branch */
-    name: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      name of protected branch */
+  name: string;
+};
 
 /** @description response type for repoDeleteBranchProtection */
 export interface RepoDeleteBranchProtectionResponse {
@@ -3507,11 +3260,11 @@ export const repoDeleteBranchProtection = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/branch_protections/:name";
   function request(
-    option: RepoDeleteBranchProtectionOption
+    option?: RepoDeleteBranchProtectionOption
   ): Promise<RepoDeleteBranchProtectionResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoDeleteBranchProtectionResponseSuccess>;
   }
 
@@ -3716,27 +3469,20 @@ export const repoCreateBranch = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoGetBranch */
-export interface RepoGetBranchOption {
+export type RepoGetBranchOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          branch to get */
-    branch: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      branch to get */
+  branch: string;
+};
 
 /** @description response type for repoGetBranch */
 export interface RepoGetBranchResponse {
@@ -3755,11 +3501,11 @@ export const repoGetBranch = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/branches/:branch";
   function request(
-    option: RepoGetBranchOption
+    option?: RepoGetBranchOption
   ): Promise<RepoGetBranchResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoGetBranchResponseSuccess>;
   }
 
@@ -3770,27 +3516,20 @@ export const repoGetBranch = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoDeleteBranch */
-export interface RepoDeleteBranchOption {
+export type RepoDeleteBranchOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          branch to delete */
-    branch: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      branch to delete */
+  branch: string;
+};
 
 /** @description response type for repoDeleteBranch */
 export interface RepoDeleteBranchResponse {
@@ -3810,11 +3549,11 @@ export const repoDeleteBranch = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/branches/:branch";
   function request(
-    option: RepoDeleteBranchOption
+    option?: RepoDeleteBranchOption
   ): Promise<RepoDeleteBranchResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoDeleteBranchResponseSuccess>;
   }
 
@@ -3893,27 +3632,20 @@ export const repoListCollaborators = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoCheckCollaborator */
-export interface RepoCheckCollaboratorOption {
+export type RepoCheckCollaboratorOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          username of the collaborator */
-    collaborator: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      username of the collaborator */
+  collaborator: string;
+};
 
 /** @description response type for repoCheckCollaborator */
 export interface RepoCheckCollaboratorResponse {
@@ -3934,11 +3666,11 @@ export const repoCheckCollaborator = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/collaborators/:collaborator";
   function request(
-    option: RepoCheckCollaboratorOption
+    option?: RepoCheckCollaboratorOption
   ): Promise<RepoCheckCollaboratorResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoCheckCollaboratorResponseSuccess>;
   }
 
@@ -4009,27 +3741,20 @@ export const repoAddCollaborator = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoDeleteCollaborator */
-export interface RepoDeleteCollaboratorOption {
+export type RepoDeleteCollaboratorOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          username of the collaborator to delete */
-    collaborator: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      username of the collaborator to delete */
+  collaborator: string;
+};
 
 /** @description response type for repoDeleteCollaborator */
 export interface RepoDeleteCollaboratorResponse {
@@ -4049,11 +3774,11 @@ export const repoDeleteCollaborator = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/collaborators/:collaborator";
   function request(
-    option: RepoDeleteCollaboratorOption
+    option?: RepoDeleteCollaboratorOption
   ): Promise<RepoDeleteCollaboratorResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoDeleteCollaboratorResponseSuccess>;
   }
 
@@ -4614,27 +4339,20 @@ export const repoDeleteFile = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoGetEditorConfig */
-export interface RepoGetEditorConfigOption {
+export type RepoGetEditorConfigOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          filepath of file to get */
-    filepath: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      filepath of file to get */
+  filepath: string;
+};
 
 /** @description response type for repoGetEditorConfig */
 export interface RepoGetEditorConfigResponse {
@@ -4658,11 +4376,11 @@ export const repoGetEditorConfig = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/editorconfig/:filepath";
   function request(
-    option: RepoGetEditorConfigOption
+    option?: RepoGetEditorConfigOption
   ): Promise<RepoGetEditorConfigResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoGetEditorConfigResponseSuccess>;
   }
 
@@ -4738,8 +4456,8 @@ export const listForks = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for createFork */
-export interface CreateForkOption {
+/** @description request parameter type for repoCreateFork */
+export interface RepoCreateForkOption {
   /**
    * @description
    *   owner of the repo to fork
@@ -4756,13 +4474,13 @@ export interface CreateForkOption {
   };
 }
 
-/** @description request parameter type for createFork */
-export interface CreateForkOption {
+/** @description request parameter type for repoCreateFork */
+export interface RepoCreateForkOption {
   body?: CreateForkOption;
 }
 
-/** @description response type for createFork */
-export interface CreateForkResponse {
+/** @description response type for repoCreateFork */
+export interface RepoCreateForkResponse {
   202: Repository;
   403: Forbidden;
   /**
@@ -4773,23 +4491,23 @@ export interface CreateForkResponse {
   422: ValidationError;
 }
 
-export type CreateForkResponseSuccess = CreateForkResponse[202];
+export type RepoCreateForkResponseSuccess = RepoCreateForkResponse[202];
 /**
  * @description
  *   Fork a repository
  * @tags repository
  * @produces application/json
  */
-export const createFork = /* #__PURE__ */ (() => {
+export const repoCreateFork = /* #__PURE__ */ (() => {
   const method = "post";
   const url = "/repos/:owner/:repo/forks";
   function request(
-    option: CreateForkOption
-  ): Promise<CreateForkResponseSuccess> {
+    option: RepoCreateForkOption
+  ): Promise<RepoCreateForkResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<CreateForkResponseSuccess>;
+    }) as unknown as Promise<RepoCreateForkResponseSuccess>;
   }
 
   /** http method */
@@ -4799,27 +4517,20 @@ export const createFork = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for GetBlob */
-export interface GetBlobOption {
+export type GetBlobOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          sha of the commit */
-    sha: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      sha of the commit */
+  sha: string;
+};
 
 /** @description response type for GetBlob */
 export interface GetBlobResponse {
@@ -4837,10 +4548,10 @@ export type GetBlobResponseSuccess = GetBlobResponse[200];
 export const GetBlob = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/git/blobs/:sha";
-  function request(option: GetBlobOption): Promise<GetBlobResponseSuccess> {
+  function request(option?: GetBlobOption): Promise<GetBlobResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<GetBlobResponseSuccess>;
   }
 
@@ -4851,27 +4562,20 @@ export const GetBlob = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoGetSingleCommit */
-export interface RepoGetSingleCommitOption {
+export type RepoGetSingleCommitOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          a git ref or commit sha */
-    sha: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      a git ref or commit sha */
+  sha: string;
+};
 
 /** @description response type for repoGetSingleCommit */
 export interface RepoGetSingleCommitResponse {
@@ -4892,11 +4596,11 @@ export const repoGetSingleCommit = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/git/commits/:sha";
   function request(
-    option: RepoGetSingleCommitOption
+    option?: RepoGetSingleCommitOption
   ): Promise<RepoGetSingleCommitResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoGetSingleCommitResponseSuccess>;
   }
 
@@ -4907,31 +4611,24 @@ export const repoGetSingleCommit = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoDownloadCommitDiffOrPatch */
-export interface RepoDownloadCommitDiffOrPatchOption {
+export type RepoDownloadCommitDiffOrPatchOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          SHA of the commit to get */
-    sha: string;
-    /**
-        @description
-          whether the output is diff or patch */
-    diffType: GetReposOwnerRepoGitCommitsShaDiffTypeDiffType;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      SHA of the commit to get */
+  sha: string;
+  /**
+    @description
+      whether the output is diff or patch */
+  diffType: GetReposOwnerRepoGitCommitsShaDiffTypeDiffType;
+};
 
 /** @description response type for repoDownloadCommitDiffOrPatch */
 export interface RepoDownloadCommitDiffOrPatchResponse {
@@ -4951,11 +4648,11 @@ export const repoDownloadCommitDiffOrPatch = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/git/commits/:sha.diffType";
   function request(
-    option: RepoDownloadCommitDiffOrPatchOption
+    option?: RepoDownloadCommitDiffOrPatchOption
   ): Promise<RepoDownloadCommitDiffOrPatchResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoDownloadCommitDiffOrPatchResponseSuccess>;
   }
 
@@ -4966,27 +4663,20 @@ export const repoDownloadCommitDiffOrPatch = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoGetNote */
-export interface RepoGetNoteOption {
+export type RepoGetNoteOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          a git ref or commit sha */
-    sha: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      a git ref or commit sha */
+  sha: string;
+};
 
 /** @description response type for repoGetNote */
 export interface RepoGetNoteResponse {
@@ -5006,11 +4696,11 @@ export const repoGetNote = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/git/notes/:sha";
   function request(
-    option: RepoGetNoteOption
+    option?: RepoGetNoteOption
   ): Promise<RepoGetNoteResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoGetNoteResponseSuccess>;
   }
 
@@ -5021,23 +4711,16 @@ export const repoGetNote = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoListAllGitRefs */
-export interface RepoListAllGitRefsOption {
+export type RepoListAllGitRefsOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+};
 
 /** @description response type for repoListAllGitRefs */
 export interface RepoListAllGitRefsResponse {
@@ -5056,11 +4739,11 @@ export const repoListAllGitRefs = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/git/refs";
   function request(
-    option: RepoListAllGitRefsOption
+    option?: RepoListAllGitRefsOption
   ): Promise<RepoListAllGitRefsResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoListAllGitRefsResponseSuccess>;
   }
 
@@ -5071,27 +4754,20 @@ export const repoListAllGitRefs = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoListGitRefs */
-export interface RepoListGitRefsOption {
+export type RepoListGitRefsOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          part or full name of the ref */
-    ref: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      part or full name of the ref */
+  ref: string;
+};
 
 /** @description response type for repoListGitRefs */
 export interface RepoListGitRefsResponse {
@@ -5110,11 +4786,11 @@ export const repoListGitRefs = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/git/refs/:ref";
   function request(
-    option: RepoListGitRefsOption
+    option?: RepoListGitRefsOption
   ): Promise<RepoListGitRefsResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoListGitRefsResponseSuccess>;
   }
 
@@ -5125,27 +4801,20 @@ export const repoListGitRefs = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for GetAnnotatedTag */
-export interface GetAnnotatedTagOption {
+export type GetAnnotatedTagOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          sha of the tag. The Git tags API only supports annotated tag objects, not lightweight tags. */
-    sha: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      sha of the tag. The Git tags API only supports annotated tag objects, not lightweight tags. */
+  sha: string;
+};
 
 /** @description response type for GetAnnotatedTag */
 export interface GetAnnotatedTagResponse {
@@ -5164,11 +4833,11 @@ export const GetAnnotatedTag = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/git/tags/:sha";
   function request(
-    option: GetAnnotatedTagOption
+    option?: GetAnnotatedTagOption
   ): Promise<GetAnnotatedTagResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<GetAnnotatedTagResponseSuccess>;
   }
 
@@ -5375,23 +5044,16 @@ export const repoCreateHook = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoListGitHooks */
-export interface RepoListGitHooksOption {
+export type RepoListGitHooksOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+};
 
 /** @description response type for repoListGitHooks */
 export interface RepoListGitHooksResponse {
@@ -5409,11 +5071,11 @@ export const repoListGitHooks = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/hooks/git";
   function request(
-    option: RepoListGitHooksOption
+    option?: RepoListGitHooksOption
   ): Promise<RepoListGitHooksResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoListGitHooksResponseSuccess>;
   }
 
@@ -5424,27 +5086,20 @@ export const repoListGitHooks = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoGetGitHook */
-export interface RepoGetGitHookOption {
+export type RepoGetGitHookOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          id of the hook to get */
-    id: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      id of the hook to get */
+  id: string;
+};
 
 /** @description response type for repoGetGitHook */
 export interface RepoGetGitHookResponse {
@@ -5463,11 +5118,11 @@ export const repoGetGitHook = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/hooks/git/:id";
   function request(
-    option: RepoGetGitHookOption
+    option?: RepoGetGitHookOption
   ): Promise<RepoGetGitHookResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoGetGitHookResponseSuccess>;
   }
 
@@ -5478,27 +5133,20 @@ export const repoGetGitHook = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoDeleteGitHook */
-export interface RepoDeleteGitHookOption {
+export type RepoDeleteGitHookOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          id of the hook to get */
-    id: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      id of the hook to get */
+  id: string;
+};
 
 /** @description response type for repoDeleteGitHook */
 export interface RepoDeleteGitHookResponse {
@@ -5517,11 +5165,11 @@ export const repoDeleteGitHook = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/hooks/git/:id";
   function request(
-    option: RepoDeleteGitHookOption
+    option?: RepoDeleteGitHookOption
   ): Promise<RepoDeleteGitHookResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoDeleteGitHookResponseSuccess>;
   }
 
@@ -5591,28 +5239,21 @@ export const repoEditGitHook = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoGetHook */
-export interface RepoGetHookOption {
+export type RepoGetHookOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          id of the hook to get
-        @format int64 */
-    id: number;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      id of the hook to get
+    @format int64 */
+  id: number;
+};
 
 /** @description response type for repoGetHook */
 export interface RepoGetHookResponse {
@@ -5631,11 +5272,11 @@ export const repoGetHook = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/hooks/:id";
   function request(
-    option: RepoGetHookOption
+    option?: RepoGetHookOption
   ): Promise<RepoGetHookResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoGetHookResponseSuccess>;
   }
 
@@ -5646,28 +5287,21 @@ export const repoGetHook = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoDeleteHook */
-export interface RepoDeleteHookOption {
+export type RepoDeleteHookOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          id of the hook to delete
-        @format int64 */
-    id: number;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      id of the hook to delete
+    @format int64 */
+  id: number;
+};
 
 /** @description response type for repoDeleteHook */
 export interface RepoDeleteHookResponse {
@@ -5686,11 +5320,11 @@ export const repoDeleteHook = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/hooks/:id";
   function request(
-    option: RepoDeleteHookOption
+    option?: RepoDeleteHookOption
   ): Promise<RepoDeleteHookResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoDeleteHookResponseSuccess>;
   }
 
@@ -5760,28 +5394,21 @@ export const repoEditHook = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoTestHook */
-export interface RepoTestHookOption {
+export type RepoTestHookOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          id of the hook to test
-        @format int64 */
-    id: number;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      id of the hook to test
+    @format int64 */
+  id: number;
+};
 
 /** @description response type for repoTestHook */
 export interface RepoTestHookResponse {
@@ -5799,11 +5426,11 @@ export const repoTestHook = /* #__PURE__ */ (() => {
   const method = "post";
   const url = "/repos/:owner/:repo/hooks/:id/tests";
   function request(
-    option: RepoTestHookOption
+    option?: RepoTestHookOption
   ): Promise<RepoTestHookResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoTestHookResponseSuccess>;
   }
 
@@ -5814,23 +5441,16 @@ export const repoTestHook = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoGetIssueTemplates */
-export interface RepoGetIssueTemplatesOption {
+export type RepoGetIssueTemplatesOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+};
 
 /** @description response type for repoGetIssueTemplates */
 export interface RepoGetIssueTemplatesResponse {
@@ -5849,11 +5469,11 @@ export const repoGetIssueTemplates = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/issue_templates";
   function request(
-    option: RepoGetIssueTemplatesOption
+    option?: RepoGetIssueTemplatesOption
   ): Promise<RepoGetIssueTemplatesResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoGetIssueTemplatesResponseSuccess>;
   }
 
@@ -6110,28 +5730,21 @@ export const issueGetRepoComments = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for issueGetComment */
-export interface IssueGetCommentOption {
+export type IssueGetCommentOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          id of the comment
-        @format int64 */
-    id: number;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      id of the comment
+    @format int64 */
+  id: number;
+};
 
 /** @description response type for issueGetComment */
 export interface IssueGetCommentResponse {
@@ -6153,11 +5766,11 @@ export const issueGetComment = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/issues/comments/:id";
   function request(
-    option: IssueGetCommentOption
+    option?: IssueGetCommentOption
   ): Promise<IssueGetCommentResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<IssueGetCommentResponseSuccess>;
   }
 
@@ -6168,28 +5781,21 @@ export const issueGetComment = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for issueDeleteComment */
-export interface IssueDeleteCommentOption {
+export type IssueDeleteCommentOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          id of comment to delete
-        @format int64 */
-    id: number;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      id of comment to delete
+    @format int64 */
+  id: number;
+};
 
 /** @description response type for issueDeleteComment */
 export interface IssueDeleteCommentResponse {
@@ -6208,11 +5814,11 @@ export const issueDeleteComment = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/issues/comments/:id";
   function request(
-    option: IssueDeleteCommentOption
+    option?: IssueDeleteCommentOption
   ): Promise<IssueDeleteCommentResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<IssueDeleteCommentResponseSuccess>;
   }
 
@@ -6286,28 +5892,21 @@ export const issueEditComment = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for issueGetCommentReactions */
-export interface IssueGetCommentReactionsOption {
+export type IssueGetCommentReactionsOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          id of the comment to edit
-        @format int64 */
-    id: number;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      id of the comment to edit
+    @format int64 */
+  id: number;
+};
 
 /** @description response type for issueGetCommentReactions */
 export interface IssueGetCommentReactionsResponse {
@@ -6328,11 +5927,11 @@ export const issueGetCommentReactions = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/issues/comments/:id/reactions";
   function request(
-    option: IssueGetCommentReactionsOption
+    option?: IssueGetCommentReactionsOption
   ): Promise<IssueGetCommentReactionsResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<IssueGetCommentReactionsResponseSuccess>;
   }
 
@@ -6472,28 +6071,21 @@ export const issueDeleteCommentReaction = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for issueGetIssue */
-export interface IssueGetIssueOption {
+export type IssueGetIssueOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          index of the issue to get
-        @format int64 */
-    index: number;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      index of the issue to get
+    @format int64 */
+  index: number;
+};
 
 /** @description response type for issueGetIssue */
 export interface IssueGetIssueResponse {
@@ -6512,11 +6104,11 @@ export const issueGetIssue = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/issues/:index";
   function request(
-    option: IssueGetIssueOption
+    option?: IssueGetIssueOption
   ): Promise<IssueGetIssueResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<IssueGetIssueResponseSuccess>;
   }
 
@@ -6789,28 +6381,21 @@ export const issueEditIssueDeadline = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for issueGetLabels */
-export interface IssueGetLabelsOption {
+export type IssueGetLabelsOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          index of the issue
-        @format int64 */
-    index: number;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      index of the issue
+    @format int64 */
+  index: number;
+};
 
 /** @description response type for issueGetLabels */
 export interface IssueGetLabelsResponse {
@@ -6829,11 +6414,11 @@ export const issueGetLabels = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/issues/:index/labels";
   function request(
-    option: IssueGetLabelsOption
+    option?: IssueGetLabelsOption
   ): Promise<IssueGetLabelsResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<IssueGetLabelsResponseSuccess>;
   }
 
@@ -6966,28 +6551,21 @@ export const issueAddLabel = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for issueClearLabels */
-export interface IssueClearLabelsOption {
+export type IssueClearLabelsOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          index of the issue
-        @format int64 */
-    index: number;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      index of the issue
+    @format int64 */
+  index: number;
+};
 
 /** @description response type for issueClearLabels */
 export interface IssueClearLabelsResponse {
@@ -7006,11 +6584,11 @@ export const issueClearLabels = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/issues/:index/labels";
   function request(
-    option: IssueClearLabelsOption
+    option?: IssueClearLabelsOption
   ): Promise<IssueClearLabelsResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<IssueClearLabelsResponseSuccess>;
   }
 
@@ -7021,33 +6599,26 @@ export const issueClearLabels = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for issueRemoveLabel */
-export interface IssueRemoveLabelOption {
+export type IssueRemoveLabelOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          index of the issue
-        @format int64 */
-    index: number;
-    /**
-        @description
-          id of the label to remove
-        @format int64 */
-    id: number;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      index of the issue
+    @format int64 */
+  index: number;
+  /**
+    @description
+      id of the label to remove
+    @format int64 */
+  id: number;
+};
 
 /** @description response type for issueRemoveLabel */
 export interface IssueRemoveLabelResponse {
@@ -7067,11 +6638,11 @@ export const issueRemoveLabel = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/issues/:index/labels/:id";
   function request(
-    option: IssueRemoveLabelOption
+    option?: IssueRemoveLabelOption
   ): Promise<IssueRemoveLabelResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<IssueRemoveLabelResponseSuccess>;
   }
 
@@ -7286,28 +6857,21 @@ export const issueDeleteIssueReaction = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for issueDeleteStopWatch */
-export interface IssueDeleteStopWatchOption {
+export type IssueDeleteStopWatchOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          index of the issue to stop the stopwatch on
-        @format int64 */
-    index: number;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      index of the issue to stop the stopwatch on
+    @format int64 */
+  index: number;
+};
 
 /** @description response type for issueDeleteStopWatch */
 export interface IssueDeleteStopWatchResponse {
@@ -7338,11 +6902,11 @@ export const issueDeleteStopWatch = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/issues/:index/stopwatch/delete";
   function request(
-    option: IssueDeleteStopWatchOption
+    option?: IssueDeleteStopWatchOption
   ): Promise<IssueDeleteStopWatchResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<IssueDeleteStopWatchResponseSuccess>;
   }
 
@@ -7353,28 +6917,21 @@ export const issueDeleteStopWatch = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for issueStartStopWatch */
-export interface IssueStartStopWatchOption {
+export type IssueStartStopWatchOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          index of the issue to create the stopwatch on
-        @format int64 */
-    index: number;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      index of the issue to create the stopwatch on
+    @format int64 */
+  index: number;
+};
 
 /** @description response type for issueStartStopWatch */
 export interface IssueStartStopWatchResponse {
@@ -7405,11 +6962,11 @@ export const issueStartStopWatch = /* #__PURE__ */ (() => {
   const method = "post";
   const url = "/repos/:owner/:repo/issues/:index/stopwatch/start";
   function request(
-    option: IssueStartStopWatchOption
+    option?: IssueStartStopWatchOption
   ): Promise<IssueStartStopWatchResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<IssueStartStopWatchResponseSuccess>;
   }
 
@@ -7420,28 +6977,21 @@ export const issueStartStopWatch = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for issueStopStopWatch */
-export interface IssueStopStopWatchOption {
+export type IssueStopStopWatchOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          index of the issue to stop the stopwatch on
-        @format int64 */
-    index: number;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      index of the issue to stop the stopwatch on
+    @format int64 */
+  index: number;
+};
 
 /** @description response type for issueStopStopWatch */
 export interface IssueStopStopWatchResponse {
@@ -7471,11 +7021,11 @@ export const issueStopStopWatch = /* #__PURE__ */ (() => {
   const method = "post";
   const url = "/repos/:owner/:repo/issues/:index/stopwatch/stop";
   function request(
-    option: IssueStopStopWatchOption
+    option?: IssueStopStopWatchOption
   ): Promise<IssueStopStopWatchResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<IssueStopStopWatchResponseSuccess>;
   }
 
@@ -7560,28 +7110,21 @@ export const issueSubscriptions = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for issueCheckSubscription */
-export interface IssueCheckSubscriptionOption {
+export type IssueCheckSubscriptionOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          index of the issue
-        @format int64 */
-    index: number;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      index of the issue
+    @format int64 */
+  index: number;
+};
 
 /** @description response type for issueCheckSubscription */
 export interface IssueCheckSubscriptionResponse {
@@ -7602,11 +7145,11 @@ export const issueCheckSubscription = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/issues/:index/subscriptions/check";
   function request(
-    option: IssueCheckSubscriptionOption
+    option?: IssueCheckSubscriptionOption
   ): Promise<IssueCheckSubscriptionResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<IssueCheckSubscriptionResponseSuccess>;
   }
 
@@ -7617,32 +7160,25 @@ export const issueCheckSubscription = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for issueAddSubscription */
-export interface IssueAddSubscriptionOption {
+export type IssueAddSubscriptionOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          index of the issue
-        @format int64 */
-    index: number;
-    /**
-        @description
-          user to subscribe */
-    user: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      index of the issue
+    @format int64 */
+  index: number;
+  /**
+    @description
+      user to subscribe */
+  user: string;
+};
 
 /** @description response type for issueAddSubscription */
 export interface IssueAddSubscriptionResponse {
@@ -7677,11 +7213,11 @@ export const issueAddSubscription = /* #__PURE__ */ (() => {
   const method = "put";
   const url = "/repos/:owner/:repo/issues/:index/subscriptions/:user";
   function request(
-    option: IssueAddSubscriptionOption
+    option?: IssueAddSubscriptionOption
   ): Promise<IssueAddSubscriptionResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<IssueAddSubscriptionResponseSuccess>;
   }
 
@@ -7692,32 +7228,25 @@ export const issueAddSubscription = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for issueDeleteSubscription */
-export interface IssueDeleteSubscriptionOption {
+export type IssueDeleteSubscriptionOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          index of the issue
-        @format int64 */
-    index: number;
-    /**
-        @description
-          user witch unsubscribe */
-    user: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      index of the issue
+    @format int64 */
+  index: number;
+  /**
+    @description
+      user witch unsubscribe */
+  user: string;
+};
 
 /** @description response type for issueDeleteSubscription */
 export interface IssueDeleteSubscriptionResponse {
@@ -7752,11 +7281,11 @@ export const issueDeleteSubscription = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/issues/:index/subscriptions/:user";
   function request(
-    option: IssueDeleteSubscriptionOption
+    option?: IssueDeleteSubscriptionOption
   ): Promise<IssueDeleteSubscriptionResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<IssueDeleteSubscriptionResponseSuccess>;
   }
 
@@ -8000,28 +7529,21 @@ export const issueAddTime = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for issueResetTime */
-export interface IssueResetTimeOption {
+export type IssueResetTimeOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          index of the issue to add tracked time to
-        @format int64 */
-    index: number;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      index of the issue to add tracked time to
+    @format int64 */
+  index: number;
+};
 
 /** @description response type for issueResetTime */
 export interface IssueResetTimeResponse {
@@ -8042,11 +7564,11 @@ export const issueResetTime = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/issues/:index/times";
   function request(
-    option: IssueResetTimeOption
+    option?: IssueResetTimeOption
   ): Promise<IssueResetTimeResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<IssueResetTimeResponseSuccess>;
   }
 
@@ -8057,33 +7579,26 @@ export const issueResetTime = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for issueDeleteTime */
-export interface IssueDeleteTimeOption {
+export type IssueDeleteTimeOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          index of the issue
-        @format int64 */
-    index: number;
-    /**
-        @description
-          id of time to delete
-        @format int64 */
-    id: number;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      index of the issue
+    @format int64 */
+  index: number;
+  /**
+    @description
+      id of time to delete
+    @format int64 */
+  id: number;
+};
 
 /** @description response type for issueDeleteTime */
 export interface IssueDeleteTimeResponse {
@@ -8104,11 +7619,11 @@ export const issueDeleteTime = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/issues/:index/times/:id";
   function request(
-    option: IssueDeleteTimeOption
+    option?: IssueDeleteTimeOption
   ): Promise<IssueDeleteTimeResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<IssueDeleteTimeResponseSuccess>;
   }
 
@@ -8250,28 +7765,21 @@ export const repoCreateKey = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoGetKey */
-export interface RepoGetKeyOption {
+export type RepoGetKeyOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          id of the key to get
-        @format int64 */
-    id: number;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      id of the key to get
+    @format int64 */
+  id: number;
+};
 
 /** @description response type for repoGetKey */
 export interface RepoGetKeyResponse {
@@ -8289,11 +7797,11 @@ export const repoGetKey = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/keys/:id";
   function request(
-    option: RepoGetKeyOption
+    option?: RepoGetKeyOption
   ): Promise<RepoGetKeyResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoGetKeyResponseSuccess>;
   }
 
@@ -8304,28 +7812,21 @@ export const repoGetKey = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoDeleteKey */
-export interface RepoDeleteKeyOption {
+export type RepoDeleteKeyOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          id of the key to delete
-        @format int64 */
-    id: number;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      id of the key to delete
+    @format int64 */
+  id: number;
+};
 
 /** @description response type for repoDeleteKey */
 export interface RepoDeleteKeyResponse {
@@ -8343,11 +7844,11 @@ export const repoDeleteKey = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/keys/:id";
   function request(
-    option: RepoDeleteKeyOption
+    option?: RepoDeleteKeyOption
   ): Promise<RepoDeleteKeyResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoDeleteKeyResponseSuccess>;
   }
 
@@ -8481,28 +7982,21 @@ export const issueCreateLabel = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for issueGetLabel */
-export interface IssueGetLabelOption {
+export type IssueGetLabelOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          id of the label to get
-        @format int64 */
-    id: number;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      id of the label to get
+    @format int64 */
+  id: number;
+};
 
 /** @description response type for issueGetLabel */
 export interface IssueGetLabelResponse {
@@ -8520,11 +8014,11 @@ export const issueGetLabel = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/labels/:id";
   function request(
-    option: IssueGetLabelOption
+    option?: IssueGetLabelOption
   ): Promise<IssueGetLabelResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<IssueGetLabelResponseSuccess>;
   }
 
@@ -8535,28 +8029,21 @@ export const issueGetLabel = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for issueDeleteLabel */
-export interface IssueDeleteLabelOption {
+export type IssueDeleteLabelOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          id of the label to delete
-        @format int64 */
-    id: number;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      id of the label to delete
+    @format int64 */
+  id: number;
+};
 
 /** @description response type for issueDeleteLabel */
 export interface IssueDeleteLabelResponse {
@@ -8573,11 +8060,11 @@ export const issueDeleteLabel = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/labels/:id";
   function request(
-    option: IssueDeleteLabelOption
+    option?: IssueDeleteLabelOption
   ): Promise<IssueDeleteLabelResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<IssueDeleteLabelResponseSuccess>;
   }
 
@@ -8649,23 +8136,16 @@ export const issueEditLabel = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoGetLanguages */
-export interface RepoGetLanguagesOption {
+export type RepoGetLanguagesOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+};
 
 /** @description response type for repoGetLanguages */
 export interface RepoGetLanguagesResponse {
@@ -8684,11 +8164,11 @@ export const repoGetLanguages = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/languages";
   function request(
-    option: RepoGetLanguagesOption
+    option?: RepoGetLanguagesOption
   ): Promise<RepoGetLanguagesResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoGetLanguagesResponseSuccess>;
   }
 
@@ -8831,27 +8311,20 @@ export const issueCreateMilestone = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for issueGetMilestone */
-export interface IssueGetMilestoneOption {
+export type IssueGetMilestoneOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          the milestone to get, identified by ID and if not available by name */
-    id: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      the milestone to get, identified by ID and if not available by name */
+  id: string;
+};
 
 /** @description response type for issueGetMilestone */
 export interface IssueGetMilestoneResponse {
@@ -8869,11 +8342,11 @@ export const issueGetMilestone = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/milestones/:id";
   function request(
-    option: IssueGetMilestoneOption
+    option?: IssueGetMilestoneOption
   ): Promise<IssueGetMilestoneResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<IssueGetMilestoneResponseSuccess>;
   }
 
@@ -8884,27 +8357,20 @@ export const issueGetMilestone = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for issueDeleteMilestone */
-export interface IssueDeleteMilestoneOption {
+export type IssueDeleteMilestoneOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          the milestone to delete, identified by ID and if not available by name */
-    id: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      the milestone to delete, identified by ID and if not available by name */
+  id: string;
+};
 
 /** @description response type for issueDeleteMilestone */
 export interface IssueDeleteMilestoneResponse {
@@ -8922,11 +8388,11 @@ export const issueDeleteMilestone = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/milestones/:id";
   function request(
-    option: IssueDeleteMilestoneOption
+    option?: IssueDeleteMilestoneOption
   ): Promise<IssueDeleteMilestoneResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<IssueDeleteMilestoneResponseSuccess>;
   }
 
@@ -8996,23 +8462,16 @@ export const issueEditMilestone = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoMirrorSync */
-export interface RepoMirrorSyncOption {
+export type RepoMirrorSyncOption = {
   /**
-   * @description
-   *   owner of the repo to sync
-   */
-  path: {
-    /**
-        @description
-          owner of the repo to sync */
-    owner: string;
-    /**
-        @description
-          name of the repo to sync */
-    repo: string;
-  };
-}
+    @description
+      owner of the repo to sync */
+  owner: string;
+  /**
+    @description
+      name of the repo to sync */
+  repo: string;
+};
 
 /** @description response type for repoMirrorSync */
 export interface RepoMirrorSyncResponse {
@@ -9031,11 +8490,11 @@ export const repoMirrorSync = /* #__PURE__ */ (() => {
   const method = "post";
   const url = "/repos/:owner/:repo/mirror-sync";
   function request(
-    option: RepoMirrorSyncOption
+    option?: RepoMirrorSyncOption
   ): Promise<RepoMirrorSyncResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoMirrorSyncResponseSuccess>;
   }
 
@@ -9356,28 +8815,21 @@ export const repoCreatePullRequest = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoGetPullRequest */
-export interface RepoGetPullRequestOption {
+export type RepoGetPullRequestOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          index of the pull request to get
-        @format int64 */
-    index: number;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      index of the pull request to get
+    @format int64 */
+  index: number;
+};
 
 /** @description response type for repoGetPullRequest */
 export interface RepoGetPullRequestResponse {
@@ -9396,11 +8848,11 @@ export const repoGetPullRequest = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/pulls/:index";
   function request(
-    option: RepoGetPullRequestOption
+    option?: RepoGetPullRequestOption
   ): Promise<RepoGetPullRequestResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoGetPullRequestResponseSuccess>;
   }
 
@@ -9624,28 +9076,21 @@ export const repoGetPullRequestCommits = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoPullRequestIsMerged */
-export interface RepoPullRequestIsMergedOption {
+export type RepoPullRequestIsMergedOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          index of the pull request
-        @format int64 */
-    index: number;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      index of the pull request
+    @format int64 */
+  index: number;
+};
 
 /** @description response type for repoPullRequestIsMerged */
 export interface RepoPullRequestIsMergedResponse {
@@ -9673,11 +9118,11 @@ export const repoPullRequestIsMerged = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/pulls/:index/merge";
   function request(
-    option: RepoPullRequestIsMergedOption
+    option?: RepoPullRequestIsMergedOption
   ): Promise<RepoPullRequestIsMergedResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoPullRequestIsMergedResponseSuccess>;
   }
 
@@ -10010,33 +9455,26 @@ export const repoCreatePullReview = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoGetPullReview */
-export interface RepoGetPullReviewOption {
+export type RepoGetPullReviewOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          index of the pull request
-        @format int64 */
-    index: number;
-    /**
-        @description
-          id of the review
-        @format int64 */
-    id: number;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      index of the pull request
+    @format int64 */
+  index: number;
+  /**
+    @description
+      id of the review
+    @format int64 */
+  id: number;
+};
 
 /** @description response type for repoGetPullReview */
 export interface RepoGetPullReviewResponse {
@@ -10055,11 +9493,11 @@ export const repoGetPullReview = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/pulls/:index/reviews/:id";
   function request(
-    option: RepoGetPullReviewOption
+    option?: RepoGetPullReviewOption
   ): Promise<RepoGetPullReviewResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoGetPullReviewResponseSuccess>;
   }
 
@@ -10137,33 +9575,26 @@ export const repoSubmitPullReview = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoDeletePullReview */
-export interface RepoDeletePullReviewOption {
+export type RepoDeletePullReviewOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          index of the pull request
-        @format int64 */
-    index: number;
-    /**
-        @description
-          id of the review
-        @format int64 */
-    id: number;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      index of the pull request
+    @format int64 */
+  index: number;
+  /**
+    @description
+      id of the review
+    @format int64 */
+  id: number;
+};
 
 /** @description response type for repoDeletePullReview */
 export interface RepoDeletePullReviewResponse {
@@ -10184,11 +9615,11 @@ export const repoDeletePullReview = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/pulls/:index/reviews/:id";
   function request(
-    option: RepoDeletePullReviewOption
+    option?: RepoDeletePullReviewOption
   ): Promise<RepoDeletePullReviewResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoDeletePullReviewResponseSuccess>;
   }
 
@@ -10199,33 +9630,26 @@ export const repoDeletePullReview = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoGetPullReviewComments */
-export interface RepoGetPullReviewCommentsOption {
+export type RepoGetPullReviewCommentsOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          index of the pull request
-        @format int64 */
-    index: number;
-    /**
-        @description
-          id of the review
-        @format int64 */
-    id: number;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      index of the pull request
+    @format int64 */
+  index: number;
+  /**
+    @description
+      id of the review
+    @format int64 */
+  id: number;
+};
 
 /** @description response type for repoGetPullReviewComments */
 export interface RepoGetPullReviewCommentsResponse {
@@ -10245,11 +9669,11 @@ export const repoGetPullReviewComments = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/pulls/:index/reviews/:id/comments";
   function request(
-    option: RepoGetPullReviewCommentsOption
+    option?: RepoGetPullReviewCommentsOption
   ): Promise<RepoGetPullReviewCommentsResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoGetPullReviewCommentsResponseSuccess>;
   }
 
@@ -10327,33 +9751,26 @@ export const repoDismissPullReview = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoUnDismissPullReview */
-export interface RepoUnDismissPullReviewOption {
+export type RepoUnDismissPullReviewOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          index of the pull request
-        @format int64 */
-    index: number;
-    /**
-        @description
-          id of the review
-        @format int64 */
-    id: number;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      index of the pull request
+    @format int64 */
+  index: number;
+  /**
+    @description
+      id of the review
+    @format int64 */
+  id: number;
+};
 
 /** @description response type for repoUnDismissPullReview */
 export interface RepoUnDismissPullReviewResponse {
@@ -10374,11 +9791,11 @@ export const repoUnDismissPullReview = /* #__PURE__ */ (() => {
   const method = "post";
   const url = "/repos/:owner/:repo/pulls/:index/reviews/:id/undismissals";
   function request(
-    option: RepoUnDismissPullReviewOption
+    option?: RepoUnDismissPullReviewOption
   ): Promise<RepoUnDismissPullReviewResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoUnDismissPullReviewResponseSuccess>;
   }
 
@@ -10670,27 +10087,20 @@ export const repoCreateRelease = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoGetReleaseByTag */
-export interface RepoGetReleaseByTagOption {
+export type RepoGetReleaseByTagOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          tag name of the release to get */
-    tag: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      tag name of the release to get */
+  tag: string;
+};
 
 /** @description response type for repoGetReleaseByTag */
 export interface RepoGetReleaseByTagResponse {
@@ -10710,11 +10120,11 @@ export const repoGetReleaseByTag = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/releases/tags/:tag";
   function request(
-    option: RepoGetReleaseByTagOption
+    option?: RepoGetReleaseByTagOption
   ): Promise<RepoGetReleaseByTagResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoGetReleaseByTagResponseSuccess>;
   }
 
@@ -10725,27 +10135,20 @@ export const repoGetReleaseByTag = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoDeleteReleaseByTag */
-export interface RepoDeleteReleaseByTagOption {
+export type RepoDeleteReleaseByTagOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          tag name of the release to delete */
-    tag: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      tag name of the release to delete */
+  tag: string;
+};
 
 /** @description response type for repoDeleteReleaseByTag */
 export interface RepoDeleteReleaseByTagResponse {
@@ -10765,11 +10168,11 @@ export const repoDeleteReleaseByTag = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/releases/tags/:tag";
   function request(
-    option: RepoDeleteReleaseByTagOption
+    option?: RepoDeleteReleaseByTagOption
   ): Promise<RepoDeleteReleaseByTagResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoDeleteReleaseByTagResponseSuccess>;
   }
 
@@ -10780,28 +10183,21 @@ export const repoDeleteReleaseByTag = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoGetRelease */
-export interface RepoGetReleaseOption {
+export type RepoGetReleaseOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          id of the release to get
-        @format int64 */
-    id: number;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      id of the release to get
+    @format int64 */
+  id: number;
+};
 
 /** @description response type for repoGetRelease */
 export interface RepoGetReleaseResponse {
@@ -10820,11 +10216,11 @@ export const repoGetRelease = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/releases/:id";
   function request(
-    option: RepoGetReleaseOption
+    option?: RepoGetReleaseOption
   ): Promise<RepoGetReleaseResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoGetReleaseResponseSuccess>;
   }
 
@@ -10835,28 +10231,21 @@ export const repoGetRelease = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoDeleteRelease */
-export interface RepoDeleteReleaseOption {
+export type RepoDeleteReleaseOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          id of the release to delete
-        @format int64 */
-    id: number;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      id of the release to delete
+    @format int64 */
+  id: number;
+};
 
 /** @description response type for repoDeleteRelease */
 export interface RepoDeleteReleaseResponse {
@@ -10875,11 +10264,11 @@ export const repoDeleteRelease = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/releases/:id";
   function request(
-    option: RepoDeleteReleaseOption
+    option?: RepoDeleteReleaseOption
   ): Promise<RepoDeleteReleaseResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoDeleteReleaseResponseSuccess>;
   }
 
@@ -10951,28 +10340,21 @@ export const repoEditRelease = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoListReleaseAttachments */
-export interface RepoListReleaseAttachmentsOption {
+export type RepoListReleaseAttachmentsOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          id of the release
-        @format int64 */
-    id: number;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      id of the release
+    @format int64 */
+  id: number;
+};
 
 /** @description response type for repoListReleaseAttachments */
 export interface RepoListReleaseAttachmentsResponse {
@@ -10991,11 +10373,11 @@ export const repoListReleaseAttachments = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/releases/:id/assets";
   function request(
-    option: RepoListReleaseAttachmentsOption
+    option?: RepoListReleaseAttachmentsOption
   ): Promise<RepoListReleaseAttachmentsResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoListReleaseAttachmentsResponseSuccess>;
   }
 
@@ -11091,33 +10473,26 @@ export const repoCreateReleaseAttachment = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoGetReleaseAttachment */
-export interface RepoGetReleaseAttachmentOption {
+export type RepoGetReleaseAttachmentOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          id of the release
-        @format int64 */
-    id: number;
-    /**
-        @description
-          id of the attachment to get
-        @format int64 */
-    attachment_id: number;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      id of the release
+    @format int64 */
+  id: number;
+  /**
+    @description
+      id of the attachment to get
+    @format int64 */
+  attachment_id: number;
+};
 
 /** @description response type for repoGetReleaseAttachment */
 export interface RepoGetReleaseAttachmentResponse {
@@ -11136,11 +10511,11 @@ export const repoGetReleaseAttachment = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/releases/:id/assets/:attachment_id";
   function request(
-    option: RepoGetReleaseAttachmentOption
+    option?: RepoGetReleaseAttachmentOption
   ): Promise<RepoGetReleaseAttachmentResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoGetReleaseAttachmentResponseSuccess>;
   }
 
@@ -11151,33 +10526,26 @@ export const repoGetReleaseAttachment = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoDeleteReleaseAttachment */
-export interface RepoDeleteReleaseAttachmentOption {
+export type RepoDeleteReleaseAttachmentOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          id of the release
-        @format int64 */
-    id: number;
-    /**
-        @description
-          id of the attachment to delete
-        @format int64 */
-    attachment_id: number;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      id of the release
+    @format int64 */
+  id: number;
+  /**
+    @description
+      id of the attachment to delete
+    @format int64 */
+  attachment_id: number;
+};
 
 /** @description response type for repoDeleteReleaseAttachment */
 export interface RepoDeleteReleaseAttachmentResponse {
@@ -11196,11 +10564,11 @@ export const repoDeleteReleaseAttachment = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/releases/:id/assets/:attachment_id";
   function request(
-    option: RepoDeleteReleaseAttachmentOption
+    option?: RepoDeleteReleaseAttachmentOption
   ): Promise<RepoDeleteReleaseAttachmentResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoDeleteReleaseAttachmentResponseSuccess>;
   }
 
@@ -11277,23 +10645,16 @@ export const repoEditReleaseAttachment = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoGetReviewers */
-export interface RepoGetReviewersOption {
+export type RepoGetReviewersOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+};
 
 /** @description response type for repoGetReviewers */
 export interface RepoGetReviewersResponse {
@@ -11311,11 +10672,11 @@ export const repoGetReviewers = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/reviewers";
   function request(
-    option: RepoGetReviewersOption
+    option?: RepoGetReviewersOption
   ): Promise<RepoGetReviewersResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoGetReviewersResponseSuccess>;
   }
 
@@ -11326,23 +10687,16 @@ export const repoGetReviewers = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoSigningKey */
-export interface RepoSigningKeyOption {
+export type RepoSigningKeyOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+};
 
 /** @description response type for repoSigningKey */
 export interface RepoSigningKeyResponse {
@@ -11364,11 +10718,11 @@ export const repoSigningKey = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/signing-key.gpg";
   function request(
-    option: RepoSigningKeyOption
+    option?: RepoSigningKeyOption
   ): Promise<RepoSigningKeyResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoSigningKeyResponseSuccess>;
   }
 
@@ -11653,23 +11007,16 @@ export const repoListSubscribers = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userCurrentCheckSubscription */
-export interface UserCurrentCheckSubscriptionOption {
+export type UserCurrentCheckSubscriptionOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+};
 
 /** @description response type for userCurrentCheckSubscription */
 export interface UserCurrentCheckSubscriptionResponse {
@@ -11692,11 +11039,11 @@ export const userCurrentCheckSubscription = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/subscription";
   function request(
-    option: UserCurrentCheckSubscriptionOption
+    option?: UserCurrentCheckSubscriptionOption
   ): Promise<UserCurrentCheckSubscriptionResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<UserCurrentCheckSubscriptionResponseSuccess>;
   }
 
@@ -11707,23 +11054,16 @@ export const userCurrentCheckSubscription = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userCurrentPutSubscription */
-export interface UserCurrentPutSubscriptionOption {
+export type UserCurrentPutSubscriptionOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+};
 
 /** @description response type for userCurrentPutSubscription */
 export interface UserCurrentPutSubscriptionResponse {
@@ -11741,11 +11081,11 @@ export const userCurrentPutSubscription = /* #__PURE__ */ (() => {
   const method = "put";
   const url = "/repos/:owner/:repo/subscription";
   function request(
-    option: UserCurrentPutSubscriptionOption
+    option?: UserCurrentPutSubscriptionOption
   ): Promise<UserCurrentPutSubscriptionResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<UserCurrentPutSubscriptionResponseSuccess>;
   }
 
@@ -11756,23 +11096,16 @@ export const userCurrentPutSubscription = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userCurrentDeleteSubscription */
-export interface UserCurrentDeleteSubscriptionOption {
+export type UserCurrentDeleteSubscriptionOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+};
 
 /** @description response type for userCurrentDeleteSubscription */
 export interface UserCurrentDeleteSubscriptionResponse {
@@ -11790,11 +11123,11 @@ export const userCurrentDeleteSubscription = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/subscription";
   function request(
-    option: UserCurrentDeleteSubscriptionOption
+    option?: UserCurrentDeleteSubscriptionOption
   ): Promise<UserCurrentDeleteSubscriptionResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<UserCurrentDeleteSubscriptionResponseSuccess>;
   }
 
@@ -11929,27 +11262,20 @@ export const repoCreateTag = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoGetTag */
-export interface RepoGetTagOption {
+export type RepoGetTagOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          name of tag */
-    tag: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      name of tag */
+  tag: string;
+};
 
 /** @description response type for repoGetTag */
 export interface RepoGetTagResponse {
@@ -11968,11 +11294,11 @@ export const repoGetTag = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/tags/:tag";
   function request(
-    option: RepoGetTagOption
+    option?: RepoGetTagOption
   ): Promise<RepoGetTagResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoGetTagResponseSuccess>;
   }
 
@@ -11983,27 +11309,20 @@ export const repoGetTag = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoDeleteTag */
-export interface RepoDeleteTagOption {
+export type RepoDeleteTagOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          name of tag to delete */
-    tag: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      name of tag to delete */
+  tag: string;
+};
 
 /** @description response type for repoDeleteTag */
 export interface RepoDeleteTagResponse {
@@ -12024,11 +11343,11 @@ export const repoDeleteTag = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/tags/:tag";
   function request(
-    option: RepoDeleteTagOption
+    option?: RepoDeleteTagOption
   ): Promise<RepoDeleteTagResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoDeleteTagResponseSuccess>;
   }
 
@@ -12039,23 +11358,16 @@ export const repoDeleteTag = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoListTeams */
-export interface RepoListTeamsOption {
+export type RepoListTeamsOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+};
 
 /** @description response type for repoListTeams */
 export interface RepoListTeamsResponse {
@@ -12073,11 +11385,11 @@ export const repoListTeams = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/teams";
   function request(
-    option: RepoListTeamsOption
+    option?: RepoListTeamsOption
   ): Promise<RepoListTeamsResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoListTeamsResponseSuccess>;
   }
 
@@ -12088,27 +11400,20 @@ export const repoListTeams = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoCheckTeam */
-export interface RepoCheckTeamOption {
+export type RepoCheckTeamOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          team name */
-    team: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      team name */
+  team: string;
+};
 
 /** @description response type for repoCheckTeam */
 export interface RepoCheckTeamResponse {
@@ -12128,11 +11433,11 @@ export const repoCheckTeam = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/teams/:team";
   function request(
-    option: RepoCheckTeamOption
+    option?: RepoCheckTeamOption
   ): Promise<RepoCheckTeamResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoCheckTeamResponseSuccess>;
   }
 
@@ -12143,27 +11448,20 @@ export const repoCheckTeam = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoAddTeam */
-export interface RepoAddTeamOption {
+export type RepoAddTeamOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          team name */
-    team: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      team name */
+  team: string;
+};
 
 /** @description response type for repoAddTeam */
 export interface RepoAddTeamResponse {
@@ -12183,11 +11481,11 @@ export const repoAddTeam = /* #__PURE__ */ (() => {
   const method = "put";
   const url = "/repos/:owner/:repo/teams/:team";
   function request(
-    option: RepoAddTeamOption
+    option?: RepoAddTeamOption
   ): Promise<RepoAddTeamResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoAddTeamResponseSuccess>;
   }
 
@@ -12198,27 +11496,20 @@ export const repoAddTeam = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoDeleteTeam */
-export interface RepoDeleteTeamOption {
+export type RepoDeleteTeamOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          team name */
-    team: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      team name */
+  team: string;
+};
 
 /** @description response type for repoDeleteTeam */
 export interface RepoDeleteTeamResponse {
@@ -12238,11 +11529,11 @@ export const repoDeleteTeam = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/teams/:team";
   function request(
-    option: RepoDeleteTeamOption
+    option?: RepoDeleteTeamOption
   ): Promise<RepoDeleteTeamResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoDeleteTeamResponseSuccess>;
   }
 
@@ -12458,27 +11749,20 @@ export const repoUpdateTopics = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoAddTopic */
-export interface RepoAddTopicOption {
+export type RepoAddTopicOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          name of the topic to add */
-    topic: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      name of the topic to add */
+  topic: string;
+};
 
 /** @description response type for repoAddTopic */
 export interface RepoAddTopicResponse {
@@ -12497,11 +11781,11 @@ export const repoAddTopic = /* #__PURE__ */ (() => {
   const method = "put";
   const url = "/repos/:owner/:repo/topics/:topic";
   function request(
-    option: RepoAddTopicOption
+    option?: RepoAddTopicOption
   ): Promise<RepoAddTopicResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoAddTopicResponseSuccess>;
   }
 
@@ -12512,27 +11796,20 @@ export const repoAddTopic = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoDeleteTopic */
-export interface RepoDeleteTopicOption {
+export type RepoDeleteTopicOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          name of the topic to delete */
-    topic: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      name of the topic to delete */
+  topic: string;
+};
 
 /** @description response type for repoDeleteTopic */
 export interface RepoDeleteTopicResponse {
@@ -12551,11 +11828,11 @@ export const repoDeleteTopic = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/topics/:topic";
   function request(
-    option: RepoDeleteTopicOption
+    option?: RepoDeleteTopicOption
   ): Promise<RepoDeleteTopicResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoDeleteTopicResponseSuccess>;
   }
 
@@ -12627,23 +11904,16 @@ export const repoTransfer = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for acceptRepoTransfer */
-export interface AcceptRepoTransferOption {
+export type AcceptRepoTransferOption = {
   /**
-   * @description
-   *   owner of the repo to transfer
-   */
-  path: {
-    /**
-        @description
-          owner of the repo to transfer */
-    owner: string;
-    /**
-        @description
-          name of the repo to transfer */
-    repo: string;
-  };
-}
+    @description
+      owner of the repo to transfer */
+  owner: string;
+  /**
+    @description
+      name of the repo to transfer */
+  repo: string;
+};
 
 /** @description response type for acceptRepoTransfer */
 export interface AcceptRepoTransferResponse {
@@ -12663,11 +11933,11 @@ export const acceptRepoTransfer = /* #__PURE__ */ (() => {
   const method = "post";
   const url = "/repos/:owner/:repo/transfer/accept";
   function request(
-    option: AcceptRepoTransferOption
+    option?: AcceptRepoTransferOption
   ): Promise<AcceptRepoTransferResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<AcceptRepoTransferResponseSuccess>;
   }
 
@@ -12678,23 +11948,16 @@ export const acceptRepoTransfer = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for rejectRepoTransfer */
-export interface RejectRepoTransferOption {
+export type RejectRepoTransferOption = {
   /**
-   * @description
-   *   owner of the repo to transfer
-   */
-  path: {
-    /**
-        @description
-          owner of the repo to transfer */
-    owner: string;
-    /**
-        @description
-          name of the repo to transfer */
-    repo: string;
-  };
-}
+    @description
+      owner of the repo to transfer */
+  owner: string;
+  /**
+    @description
+      name of the repo to transfer */
+  repo: string;
+};
 
 /** @description response type for rejectRepoTransfer */
 export interface RejectRepoTransferResponse {
@@ -12714,11 +11977,11 @@ export const rejectRepoTransfer = /* #__PURE__ */ (() => {
   const method = "post";
   const url = "/repos/:owner/:repo/transfer/reject";
   function request(
-    option: RejectRepoTransferOption
+    option?: RejectRepoTransferOption
   ): Promise<RejectRepoTransferResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RejectRepoTransferResponseSuccess>;
   }
 
@@ -12785,27 +12048,20 @@ export const repoCreateWikiPage = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoGetWikiPage */
-export interface RepoGetWikiPageOption {
+export type RepoGetWikiPageOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          name of the page */
-    pageName: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      name of the page */
+  pageName: string;
+};
 
 /** @description response type for repoGetWikiPage */
 export interface RepoGetWikiPageResponse {
@@ -12824,11 +12080,11 @@ export const repoGetWikiPage = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repos/:owner/:repo/wiki/page/:pageName";
   function request(
-    option: RepoGetWikiPageOption
+    option?: RepoGetWikiPageOption
   ): Promise<RepoGetWikiPageResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoGetWikiPageResponseSuccess>;
   }
 
@@ -12839,27 +12095,20 @@ export const repoGetWikiPage = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoDeleteWikiPage */
-export interface RepoDeleteWikiPageOption {
+export type RepoDeleteWikiPageOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-    /**
-        @description
-          name of the page */
-    pageName: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+  /**
+    @description
+      name of the page */
+  pageName: string;
+};
 
 /** @description response type for repoDeleteWikiPage */
 export interface RepoDeleteWikiPageResponse {
@@ -12878,11 +12127,11 @@ export const repoDeleteWikiPage = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/repos/:owner/:repo/wiki/page/:pageName";
   function request(
-    option: RepoDeleteWikiPageOption
+    option?: RepoDeleteWikiPageOption
   ): Promise<RepoDeleteWikiPageResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoDeleteWikiPageResponseSuccess>;
   }
 
@@ -13090,8 +12339,8 @@ export const repoGetWikiPageRevisions = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for generateRepo */
-export interface GenerateRepoOption {
+/** @description request parameter type for repoGenerate */
+export interface RepoGenerateOption {
   /**
    * @description
    *   name of the template repository owner
@@ -13108,13 +12357,13 @@ export interface GenerateRepoOption {
   };
 }
 
-/** @description request parameter type for generateRepo */
-export interface GenerateRepoOption {
+/** @description request parameter type for repoGenerate */
+export interface RepoGenerateOption {
   body?: GenerateRepoOption;
 }
 
-/** @description response type for generateRepo */
-export interface GenerateRepoResponse {
+/** @description response type for repoGenerate */
+export interface RepoGenerateResponse {
   201: Repository;
   403: Forbidden;
   404: NotFound;
@@ -13126,7 +12375,7 @@ export interface GenerateRepoResponse {
   422: ValidationError;
 }
 
-export type GenerateRepoResponseSuccess = GenerateRepoResponse[201];
+export type RepoGenerateResponseSuccess = RepoGenerateResponse[201];
 /**
  * @description
  *   Create a repository using a template
@@ -13134,16 +12383,16 @@ export type GenerateRepoResponseSuccess = GenerateRepoResponse[201];
  * @produces application/json
  * @consumes application/json
  */
-export const generateRepo = /* #__PURE__ */ (() => {
+export const repoGenerate = /* #__PURE__ */ (() => {
   const method = "post";
   const url = "/repos/:template_owner/:template_repo/generate";
   function request(
-    option: GenerateRepoOption
-  ): Promise<GenerateRepoResponseSuccess> {
+    option: RepoGenerateOption
+  ): Promise<RepoGenerateResponseSuccess> {
     return requester(url, {
       method,
       ...option,
-    }) as unknown as Promise<GenerateRepoResponseSuccess>;
+    }) as unknown as Promise<RepoGenerateResponseSuccess>;
   }
 
   /** http method */
@@ -13153,21 +12402,13 @@ export const generateRepo = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for repoGetByID */
-export interface RepoGetByIDOption {
+export type RepoGetByIDOption = {
   /**
-   * @description
-   *   id of the repo to get
-   * @format int64
-   */
-  path: {
-    /**
-        @description
-          id of the repo to get
-        @format int64 */
-    id: number;
-  };
-}
+    @description
+      id of the repo to get
+    @format int64 */
+  id: number;
+};
 
 /** @description response type for repoGetByID */
 export interface RepoGetByIDResponse {
@@ -13185,11 +12426,11 @@ export const repoGetByID = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/repositories/:id";
   function request(
-    option: RepoGetByIDOption
+    option?: RepoGetByIDOption
   ): Promise<RepoGetByIDResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<RepoGetByIDResponseSuccess>;
   }
 
@@ -13348,21 +12589,13 @@ export const getSigningKey = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for orgGetTeam */
-export interface OrgGetTeamOption {
+export type OrgGetTeamOption = {
   /**
-   * @description
-   *   id of the team to get
-   * @format int64
-   */
-  path: {
-    /**
-        @description
-          id of the team to get
-        @format int64 */
-    id: number;
-  };
-}
+    @description
+      id of the team to get
+    @format int64 */
+  id: number;
+};
 
 /** @description response type for orgGetTeam */
 export interface OrgGetTeamResponse {
@@ -13380,11 +12613,11 @@ export const orgGetTeam = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/teams/:id";
   function request(
-    option: OrgGetTeamOption
+    option?: OrgGetTeamOption
   ): Promise<OrgGetTeamResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<OrgGetTeamResponseSuccess>;
   }
 
@@ -13395,21 +12628,13 @@ export const orgGetTeam = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for orgDeleteTeam */
-export interface OrgDeleteTeamOption {
+export type OrgDeleteTeamOption = {
   /**
-   * @description
-   *   id of the team to delete
-   * @format int64
-   */
-  path: {
-    /**
-        @description
-          id of the team to delete
-        @format int64 */
-    id: number;
-  };
-}
+    @description
+      id of the team to delete
+    @format int64 */
+  id: number;
+};
 
 /** @description response type for orgDeleteTeam */
 export interface OrgDeleteTeamResponse {
@@ -13430,11 +12655,11 @@ export const orgDeleteTeam = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/teams/:id";
   function request(
-    option: OrgDeleteTeamOption
+    option?: OrgDeleteTeamOption
   ): Promise<OrgDeleteTeamResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<OrgDeleteTeamResponseSuccess>;
   }
 
@@ -13561,25 +12786,17 @@ export const orgListTeamMembers = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for orgListTeamMember */
-export interface OrgListTeamMemberOption {
+export type OrgListTeamMemberOption = {
   /**
-   * @description
-   *   id of the team
-   * @format int64
-   */
-  path: {
-    /**
-        @description
-          id of the team
-        @format int64 */
-    id: number;
-    /**
-        @description
-          username of the member to list */
-    username: string;
-  };
-}
+    @description
+      id of the team
+    @format int64 */
+  id: number;
+  /**
+    @description
+      username of the member to list */
+  username: string;
+};
 
 /** @description response type for orgListTeamMember */
 export interface OrgListTeamMemberResponse {
@@ -13598,11 +12815,11 @@ export const orgListTeamMember = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/teams/:id/members/:username";
   function request(
-    option: OrgListTeamMemberOption
+    option?: OrgListTeamMemberOption
   ): Promise<OrgListTeamMemberResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<OrgListTeamMemberResponseSuccess>;
   }
 
@@ -13613,25 +12830,17 @@ export const orgListTeamMember = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for orgAddTeamMember */
-export interface OrgAddTeamMemberOption {
+export type OrgAddTeamMemberOption = {
   /**
-   * @description
-   *   id of the team
-   * @format int64
-   */
-  path: {
-    /**
-        @description
-          id of the team
-        @format int64 */
-    id: number;
-    /**
-        @description
-          username of the user to add */
-    username: string;
-  };
-}
+    @description
+      id of the team
+    @format int64 */
+  id: number;
+  /**
+    @description
+      username of the user to add */
+  username: string;
+};
 
 /** @description response type for orgAddTeamMember */
 export interface OrgAddTeamMemberResponse {
@@ -13650,11 +12859,11 @@ export const orgAddTeamMember = /* #__PURE__ */ (() => {
   const method = "put";
   const url = "/teams/:id/members/:username";
   function request(
-    option: OrgAddTeamMemberOption
+    option?: OrgAddTeamMemberOption
   ): Promise<OrgAddTeamMemberResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<OrgAddTeamMemberResponseSuccess>;
   }
 
@@ -13665,25 +12874,17 @@ export const orgAddTeamMember = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for orgRemoveTeamMember */
-export interface OrgRemoveTeamMemberOption {
+export type OrgRemoveTeamMemberOption = {
   /**
-   * @description
-   *   id of the team
-   * @format int64
-   */
-  path: {
-    /**
-        @description
-          id of the team
-        @format int64 */
-    id: number;
-    /**
-        @description
-          username of the user to remove */
-    username: string;
-  };
-}
+    @description
+      id of the team
+    @format int64 */
+  id: number;
+  /**
+    @description
+      username of the user to remove */
+  username: string;
+};
 
 /** @description response type for orgRemoveTeamMember */
 export interface OrgRemoveTeamMemberResponse {
@@ -13703,11 +12904,11 @@ export const orgRemoveTeamMember = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/teams/:id/members/:username";
   function request(
-    option: OrgRemoveTeamMemberOption
+    option?: OrgRemoveTeamMemberOption
   ): Promise<OrgRemoveTeamMemberResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<OrgRemoveTeamMemberResponseSuccess>;
   }
 
@@ -13783,29 +12984,21 @@ export const orgListTeamRepos = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for orgAddTeamRepository */
-export interface OrgAddTeamRepositoryOption {
+export type OrgAddTeamRepositoryOption = {
   /**
-   * @description
-   *   id of the team
-   * @format int64
-   */
-  path: {
-    /**
-        @description
-          id of the team
-        @format int64 */
-    id: number;
-    /**
-        @description
-          organization that owns the repo to add */
-    org: string;
-    /**
-        @description
-          name of the repo to add */
-    repo: string;
-  };
-}
+    @description
+      id of the team
+    @format int64 */
+  id: number;
+  /**
+    @description
+      organization that owns the repo to add */
+  org: string;
+  /**
+    @description
+      name of the repo to add */
+  repo: string;
+};
 
 /** @description response type for orgAddTeamRepository */
 export interface OrgAddTeamRepositoryResponse {
@@ -13825,11 +13018,11 @@ export const orgAddTeamRepository = /* #__PURE__ */ (() => {
   const method = "put";
   const url = "/teams/:id/repos/:org/:repo";
   function request(
-    option: OrgAddTeamRepositoryOption
+    option?: OrgAddTeamRepositoryOption
   ): Promise<OrgAddTeamRepositoryResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<OrgAddTeamRepositoryResponseSuccess>;
   }
 
@@ -13840,29 +13033,21 @@ export const orgAddTeamRepository = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for orgRemoveTeamRepository */
-export interface OrgRemoveTeamRepositoryOption {
+export type OrgRemoveTeamRepositoryOption = {
   /**
-   * @description
-   *   id of the team
-   * @format int64
-   */
-  path: {
-    /**
-        @description
-          id of the team
-        @format int64 */
-    id: number;
-    /**
-        @description
-          organization that owns the repo to remove */
-    org: string;
-    /**
-        @description
-          name of the repo to remove */
-    repo: string;
-  };
-}
+    @description
+      id of the team
+    @format int64 */
+  id: number;
+  /**
+    @description
+      organization that owns the repo to remove */
+  org: string;
+  /**
+    @description
+      name of the repo to remove */
+  repo: string;
+};
 
 /** @description response type for orgRemoveTeamRepository */
 export interface OrgRemoveTeamRepositoryResponse {
@@ -13883,11 +13068,11 @@ export const orgRemoveTeamRepository = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/teams/:id/repos/:org/:repo";
   function request(
-    option: OrgRemoveTeamRepositoryOption
+    option?: OrgRemoveTeamRepositoryOption
   ): Promise<OrgRemoveTeamRepositoryResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<OrgRemoveTeamRepositoryResponseSuccess>;
   }
 
@@ -13898,27 +13083,20 @@ export const orgRemoveTeamRepository = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for topicSearch */
-export interface TopicSearchOption {
+export type TopicSearchOption = {
   /**
-   * @description
-   *   keywords to search
-   */
-  query: {
-    /**
-        @description
-          keywords to search */
-    q: string;
-    /**
-        @description
-          page number of results to return (1-based) */
-    page?: number;
-    /**
-        @description
-          page size of results */
-    limit?: number;
-  };
-}
+    @description
+      keywords to search */
+  q: string;
+  /**
+    @description
+      page number of results to return (1-based) */
+  page?: number;
+  /**
+    @description
+      page size of results */
+  limit?: number;
+};
 
 /** @description response type for topicSearch */
 export interface TopicSearchResponse {
@@ -13937,11 +13115,11 @@ export const topicSearch = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/topics/search";
   function request(
-    option: TopicSearchOption
+    option?: TopicSearchOption
   ): Promise<TopicSearchResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      query: option,
     }) as unknown as Promise<TopicSearchResponseSuccess>;
   }
 
@@ -13980,23 +13158,16 @@ export const userGetCurrent = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userGetOauth2Application */
-export interface UserGetOauth2ApplicationOption {
+export type UserGetOauth2ApplicationOption = {
   /**
-   * @description
-   *   page number of results to return (1-based)
-   */
-  query?: {
-    /**
-        @description
-          page number of results to return (1-based) */
-    page?: number;
-    /**
-        @description
-          page size of results */
-    limit?: number;
-  };
-}
+    @description
+      page number of results to return (1-based) */
+  page?: number;
+  /**
+    @description
+      page size of results */
+  limit?: number;
+};
 
 /** @description response type for userGetOauth2Application */
 export interface UserGetOauth2ApplicationResponse {
@@ -14019,7 +13190,7 @@ export const userGetOauth2Application = /* #__PURE__ */ (() => {
   ): Promise<UserGetOauth2ApplicationResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      query: option,
     }) as unknown as Promise<UserGetOauth2ApplicationResponseSuccess>;
   }
 
@@ -14030,10 +13201,7 @@ export const userGetOauth2Application = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userCreateOAuth2Application */
-export interface UserCreateOAuth2ApplicationOption {
-  body: CreateOAuthApplicationOptions;
-}
+export type UserCreateOAuth2ApplicationOption = CreateOAuthApplicationOptions;
 
 /** @description response type for userCreateOAuth2Application */
 export interface UserCreateOAuth2ApplicationResponse {
@@ -14053,11 +13221,11 @@ export const userCreateOAuth2Application = /* #__PURE__ */ (() => {
   const method = "post";
   const url = "/user/applications/oauth2";
   function request(
-    option: UserCreateOAuth2ApplicationOption
+    option?: UserCreateOAuth2ApplicationOption
   ): Promise<UserCreateOAuth2ApplicationResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      body: option,
     }) as unknown as Promise<UserCreateOAuth2ApplicationResponseSuccess>;
   }
 
@@ -14068,21 +13236,13 @@ export const userCreateOAuth2Application = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userGetOAuth2Application */
-export interface UserGetOAuth2ApplicationOption {
+export type UserGetOAuth2ApplicationOption = {
   /**
-   * @description
-   *   Application ID to be found
-   * @format int64
-   */
-  path: {
-    /**
-        @description
-          Application ID to be found
-        @format int64 */
-    id: number;
-  };
-}
+    @description
+      Application ID to be found
+    @format int64 */
+  id: number;
+};
 
 /** @description response type for userGetOAuth2Application */
 export interface UserGetOAuth2ApplicationResponse {
@@ -14102,11 +13262,11 @@ export const userGetOAuth2Application = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/user/applications/oauth2/:id";
   function request(
-    option: UserGetOAuth2ApplicationOption
+    option?: UserGetOAuth2ApplicationOption
   ): Promise<UserGetOAuth2ApplicationResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<UserGetOAuth2ApplicationResponseSuccess>;
   }
 
@@ -14117,21 +13277,13 @@ export const userGetOAuth2Application = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userDeleteOAuth2Application */
-export interface UserDeleteOAuth2ApplicationOption {
+export type UserDeleteOAuth2ApplicationOption = {
   /**
-   * @description
-   *   token to be deleted
-   * @format int64
-   */
-  path: {
-    /**
-        @description
-          token to be deleted
-        @format int64 */
-    id: number;
-  };
-}
+    @description
+      token to be deleted
+    @format int64 */
+  id: number;
+};
 
 /** @description response type for userDeleteOAuth2Application */
 export interface UserDeleteOAuth2ApplicationResponse {
@@ -14151,11 +13303,11 @@ export const userDeleteOAuth2Application = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/user/applications/oauth2/:id";
   function request(
-    option: UserDeleteOAuth2ApplicationOption
+    option?: UserDeleteOAuth2ApplicationOption
   ): Promise<UserDeleteOAuth2ApplicationResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<UserDeleteOAuth2ApplicationResponseSuccess>;
   }
 
@@ -14248,10 +13400,7 @@ export const userListEmails = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userAddEmail */
-export interface UserAddEmailOption {
-  body?: CreateEmailOption;
-}
+export type UserAddEmailOption = CreateEmailOption;
 
 /** @description response type for userAddEmail */
 export interface UserAddEmailResponse {
@@ -14274,7 +13423,7 @@ export const userAddEmail = /* #__PURE__ */ (() => {
   ): Promise<UserAddEmailResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      body: option,
     }) as unknown as Promise<UserAddEmailResponseSuccess>;
   }
 
@@ -14285,10 +13434,7 @@ export const userAddEmail = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userDeleteEmail */
-export interface UserDeleteEmailOption {
-  body?: DeleteEmailOption;
-}
+export type UserDeleteEmailOption = DeleteEmailOption;
 
 /** @description response type for userDeleteEmail */
 export interface UserDeleteEmailResponse {
@@ -14311,7 +13457,7 @@ export const userDeleteEmail = /* #__PURE__ */ (() => {
   ): Promise<UserDeleteEmailResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      body: option,
     }) as unknown as Promise<UserDeleteEmailResponseSuccess>;
   }
 
@@ -14322,23 +13468,16 @@ export const userDeleteEmail = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userCurrentListFollowers */
-export interface UserCurrentListFollowersOption {
+export type UserCurrentListFollowersOption = {
   /**
-   * @description
-   *   page number of results to return (1-based)
-   */
-  query?: {
-    /**
-        @description
-          page number of results to return (1-based) */
-    page?: number;
-    /**
-        @description
-          page size of results */
-    limit?: number;
-  };
-}
+    @description
+      page number of results to return (1-based) */
+  page?: number;
+  /**
+    @description
+      page size of results */
+  limit?: number;
+};
 
 /** @description response type for userCurrentListFollowers */
 export interface UserCurrentListFollowersResponse {
@@ -14361,7 +13500,7 @@ export const userCurrentListFollowers = /* #__PURE__ */ (() => {
   ): Promise<UserCurrentListFollowersResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      query: option,
     }) as unknown as Promise<UserCurrentListFollowersResponseSuccess>;
   }
 
@@ -14372,23 +13511,16 @@ export const userCurrentListFollowers = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userCurrentListFollowing */
-export interface UserCurrentListFollowingOption {
+export type UserCurrentListFollowingOption = {
   /**
-   * @description
-   *   page number of results to return (1-based)
-   */
-  query?: {
-    /**
-        @description
-          page number of results to return (1-based) */
-    page?: number;
-    /**
-        @description
-          page size of results */
-    limit?: number;
-  };
-}
+    @description
+      page number of results to return (1-based) */
+  page?: number;
+  /**
+    @description
+      page size of results */
+  limit?: number;
+};
 
 /** @description response type for userCurrentListFollowing */
 export interface UserCurrentListFollowingResponse {
@@ -14411,7 +13543,7 @@ export const userCurrentListFollowing = /* #__PURE__ */ (() => {
   ): Promise<UserCurrentListFollowingResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      query: option,
     }) as unknown as Promise<UserCurrentListFollowingResponseSuccess>;
   }
 
@@ -14422,19 +13554,12 @@ export const userCurrentListFollowing = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userCurrentCheckFollowing */
-export interface UserCurrentCheckFollowingOption {
+export type UserCurrentCheckFollowingOption = {
   /**
-   * @description
-   *   username of followed user
-   */
-  path: {
-    /**
-        @description
-          username of followed user */
-    username: string;
-  };
-}
+    @description
+      username of followed user */
+  username: string;
+};
 
 /** @description response type for userCurrentCheckFollowing */
 export interface UserCurrentCheckFollowingResponse {
@@ -14453,11 +13578,11 @@ export const userCurrentCheckFollowing = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/user/following/:username";
   function request(
-    option: UserCurrentCheckFollowingOption
+    option?: UserCurrentCheckFollowingOption
   ): Promise<UserCurrentCheckFollowingResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<UserCurrentCheckFollowingResponseSuccess>;
   }
 
@@ -14468,19 +13593,12 @@ export const userCurrentCheckFollowing = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userCurrentPutFollow */
-export interface UserCurrentPutFollowOption {
+export type UserCurrentPutFollowOption = {
   /**
-   * @description
-   *   username of user to follow
-   */
-  path: {
-    /**
-        @description
-          username of user to follow */
-    username: string;
-  };
-}
+    @description
+      username of user to follow */
+  username: string;
+};
 
 /** @description response type for userCurrentPutFollow */
 export interface UserCurrentPutFollowResponse {
@@ -14498,11 +13616,11 @@ export const userCurrentPutFollow = /* #__PURE__ */ (() => {
   const method = "put";
   const url = "/user/following/:username";
   function request(
-    option: UserCurrentPutFollowOption
+    option?: UserCurrentPutFollowOption
   ): Promise<UserCurrentPutFollowResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<UserCurrentPutFollowResponseSuccess>;
   }
 
@@ -14513,19 +13631,12 @@ export const userCurrentPutFollow = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userCurrentDeleteFollow */
-export interface UserCurrentDeleteFollowOption {
+export type UserCurrentDeleteFollowOption = {
   /**
-   * @description
-   *   username of user to unfollow
-   */
-  path: {
-    /**
-        @description
-          username of user to unfollow */
-    username: string;
-  };
-}
+    @description
+      username of user to unfollow */
+  username: string;
+};
 
 /** @description response type for userCurrentDeleteFollow */
 export interface UserCurrentDeleteFollowResponse {
@@ -14543,11 +13654,11 @@ export const userCurrentDeleteFollow = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/user/following/:username";
   function request(
-    option: UserCurrentDeleteFollowOption
+    option?: UserCurrentDeleteFollowOption
   ): Promise<UserCurrentDeleteFollowResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<UserCurrentDeleteFollowResponseSuccess>;
   }
 
@@ -14619,23 +13730,16 @@ export const userVerifyGPGKey = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userCurrentListGPGKeys */
-export interface UserCurrentListGPGKeysOption {
+export type UserCurrentListGPGKeysOption = {
   /**
-   * @description
-   *   page number of results to return (1-based)
-   */
-  query?: {
-    /**
-        @description
-          page number of results to return (1-based) */
-    page?: number;
-    /**
-        @description
-          page size of results */
-    limit?: number;
-  };
-}
+    @description
+      page number of results to return (1-based) */
+  page?: number;
+  /**
+    @description
+      page size of results */
+  limit?: number;
+};
 
 /** @description response type for userCurrentListGPGKeys */
 export interface UserCurrentListGPGKeysResponse {
@@ -14658,7 +13762,7 @@ export const userCurrentListGPGKeys = /* #__PURE__ */ (() => {
   ): Promise<UserCurrentListGPGKeysResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      query: option,
     }) as unknown as Promise<UserCurrentListGPGKeysResponseSuccess>;
   }
 
@@ -14669,12 +13773,9 @@ export const userCurrentListGPGKeys = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userCurrentPostGPGKey */
-export interface UserCurrentPostGPGKeyOption {
-  body?: {
-    Form?: CreateGPGKeyOption;
-  };
-}
+export type UserCurrentPostGPGKeyOption = {
+  Form?: CreateGPGKeyOption;
+};
 
 /** @description response type for userCurrentPostGPGKey */
 export interface UserCurrentPostGPGKeyResponse {
@@ -14700,7 +13801,7 @@ export const userCurrentPostGPGKey = /* #__PURE__ */ (() => {
   ): Promise<UserCurrentPostGPGKeyResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      body: option,
     }) as unknown as Promise<UserCurrentPostGPGKeyResponseSuccess>;
   }
 
@@ -14711,21 +13812,13 @@ export const userCurrentPostGPGKey = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userCurrentGetGPGKey */
-export interface UserCurrentGetGPGKeyOption {
+export type UserCurrentGetGPGKeyOption = {
   /**
-   * @description
-   *   id of key to get
-   * @format int64
-   */
-  path: {
-    /**
-        @description
-          id of key to get
-        @format int64 */
-    id: number;
-  };
-}
+    @description
+      id of key to get
+    @format int64 */
+  id: number;
+};
 
 /** @description response type for userCurrentGetGPGKey */
 export interface UserCurrentGetGPGKeyResponse {
@@ -14745,11 +13838,11 @@ export const userCurrentGetGPGKey = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/user/gpg_keys/:id";
   function request(
-    option: UserCurrentGetGPGKeyOption
+    option?: UserCurrentGetGPGKeyOption
   ): Promise<UserCurrentGetGPGKeyResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<UserCurrentGetGPGKeyResponseSuccess>;
   }
 
@@ -14760,21 +13853,13 @@ export const userCurrentGetGPGKey = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userCurrentDeleteGPGKey */
-export interface UserCurrentDeleteGPGKeyOption {
+export type UserCurrentDeleteGPGKeyOption = {
   /**
-   * @description
-   *   id of key to delete
-   * @format int64
-   */
-  path: {
-    /**
-        @description
-          id of key to delete
-        @format int64 */
-    id: number;
-  };
-}
+    @description
+      id of key to delete
+    @format int64 */
+  id: number;
+};
 
 /** @description response type for userCurrentDeleteGPGKey */
 export interface UserCurrentDeleteGPGKeyResponse {
@@ -14795,11 +13880,11 @@ export const userCurrentDeleteGPGKey = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/user/gpg_keys/:id";
   function request(
-    option: UserCurrentDeleteGPGKeyOption
+    option?: UserCurrentDeleteGPGKeyOption
   ): Promise<UserCurrentDeleteGPGKeyResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<UserCurrentDeleteGPGKeyResponseSuccess>;
   }
 
@@ -14810,27 +13895,20 @@ export const userCurrentDeleteGPGKey = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userCurrentListKeys */
-export interface UserCurrentListKeysOption {
+export type UserCurrentListKeysOption = {
   /**
-   * @description
-   *   fingerprint of the key
-   */
-  query?: {
-    /**
-        @description
-          fingerprint of the key */
-    fingerprint?: string;
-    /**
-        @description
-          page number of results to return (1-based) */
-    page?: number;
-    /**
-        @description
-          page size of results */
-    limit?: number;
-  };
-}
+    @description
+      fingerprint of the key */
+  fingerprint?: string;
+  /**
+    @description
+      page number of results to return (1-based) */
+  page?: number;
+  /**
+    @description
+      page size of results */
+  limit?: number;
+};
 
 /** @description response type for userCurrentListKeys */
 export interface UserCurrentListKeysResponse {
@@ -14853,7 +13931,7 @@ export const userCurrentListKeys = /* #__PURE__ */ (() => {
   ): Promise<UserCurrentListKeysResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      query: option,
     }) as unknown as Promise<UserCurrentListKeysResponseSuccess>;
   }
 
@@ -14864,10 +13942,7 @@ export const userCurrentListKeys = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userCurrentPostKey */
-export interface UserCurrentPostKeyOption {
-  body?: CreateKeyOption;
-}
+export type UserCurrentPostKeyOption = CreateKeyOption;
 
 /** @description response type for userCurrentPostKey */
 export interface UserCurrentPostKeyResponse {
@@ -14891,7 +13966,7 @@ export const userCurrentPostKey = /* #__PURE__ */ (() => {
   ): Promise<UserCurrentPostKeyResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      body: option,
     }) as unknown as Promise<UserCurrentPostKeyResponseSuccess>;
   }
 
@@ -14902,21 +13977,13 @@ export const userCurrentPostKey = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userCurrentGetKey */
-export interface UserCurrentGetKeyOption {
+export type UserCurrentGetKeyOption = {
   /**
-   * @description
-   *   id of key to get
-   * @format int64
-   */
-  path: {
-    /**
-        @description
-          id of key to get
-        @format int64 */
-    id: number;
-  };
-}
+    @description
+      id of key to get
+    @format int64 */
+  id: number;
+};
 
 /** @description response type for userCurrentGetKey */
 export interface UserCurrentGetKeyResponse {
@@ -14935,11 +14002,11 @@ export const userCurrentGetKey = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/user/keys/:id";
   function request(
-    option: UserCurrentGetKeyOption
+    option?: UserCurrentGetKeyOption
   ): Promise<UserCurrentGetKeyResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<UserCurrentGetKeyResponseSuccess>;
   }
 
@@ -14950,21 +14017,13 @@ export const userCurrentGetKey = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userCurrentDeleteKey */
-export interface UserCurrentDeleteKeyOption {
+export type UserCurrentDeleteKeyOption = {
   /**
-   * @description
-   *   id of key to delete
-   * @format int64
-   */
-  path: {
-    /**
-        @description
-          id of key to delete
-        @format int64 */
-    id: number;
-  };
-}
+    @description
+      id of key to delete
+    @format int64 */
+  id: number;
+};
 
 /** @description response type for userCurrentDeleteKey */
 export interface UserCurrentDeleteKeyResponse {
@@ -14985,11 +14044,11 @@ export const userCurrentDeleteKey = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/user/keys/:id";
   function request(
-    option: UserCurrentDeleteKeyOption
+    option?: UserCurrentDeleteKeyOption
   ): Promise<UserCurrentDeleteKeyResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<UserCurrentDeleteKeyResponseSuccess>;
   }
 
@@ -15000,23 +14059,16 @@ export const userCurrentDeleteKey = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for orgListCurrentUserOrgs */
-export interface OrgListCurrentUserOrgsOption {
+export type OrgListCurrentUserOrgsOption = {
   /**
-   * @description
-   *   page number of results to return (1-based)
-   */
-  query?: {
-    /**
-        @description
-          page number of results to return (1-based) */
-    page?: number;
-    /**
-        @description
-          page size of results */
-    limit?: number;
-  };
-}
+    @description
+      page number of results to return (1-based) */
+  page?: number;
+  /**
+    @description
+      page size of results */
+  limit?: number;
+};
 
 /** @description response type for orgListCurrentUserOrgs */
 export interface OrgListCurrentUserOrgsResponse {
@@ -15039,7 +14091,7 @@ export const orgListCurrentUserOrgs = /* #__PURE__ */ (() => {
   ): Promise<OrgListCurrentUserOrgsResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      query: option,
     }) as unknown as Promise<OrgListCurrentUserOrgsResponseSuccess>;
   }
 
@@ -15050,23 +14102,16 @@ export const orgListCurrentUserOrgs = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userCurrentListRepos */
-export interface UserCurrentListReposOption {
+export type UserCurrentListReposOption = {
   /**
-   * @description
-   *   page number of results to return (1-based)
-   */
-  query?: {
-    /**
-        @description
-          page number of results to return (1-based) */
-    page?: number;
-    /**
-        @description
-          page size of results */
-    limit?: number;
-  };
-}
+    @description
+      page number of results to return (1-based) */
+  page?: number;
+  /**
+    @description
+      page size of results */
+  limit?: number;
+};
 
 /** @description response type for userCurrentListRepos */
 export interface UserCurrentListReposResponse {
@@ -15089,7 +14134,7 @@ export const userCurrentListRepos = /* #__PURE__ */ (() => {
   ): Promise<UserCurrentListReposResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      query: option,
     }) as unknown as Promise<UserCurrentListReposResponseSuccess>;
   }
 
@@ -15100,10 +14145,7 @@ export const userCurrentListRepos = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for createCurrentUserRepo */
-export interface CreateCurrentUserRepoOption {
-  body?: CreateRepoOption;
-}
+export type CreateCurrentUserRepoOption = CreateRepoOption;
 
 /** @description response type for createCurrentUserRepo */
 export interface CreateCurrentUserRepoResponse {
@@ -15133,7 +14175,7 @@ export const createCurrentUserRepo = /* #__PURE__ */ (() => {
   ): Promise<CreateCurrentUserRepoResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      body: option,
     }) as unknown as Promise<CreateCurrentUserRepoResponseSuccess>;
   }
 
@@ -15172,10 +14214,7 @@ export const getUserSettings = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for updateUserSettings */
-export interface UpdateUserSettingsOption {
-  body?: UserSettingsOptions;
-}
+export type UpdateUserSettingsOption = UserSettingsOptions;
 
 /** @description response type for updateUserSettings */
 export interface UpdateUserSettingsResponse {
@@ -15197,7 +14236,7 @@ export const updateUserSettings = /* #__PURE__ */ (() => {
   ): Promise<UpdateUserSettingsResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      body: option,
     }) as unknown as Promise<UpdateUserSettingsResponseSuccess>;
   }
 
@@ -15208,23 +14247,16 @@ export const updateUserSettings = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userCurrentListStarred */
-export interface UserCurrentListStarredOption {
+export type UserCurrentListStarredOption = {
   /**
-   * @description
-   *   page number of results to return (1-based)
-   */
-  query?: {
-    /**
-        @description
-          page number of results to return (1-based) */
-    page?: number;
-    /**
-        @description
-          page size of results */
-    limit?: number;
-  };
-}
+    @description
+      page number of results to return (1-based) */
+  page?: number;
+  /**
+    @description
+      page size of results */
+  limit?: number;
+};
 
 /** @description response type for userCurrentListStarred */
 export interface UserCurrentListStarredResponse {
@@ -15247,7 +14279,7 @@ export const userCurrentListStarred = /* #__PURE__ */ (() => {
   ): Promise<UserCurrentListStarredResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      query: option,
     }) as unknown as Promise<UserCurrentListStarredResponseSuccess>;
   }
 
@@ -15258,23 +14290,16 @@ export const userCurrentListStarred = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userCurrentCheckStarring */
-export interface UserCurrentCheckStarringOption {
+export type UserCurrentCheckStarringOption = {
   /**
-   * @description
-   *   owner of the repo
-   */
-  path: {
-    /**
-        @description
-          owner of the repo */
-    owner: string;
-    /**
-        @description
-          name of the repo */
-    repo: string;
-  };
-}
+    @description
+      owner of the repo */
+  owner: string;
+  /**
+    @description
+      name of the repo */
+  repo: string;
+};
 
 /** @description response type for userCurrentCheckStarring */
 export interface UserCurrentCheckStarringResponse {
@@ -15293,11 +14318,11 @@ export const userCurrentCheckStarring = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/user/starred/:owner/:repo";
   function request(
-    option: UserCurrentCheckStarringOption
+    option?: UserCurrentCheckStarringOption
   ): Promise<UserCurrentCheckStarringResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<UserCurrentCheckStarringResponseSuccess>;
   }
 
@@ -15308,23 +14333,16 @@ export const userCurrentCheckStarring = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userCurrentPutStar */
-export interface UserCurrentPutStarOption {
+export type UserCurrentPutStarOption = {
   /**
-   * @description
-   *   owner of the repo to star
-   */
-  path: {
-    /**
-        @description
-          owner of the repo to star */
-    owner: string;
-    /**
-        @description
-          name of the repo to star */
-    repo: string;
-  };
-}
+    @description
+      owner of the repo to star */
+  owner: string;
+  /**
+    @description
+      name of the repo to star */
+  repo: string;
+};
 
 /** @description response type for userCurrentPutStar */
 export interface UserCurrentPutStarResponse {
@@ -15341,11 +14359,11 @@ export const userCurrentPutStar = /* #__PURE__ */ (() => {
   const method = "put";
   const url = "/user/starred/:owner/:repo";
   function request(
-    option: UserCurrentPutStarOption
+    option?: UserCurrentPutStarOption
   ): Promise<UserCurrentPutStarResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<UserCurrentPutStarResponseSuccess>;
   }
 
@@ -15356,23 +14374,16 @@ export const userCurrentPutStar = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userCurrentDeleteStar */
-export interface UserCurrentDeleteStarOption {
+export type UserCurrentDeleteStarOption = {
   /**
-   * @description
-   *   owner of the repo to unstar
-   */
-  path: {
-    /**
-        @description
-          owner of the repo to unstar */
-    owner: string;
-    /**
-        @description
-          name of the repo to unstar */
-    repo: string;
-  };
-}
+    @description
+      owner of the repo to unstar */
+  owner: string;
+  /**
+    @description
+      name of the repo to unstar */
+  repo: string;
+};
 
 /** @description response type for userCurrentDeleteStar */
 export interface UserCurrentDeleteStarResponse {
@@ -15390,11 +14401,11 @@ export const userCurrentDeleteStar = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/user/starred/:owner/:repo";
   function request(
-    option: UserCurrentDeleteStarOption
+    option?: UserCurrentDeleteStarOption
   ): Promise<UserCurrentDeleteStarResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<UserCurrentDeleteStarResponseSuccess>;
   }
 
@@ -15405,23 +14416,16 @@ export const userCurrentDeleteStar = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userGetStopWatches */
-export interface UserGetStopWatchesOption {
+export type UserGetStopWatchesOption = {
   /**
-   * @description
-   *   page number of results to return (1-based)
-   */
-  query?: {
-    /**
-        @description
-          page number of results to return (1-based) */
-    page?: number;
-    /**
-        @description
-          page size of results */
-    limit?: number;
-  };
-}
+    @description
+      page number of results to return (1-based) */
+  page?: number;
+  /**
+    @description
+      page size of results */
+  limit?: number;
+};
 
 /** @description response type for userGetStopWatches */
 export interface UserGetStopWatchesResponse {
@@ -15444,7 +14448,7 @@ export const userGetStopWatches = /* #__PURE__ */ (() => {
   ): Promise<UserGetStopWatchesResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      query: option,
     }) as unknown as Promise<UserGetStopWatchesResponseSuccess>;
   }
 
@@ -15455,23 +14459,16 @@ export const userGetStopWatches = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userCurrentListSubscriptions */
-export interface UserCurrentListSubscriptionsOption {
+export type UserCurrentListSubscriptionsOption = {
   /**
-   * @description
-   *   page number of results to return (1-based)
-   */
-  query?: {
-    /**
-        @description
-          page number of results to return (1-based) */
-    page?: number;
-    /**
-        @description
-          page size of results */
-    limit?: number;
-  };
-}
+    @description
+      page number of results to return (1-based) */
+  page?: number;
+  /**
+    @description
+      page size of results */
+  limit?: number;
+};
 
 /** @description response type for userCurrentListSubscriptions */
 export interface UserCurrentListSubscriptionsResponse {
@@ -15494,7 +14491,7 @@ export const userCurrentListSubscriptions = /* #__PURE__ */ (() => {
   ): Promise<UserCurrentListSubscriptionsResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      query: option,
     }) as unknown as Promise<UserCurrentListSubscriptionsResponseSuccess>;
   }
 
@@ -15505,23 +14502,16 @@ export const userCurrentListSubscriptions = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userListTeams */
-export interface UserListTeamsOption {
+export type UserListTeamsOption = {
   /**
-   * @description
-   *   page number of results to return (1-based)
-   */
-  query?: {
-    /**
-        @description
-          page number of results to return (1-based) */
-    page?: number;
-    /**
-        @description
-          page size of results */
-    limit?: number;
-  };
-}
+    @description
+      page number of results to return (1-based) */
+  page?: number;
+  /**
+    @description
+      page size of results */
+  limit?: number;
+};
 
 /** @description response type for userListTeams */
 export interface UserListTeamsResponse {
@@ -15543,7 +14533,7 @@ export const userListTeams = /* #__PURE__ */ (() => {
   ): Promise<UserListTeamsResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      query: option,
     }) as unknown as Promise<UserListTeamsResponseSuccess>;
   }
 
@@ -15554,26 +14544,18 @@ export const userListTeams = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userCurrentTrackedTimes */
-export interface UserCurrentTrackedTimesOption {
+export type UserCurrentTrackedTimesOption = {
   /**
-   * @description
-   *   Only show times updated after the given time. This is a timestamp in RFC 3339 format
-   * @format date-time
-   */
-  query?: {
-    /**
-        @description
-          Only show times updated after the given time. This is a timestamp in RFC 3339 format
-        @format date-time */
-    since?: string;
-    /**
-        @description
-          Only show times updated before the given time. This is a timestamp in RFC 3339 format
-        @format date-time */
-    before?: string;
-  };
-}
+    @description
+      Only show times updated after the given time. This is a timestamp in RFC 3339 format
+    @format date-time */
+  since?: string;
+  /**
+    @description
+      Only show times updated before the given time. This is a timestamp in RFC 3339 format
+    @format date-time */
+  before?: string;
+};
 
 /** @description response type for userCurrentTrackedTimes */
 export interface UserCurrentTrackedTimesResponse {
@@ -15596,7 +14578,7 @@ export const userCurrentTrackedTimes = /* #__PURE__ */ (() => {
   ): Promise<UserCurrentTrackedTimesResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      query: option,
     }) as unknown as Promise<UserCurrentTrackedTimesResponseSuccess>;
   }
 
@@ -15607,36 +14589,29 @@ export const userCurrentTrackedTimes = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userSearch */
-export interface UserSearchOption {
+export type UserSearchOption = {
   /**
-   * @description
-   *   keyword
-   */
-  query?: {
-    /**
-        @description
-          keyword */
-    q?: string;
-    /**
-        @description
-          ID of the user to search for
-        @format int64 */
-    uid?: number;
-    /**
-        @description
-          If the user has one or more repos with the given language(s), the org will be in the results. Multiple lang's are ORed. */
-    lang?: string;
-    /**
-        @description
-          page number of results to return (1-based) */
-    page?: number;
-    /**
-        @description
-          page size of results */
-    limit?: number;
-  };
-}
+    @description
+      keyword */
+  q?: string;
+  /**
+    @description
+      ID of the user to search for
+    @format int64 */
+  uid?: number;
+  /**
+    @description
+      If the user has one or more repos with the given language(s), the org will be in the results. Multiple lang's are ORed. */
+  lang?: string;
+  /**
+    @description
+      page number of results to return (1-based) */
+  page?: number;
+  /**
+    @description
+      page size of results */
+  limit?: number;
+};
 
 /** @description response type for userSearch */
 export interface UserSearchResponse {
@@ -15665,7 +14640,7 @@ export const userSearch = /* #__PURE__ */ (() => {
   ): Promise<UserSearchResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      query: option,
     }) as unknown as Promise<UserSearchResponseSuccess>;
   }
 
@@ -15676,23 +14651,16 @@ export const userSearch = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userCheckFollowing */
-export interface UserCheckFollowingOption {
+export type UserCheckFollowingOption = {
   /**
-   * @description
-   *   username of following user
-   */
-  path: {
-    /**
-        @description
-          username of following user */
-    follower: string;
-    /**
-        @description
-          username of followed user */
-    followee: string;
-  };
-}
+    @description
+      username of following user */
+  follower: string;
+  /**
+    @description
+      username of followed user */
+  followee: string;
+};
 
 /** @description response type for userCheckFollowing */
 export interface UserCheckFollowingResponse {
@@ -15710,11 +14678,11 @@ export const userCheckFollowing = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/users/:follower/following/:followee";
   function request(
-    option: UserCheckFollowingOption
+    option?: UserCheckFollowingOption
   ): Promise<UserCheckFollowingResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<UserCheckFollowingResponseSuccess>;
   }
 
@@ -15725,19 +14693,12 @@ export const userCheckFollowing = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userGet */
-export interface UserGetOption {
+export type UserGetOption = {
   /**
-   * @description
-   *   username of user to get
-   */
-  path: {
-    /**
-        @description
-          username of user to get */
-    username: string;
-  };
-}
+    @description
+      username of user to get */
+  username: string;
+};
 
 /** @description response type for userGet */
 export interface UserGetResponse {
@@ -15755,10 +14716,10 @@ export type UserGetResponseSuccess = UserGetResponse[200];
 export const userGet = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/users/:username";
-  function request(option: UserGetOption): Promise<UserGetResponseSuccess> {
+  function request(option?: UserGetOption): Promise<UserGetResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<UserGetResponseSuccess>;
   }
 
@@ -15958,19 +14919,12 @@ export const userListGPGKeys = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userGetHeatmapData */
-export interface UserGetHeatmapDataOption {
+export type UserGetHeatmapDataOption = {
   /**
-   * @description
-   *   username of user to get
-   */
-  path: {
-    /**
-        @description
-          username of user to get */
-    username: string;
-  };
-}
+    @description
+      username of user to get */
+  username: string;
+};
 
 /** @description response type for userGetHeatmapData */
 export interface UserGetHeatmapDataResponse {
@@ -15989,11 +14943,11 @@ export const userGetHeatmapData = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/users/:username/heatmap";
   function request(
-    option: UserGetHeatmapDataOption
+    option?: UserGetHeatmapDataOption
   ): Promise<UserGetHeatmapDataResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<UserGetHeatmapDataResponseSuccess>;
   }
 
@@ -16134,23 +15088,16 @@ export const orgListUserOrgs = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for orgGetUserPermissions */
-export interface OrgGetUserPermissionsOption {
+export type OrgGetUserPermissionsOption = {
   /**
-   * @description
-   *   username of user
-   */
-  path: {
-    /**
-        @description
-          username of user */
-    username: string;
-    /**
-        @description
-          name of the organization */
-    org: string;
-  };
-}
+    @description
+      username of user */
+  username: string;
+  /**
+    @description
+      name of the organization */
+  org: string;
+};
 
 /** @description response type for orgGetUserPermissions */
 export interface OrgGetUserPermissionsResponse {
@@ -16171,11 +15118,11 @@ export const orgGetUserPermissions = /* #__PURE__ */ (() => {
   const method = "get";
   const url = "/users/:username/orgs/:org/permissions";
   function request(
-    option: OrgGetUserPermissionsOption
+    option?: OrgGetUserPermissionsOption
   ): Promise<OrgGetUserPermissionsResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<OrgGetUserPermissionsResponseSuccess>;
   }
 
@@ -16495,23 +15442,16 @@ export const userCreateToken = /* #__PURE__ */ (() => {
   return request;
 })();
 
-/** @description request parameter type for userDeleteAccessToken */
-export interface UserDeleteAccessTokenOption {
+export type UserDeleteAccessTokenOption = {
   /**
-   * @description
-   *   username of user
-   */
-  path: {
-    /**
-        @description
-          username of user */
-    username: string;
-    /**
-        @description
-          token to be deleted, identified by ID and if not available by name */
-    token: string;
-  };
-}
+    @description
+      username of user */
+  username: string;
+  /**
+    @description
+      token to be deleted, identified by ID and if not available by name */
+  token: string;
+};
 
 /** @description response type for userDeleteAccessToken */
 export interface UserDeleteAccessTokenResponse {
@@ -16532,11 +15472,11 @@ export const userDeleteAccessToken = /* #__PURE__ */ (() => {
   const method = "delete";
   const url = "/users/:username/tokens/:token";
   function request(
-    option: UserDeleteAccessTokenOption
+    option?: UserDeleteAccessTokenOption
   ): Promise<UserDeleteAccessTokenResponseSuccess> {
     return requester(url, {
       method,
-      ...option,
+      path: option,
     }) as unknown as Promise<UserDeleteAccessTokenResponseSuccess>;
   }
 
