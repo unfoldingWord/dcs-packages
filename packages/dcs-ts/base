@@ -1,0 +1,5560 @@
+/**
+ * DCS (Gitea) API.
+ * DO NOT MODIFY - This file has been generated using oazapfts.
+ * See https://www.npmjs.com/package/oazapfts
+ */
+import * as Oazapfts from "oazapfts/lib/runtime";
+import * as QS from "oazapfts/lib/runtime/query";
+export const defaults: Oazapfts.RequestOpts = {
+    baseUrl: "/api/v1",
+};
+const oazapfts = Oazapfts.runtime(defaults);
+export const servers = {
+    server1: "/api/v1"
+};
+export type Cron = {
+    exec_times?: number;
+    name?: string;
+    next?: string;
+    prev?: string;
+    schedule?: string;
+};
+export type Organization = {
+    avatar_url?: string;
+    description?: string;
+    full_name?: string;
+    id?: number;
+    location?: string;
+    repo_admin_change_team_access?: boolean;
+    repo_languages?: string[];
+    repo_subjects?: string[];
+    username?: string;
+    visibility?: string;
+    website?: string;
+};
+export type User = {
+    active?: boolean;
+    avatar_url?: string;
+    created?: string;
+    description?: string;
+    email?: string;
+    followers_count?: number;
+    following_count?: number;
+    full_name?: string;
+    id?: number;
+    is_admin?: boolean;
+    language?: string;
+    last_login?: string;
+    location?: string;
+    login?: string;
+    prohibit_login?: boolean;
+    repo_languages?: string[];
+    repo_subjects?: string[];
+    restricted?: boolean;
+    starred_repos_count?: number;
+    visibility?: string;
+    website?: string;
+};
+export type CreateUserOption = {
+    email: string;
+    full_name?: string;
+    login_name?: string;
+    must_change_password?: boolean;
+    password: string;
+    restricted?: boolean;
+    send_notify?: boolean;
+    source_id?: number;
+    username: string;
+    visibility?: string;
+};
+export type EditUserOption = {
+    active?: boolean;
+    admin?: boolean;
+    allow_create_organization?: boolean;
+    allow_git_hook?: boolean;
+    allow_import_local?: boolean;
+    description?: string;
+    email?: string;
+    full_name?: string;
+    location?: string;
+    login_name: string;
+    max_repo_creation?: number;
+    must_change_password?: boolean;
+    password?: string;
+    prohibit_login?: boolean;
+    restricted?: boolean;
+    source_id: number;
+    visibility?: string;
+    website?: string;
+};
+export type CreateKeyOption = {
+    key: string;
+    read_only?: boolean;
+    title: string;
+};
+export type PublicKey = {
+    created_at?: string;
+    fingerprint?: string;
+    id?: number;
+    key?: string;
+    key_type?: string;
+    read_only?: boolean;
+    title?: string;
+    url?: string;
+    user?: User;
+};
+export type CreateOrgOption = {
+    description?: string;
+    full_name?: string;
+    location?: string;
+    repo_admin_change_team_access?: boolean;
+    username: string;
+    visibility?: "public" | "limited" | "private";
+    website?: string;
+};
+export type CreateRepoOption = {
+    auto_init?: boolean;
+    default_branch?: string;
+    description?: string;
+    gitignores?: string;
+    issue_labels?: string;
+    license?: string;
+    name: string;
+    "private"?: boolean;
+    readme?: string;
+    template?: boolean;
+    trust_model?: "default" | "collaborator" | "committer" | "collaboratorcommitter";
+};
+export type CatalogStage = {
+    branch_or_tag_name?: string;
+    contents_url?: string;
+    git_trees_url?: string;
+    release_url?: string;
+    released?: string;
+    tarball_url?: string;
+    zipball_url?: string;
+};
+export type CatalogStages = {
+    draft?: CatalogStage;
+    latest?: CatalogStage;
+    preprod?: CatalogStage;
+    prod?: CatalogStage;
+};
+export type ExternalTracker = {
+    external_tracker_format?: string;
+    external_tracker_style?: string;
+    external_tracker_url?: string;
+};
+export type ExternalWiki = {
+    external_wiki_url?: string;
+};
+export type InternalTracker = {
+    allow_only_contributors_to_track_time?: boolean;
+    enable_issue_dependencies?: boolean;
+    enable_time_tracker?: boolean;
+};
+export type Permission = {
+    admin?: boolean;
+    pull?: boolean;
+    push?: boolean;
+};
+export type Team = {
+    can_create_org_repo?: boolean;
+    description?: string;
+    id?: number;
+    includes_all_repositories?: boolean;
+    name?: string;
+    organization?: Organization;
+    permission?: "none" | "read" | "write" | "admin" | "owner";
+    units?: string[];
+    units_map?: {
+        [key: string]: string;
+    };
+};
+export type RepoTransfer = {
+    doer?: User;
+    recipient?: User;
+    teams?: Team[];
+};
+export type Repository = {
+    alignment_counts?: {
+        [key: string]: object;
+    };
+    allow_merge_commits?: boolean;
+    allow_rebase?: boolean;
+    allow_rebase_explicit?: boolean;
+    allow_squash_merge?: boolean;
+    archived?: boolean;
+    avatar_url?: string;
+    books?: string[];
+    catalog?: CatalogStages;
+    checking_level?: string;
+    clone_url?: string;
+    created_at?: string;
+    default_branch?: string;
+    default_merge_style?: string;
+    description?: string;
+    empty?: boolean;
+    external_tracker?: ExternalTracker;
+    external_wiki?: ExternalWiki;
+    fork?: boolean;
+    forks_count?: number;
+    full_name?: string;
+    has_issues?: boolean;
+    has_projects?: boolean;
+    has_pull_requests?: boolean;
+    has_wiki?: boolean;
+    html_url?: string;
+    id?: number;
+    ignore_whitespace_conflicts?: boolean;
+    internal?: boolean;
+    internal_tracker?: InternalTracker;
+    language?: string;
+    language_direction?: string;
+    language_is_gl?: boolean;
+    language_title?: string;
+    mirror?: boolean;
+    mirror_interval?: string;
+    mirror_updated?: string;
+    name?: string;
+    open_issues_count?: number;
+    open_pr_counter?: number;
+    original_url?: string;
+    owner?: User;
+    parent?: Repository;
+    permissions?: Permission;
+    "private"?: boolean;
+    release_counter?: number;
+    repo_transfer?: RepoTransfer;
+    size?: number;
+    ssh_url?: string;
+    stars_count?: number;
+    subject?: string;
+    template?: boolean;
+    title?: string;
+    updated_at?: string;
+    watchers_count?: number;
+    website?: string;
+};
+export type MarkdownOption = {
+    Context?: string;
+    Mode?: string;
+    Text?: string;
+    Wiki?: boolean;
+};
+export type NodeInfoServices = {
+    inbound?: string[];
+    outbound?: string[];
+};
+export type NodeInfoSoftware = {
+    homepage?: string;
+    name?: string;
+    repository?: string;
+    version?: string;
+};
+export type NodeInfoUsageUsers = {
+    activeHalfyear?: number;
+    activeMonth?: number;
+    total?: number;
+};
+export type NodeInfoUsage = {
+    localComments?: number;
+    localPosts?: number;
+    users?: NodeInfoUsageUsers;
+};
+export type NodeInfo = {
+    metadata?: object;
+    openRegistrations?: boolean;
+    protocols?: string[];
+    services?: NodeInfoServices;
+    software?: NodeInfoSoftware;
+    usage?: NodeInfoUsage;
+    version?: string;
+};
+export type StateType = string;
+export type NotifySubjectType = string;
+export type NotificationSubject = {
+    html_url?: string;
+    latest_comment_html_url?: string;
+    latest_comment_url?: string;
+    state?: StateType;
+    title?: string;
+    "type"?: NotifySubjectType;
+    url?: string;
+};
+export type NotificationThread = {
+    id?: number;
+    pinned?: boolean;
+    repository?: Repository;
+    subject?: NotificationSubject;
+    unread?: boolean;
+    updated_at?: string;
+    url?: string;
+};
+export type NotificationCount = {
+    "new"?: number;
+};
+export type EditOrgOption = {
+    description?: string;
+    full_name?: string;
+    location?: string;
+    repo_admin_change_team_access?: boolean;
+    visibility?: "public" | "limited" | "private";
+    website?: string;
+};
+export type Hook = {
+    active?: boolean;
+    config?: {
+        [key: string]: string;
+    };
+    created_at?: string;
+    events?: string[];
+    id?: number;
+    "type"?: string;
+    updated_at?: string;
+};
+export type CreateHookOptionConfig = {
+    [key: string]: string;
+};
+export type CreateHookOption = {
+    active?: boolean;
+    branch_filter?: string;
+    config: CreateHookOptionConfig;
+    events?: string[];
+    "type": "dingtalk" | "discord" | "gitea" | "gogs" | "msteams" | "slack" | "telegram" | "feishu" | "wechatwork";
+};
+export type EditHookOption = {
+    active?: boolean;
+    branch_filter?: string;
+    config?: {
+        [key: string]: string;
+    };
+    events?: string[];
+};
+export type Label = {
+    color?: string;
+    description?: string;
+    id?: number;
+    name?: string;
+    url?: string;
+};
+export type CreateLabelOption = {
+    color: string;
+    description?: string;
+    name: string;
+};
+export type EditLabelOption = {
+    color?: string;
+    description?: string;
+    name?: string;
+};
+export type CreateTeamOption = {
+    can_create_org_repo?: boolean;
+    description?: string;
+    includes_all_repositories?: boolean;
+    name: string;
+    permission?: "read" | "write" | "admin";
+    units?: string[];
+    units_map?: {
+        [key: string]: string;
+    };
+};
+export type Milestone = {
+    closed_at?: string;
+    closed_issues?: number;
+    created_at?: string;
+    description?: string;
+    due_on?: string;
+    id?: number;
+    open_issues?: number;
+    state?: StateType;
+    title?: string;
+    updated_at?: string;
+};
+export type PullRequestMeta = {
+    merged?: boolean;
+    merged_at?: string;
+};
+export type RepositoryMeta = {
+    full_name?: string;
+    id?: number;
+    name?: string;
+    owner?: string;
+};
+export type Issue = {
+    assignee?: User;
+    assignees?: User[];
+    body?: string;
+    closed_at?: string;
+    comments?: number;
+    created_at?: string;
+    due_date?: string;
+    html_url?: string;
+    id?: number;
+    is_locked?: boolean;
+    labels?: Label[];
+    milestone?: Milestone;
+    "number"?: number;
+    original_author?: string;
+    original_author_id?: number;
+    pull_request?: PullRequestMeta;
+    ref?: string;
+    repository?: RepositoryMeta;
+    state?: StateType;
+    title?: string;
+    updated_at?: string;
+    url?: string;
+    user?: User;
+};
+export type MigrateRepoOptions = {
+    auth_password?: string;
+    auth_token?: string;
+    auth_username?: string;
+    clone_addr: string;
+    description?: string;
+    issues?: boolean;
+    labels?: boolean;
+    lfs?: boolean;
+    lfs_endpoint?: string;
+    milestones?: boolean;
+    mirror?: boolean;
+    mirror_interval?: string;
+    "private"?: boolean;
+    pull_requests?: boolean;
+    releases?: boolean;
+    repo_name: string;
+    repo_owner?: string;
+    service?: "git" | "github" | "gitea" | "gitlab";
+    uid?: number;
+    wiki?: boolean;
+};
+export type SearchResults = {
+    data?: Repository[];
+    ok?: boolean;
+};
+export type EditRepoOption = {
+    allow_manual_merge?: boolean;
+    allow_merge_commits?: boolean;
+    allow_rebase?: boolean;
+    allow_rebase_explicit?: boolean;
+    allow_squash_merge?: boolean;
+    archived?: boolean;
+    autodetect_manual_merge?: boolean;
+    default_branch?: string;
+    default_delete_branch_after_merge?: boolean;
+    default_merge_style?: string;
+    description?: string;
+    enable_prune?: boolean;
+    external_tracker?: ExternalTracker;
+    external_wiki?: ExternalWiki;
+    has_issues?: boolean;
+    has_projects?: boolean;
+    has_pull_requests?: boolean;
+    has_wiki?: boolean;
+    ignore_whitespace_conflicts?: boolean;
+    internal_tracker?: InternalTracker;
+    mirror_interval?: string;
+    name?: string;
+    "private"?: boolean;
+    template?: boolean;
+    website?: string;
+};
+export type BranchProtection = {
+    approvals_whitelist_teams?: string[];
+    approvals_whitelist_username?: string[];
+    block_on_official_review_requests?: boolean;
+    block_on_outdated_branch?: boolean;
+    block_on_rejected_reviews?: boolean;
+    branch_name?: string;
+    created_at?: string;
+    dismiss_stale_approvals?: boolean;
+    enable_approvals_whitelist?: boolean;
+    enable_merge_whitelist?: boolean;
+    enable_push?: boolean;
+    enable_push_whitelist?: boolean;
+    enable_status_check?: boolean;
+    merge_whitelist_teams?: string[];
+    merge_whitelist_usernames?: string[];
+    protected_file_patterns?: string;
+    push_whitelist_deploy_keys?: boolean;
+    push_whitelist_teams?: string[];
+    push_whitelist_usernames?: string[];
+    require_signed_commits?: boolean;
+    required_approvals?: number;
+    status_check_contexts?: string[];
+    unprotected_file_patterns?: string;
+    updated_at?: string;
+};
+export type CreateBranchProtectionOption = {
+    approvals_whitelist_teams?: string[];
+    approvals_whitelist_username?: string[];
+    block_on_official_review_requests?: boolean;
+    block_on_outdated_branch?: boolean;
+    block_on_rejected_reviews?: boolean;
+    branch_name?: string;
+    dismiss_stale_approvals?: boolean;
+    enable_approvals_whitelist?: boolean;
+    enable_merge_whitelist?: boolean;
+    enable_push?: boolean;
+    enable_push_whitelist?: boolean;
+    enable_status_check?: boolean;
+    merge_whitelist_teams?: string[];
+    merge_whitelist_usernames?: string[];
+    protected_file_patterns?: string;
+    push_whitelist_deploy_keys?: boolean;
+    push_whitelist_teams?: string[];
+    push_whitelist_usernames?: string[];
+    require_signed_commits?: boolean;
+    required_approvals?: number;
+    status_check_contexts?: string[];
+    unprotected_file_patterns?: string;
+};
+export type EditBranchProtectionOption = {
+    approvals_whitelist_teams?: string[];
+    approvals_whitelist_username?: string[];
+    block_on_official_review_requests?: boolean;
+    block_on_outdated_branch?: boolean;
+    block_on_rejected_reviews?: boolean;
+    dismiss_stale_approvals?: boolean;
+    enable_approvals_whitelist?: boolean;
+    enable_merge_whitelist?: boolean;
+    enable_push?: boolean;
+    enable_push_whitelist?: boolean;
+    enable_status_check?: boolean;
+    merge_whitelist_teams?: string[];
+    merge_whitelist_usernames?: string[];
+    protected_file_patterns?: string;
+    push_whitelist_deploy_keys?: boolean;
+    push_whitelist_teams?: string[];
+    push_whitelist_usernames?: string[];
+    require_signed_commits?: boolean;
+    required_approvals?: number;
+    status_check_contexts?: string[];
+    unprotected_file_patterns?: string;
+};
+export type PayloadUser = {
+    email?: string;
+    name?: string;
+    username?: string;
+};
+export type PayloadCommitVerification = {
+    payload?: string;
+    reason?: string;
+    signature?: string;
+    signer?: PayloadUser;
+    verified?: boolean;
+};
+export type PayloadCommit = {
+    added?: string[];
+    author?: PayloadUser;
+    committer?: PayloadUser;
+    id?: string;
+    message?: string;
+    modified?: string[];
+    removed?: string[];
+    timestamp?: string;
+    url?: string;
+    verification?: PayloadCommitVerification;
+};
+export type Branch = {
+    commit?: PayloadCommit;
+    effective_branch_protection_name?: string;
+    enable_status_check?: boolean;
+    name?: string;
+    "protected"?: boolean;
+    required_approvals?: number;
+    status_check_contexts?: string[];
+    user_can_merge?: boolean;
+    user_can_push?: boolean;
+};
+export type CreateBranchRepoOption = {
+    new_branch_name: string;
+    old_branch_name?: string;
+};
+export type AddCollaboratorOption = {
+    permission?: string;
+};
+export type CommitUserContainsInformationOfAUserInTheContextOfACommit = {
+    date?: string;
+    email?: string;
+    name?: string;
+};
+export type CommitMetaContainsMetaInformationOfACommitInTermsOfApi = {
+    created?: string;
+    sha?: string;
+    url?: string;
+};
+export type RepoCommitContainsInformationOfACommitInTheContextOfARepository = {
+    author?: CommitUserContainsInformationOfAUserInTheContextOfACommit;
+    committer?: CommitUserContainsInformationOfAUserInTheContextOfACommit;
+    message?: string;
+    tree?: CommitMetaContainsMetaInformationOfACommitInTermsOfApi;
+    url?: string;
+};
+export type CommitAffectedFiles = {
+    filename?: string;
+};
+export type CommitContainsInformationGeneratedFromAGitCommit = {
+    author?: User;
+    commit?: RepoCommitContainsInformationOfACommitInTheContextOfARepository;
+    committer?: User;
+    created?: string;
+    files?: CommitAffectedFiles[];
+    html_url?: string;
+    parents?: CommitMetaContainsMetaInformationOfACommitInTermsOfApi[];
+    sha?: string;
+    url?: string;
+};
+export type ApiError = {
+    message?: string;
+    url?: string;
+};
+export type CommitStatusState = string;
+export type CommitStatus = {
+    context?: string;
+    created_at?: string;
+    creator?: User;
+    description?: string;
+    id?: number;
+    status?: CommitStatusState;
+    target_url?: string;
+    updated_at?: string;
+    url?: string;
+};
+export type CombinedStatus = {
+    commit_url?: string;
+    repository?: Repository;
+    sha?: string;
+    state?: CommitStatusState;
+    statuses?: CommitStatus[];
+    total_count?: number;
+    url?: string;
+};
+export type FileLinksResponse = {
+    git?: string;
+    html?: string;
+    self?: string;
+};
+export type ContentsResponse = {
+    _links?: FileLinksResponse;
+    content?: string;
+    download_url?: string;
+    encoding?: string;
+    git_url?: string;
+    html_url?: string;
+    name?: string;
+    path?: string;
+    sha?: string;
+    size?: number;
+    submodule_git_url?: string;
+    target?: string;
+    "type"?: string;
+    url?: string;
+};
+export type Identity = {
+    email?: string;
+    name?: string;
+};
+export type CommitDateOptions = {
+    author?: string;
+    committer?: string;
+};
+export type UpdateFileOptions = {
+    author?: Identity;
+    branch?: string;
+    committer?: Identity;
+    content: string;
+    dates?: CommitDateOptions;
+    from_path?: string;
+    message?: string;
+    new_branch?: string;
+    sha: string;
+    signoff?: boolean;
+};
+export type FileCommitResponseContainsInformationGeneratedFromAGitCommitForAReposFile = {
+    author?: CommitUserContainsInformationOfAUserInTheContextOfACommit;
+    committer?: CommitUserContainsInformationOfAUserInTheContextOfACommit;
+    created?: string;
+    html_url?: string;
+    message?: string;
+    parents?: CommitMetaContainsMetaInformationOfACommitInTermsOfApi[];
+    sha?: string;
+    tree?: CommitMetaContainsMetaInformationOfACommitInTermsOfApi;
+    url?: string;
+};
+export type FileResponse = {
+    commit?: FileCommitResponseContainsInformationGeneratedFromAGitCommitForAReposFile;
+    content?: ContentsResponse;
+    verification?: PayloadCommitVerification;
+};
+export type CreateFileOptions = {
+    author?: Identity;
+    branch?: string;
+    committer?: Identity;
+    content: string;
+    dates?: CommitDateOptions;
+    message?: string;
+    new_branch?: string;
+    signoff?: boolean;
+};
+export type DeleteFileOptions = {
+    author?: Identity;
+    branch?: string;
+    committer?: Identity;
+    dates?: CommitDateOptions;
+    message?: string;
+    new_branch?: string;
+    sha: string;
+    signoff?: boolean;
+};
+export type FileDeleteResponse = {
+    commit?: FileCommitResponseContainsInformationGeneratedFromAGitCommitForAReposFile;
+    content?: object;
+    verification?: PayloadCommitVerification;
+};
+export type CreateForkOption = {
+    name?: string;
+    organization?: string;
+};
+export type GitBlobResponse = {
+    content?: string;
+    encoding?: string;
+    sha?: string;
+    size?: number;
+    url?: string;
+};
+export type Note = {
+    commit?: CommitContainsInformationGeneratedFromAGitCommit;
+    message?: string;
+};
+export type GitObjectRepresentsAGitObject = {
+    sha?: string;
+    "type"?: string;
+    url?: string;
+};
+export type ReferenceRepresentsAGitReference = {
+    "object"?: GitObjectRepresentsAGitObject;
+    ref?: string;
+    url?: string;
+};
+export type AnnotatedTagObject = {
+    sha?: string;
+    "type"?: string;
+    url?: string;
+};
+export type AnnotatedTag = {
+    message?: string;
+    "object"?: AnnotatedTagObject;
+    sha?: string;
+    tag?: string;
+    tagger?: CommitUserContainsInformationOfAUserInTheContextOfACommit;
+    url?: string;
+    verification?: PayloadCommitVerification;
+};
+export type GitEntry = {
+    mode?: string;
+    path?: string;
+    sha?: string;
+    size?: number;
+    "type"?: string;
+    url?: string;
+};
+export type GitTreeResponse = {
+    page?: number;
+    sha?: string;
+    total_count?: number;
+    tree?: GitEntry[];
+    truncated?: boolean;
+    url?: string;
+};
+export type GitHook = {
+    content?: string;
+    is_active?: boolean;
+    name?: string;
+};
+export type EditGitHookOption = {
+    content?: string;
+};
+export type IssueTemplate = {
+    about?: string;
+    content?: string;
+    file_name?: string;
+    labels?: string[];
+    name?: string;
+    ref?: string;
+    title?: string;
+};
+export type CreateIssueOption = {
+    assignee?: string;
+    assignees?: string[];
+    body?: string;
+    closed?: boolean;
+    due_date?: string;
+    labels?: number[];
+    milestone?: number;
+    ref?: string;
+    title: string;
+};
+export type Comment = {
+    body?: string;
+    created_at?: string;
+    html_url?: string;
+    id?: number;
+    issue_url?: string;
+    original_author?: string;
+    original_author_id?: number;
+    pull_request_url?: string;
+    updated_at?: string;
+    user?: User;
+};
+export type EditIssueCommentOption = {
+    body: string;
+};
+export type Reaction = {
+    content?: string;
+    created_at?: string;
+    user?: User;
+};
+export type EditReactionOption = {
+    content?: string;
+};
+export type EditIssueOption = {
+    assignee?: string;
+    assignees?: string[];
+    body?: string;
+    due_date?: string;
+    milestone?: number;
+    ref?: string;
+    state?: string;
+    title?: string;
+    unset_due_date?: boolean;
+};
+export type CreateIssueCommentOption = {
+    body: string;
+};
+export type EditDeadlineOption = {
+    due_date: string;
+};
+export type IssueDeadline = {
+    due_date?: string;
+};
+export type IssueLabelsOption = {
+    labels?: number[];
+};
+export type WatchInfo = {
+    created_at?: string;
+    ignored?: boolean;
+    reason?: object;
+    repository_url?: string;
+    subscribed?: boolean;
+    url?: string;
+};
+export type TrackedTime = {
+    created?: string;
+    id?: number;
+    issue?: Issue;
+    issue_id?: number;
+    time?: number;
+    user_id?: number;
+    user_name?: string;
+};
+export type TimelineComment = {
+    assignee?: User;
+    assignee_team?: Team;
+    body?: string;
+    created_at?: string;
+    dependent_issue?: Issue;
+    html_url?: string;
+    id?: number;
+    issue_url?: string;
+    label?: Label;
+    milestone?: Milestone;
+    new_ref?: string;
+    new_title?: string;
+    old_milestone?: Milestone;
+    old_project_id?: number;
+    old_ref?: string;
+    old_title?: string;
+    project_id?: number;
+    pull_request_url?: string;
+    ref_action?: string;
+    ref_comment?: Comment;
+    ref_commit_sha?: string;
+    ref_issue?: Issue;
+    removed_assignee?: boolean;
+    resolve_doer?: User;
+    review_id?: number;
+    tracked_time?: TrackedTime;
+    "type"?: string;
+    updated_at?: string;
+    user?: User;
+};
+export type AddTimeOption = {
+    created?: string;
+    time: number;
+    user_name?: string;
+};
+export type DeployKey = {
+    created_at?: string;
+    fingerprint?: string;
+    id?: number;
+    key?: string;
+    key_id?: number;
+    read_only?: boolean;
+    repository?: Repository;
+    title?: string;
+    url?: string;
+};
+export type CreateMilestoneOption = {
+    description?: string;
+    due_on?: string;
+    state?: "open" | "closed";
+    title?: string;
+};
+export type EditMilestoneOption = {
+    description?: string;
+    due_on?: string;
+    state?: string;
+    title?: string;
+};
+export type PrBranchInfo = {
+    label?: string;
+    ref?: string;
+    repo?: Repository;
+    repo_id?: number;
+    sha?: string;
+};
+export type PullRequest = {
+    assignee?: User;
+    assignees?: User[];
+    base?: PrBranchInfo;
+    body?: string;
+    closed_at?: string;
+    comments?: number;
+    created_at?: string;
+    diff_url?: string;
+    due_date?: string;
+    head?: PrBranchInfo;
+    html_url?: string;
+    id?: number;
+    is_locked?: boolean;
+    labels?: Label[];
+    merge_base?: string;
+    merge_commit_sha?: string;
+    mergeable?: boolean;
+    merged?: boolean;
+    merged_at?: string;
+    merged_by?: User;
+    milestone?: Milestone;
+    "number"?: number;
+    patch_url?: string;
+    state?: StateType;
+    title?: string;
+    updated_at?: string;
+    url?: string;
+    user?: User;
+};
+export type CreatePullRequestOption = {
+    assignee?: string;
+    assignees?: string[];
+    base?: string;
+    body?: string;
+    due_date?: string;
+    head?: string;
+    labels?: number[];
+    milestone?: number;
+    title?: string;
+};
+export type EditPullRequestOption = {
+    assignee?: string;
+    assignees?: string[];
+    base?: string;
+    body?: string;
+    due_date?: string;
+    labels?: number[];
+    milestone?: number;
+    state?: string;
+    title?: string;
+    unset_due_date?: boolean;
+};
+export type MergePullRequestOption = {
+    Do: "merge" | "rebase" | "rebase-merge" | "squash" | "manually-merged";
+    MergeCommitID?: string;
+    MergeMessageField?: string;
+    MergeTitleField?: string;
+    delete_branch_after_merge?: boolean;
+    force_merge?: boolean;
+    head_commit_id?: string;
+};
+export type PullReviewRequestOptions = {
+    reviewers?: string[];
+    team_reviewers?: string[];
+};
+export type ReviewStateType = string;
+export type PullReview = {
+    body?: string;
+    comments_count?: number;
+    commit_id?: string;
+    dismissed?: boolean;
+    html_url?: string;
+    id?: number;
+    official?: boolean;
+    pull_request_url?: string;
+    stale?: boolean;
+    state?: ReviewStateType;
+    submitted_at?: string;
+    team?: Team;
+    user?: User;
+};
+export type CreatePullReviewComment = {
+    body?: string;
+    new_position?: number;
+    old_position?: number;
+    path?: string;
+};
+export type CreatePullReviewOptions = {
+    body?: string;
+    comments?: CreatePullReviewComment[];
+    commit_id?: string;
+    event?: ReviewStateType;
+};
+export type SubmitPullReviewOptions = {
+    body?: string;
+    event?: ReviewStateType;
+};
+export type PullReviewComment = {
+    body?: string;
+    commit_id?: string;
+    created_at?: string;
+    diff_hunk?: string;
+    html_url?: string;
+    id?: number;
+    original_commit_id?: string;
+    original_position?: number;
+    path?: string;
+    position?: number;
+    pull_request_review_id?: number;
+    pull_request_url?: string;
+    resolver?: User;
+    updated_at?: string;
+    user?: User;
+};
+export type DismissPullReviewOptions = {
+    message?: string;
+};
+export type Attachment = {
+    browser_download_url?: string;
+    created_at?: string;
+    download_count?: number;
+    id?: number;
+    name?: string;
+    size?: number;
+    uuid?: string;
+};
+export type Release = {
+    assets?: Attachment[];
+    author?: User;
+    body?: string;
+    created_at?: string;
+    draft?: boolean;
+    html_url?: string;
+    id?: number;
+    name?: string;
+    prerelease?: boolean;
+    published_at?: string;
+    tag_name?: string;
+    tarball_url?: string;
+    target_commitish?: string;
+    url?: string;
+    zipball_url?: string;
+};
+export type CreateReleaseOption = {
+    body?: string;
+    draft?: boolean;
+    name?: string;
+    prerelease?: boolean;
+    tag_name: string;
+    target_commitish?: string;
+};
+export type EditReleaseOption = {
+    body?: string;
+    draft?: boolean;
+    name?: string;
+    prerelease?: boolean;
+    tag_name?: string;
+    target_commitish?: string;
+};
+export type EditAttachmentOptions = {
+    name?: string;
+};
+export type CreateStatusOption = {
+    context?: string;
+    description?: string;
+    state?: CommitStatusState;
+    target_url?: string;
+};
+export type Tag = {
+    commit?: CommitMetaContainsMetaInformationOfACommitInTermsOfApi;
+    id?: string;
+    message?: string;
+    name?: string;
+    tarball_url?: string;
+    zipball_url?: string;
+};
+export type CreateTagOption = {
+    message?: string;
+    tag_name: string;
+    target?: string;
+};
+export type TopicName = {
+    topics?: string[];
+};
+export type RepoTopicOptions = {
+    topics?: string[];
+};
+export type TransferRepoOption = {
+    new_owner: string;
+    team_ids?: number[];
+};
+export type CreateWikiPageOptions = {
+    content_base64?: string;
+    message?: string;
+    title?: string;
+};
+export type WikiCommit = {
+    author?: CommitUserContainsInformationOfAUserInTheContextOfACommit;
+    commiter?: CommitUserContainsInformationOfAUserInTheContextOfACommit;
+    message?: string;
+    sha?: string;
+};
+export type WikiPage = {
+    commit_count?: number;
+    content_base64?: string;
+    footer?: string;
+    html_url?: string;
+    last_commit?: WikiCommit;
+    sidebar?: string;
+    sub_url?: string;
+    title?: string;
+};
+export type WikiPageMetaData = {
+    html_url?: string;
+    last_commit?: WikiCommit;
+    sub_url?: string;
+    title?: string;
+};
+export type WikiCommitList = {
+    commits?: WikiCommit[];
+    count?: number;
+};
+export type GenerateRepoOption = {
+    avatar?: boolean;
+    description?: string;
+    git_content?: boolean;
+    git_hooks?: boolean;
+    labels?: boolean;
+    name: string;
+    owner: string;
+    "private"?: boolean;
+    topics?: boolean;
+    webhooks?: boolean;
+};
+export type GeneralApiSettings = {
+    default_git_trees_per_page?: number;
+    default_max_blob_size?: number;
+    default_paging_num?: number;
+    max_response_items?: number;
+};
+export type GeneralAttachmentSettings = {
+    allowed_types?: string;
+    enabled?: boolean;
+    max_files?: number;
+    max_size?: number;
+};
+export type GeneralRepoSettings = {
+    http_git_disabled?: boolean;
+    lfs_disabled?: boolean;
+    migrations_disabled?: boolean;
+    mirrors_disabled?: boolean;
+    stars_disabled?: boolean;
+    time_tracking_disabled?: boolean;
+};
+export type GeneralUiSettings = {
+    allowed_reactions?: string[];
+    custom_emojis?: string[];
+    default_theme?: string;
+};
+export type EditTeamOption = {
+    can_create_org_repo?: boolean;
+    description?: string;
+    includes_all_repositories?: boolean;
+    name: string;
+    permission?: "read" | "write" | "admin";
+    units?: string[];
+    units_map?: {
+        [key: string]: string;
+    };
+};
+export type TopicResponse = {
+    created?: string;
+    id?: number;
+    repo_count?: number;
+    topic_name?: string;
+    updated?: string;
+};
+export type OAuth2ApplicationRepresentsAnOAuth2Application = {
+    client_id?: string;
+    client_secret?: string;
+    created?: string;
+    id?: number;
+    name?: string;
+    redirect_uris?: string[];
+};
+export type CreateOAuth2ApplicationOptions = {
+    name?: string;
+    redirect_uris?: string[];
+};
+export type Email = {
+    email?: string;
+    primary?: boolean;
+    verified?: boolean;
+};
+export type CreateEmailOption = {
+    emails?: string[];
+};
+export type DeleteEmailOption = {
+    emails?: string[];
+};
+export type GpgKeyEmail = {
+    email?: string;
+    verified?: boolean;
+};
+export type GpgKey = {
+    can_certify?: boolean;
+    can_encrypt_comms?: boolean;
+    can_encrypt_storage?: boolean;
+    can_sign?: boolean;
+    created_at?: string;
+    emails?: GpgKeyEmail[];
+    expires_at?: string;
+    id?: number;
+    key_id?: string;
+    primary_key_id?: string;
+    public_key?: string;
+    subkeys?: GpgKey[];
+    verified?: boolean;
+};
+export type CreateGpgKeyOption = {
+    armored_public_key: string;
+    armored_signature?: string;
+};
+export type UserSettings = {
+    description?: string;
+    diff_view_style?: string;
+    full_name?: string;
+    hide_activity?: boolean;
+    hide_email?: boolean;
+    language?: string;
+    location?: string;
+    theme?: string;
+    website?: string;
+};
+export type UserSettingsOptions = {
+    description?: string;
+    diff_view_style?: string;
+    full_name?: string;
+    hide_activity?: boolean;
+    hide_email?: boolean;
+    language?: string;
+    location?: string;
+    theme?: string;
+    website?: string;
+};
+export type StopWatch = {
+    created?: string;
+    duration?: string;
+    issue_index?: number;
+    issue_title?: string;
+    repo_name?: string;
+    repo_owner_name?: string;
+    seconds?: number;
+};
+export type TimeStamp = number;
+export type UserHeatmapData = {
+    contributions?: number;
+    timestamp?: TimeStamp;
+};
+export type OrganizationPermissions = {
+    can_create_repository?: boolean;
+    can_read?: boolean;
+    can_write?: boolean;
+    is_admin?: boolean;
+    is_owner?: boolean;
+};
+export type AccessTokenRepresentsAnApiAccessToken = {
+    id?: number;
+    name?: string;
+    sha1?: string;
+    token_last_eight?: string;
+};
+export type CreateAccessTokenOption = {
+    name?: string;
+};
+export type ServerVersion = {
+    version?: string;
+};
+/**
+ * List cron tasks
+ */
+export function adminCronList({ page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Cron[];
+    } | {
+        status: 403;
+    }>(`/admin/cron${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Run cron task
+ */
+export function adminCronRun(task: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/admin/cron/${task}`, {
+        ...opts,
+        method: "POST"
+    });
+}
+/**
+ * List all organizations
+ */
+export function adminGetAllOrgs({ lang, page, limit }: {
+    lang?: string;
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Organization[];
+    } | {
+        status: 403;
+    }>(`/admin/orgs${QS.query(QS.form({
+        lang,
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * List unadopted repositories
+ */
+export function adminUnadoptedList({ page, limit, pattern }: {
+    page?: number;
+    limit?: number;
+    pattern?: string;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: string[];
+    } | {
+        status: 403;
+    }>(`/admin/unadopted${QS.query(QS.form({
+        page,
+        limit,
+        pattern
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Adopt unadopted files as a repository
+ */
+export function adminAdoptRepository(owner: string, repo: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/admin/unadopted/${owner}/${repo}`, {
+        ...opts,
+        method: "POST"
+    });
+}
+/**
+ * Delete unadopted files
+ */
+export function adminDeleteUnadoptedRepository(owner: string, repo: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/admin/unadopted/${owner}/${repo}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * List all users
+ */
+export function adminGetAllUsers({ lang, page, limit }: {
+    lang?: string;
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: User[];
+    } | {
+        status: 403;
+    }>(`/admin/users${QS.query(QS.form({
+        lang,
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Create a user
+ */
+export function adminCreateUser(createUserOption?: CreateUserOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: User;
+    } | {
+        status: 400;
+    } | {
+        status: 403;
+    } | {
+        status: 422;
+    }>("/admin/users", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: createUserOption
+    }));
+}
+/**
+ * Delete a user
+ */
+export function adminDeleteUser(username: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/admin/users/${username}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * Edit an existing user
+ */
+export function adminEditUser(username: string, editUserOption?: EditUserOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: User;
+    } | {
+        status: 403;
+    } | {
+        status: 422;
+    }>(`/admin/users/${username}`, oazapfts.json({
+        ...opts,
+        method: "PATCH",
+        body: editUserOption
+    }));
+}
+/**
+ * Add a public key on behalf of a user
+ */
+export function adminCreatePublicKey(username: string, createKeyOption?: CreateKeyOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: PublicKey;
+    } | {
+        status: 403;
+    } | {
+        status: 422;
+    }>(`/admin/users/${username}/keys`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: createKeyOption
+    }));
+}
+/**
+ * Delete a user's public key
+ */
+export function adminDeleteUserPublicKey(username: string, id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/admin/users/${username}/keys/${id}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * Create an organization
+ */
+export function adminCreateOrg(username: string, createOrgOption: CreateOrgOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: Organization;
+    } | {
+        status: 403;
+    } | {
+        status: 422;
+    }>(`/admin/users/${username}/orgs`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: createOrgOption
+    }));
+}
+/**
+ * Create a repository on behalf of a user
+ */
+export function adminCreateRepo(username: string, createRepoOption: CreateRepoOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: Repository;
+    } | {
+        status: 403;
+    } | {
+        status: 404;
+    } | {
+        status: 409;
+    } | {
+        status: 422;
+    }>(`/admin/users/${username}/repos`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: createRepoOption
+    }));
+}
+/**
+ * Render a markdown document as HTML
+ */
+export function renderMarkdown(markdownOption?: MarkdownOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: string;
+    } | {
+        status: 422;
+    }>("/markdown", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: markdownOption
+    }));
+}
+/**
+ * Render raw markdown as HTML
+ */
+export function renderMarkdownRaw(body: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: string;
+    } | {
+        status: 422;
+    }>("/markdown/raw", {
+        ...opts,
+        method: "POST",
+        body
+    });
+}
+/**
+ * Returns the nodeinfo of the Gitea application
+ */
+export function getNodeInfo(opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: NodeInfo;
+    }>("/nodeinfo", {
+        ...opts
+    });
+}
+/**
+ * List users's notification threads
+ */
+export function notifyGetList({ all, statusTypes, subjectType, since, before, page, limit }: {
+    all?: boolean;
+    statusTypes?: string[];
+    subjectType?: ("issue" | "pull" | "commit" | "repository")[];
+    since?: string;
+    before?: string;
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: NotificationThread[];
+    }>(`/notifications${QS.query(QS.form({
+        all,
+        since,
+        before,
+        page,
+        limit
+    }), QS.explode({
+        "status-types": statusTypes,
+        "subject-type": subjectType
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Mark notification threads as read, pinned or unread
+ */
+export function notifyReadList({ lastReadAt, all, statusTypes, toStatus }: {
+    lastReadAt?: string;
+    all?: string;
+    statusTypes?: string[];
+    toStatus?: string;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 205;
+        data: NotificationThread[];
+    }>(`/notifications${QS.query(QS.form({
+        last_read_at: lastReadAt,
+        all,
+        "to-status": toStatus
+    }), QS.explode({
+        "status-types": statusTypes
+    }))}`, {
+        ...opts,
+        method: "PUT"
+    });
+}
+/**
+ * Check if unread notifications exist
+ */
+export function notifyNewAvailable(opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: NotificationCount;
+    }>("/notifications/new", {
+        ...opts
+    });
+}
+/**
+ * Get notification thread by ID
+ */
+export function notifyGetThread(id: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: NotificationThread;
+    } | {
+        status: 403;
+    } | {
+        status: 404;
+    }>(`/notifications/threads/${id}`, {
+        ...opts
+    });
+}
+/**
+ * Mark notification thread as read by ID
+ */
+export function notifyReadThread(id: string, { toStatus }: {
+    toStatus?: string;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 205;
+        data: NotificationThread;
+    } | {
+        status: 403;
+    } | {
+        status: 404;
+    }>(`/notifications/threads/${id}${QS.query(QS.form({
+        "to-status": toStatus
+    }))}`, {
+        ...opts,
+        method: "PATCH"
+    });
+}
+/**
+ * Create a repository in an organization
+ */
+export function createOrgRepoDeprecated(org: string, createRepoOption?: CreateRepoOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: Repository;
+    } | {
+        status: 403;
+    } | {
+        status: 422;
+    }>(`/org/${org}/repos`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: createRepoOption
+    }));
+}
+/**
+ * Get list of organizations
+ */
+export function orgGetAll({ lang, page, limit }: {
+    lang?: string;
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Organization[];
+    }>(`/orgs${QS.query(QS.form({
+        lang,
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Create an organization
+ */
+export function orgCreate(createOrgOption: CreateOrgOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: Organization;
+    } | {
+        status: 403;
+    } | {
+        status: 422;
+    }>("/orgs", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: createOrgOption
+    }));
+}
+/**
+ * Get an organization
+ */
+export function orgGet(org: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Organization;
+    }>(`/orgs/${org}`, {
+        ...opts
+    });
+}
+/**
+ * Delete an organization
+ */
+export function orgDelete(org: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/orgs/${org}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * Edit an organization
+ */
+export function orgEdit(org: string, editOrgOption: EditOrgOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Organization;
+    }>(`/orgs/${org}`, oazapfts.json({
+        ...opts,
+        method: "PATCH",
+        body: editOrgOption
+    }));
+}
+/**
+ * List an organization's webhooks
+ */
+export function orgListHooks(org: string, { page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Hook[];
+    }>(`/orgs/${org}/hooks${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Create a hook
+ */
+export function orgCreateHook(org: string, createHookOption: CreateHookOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: Hook;
+    }>(`/orgs/${org}/hooks/`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: createHookOption
+    }));
+}
+/**
+ * Get a hook
+ */
+export function orgGetHook(org: string, id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Hook;
+    }>(`/orgs/${org}/hooks/${id}`, {
+        ...opts
+    });
+}
+/**
+ * Delete a hook
+ */
+export function orgDeleteHook(org: string, id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/orgs/${org}/hooks/${id}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * Update a hook
+ */
+export function orgEditHook(org: string, id: number, editHookOption?: EditHookOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Hook;
+    }>(`/orgs/${org}/hooks/${id}`, oazapfts.json({
+        ...opts,
+        method: "PATCH",
+        body: editHookOption
+    }));
+}
+/**
+ * List an organization's labels
+ */
+export function orgListLabels(org: string, { page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Label[];
+    }>(`/orgs/${org}/labels${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Create a label for an organization
+ */
+export function orgCreateLabel(org: string, createLabelOption?: CreateLabelOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: Label;
+    } | {
+        status: 422;
+    }>(`/orgs/${org}/labels`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: createLabelOption
+    }));
+}
+/**
+ * Get a single label
+ */
+export function orgGetLabel(org: string, id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Label;
+    }>(`/orgs/${org}/labels/${id}`, {
+        ...opts
+    });
+}
+/**
+ * Delete a label
+ */
+export function orgDeleteLabel(org: string, id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/orgs/${org}/labels/${id}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * Update a label
+ */
+export function orgEditLabel(org: string, id: number, editLabelOption?: EditLabelOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Label;
+    } | {
+        status: 422;
+    }>(`/orgs/${org}/labels/${id}`, oazapfts.json({
+        ...opts,
+        method: "PATCH",
+        body: editLabelOption
+    }));
+}
+/**
+ * List an organization's members
+ */
+export function orgListMembers(org: string, { page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: User[];
+    }>(`/orgs/${org}/members${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Check if a user is a member of an organization
+ */
+export function orgIsMember(org: string, username: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/orgs/${org}/members/${username}`, {
+        ...opts
+    });
+}
+/**
+ * Remove a member from an organization
+ */
+export function orgDeleteMember(org: string, username: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/orgs/${org}/members/${username}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * List an organization's public members
+ */
+export function orgListPublicMembers(org: string, { page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: User[];
+    }>(`/orgs/${org}/public_members${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Check if a user is a public member of an organization
+ */
+export function orgIsPublicMember(org: string, username: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/orgs/${org}/public_members/${username}`, {
+        ...opts
+    });
+}
+/**
+ * Publicize a user's membership
+ */
+export function orgPublicizeMember(org: string, username: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/orgs/${org}/public_members/${username}`, {
+        ...opts,
+        method: "PUT"
+    });
+}
+/**
+ * Conceal a user's membership
+ */
+export function orgConcealMember(org: string, username: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/orgs/${org}/public_members/${username}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * List an organization's repos
+ */
+export function orgListRepos(org: string, { page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Repository[];
+    }>(`/orgs/${org}/repos${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Create a repository in an organization
+ */
+export function createOrgRepo(org: string, createRepoOption?: CreateRepoOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: Repository;
+    } | {
+        status: 403;
+    } | {
+        status: 404;
+    }>(`/orgs/${org}/repos`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: createRepoOption
+    }));
+}
+/**
+ * List an organization's teams
+ */
+export function orgListTeams(org: string, { page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Team[];
+    }>(`/orgs/${org}/teams${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Create a team
+ */
+export function orgCreateTeam(org: string, createTeamOption?: CreateTeamOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: Team;
+    } | {
+        status: 422;
+    }>(`/orgs/${org}/teams`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: createTeamOption
+    }));
+}
+/**
+ * Search for teams within an organization
+ */
+export function teamSearch(org: string, { q, includeDesc, page, limit }: {
+    q?: string;
+    includeDesc?: boolean;
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: {
+            data?: Team[];
+            ok?: boolean;
+        };
+    }>(`/orgs/${org}/teams/search${QS.query(QS.form({
+        q,
+        include_desc: includeDesc,
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Search for issues across the repositories that the user has access to
+ */
+export function issueSearchIssues({ state, labels, milestones, q, priorityRepoId, type, since, before, assigned, created, mentioned, reviewRequested, owner, team, page, limit }: {
+    state?: string;
+    labels?: string;
+    milestones?: string;
+    q?: string;
+    priorityRepoId?: number;
+    "type"?: string;
+    since?: string;
+    before?: string;
+    assigned?: boolean;
+    created?: boolean;
+    mentioned?: boolean;
+    reviewRequested?: boolean;
+    owner?: string;
+    team?: string;
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Issue[];
+    }>(`/repos/issues/search${QS.query(QS.form({
+        state,
+        labels,
+        milestones,
+        q,
+        priority_repo_id: priorityRepoId,
+        type,
+        since,
+        before,
+        assigned,
+        created,
+        mentioned,
+        review_requested: reviewRequested,
+        owner,
+        team,
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Migrate a remote git repository
+ */
+export function repoMigrate(migrateRepoOptions?: MigrateRepoOptions, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: Repository;
+    } | {
+        status: 403;
+    } | {
+        status: 422;
+    }>("/repos/migrate", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: migrateRepoOptions
+    }));
+}
+/**
+ * Search for repositories
+ */
+export function repoSearch({ q, topic, includeDesc, uid, priorityOwnerId, teamId, starredBy, private, isPrivate, template, archived, mode, exclusive, repo, owner, lang, subject, book, includeMetadata, sort, order, page, limit }: {
+    q?: string;
+    topic?: boolean;
+    includeDesc?: boolean;
+    uid?: number;
+    priorityOwnerId?: number;
+    teamId?: number;
+    starredBy?: number;
+    "private"?: boolean;
+    isPrivate?: boolean;
+    template?: boolean;
+    archived?: boolean;
+    mode?: string;
+    exclusive?: boolean;
+    repo?: string;
+    owner?: string;
+    lang?: string;
+    subject?: string;
+    book?: string;
+    includeMetadata?: boolean;
+    sort?: string;
+    order?: string;
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: SearchResults;
+    } | {
+        status: 422;
+    }>(`/repos/search${QS.query(QS.form({
+        q,
+        topic,
+        includeDesc,
+        uid,
+        priority_owner_id: priorityOwnerId,
+        team_id: teamId,
+        starredBy,
+        private,
+        is_private: isPrivate,
+        template,
+        archived,
+        mode,
+        exclusive,
+        repo,
+        owner,
+        lang,
+        subject,
+        book,
+        includeMetadata,
+        sort,
+        order,
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Get a repository
+ */
+export function repoGet(owner: string, repo: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Repository;
+    }>(`/repos/${owner}/${repo}`, {
+        ...opts
+    });
+}
+/**
+ * Delete a repository
+ */
+export function repoDelete(owner: string, repo: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * Edit a repository's properties. Only fields that are set will be changed.
+ */
+export function repoEdit(owner: string, repo: string, editRepoOption?: EditRepoOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Repository;
+    } | {
+        status: 403;
+    } | {
+        status: 422;
+    }>(`/repos/${owner}/${repo}`, oazapfts.json({
+        ...opts,
+        method: "PATCH",
+        body: editRepoOption
+    }));
+}
+/**
+ * Get an archive of a repository
+ */
+export function repoGetArchive(owner: string, repo: string, archive: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/archive/${archive}`, {
+        ...opts
+    });
+}
+/**
+ * Return all users that have write access and can be assigned to issues
+ */
+export function repoGetAssignees(owner: string, repo: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: User[];
+    }>(`/repos/${owner}/${repo}/assignees`, {
+        ...opts
+    });
+}
+/**
+ * List branch protections for a repository
+ */
+export function repoListBranchProtection(owner: string, repo: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: BranchProtection[];
+    }>(`/repos/${owner}/${repo}/branch_protections`, {
+        ...opts
+    });
+}
+/**
+ * Create a branch protections for a repository
+ */
+export function repoCreateBranchProtection(owner: string, repo: string, createBranchProtectionOption?: CreateBranchProtectionOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: BranchProtection;
+    } | {
+        status: 403;
+    } | {
+        status: 404;
+    } | {
+        status: 422;
+    }>(`/repos/${owner}/${repo}/branch_protections`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: createBranchProtectionOption
+    }));
+}
+/**
+ * Get a specific branch protection for the repository
+ */
+export function repoGetBranchProtection(owner: string, repo: string, name: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: BranchProtection;
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/branch_protections/${name}`, {
+        ...opts
+    });
+}
+/**
+ * Delete a specific branch protection for the repository
+ */
+export function repoDeleteBranchProtection(owner: string, repo: string, name: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/branch_protections/${name}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * Edit a branch protections for a repository. Only fields that are set will be changed
+ */
+export function repoEditBranchProtection(owner: string, repo: string, name: string, editBranchProtectionOption?: EditBranchProtectionOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: BranchProtection;
+    } | {
+        status: 404;
+    } | {
+        status: 422;
+    }>(`/repos/${owner}/${repo}/branch_protections/${name}`, oazapfts.json({
+        ...opts,
+        method: "PATCH",
+        body: editBranchProtectionOption
+    }));
+}
+/**
+ * List a repository's branches
+ */
+export function repoListBranches(owner: string, repo: string, { page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Branch[];
+    }>(`/repos/${owner}/${repo}/branches${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Create a branch
+ */
+export function repoCreateBranch(owner: string, repo: string, createBranchRepoOption?: CreateBranchRepoOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: Branch;
+    } | {
+        status: 404;
+    } | {
+        status: 409;
+    }>(`/repos/${owner}/${repo}/branches`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: createBranchRepoOption
+    }));
+}
+/**
+ * Retrieve a specific branch from a repository, including its effective branch protection
+ */
+export function repoGetBranch(owner: string, repo: string, branch: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Branch;
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/branches/${branch}`, {
+        ...opts
+    });
+}
+/**
+ * Delete a specific branch from a repository
+ */
+export function repoDeleteBranch(owner: string, repo: string, branch: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/branches/${branch}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * List a repository's collaborators
+ */
+export function repoListCollaborators(owner: string, repo: string, { page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: User[];
+    }>(`/repos/${owner}/${repo}/collaborators${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Check if a user is a collaborator of a repository
+ */
+export function repoCheckCollaborator(owner: string, repo: string, collaborator: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/collaborators/${collaborator}`, {
+        ...opts
+    });
+}
+/**
+ * Add a collaborator to a repository
+ */
+export function repoAddCollaborator(owner: string, repo: string, collaborator: string, addCollaboratorOption?: AddCollaboratorOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/collaborators/${collaborator}`, oazapfts.json({
+        ...opts,
+        method: "PUT",
+        body: addCollaboratorOption
+    }));
+}
+/**
+ * Delete a collaborator from a repository
+ */
+export function repoDeleteCollaborator(owner: string, repo: string, collaborator: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/collaborators/${collaborator}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * Get a list of all commits from a repository
+ */
+export function repoGetAllCommits(owner: string, repo: string, { sha, path, page, limit }: {
+    sha?: string;
+    path?: string;
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: CommitContainsInformationGeneratedFromAGitCommit[];
+    } | {
+        status: 404;
+    } | {
+        status: 409;
+        data: ApiError;
+    }>(`/repos/${owner}/${repo}/commits${QS.query(QS.form({
+        sha,
+        path,
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Get a commit's combined status, by branch/tag/commit reference
+ */
+export function repoGetCombinedStatusByRef(owner: string, repo: string, ref: string, { page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: CombinedStatus;
+    } | {
+        status: 400;
+    }>(`/repos/${owner}/${repo}/commits/${ref}/status${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Get a commit's statuses, by branch/tag/commit reference
+ */
+export function repoListStatusesByRef(owner: string, repo: string, ref: string, { sort, state, page, limit }: {
+    sort?: "oldest" | "recentupdate" | "leastupdate" | "leastindex" | "highestindex";
+    state?: "pending" | "success" | "error" | "failure" | "warning";
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: CommitStatus[];
+    } | {
+        status: 400;
+    }>(`/repos/${owner}/${repo}/commits/${ref}/statuses${QS.query(QS.form({
+        sort,
+        state,
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Gets the metadata of all the entries of the root dir
+ */
+export function repoGetContentsList(owner: string, repo: string, { ref }: {
+    ref?: string;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: ContentsResponse[];
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/contents${QS.query(QS.form({
+        ref
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Gets the metadata and contents (if a file) of an entry in a repository, or a list of entries if a dir
+ */
+export function repoGetContents(owner: string, repo: string, filepath: string, { ref }: {
+    ref?: string;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: ContentsResponse;
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/contents/${filepath}${QS.query(QS.form({
+        ref
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Update a file in a repository
+ */
+export function repoUpdateFile(owner: string, repo: string, filepath: string, updateFileOptions: UpdateFileOptions, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: FileResponse;
+    } | {
+        status: 403;
+    } | {
+        status: 404;
+    } | {
+        status: 422;
+    }>(`/repos/${owner}/${repo}/contents/${filepath}`, oazapfts.json({
+        ...opts,
+        method: "PUT",
+        body: updateFileOptions
+    }));
+}
+/**
+ * Create a file in a repository
+ */
+export function repoCreateFile(owner: string, repo: string, filepath: string, createFileOptions: CreateFileOptions, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: FileResponse;
+    } | {
+        status: 403;
+    } | {
+        status: 404;
+    } | {
+        status: 422;
+    }>(`/repos/${owner}/${repo}/contents/${filepath}`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: createFileOptions
+    }));
+}
+/**
+ * Delete a file in a repository
+ */
+export function repoDeleteFile(owner: string, repo: string, filepath: string, deleteFileOptions: DeleteFileOptions, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: FileDeleteResponse;
+    } | {
+        status: 400;
+    } | {
+        status: 403;
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/contents/${filepath}`, oazapfts.json({
+        ...opts,
+        method: "DELETE",
+        body: deleteFileOptions
+    }));
+}
+/**
+ * Get the EditorConfig definitions of a file in a repository
+ */
+export function repoGetEditorConfig(owner: string, repo: string, filepath: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/editorconfig/${filepath}`, {
+        ...opts
+    });
+}
+/**
+ * List a repository's forks
+ */
+export function listForks(owner: string, repo: string, { page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Repository[];
+    }>(`/repos/${owner}/${repo}/forks${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Fork a repository
+ */
+export function createFork(owner: string, repo: string, createForkOption?: CreateForkOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 202;
+        data: Repository;
+    } | {
+        status: 403;
+    } | {
+        status: 409;
+    } | {
+        status: 422;
+    }>(`/repos/${owner}/${repo}/forks`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: createForkOption
+    }));
+}
+/**
+ * Gets the blob of a repository.
+ */
+export function getBlob(owner: string, repo: string, sha: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: GitBlobResponse;
+    } | {
+        status: 400;
+    }>(`/repos/${owner}/${repo}/git/blobs/${sha}`, {
+        ...opts
+    });
+}
+/**
+ * Get a single commit from a repository
+ */
+export function repoGetSingleCommit(owner: string, repo: string, sha: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: CommitContainsInformationGeneratedFromAGitCommit;
+    } | {
+        status: 404;
+    } | {
+        status: 422;
+    }>(`/repos/${owner}/${repo}/git/commits/${sha}`, {
+        ...opts
+    });
+}
+/**
+ * Get a commit's diff or patch
+ */
+export function repoDownloadCommitDiffOrPatch(owner: string, repo: string, sha: string, diffType: "diff" | "patch", opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: string;
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/git/commits/${sha}.${diffType}`, {
+        ...opts
+    });
+}
+/**
+ * Get a note corresponding to a single commit from a repository
+ */
+export function repoGetNote(owner: string, repo: string, sha: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Note;
+    } | {
+        status: 404;
+    } | {
+        status: 422;
+    }>(`/repos/${owner}/${repo}/git/notes/${sha}`, {
+        ...opts
+    });
+}
+/**
+ * Get specified ref or filtered repository's refs
+ */
+export function repoListAllGitRefs(owner: string, repo: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: ReferenceRepresentsAGitReference[];
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/git/refs`, {
+        ...opts
+    });
+}
+/**
+ * Get specified ref or filtered repository's refs
+ */
+export function repoListGitRefs(owner: string, repo: string, ref: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: ReferenceRepresentsAGitReference[];
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/git/refs/${ref}`, {
+        ...opts
+    });
+}
+/**
+ * Gets the tag object of an annotated tag (not lightweight tags)
+ */
+export function getAnnotatedTag(owner: string, repo: string, sha: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: AnnotatedTag;
+    } | {
+        status: 400;
+    }>(`/repos/${owner}/${repo}/git/tags/${sha}`, {
+        ...opts
+    });
+}
+/**
+ * Gets the tree of a repository.
+ */
+export function getTree(owner: string, repo: string, sha: string, { recursive, page, perPage }: {
+    recursive?: boolean;
+    page?: number;
+    perPage?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: GitTreeResponse;
+    } | {
+        status: 400;
+    }>(`/repos/${owner}/${repo}/git/trees/${sha}${QS.query(QS.form({
+        recursive,
+        page,
+        per_page: perPage
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * List the hooks in a repository
+ */
+export function repoListHooks(owner: string, repo: string, { page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Hook[];
+    }>(`/repos/${owner}/${repo}/hooks${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Create a hook
+ */
+export function repoCreateHook(owner: string, repo: string, createHookOption?: CreateHookOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: Hook;
+    }>(`/repos/${owner}/${repo}/hooks`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: createHookOption
+    }));
+}
+/**
+ * List the Git hooks in a repository
+ */
+export function repoListGitHooks(owner: string, repo: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: GitHook[];
+    }>(`/repos/${owner}/${repo}/hooks/git`, {
+        ...opts
+    });
+}
+/**
+ * Get a Git hook
+ */
+export function repoGetGitHook(owner: string, repo: string, id: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: GitHook;
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/hooks/git/${id}`, {
+        ...opts
+    });
+}
+/**
+ * Delete a Git hook in a repository
+ */
+export function repoDeleteGitHook(owner: string, repo: string, id: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/hooks/git/${id}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * Edit a Git hook in a repository
+ */
+export function repoEditGitHook(owner: string, repo: string, id: string, editGitHookOption?: EditGitHookOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: GitHook;
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/hooks/git/${id}`, oazapfts.json({
+        ...opts,
+        method: "PATCH",
+        body: editGitHookOption
+    }));
+}
+/**
+ * Get a hook
+ */
+export function repoGetHook(owner: string, repo: string, id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Hook;
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/hooks/${id}`, {
+        ...opts
+    });
+}
+/**
+ * Delete a hook in a repository
+ */
+export function repoDeleteHook(owner: string, repo: string, id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/hooks/${id}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * Edit a hook in a repository
+ */
+export function repoEditHook(owner: string, repo: string, id: number, editHookOption?: EditHookOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Hook;
+    }>(`/repos/${owner}/${repo}/hooks/${id}`, oazapfts.json({
+        ...opts,
+        method: "PATCH",
+        body: editHookOption
+    }));
+}
+/**
+ * Test a push webhook
+ */
+export function repoTestHook(owner: string, repo: string, id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/hooks/${id}/tests`, {
+        ...opts,
+        method: "POST"
+    });
+}
+/**
+ * Get available issue templates for a repository
+ */
+export function repoGetIssueTemplates(owner: string, repo: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: IssueTemplate[];
+    }>(`/repos/${owner}/${repo}/issue_templates`, {
+        ...opts
+    });
+}
+/**
+ * List a repository's issues
+ */
+export function issueListIssues(owner: string, repo: string, { state, labels, q, type, milestones, since, before, createdBy, assignedBy, mentionedBy, page, limit }: {
+    state?: "closed" | "open" | "all";
+    labels?: string;
+    q?: string;
+    "type"?: "issues" | "pulls";
+    milestones?: string;
+    since?: string;
+    before?: string;
+    createdBy?: string;
+    assignedBy?: string;
+    mentionedBy?: string;
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Issue[];
+    }>(`/repos/${owner}/${repo}/issues${QS.query(QS.form({
+        state,
+        labels,
+        q,
+        type,
+        milestones,
+        since,
+        before,
+        created_by: createdBy,
+        assigned_by: assignedBy,
+        mentioned_by: mentionedBy,
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Create an issue. If using deadline only the date will be taken into account, and time of day ignored.
+ */
+export function issueCreateIssue(owner: string, repo: string, createIssueOption?: CreateIssueOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: Issue;
+    } | {
+        status: 403;
+    } | {
+        status: 412;
+    } | {
+        status: 422;
+    }>(`/repos/${owner}/${repo}/issues`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: createIssueOption
+    }));
+}
+/**
+ * List all comments in a repository
+ */
+export function issueGetRepoComments(owner: string, repo: string, { since, before, page, limit }: {
+    since?: string;
+    before?: string;
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Comment[];
+    }>(`/repos/${owner}/${repo}/issues/comments${QS.query(QS.form({
+        since,
+        before,
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Get a comment
+ */
+export function issueGetComment(owner: string, repo: string, id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Comment;
+    } | {
+        status: 204;
+    } | {
+        status: 403;
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/issues/comments/${id}`, {
+        ...opts
+    });
+}
+/**
+ * Delete a comment
+ */
+export function issueDeleteComment(owner: string, repo: string, id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/issues/comments/${id}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * Edit a comment
+ */
+export function issueEditComment(owner: string, repo: string, id: number, editIssueCommentOption?: EditIssueCommentOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Comment;
+    } | {
+        status: 204;
+    } | {
+        status: 403;
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/issues/comments/${id}`, oazapfts.json({
+        ...opts,
+        method: "PATCH",
+        body: editIssueCommentOption
+    }));
+}
+/**
+ * Get a list of reactions from a comment of an issue
+ */
+export function issueGetCommentReactions(owner: string, repo: string, id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Reaction[];
+    } | {
+        status: 403;
+    }>(`/repos/${owner}/${repo}/issues/comments/${id}/reactions`, {
+        ...opts
+    });
+}
+/**
+ * Add a reaction to a comment of an issue
+ */
+export function issuePostCommentReaction(owner: string, repo: string, id: number, editReactionOption?: EditReactionOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Reaction;
+    } | {
+        status: 201;
+        data: Reaction;
+    } | {
+        status: 403;
+    }>(`/repos/${owner}/${repo}/issues/comments/${id}/reactions`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: editReactionOption
+    }));
+}
+/**
+ * Remove a reaction from a comment of an issue
+ */
+export function issueDeleteCommentReaction(owner: string, repo: string, id: number, editReactionOption?: EditReactionOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/issues/comments/${id}/reactions`, oazapfts.json({
+        ...opts,
+        method: "DELETE",
+        body: editReactionOption
+    }));
+}
+/**
+ * Get an issue
+ */
+export function issueGetIssue(owner: string, repo: string, index: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Issue;
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/issues/${index}`, {
+        ...opts
+    });
+}
+/**
+ * Edit an issue. If using deadline only the date will be taken into account, and time of day ignored.
+ */
+export function issueEditIssue(owner: string, repo: string, index: number, editIssueOption?: EditIssueOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: Issue;
+    } | {
+        status: 403;
+    } | {
+        status: 404;
+    } | {
+        status: 412;
+    }>(`/repos/${owner}/${repo}/issues/${index}`, oazapfts.json({
+        ...opts,
+        method: "PATCH",
+        body: editIssueOption
+    }));
+}
+/**
+ * List all comments on an issue
+ */
+export function issueGetComments(owner: string, repo: string, index: number, { since, before }: {
+    since?: string;
+    before?: string;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Comment[];
+    }>(`/repos/${owner}/${repo}/issues/${index}/comments${QS.query(QS.form({
+        since,
+        before
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Add a comment to an issue
+ */
+export function issueCreateComment(owner: string, repo: string, index: number, createIssueCommentOption?: CreateIssueCommentOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: Comment;
+    } | {
+        status: 403;
+    }>(`/repos/${owner}/${repo}/issues/${index}/comments`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: createIssueCommentOption
+    }));
+}
+/**
+ * Delete a comment
+ */
+export function issueDeleteCommentDeprecated(owner: string, repo: string, index: number, id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/issues/${index}/comments/${id}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * Edit a comment
+ */
+export function issueEditCommentDeprecated(owner: string, repo: string, index: number, id: number, editIssueCommentOption?: EditIssueCommentOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Comment;
+    } | {
+        status: 204;
+    } | {
+        status: 403;
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/issues/${index}/comments/${id}`, oazapfts.json({
+        ...opts,
+        method: "PATCH",
+        body: editIssueCommentOption
+    }));
+}
+/**
+ * Set an issue deadline. If set to null, the deadline is deleted. If using deadline only the date will be taken into account, and time of day ignored.
+ */
+export function issueEditIssueDeadline(owner: string, repo: string, index: number, editDeadlineOption?: EditDeadlineOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: IssueDeadline;
+    } | {
+        status: 403;
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/issues/${index}/deadline`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: editDeadlineOption
+    }));
+}
+/**
+ * Get an issue's labels
+ */
+export function issueGetLabels(owner: string, repo: string, index: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Label[];
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/issues/${index}/labels`, {
+        ...opts
+    });
+}
+/**
+ * Replace an issue's labels
+ */
+export function issueReplaceLabels(owner: string, repo: string, index: number, issueLabelsOption?: IssueLabelsOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Label[];
+    } | {
+        status: 403;
+    }>(`/repos/${owner}/${repo}/issues/${index}/labels`, oazapfts.json({
+        ...opts,
+        method: "PUT",
+        body: issueLabelsOption
+    }));
+}
+/**
+ * Add a label to an issue
+ */
+export function issueAddLabel(owner: string, repo: string, index: number, issueLabelsOption?: IssueLabelsOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Label[];
+    } | {
+        status: 403;
+    }>(`/repos/${owner}/${repo}/issues/${index}/labels`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: issueLabelsOption
+    }));
+}
+/**
+ * Remove all labels from an issue
+ */
+export function issueClearLabels(owner: string, repo: string, index: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/issues/${index}/labels`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * Remove a label from an issue
+ */
+export function issueRemoveLabel(owner: string, repo: string, index: number, id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/issues/${index}/labels/${id}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * Get a list reactions of an issue
+ */
+export function issueGetIssueReactions(owner: string, repo: string, index: number, { page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Reaction[];
+    } | {
+        status: 403;
+    }>(`/repos/${owner}/${repo}/issues/${index}/reactions${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Add a reaction to an issue
+ */
+export function issuePostIssueReaction(owner: string, repo: string, index: number, editReactionOption?: EditReactionOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Reaction;
+    } | {
+        status: 201;
+        data: Reaction;
+    } | {
+        status: 403;
+    }>(`/repos/${owner}/${repo}/issues/${index}/reactions`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: editReactionOption
+    }));
+}
+/**
+ * Remove a reaction from an issue
+ */
+export function issueDeleteIssueReaction(owner: string, repo: string, index: number, editReactionOption?: EditReactionOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/issues/${index}/reactions`, oazapfts.json({
+        ...opts,
+        method: "DELETE",
+        body: editReactionOption
+    }));
+}
+/**
+ * Delete an issue's existing stopwatch.
+ */
+export function issueDeleteStopWatch(owner: string, repo: string, index: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/issues/${index}/stopwatch/delete`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * Start stopwatch on an issue.
+ */
+export function issueStartStopWatch(owner: string, repo: string, index: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/issues/${index}/stopwatch/start`, {
+        ...opts,
+        method: "POST"
+    });
+}
+/**
+ * Stop an issue's existing stopwatch.
+ */
+export function issueStopStopWatch(owner: string, repo: string, index: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/issues/${index}/stopwatch/stop`, {
+        ...opts,
+        method: "POST"
+    });
+}
+/**
+ * Get users who subscribed on an issue.
+ */
+export function issueSubscriptions(owner: string, repo: string, index: number, { page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: User[];
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/issues/${index}/subscriptions${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Check if user is subscribed to an issue
+ */
+export function issueCheckSubscription(owner: string, repo: string, index: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: WatchInfo;
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/issues/${index}/subscriptions/check`, {
+        ...opts
+    });
+}
+/**
+ * Subscribe user to issue
+ */
+export function issueAddSubscription(owner: string, repo: string, index: number, user: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/issues/${index}/subscriptions/${user}`, {
+        ...opts,
+        method: "PUT"
+    });
+}
+/**
+ * Unsubscribe user from issue
+ */
+export function issueDeleteSubscription(owner: string, repo: string, index: number, user: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/issues/${index}/subscriptions/${user}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * List all comments and events on an issue
+ */
+export function issueGetCommentsAndTimeline(owner: string, repo: string, index: number, { since, page, limit, before }: {
+    since?: string;
+    page?: number;
+    limit?: number;
+    before?: string;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: TimelineComment[];
+    }>(`/repos/${owner}/${repo}/issues/${index}/timeline${QS.query(QS.form({
+        since,
+        page,
+        limit,
+        before
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * List an issue's tracked times
+ */
+export function issueTrackedTimes(owner: string, repo: string, index: number, { user, since, before, page, limit }: {
+    user?: string;
+    since?: string;
+    before?: string;
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: TrackedTime[];
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/issues/${index}/times${QS.query(QS.form({
+        user,
+        since,
+        before,
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Add tracked time to a issue
+ */
+export function issueAddTime(owner: string, repo: string, index: number, addTimeOption?: AddTimeOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: TrackedTime;
+    } | {
+        status: 400;
+    } | {
+        status: 403;
+    }>(`/repos/${owner}/${repo}/issues/${index}/times`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: addTimeOption
+    }));
+}
+/**
+ * Reset a tracked time of an issue
+ */
+export function issueResetTime(owner: string, repo: string, index: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/issues/${index}/times`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * Delete specific tracked time
+ */
+export function issueDeleteTime(owner: string, repo: string, index: number, id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/issues/${index}/times/${id}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * List a repository's keys
+ */
+export function repoListKeys(owner: string, repo: string, { keyId, fingerprint, page, limit }: {
+    keyId?: number;
+    fingerprint?: string;
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: DeployKey[];
+    }>(`/repos/${owner}/${repo}/keys${QS.query(QS.form({
+        key_id: keyId,
+        fingerprint,
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Add a key to a repository
+ */
+export function repoCreateKey(owner: string, repo: string, createKeyOption?: CreateKeyOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: DeployKey;
+    } | {
+        status: 422;
+    }>(`/repos/${owner}/${repo}/keys`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: createKeyOption
+    }));
+}
+/**
+ * Get a repository's key by id
+ */
+export function repoGetKey(owner: string, repo: string, id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: DeployKey;
+    }>(`/repos/${owner}/${repo}/keys/${id}`, {
+        ...opts
+    });
+}
+/**
+ * Delete a key from a repository
+ */
+export function repoDeleteKey(owner: string, repo: string, id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/keys/${id}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * Get all of a repository's labels
+ */
+export function issueListLabels(owner: string, repo: string, { page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Label[];
+    }>(`/repos/${owner}/${repo}/labels${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Create a label
+ */
+export function issueCreateLabel(owner: string, repo: string, createLabelOption?: CreateLabelOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: Label;
+    } | {
+        status: 422;
+    }>(`/repos/${owner}/${repo}/labels`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: createLabelOption
+    }));
+}
+/**
+ * Get a single label
+ */
+export function issueGetLabel(owner: string, repo: string, id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Label;
+    }>(`/repos/${owner}/${repo}/labels/${id}`, {
+        ...opts
+    });
+}
+/**
+ * Delete a label
+ */
+export function issueDeleteLabel(owner: string, repo: string, id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/labels/${id}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * Update a label
+ */
+export function issueEditLabel(owner: string, repo: string, id: number, editLabelOption?: EditLabelOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Label;
+    } | {
+        status: 422;
+    }>(`/repos/${owner}/${repo}/labels/${id}`, oazapfts.json({
+        ...opts,
+        method: "PATCH",
+        body: editLabelOption
+    }));
+}
+/**
+ * Get languages and number of bytes of code written
+ */
+export function repoGetLanguages(owner: string, repo: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: {
+            [key: string]: number;
+        };
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/languages`, {
+        ...opts
+    });
+}
+/**
+ * Get all of a repository's opened milestones
+ */
+export function issueGetMilestonesList(owner: string, repo: string, { state, name, page, limit }: {
+    state?: string;
+    name?: string;
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Milestone[];
+    }>(`/repos/${owner}/${repo}/milestones${QS.query(QS.form({
+        state,
+        name,
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Create a milestone
+ */
+export function issueCreateMilestone(owner: string, repo: string, createMilestoneOption?: CreateMilestoneOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: Milestone;
+    }>(`/repos/${owner}/${repo}/milestones`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: createMilestoneOption
+    }));
+}
+/**
+ * Get a milestone
+ */
+export function issueGetMilestone(owner: string, repo: string, id: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Milestone;
+    }>(`/repos/${owner}/${repo}/milestones/${id}`, {
+        ...opts
+    });
+}
+/**
+ * Delete a milestone
+ */
+export function issueDeleteMilestone(owner: string, repo: string, id: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/milestones/${id}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * Update a milestone
+ */
+export function issueEditMilestone(owner: string, repo: string, id: string, editMilestoneOption?: EditMilestoneOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Milestone;
+    }>(`/repos/${owner}/${repo}/milestones/${id}`, oazapfts.json({
+        ...opts,
+        method: "PATCH",
+        body: editMilestoneOption
+    }));
+}
+/**
+ * Sync a mirrored repository
+ */
+export function repoMirrorSync(owner: string, repo: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/mirror-sync`, {
+        ...opts,
+        method: "POST"
+    });
+}
+/**
+ * List users's notification threads on a specific repo
+ */
+export function notifyGetRepoList(owner: string, repo: string, { all, statusTypes, subjectType, since, before, page, limit }: {
+    all?: boolean;
+    statusTypes?: string[];
+    subjectType?: ("issue" | "pull" | "commit" | "repository")[];
+    since?: string;
+    before?: string;
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: NotificationThread[];
+    }>(`/repos/${owner}/${repo}/notifications${QS.query(QS.form({
+        all,
+        since,
+        before,
+        page,
+        limit
+    }), QS.explode({
+        "status-types": statusTypes,
+        "subject-type": subjectType
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Mark notification threads as read, pinned or unread on a specific repo
+ */
+export function notifyReadRepoList(owner: string, repo: string, { all, statusTypes, toStatus, lastReadAt }: {
+    all?: string;
+    statusTypes?: string[];
+    toStatus?: string;
+    lastReadAt?: string;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 205;
+        data: NotificationThread[];
+    }>(`/repos/${owner}/${repo}/notifications${QS.query(QS.form({
+        all,
+        "to-status": toStatus,
+        last_read_at: lastReadAt
+    }), QS.explode({
+        "status-types": statusTypes
+    }))}`, {
+        ...opts,
+        method: "PUT"
+    });
+}
+/**
+ * List a repo's pull requests
+ */
+export function repoListPullRequests(owner: string, repo: string, { state, sort, milestone, labels, page, limit }: {
+    state?: "closed" | "open" | "all";
+    sort?: "oldest" | "recentupdate" | "leastupdate" | "mostcomment" | "leastcomment" | "priority";
+    milestone?: number;
+    labels?: number[];
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: PullRequest[];
+    }>(`/repos/${owner}/${repo}/pulls${QS.query(QS.form({
+        state,
+        sort,
+        milestone,
+        page,
+        limit
+    }), QS.explode({
+        labels
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Create a pull request
+ */
+export function repoCreatePullRequest(owner: string, repo: string, createPullRequestOption?: CreatePullRequestOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: PullRequest;
+    } | {
+        status: 409;
+    } | {
+        status: 422;
+    }>(`/repos/${owner}/${repo}/pulls`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: createPullRequestOption
+    }));
+}
+/**
+ * Get a pull request
+ */
+export function repoGetPullRequest(owner: string, repo: string, index: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: PullRequest;
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/pulls/${index}`, {
+        ...opts
+    });
+}
+/**
+ * Update a pull request. If using deadline only the date will be taken into account, and time of day ignored.
+ */
+export function repoEditPullRequest(owner: string, repo: string, index: number, editPullRequestOption?: EditPullRequestOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: PullRequest;
+    } | {
+        status: 403;
+    } | {
+        status: 409;
+    } | {
+        status: 412;
+    } | {
+        status: 422;
+    }>(`/repos/${owner}/${repo}/pulls/${index}`, oazapfts.json({
+        ...opts,
+        method: "PATCH",
+        body: editPullRequestOption
+    }));
+}
+/**
+ * Get a pull request diff or patch
+ */
+export function repoDownloadPullDiffOrPatch(owner: string, repo: string, index: number, diffType: "diff" | "patch", { binary }: {
+    binary?: boolean;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: string;
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/pulls/${index}.${diffType}${QS.query(QS.form({
+        binary
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Get commits for a pull request
+ */
+export function repoGetPullRequestCommits(owner: string, repo: string, index: number, { page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: CommitContainsInformationGeneratedFromAGitCommit[];
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/pulls/${index}/commits${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Check if a pull request has been merged
+ */
+export function repoPullRequestIsMerged(owner: string, repo: string, index: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/pulls/${index}/merge`, {
+        ...opts
+    });
+}
+/**
+ * Merge a pull request
+ */
+export function repoMergePullRequest(owner: string, repo: string, index: number, mergePullRequestOption?: MergePullRequestOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/pulls/${index}/merge`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: mergePullRequestOption
+    }));
+}
+/**
+ * create review requests for a pull request
+ */
+export function repoCreatePullReviewRequests(owner: string, repo: string, index: number, pullReviewRequestOptions: PullReviewRequestOptions, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: PullReview[];
+    } | {
+        status: 404;
+    } | {
+        status: 422;
+    }>(`/repos/${owner}/${repo}/pulls/${index}/requested_reviewers`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: pullReviewRequestOptions
+    }));
+}
+/**
+ * cancel review requests for a pull request
+ */
+export function repoDeletePullReviewRequests(owner: string, repo: string, index: number, pullReviewRequestOptions: PullReviewRequestOptions, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/pulls/${index}/requested_reviewers`, oazapfts.json({
+        ...opts,
+        method: "DELETE",
+        body: pullReviewRequestOptions
+    }));
+}
+/**
+ * List all reviews for a pull request
+ */
+export function repoListPullReviews(owner: string, repo: string, index: number, { page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: PullReview[];
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/pulls/${index}/reviews${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Create a review to an pull request
+ */
+export function repoCreatePullReview(owner: string, repo: string, index: number, createPullReviewOptions: CreatePullReviewOptions, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: PullReview;
+    } | {
+        status: 404;
+    } | {
+        status: 422;
+    }>(`/repos/${owner}/${repo}/pulls/${index}/reviews`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: createPullReviewOptions
+    }));
+}
+/**
+ * Get a specific review for a pull request
+ */
+export function repoGetPullReview(owner: string, repo: string, index: number, id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: PullReview;
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/pulls/${index}/reviews/${id}`, {
+        ...opts
+    });
+}
+/**
+ * Submit a pending review to an pull request
+ */
+export function repoSubmitPullReview(owner: string, repo: string, index: number, id: number, submitPullReviewOptions: SubmitPullReviewOptions, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: PullReview;
+    } | {
+        status: 404;
+    } | {
+        status: 422;
+    }>(`/repos/${owner}/${repo}/pulls/${index}/reviews/${id}`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: submitPullReviewOptions
+    }));
+}
+/**
+ * Delete a specific review from a pull request
+ */
+export function repoDeletePullReview(owner: string, repo: string, index: number, id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/pulls/${index}/reviews/${id}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * Get a specific review for a pull request
+ */
+export function repoGetPullReviewComments(owner: string, repo: string, index: number, id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: PullReviewComment[];
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/pulls/${index}/reviews/${id}/comments`, {
+        ...opts
+    });
+}
+/**
+ * Dismiss a review for a pull request
+ */
+export function repoDismissPullReview(owner: string, repo: string, index: number, id: number, dismissPullReviewOptions: DismissPullReviewOptions, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: PullReview;
+    } | {
+        status: 403;
+    } | {
+        status: 422;
+    }>(`/repos/${owner}/${repo}/pulls/${index}/reviews/${id}/dismissals`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: dismissPullReviewOptions
+    }));
+}
+/**
+ * Cancel to dismiss a review for a pull request
+ */
+export function repoUnDismissPullReview(owner: string, repo: string, index: number, id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: PullReview;
+    } | {
+        status: 403;
+    } | {
+        status: 422;
+    }>(`/repos/${owner}/${repo}/pulls/${index}/reviews/${id}/undismissals`, {
+        ...opts,
+        method: "POST"
+    });
+}
+/**
+ * Merge PR's baseBranch into headBranch
+ */
+export function repoUpdatePullRequest(owner: string, repo: string, index: number, { style }: {
+    style?: "merge" | "rebase";
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/pulls/${index}/update${QS.query(QS.form({
+        style
+    }))}`, {
+        ...opts,
+        method: "POST"
+    });
+}
+/**
+ * Get a file from a repository
+ */
+export function repoGetRawFile(owner: string, repo: string, filepath: string, { ref }: {
+    ref?: string;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/raw/${filepath}${QS.query(QS.form({
+        ref
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * List a repo's releases
+ */
+export function repoListReleases(owner: string, repo: string, { draft, preRelease, perPage, page, limit }: {
+    draft?: boolean;
+    preRelease?: boolean;
+    perPage?: number;
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Release[];
+    }>(`/repos/${owner}/${repo}/releases${QS.query(QS.form({
+        draft,
+        "pre-release": preRelease,
+        per_page: perPage,
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Create a release
+ */
+export function repoCreateRelease(owner: string, repo: string, createReleaseOption?: CreateReleaseOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: Release;
+    } | {
+        status: 404;
+    } | {
+        status: 409;
+    }>(`/repos/${owner}/${repo}/releases`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: createReleaseOption
+    }));
+}
+/**
+ * Get a release by tag name
+ */
+export function repoGetReleaseByTag(owner: string, repo: string, tag: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Release;
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/releases/tags/${tag}`, {
+        ...opts
+    });
+}
+/**
+ * Delete a release by tag name
+ */
+export function repoDeleteReleaseByTag(owner: string, repo: string, tag: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/releases/tags/${tag}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * Get a release
+ */
+export function repoGetRelease(owner: string, repo: string, id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Release;
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/releases/${id}`, {
+        ...opts
+    });
+}
+/**
+ * Delete a release
+ */
+export function repoDeleteRelease(owner: string, repo: string, id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/releases/${id}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * Update a release
+ */
+export function repoEditRelease(owner: string, repo: string, id: number, editReleaseOption?: EditReleaseOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Release;
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/releases/${id}`, oazapfts.json({
+        ...opts,
+        method: "PATCH",
+        body: editReleaseOption
+    }));
+}
+/**
+ * List release's attachments
+ */
+export function repoListReleaseAttachments(owner: string, repo: string, id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Attachment[];
+    }>(`/repos/${owner}/${repo}/releases/${id}/assets`, {
+        ...opts
+    });
+}
+/**
+ * Create a release attachment
+ */
+export function repoCreateReleaseAttachment(owner: string, repo: string, id: number, body: {
+    attachment: Blob;
+}, { name }: {
+    name?: string;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: Attachment;
+    } | {
+        status: 400;
+    }>(`/repos/${owner}/${repo}/releases/${id}/assets${QS.query(QS.form({
+        name
+    }))}`, oazapfts.multipart({
+        ...opts,
+        method: "POST",
+        body
+    }));
+}
+/**
+ * Get a release attachment
+ */
+export function repoGetReleaseAttachment(owner: string, repo: string, id: number, attachmentId: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Attachment;
+    }>(`/repos/${owner}/${repo}/releases/${id}/assets/${attachmentId}`, {
+        ...opts
+    });
+}
+/**
+ * Delete a release attachment
+ */
+export function repoDeleteReleaseAttachment(owner: string, repo: string, id: number, attachmentId: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/releases/${id}/assets/${attachmentId}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * Edit a release attachment
+ */
+export function repoEditReleaseAttachment(owner: string, repo: string, id: number, attachmentId: number, editAttachmentOptions?: EditAttachmentOptions, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: Attachment;
+    }>(`/repos/${owner}/${repo}/releases/${id}/assets/${attachmentId}`, oazapfts.json({
+        ...opts,
+        method: "PATCH",
+        body: editAttachmentOptions
+    }));
+}
+/**
+ * Return all users that can be requested to review in this repo
+ */
+export function repoGetReviewers(owner: string, repo: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: User[];
+    }>(`/repos/${owner}/${repo}/reviewers`, {
+        ...opts
+    });
+}
+/**
+ * Get signing-key.gpg for given repository
+ */
+export function repoSigningKey(owner: string, repo: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/signing-key.gpg`, {
+        ...opts
+    });
+}
+/**
+ * List a repo's stargazers
+ */
+export function repoListStargazers(owner: string, repo: string, { page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: User[];
+    }>(`/repos/${owner}/${repo}/stargazers${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Get a commit's statuses
+ */
+export function repoListStatuses(owner: string, repo: string, sha: string, { sort, state, page, limit }: {
+    sort?: "oldest" | "recentupdate" | "leastupdate" | "leastindex" | "highestindex";
+    state?: "pending" | "success" | "error" | "failure" | "warning";
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: CommitStatus[];
+    } | {
+        status: 400;
+    }>(`/repos/${owner}/${repo}/statuses/${sha}${QS.query(QS.form({
+        sort,
+        state,
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Create a commit status
+ */
+export function repoCreateStatus(owner: string, repo: string, sha: string, createStatusOption?: CreateStatusOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: CommitStatus;
+    } | {
+        status: 400;
+    }>(`/repos/${owner}/${repo}/statuses/${sha}`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: createStatusOption
+    }));
+}
+/**
+ * List a repo's watchers
+ */
+export function repoListSubscribers(owner: string, repo: string, { page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: User[];
+    }>(`/repos/${owner}/${repo}/subscribers${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Check if the current user is watching a repo
+ */
+export function userCurrentCheckSubscription(owner: string, repo: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: WatchInfo;
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/subscription`, {
+        ...opts
+    });
+}
+/**
+ * Watch a repo
+ */
+export function userCurrentPutSubscription(owner: string, repo: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: WatchInfo;
+    }>(`/repos/${owner}/${repo}/subscription`, {
+        ...opts,
+        method: "PUT"
+    });
+}
+/**
+ * Unwatch a repo
+ */
+export function userCurrentDeleteSubscription(owner: string, repo: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/subscription`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * List a repository's tags
+ */
+export function repoListTags(owner: string, repo: string, { page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Tag[];
+    }>(`/repos/${owner}/${repo}/tags${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Create a new git tag in a repository
+ */
+export function repoCreateTag(owner: string, repo: string, createTagOption?: CreateTagOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Tag;
+    } | {
+        status: 404;
+    } | {
+        status: 405;
+    } | {
+        status: 409;
+    }>(`/repos/${owner}/${repo}/tags`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: createTagOption
+    }));
+}
+/**
+ * Get the tag of a repository by tag name
+ */
+export function repoGetTag(owner: string, repo: string, tag: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Tag;
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/tags/${tag}`, {
+        ...opts
+    });
+}
+/**
+ * Delete a repository's tag by name
+ */
+export function repoDeleteTag(owner: string, repo: string, tag: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/tags/${tag}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * List a repository's teams
+ */
+export function repoListTeams(owner: string, repo: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Team[];
+    }>(`/repos/${owner}/${repo}/teams`, {
+        ...opts
+    });
+}
+/**
+ * Check if a team is assigned to a repository
+ */
+export function repoCheckTeam(owner: string, repo: string, team: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Team;
+    } | {
+        status: 404;
+    } | {
+        status: 405;
+    }>(`/repos/${owner}/${repo}/teams/${team}`, {
+        ...opts
+    });
+}
+/**
+ * Add a team to a repository
+ */
+export function repoAddTeam(owner: string, repo: string, team: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/teams/${team}`, {
+        ...opts,
+        method: "PUT"
+    });
+}
+/**
+ * Delete a team from a repository
+ */
+export function repoDeleteTeam(owner: string, repo: string, team: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/teams/${team}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * List a repo's tracked times
+ */
+export function repoTrackedTimes(owner: string, repo: string, { user, since, before, page, limit }: {
+    user?: string;
+    since?: string;
+    before?: string;
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: TrackedTime[];
+    } | {
+        status: 400;
+    } | {
+        status: 403;
+    }>(`/repos/${owner}/${repo}/times${QS.query(QS.form({
+        user,
+        since,
+        before,
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * List a user's tracked times in a repo
+ */
+export function userTrackedTimes(owner: string, repo: string, user: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: TrackedTime[];
+    } | {
+        status: 400;
+    } | {
+        status: 403;
+    }>(`/repos/${owner}/${repo}/times/${user}`, {
+        ...opts
+    });
+}
+/**
+ * Get list of topics that a repository has
+ */
+export function repoListTopics(owner: string, repo: string, { page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: TopicName;
+    }>(`/repos/${owner}/${repo}/topics${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Replace list of topics for a repository
+ */
+export function repoUpdateTopics(owner: string, repo: string, repoTopicOptions?: RepoTopicOptions, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/topics`, oazapfts.json({
+        ...opts,
+        method: "PUT",
+        body: repoTopicOptions
+    }));
+}
+/**
+ * Add a topic to a repository
+ */
+export function repoAddTopic(owner: string, repo: string, topic: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/topics/${topic}`, {
+        ...opts,
+        method: "PUT"
+    });
+}
+/**
+ * Delete a topic from a repository
+ */
+export function repoDeleteTopic(owner: string, repo: string, topic: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/topics/${topic}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * Transfer a repo ownership
+ */
+export function repoTransfer(owner: string, repo: string, transferRepoOption: TransferRepoOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 202;
+        data: Repository;
+    } | {
+        status: 403;
+    } | {
+        status: 404;
+    } | {
+        status: 422;
+    }>(`/repos/${owner}/${repo}/transfer`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: transferRepoOption
+    }));
+}
+/**
+ * Accept a repo transfer
+ */
+export function acceptRepoTransfer(owner: string, repo: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 202;
+        data: Repository;
+    } | {
+        status: 403;
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/transfer/accept`, {
+        ...opts,
+        method: "POST"
+    });
+}
+/**
+ * Reject a repo transfer
+ */
+export function rejectRepoTransfer(owner: string, repo: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Repository;
+    } | {
+        status: 403;
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/transfer/reject`, {
+        ...opts,
+        method: "POST"
+    });
+}
+/**
+ * Create a wiki page
+ */
+export function repoCreateWikiPage(owner: string, repo: string, createWikiPageOptions?: CreateWikiPageOptions, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: WikiPage;
+    } | {
+        status: 400;
+    } | {
+        status: 403;
+    }>(`/repos/${owner}/${repo}/wiki/new`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: createWikiPageOptions
+    }));
+}
+/**
+ * Get a wiki page
+ */
+export function repoGetWikiPage(owner: string, repo: string, pageName: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: WikiPage;
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/wiki/page/${pageName}`, {
+        ...opts
+    });
+}
+/**
+ * Delete a wiki page
+ */
+export function repoDeleteWikiPage(owner: string, repo: string, pageName: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/repos/${owner}/${repo}/wiki/page/${pageName}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * Edit a wiki page
+ */
+export function repoEditWikiPage(owner: string, repo: string, pageName: string, createWikiPageOptions?: CreateWikiPageOptions, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: WikiPage;
+    } | {
+        status: 400;
+    } | {
+        status: 403;
+    }>(`/repos/${owner}/${repo}/wiki/page/${pageName}`, oazapfts.json({
+        ...opts,
+        method: "PATCH",
+        body: createWikiPageOptions
+    }));
+}
+/**
+ * Get all wiki pages
+ */
+export function repoGetWikiPages(owner: string, repo: string, { page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: WikiPageMetaData[];
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/wiki/pages${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Get revisions of a wiki page
+ */
+export function repoGetWikiPageRevisions(owner: string, repo: string, pageName: string, { page }: {
+    page?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: WikiCommitList;
+    } | {
+        status: 404;
+    }>(`/repos/${owner}/${repo}/wiki/revisions/${pageName}${QS.query(QS.form({
+        page
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Create a repository using a template
+ */
+export function generateRepo(templateOwner: string, templateRepo: string, generateRepoOption?: GenerateRepoOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: Repository;
+    } | {
+        status: 403;
+    } | {
+        status: 404;
+    } | {
+        status: 409;
+    } | {
+        status: 422;
+    }>(`/repos/${templateOwner}/${templateRepo}/generate`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: generateRepoOption
+    }));
+}
+/**
+ * Get a repository by id
+ */
+export function repoGetById(id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Repository;
+    }>(`/repositories/${id}`, {
+        ...opts
+    });
+}
+/**
+ * Get instance's global settings for api
+ */
+export function getGeneralApiSettings(opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: GeneralApiSettings;
+    }>("/settings/api", {
+        ...opts
+    });
+}
+/**
+ * Get instance's global settings for Attachment
+ */
+export function getGeneralAttachmentSettings(opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: GeneralAttachmentSettings;
+    }>("/settings/attachment", {
+        ...opts
+    });
+}
+/**
+ * Get instance's global settings for repositories
+ */
+export function getGeneralRepositorySettings(opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: GeneralRepoSettings;
+    }>("/settings/repository", {
+        ...opts
+    });
+}
+/**
+ * Get instance's global settings for ui
+ */
+export function getGeneralUiSettings(opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: GeneralUiSettings;
+    }>("/settings/ui", {
+        ...opts
+    });
+}
+/**
+ * Get default signing-key.gpg
+ */
+export function getSigningKey(opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText("/signing-key.gpg", {
+        ...opts
+    });
+}
+/**
+ * Get a team
+ */
+export function orgGetTeam(id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Team;
+    }>(`/teams/${id}`, {
+        ...opts
+    });
+}
+/**
+ * Delete a team
+ */
+export function orgDeleteTeam(id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/teams/${id}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * Edit a team
+ */
+export function orgEditTeam(id: number, editTeamOption?: EditTeamOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Team;
+    }>(`/teams/${id}`, oazapfts.json({
+        ...opts,
+        method: "PATCH",
+        body: editTeamOption
+    }));
+}
+/**
+ * List a team's members
+ */
+export function orgListTeamMembers(id: number, { page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: User[];
+    }>(`/teams/${id}/members${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * List a particular member of team
+ */
+export function orgListTeamMember(id: number, username: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: User;
+    } | {
+        status: 404;
+    }>(`/teams/${id}/members/${username}`, {
+        ...opts
+    });
+}
+/**
+ * Add a team member
+ */
+export function orgAddTeamMember(id: number, username: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/teams/${id}/members/${username}`, {
+        ...opts,
+        method: "PUT"
+    });
+}
+/**
+ * Remove a team member
+ */
+export function orgRemoveTeamMember(id: number, username: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/teams/${id}/members/${username}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * List a team's repos
+ */
+export function orgListTeamRepos(id: number, { page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Repository[];
+    }>(`/teams/${id}/repos${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Add a repository to a team
+ */
+export function orgAddTeamRepository(id: number, org: string, repo: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/teams/${id}/repos/${org}/${repo}`, {
+        ...opts,
+        method: "PUT"
+    });
+}
+/**
+ * Remove a repository from a team
+ */
+export function orgRemoveTeamRepository(id: number, org: string, repo: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/teams/${id}/repos/${org}/${repo}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * search topics via keyword
+ */
+export function topicSearch(q: string, { page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: TopicResponse[];
+    } | {
+        status: 403;
+    }>(`/topics/search${QS.query(QS.form({
+        q,
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Get the authenticated user
+ */
+export function userGetCurrent(opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: User;
+    }>("/user", {
+        ...opts
+    });
+}
+/**
+ * List the authenticated user's oauth2 applications
+ */
+export function userGetOauth2Application({ page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: OAuth2ApplicationRepresentsAnOAuth2Application[];
+    }>(`/user/applications/oauth2${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * creates a new OAuth2 application
+ */
+export function userCreateOAuth2Application(createOAuth2ApplicationOptions: CreateOAuth2ApplicationOptions, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: OAuth2ApplicationRepresentsAnOAuth2Application;
+    } | {
+        status: 400;
+    }>("/user/applications/oauth2", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: createOAuth2ApplicationOptions
+    }));
+}
+/**
+ * get an OAuth2 Application
+ */
+export function userGetOAuth2Application(id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: OAuth2ApplicationRepresentsAnOAuth2Application;
+    } | {
+        status: 404;
+    }>(`/user/applications/oauth2/${id}`, {
+        ...opts
+    });
+}
+/**
+ * delete an OAuth2 Application
+ */
+export function userDeleteOAuth2Application(id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/user/applications/oauth2/${id}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * update an OAuth2 Application, this includes regenerating the client secret
+ */
+export function userUpdateOAuth2Application(id: number, createOAuth2ApplicationOptions: CreateOAuth2ApplicationOptions, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: OAuth2ApplicationRepresentsAnOAuth2Application;
+    } | {
+        status: 404;
+    }>(`/user/applications/oauth2/${id}`, oazapfts.json({
+        ...opts,
+        method: "PATCH",
+        body: createOAuth2ApplicationOptions
+    }));
+}
+/**
+ * List the authenticated user's email addresses
+ */
+export function userListEmails(opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Email[];
+    }>("/user/emails", {
+        ...opts
+    });
+}
+/**
+ * Add email addresses
+ */
+export function userAddEmail(createEmailOption?: CreateEmailOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: Email[];
+    } | {
+        status: 422;
+    }>("/user/emails", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: createEmailOption
+    }));
+}
+/**
+ * Delete email addresses
+ */
+export function userDeleteEmail(deleteEmailOption?: DeleteEmailOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText("/user/emails", oazapfts.json({
+        ...opts,
+        method: "DELETE",
+        body: deleteEmailOption
+    }));
+}
+/**
+ * List the authenticated user's followers
+ */
+export function userCurrentListFollowers({ page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: User[];
+    }>(`/user/followers${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * List the users that the authenticated user is following
+ */
+export function userCurrentListFollowing({ page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: User[];
+    }>(`/user/following${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Check whether a user is followed by the authenticated user
+ */
+export function userCurrentCheckFollowing(username: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/user/following/${username}`, {
+        ...opts
+    });
+}
+/**
+ * Follow a user
+ */
+export function userCurrentPutFollow(username: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/user/following/${username}`, {
+        ...opts,
+        method: "PUT"
+    });
+}
+/**
+ * Unfollow a user
+ */
+export function userCurrentDeleteFollow(username: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/user/following/${username}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * Get a Token to verify
+ */
+export function getVerificationToken(opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: string;
+    } | {
+        status: 404;
+    }>("/user/gpg_key_token", {
+        ...opts
+    });
+}
+/**
+ * Verify a GPG key
+ */
+export function userVerifyGpgKey(opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: GpgKey;
+    } | {
+        status: 404;
+    } | {
+        status: 422;
+    }>("/user/gpg_key_verify", {
+        ...opts,
+        method: "POST"
+    });
+}
+/**
+ * List the authenticated user's GPG keys
+ */
+export function userCurrentListGpgKeys({ page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: GpgKey[];
+    }>(`/user/gpg_keys${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Create a GPG key
+ */
+export function userCurrentPostGpgKey(createGpgKeyOption?: CreateGpgKeyOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: GpgKey;
+    } | {
+        status: 404;
+    } | {
+        status: 422;
+    }>("/user/gpg_keys", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: createGpgKeyOption
+    }));
+}
+/**
+ * Get a GPG key
+ */
+export function userCurrentGetGpgKey(id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: GpgKey;
+    } | {
+        status: 404;
+    }>(`/user/gpg_keys/${id}`, {
+        ...opts
+    });
+}
+/**
+ * Remove a GPG key
+ */
+export function userCurrentDeleteGpgKey(id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/user/gpg_keys/${id}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * List the authenticated user's public keys
+ */
+export function userCurrentListKeys({ fingerprint, page, limit }: {
+    fingerprint?: string;
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: PublicKey[];
+    }>(`/user/keys${QS.query(QS.form({
+        fingerprint,
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Create a public key
+ */
+export function userCurrentPostKey(createKeyOption?: CreateKeyOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: PublicKey;
+    } | {
+        status: 422;
+    }>("/user/keys", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: createKeyOption
+    }));
+}
+/**
+ * Get a public key
+ */
+export function userCurrentGetKey(id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: PublicKey;
+    } | {
+        status: 404;
+    }>(`/user/keys/${id}`, {
+        ...opts
+    });
+}
+/**
+ * Delete a public key
+ */
+export function userCurrentDeleteKey(id: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/user/keys/${id}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * List the current user's organizations
+ */
+export function orgListCurrentUserOrgs({ page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Organization[];
+    }>(`/user/orgs${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * List the repos that the authenticated user owns
+ */
+export function userCurrentListRepos({ page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Repository[];
+    }>(`/user/repos${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Create a repository
+ */
+export function createCurrentUserRepo(createRepoOption?: CreateRepoOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: Repository;
+    } | {
+        status: 409;
+    } | {
+        status: 422;
+    }>("/user/repos", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: createRepoOption
+    }));
+}
+/**
+ * Get user settings
+ */
+export function getUserSettings(opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: UserSettings[];
+    }>("/user/settings", {
+        ...opts
+    });
+}
+/**
+ * Update user settings
+ */
+export function updateUserSettings(userSettingsOptions?: UserSettingsOptions, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: UserSettings[];
+    }>("/user/settings", oazapfts.json({
+        ...opts,
+        method: "PATCH",
+        body: userSettingsOptions
+    }));
+}
+/**
+ * The repos that the authenticated user has starred
+ */
+export function userCurrentListStarred({ page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Repository[];
+    }>(`/user/starred${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Whether the authenticated is starring the repo
+ */
+export function userCurrentCheckStarring(owner: string, repo: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/user/starred/${owner}/${repo}`, {
+        ...opts
+    });
+}
+/**
+ * Star the given repo
+ */
+export function userCurrentPutStar(owner: string, repo: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/user/starred/${owner}/${repo}`, {
+        ...opts,
+        method: "PUT"
+    });
+}
+/**
+ * Unstar the given repo
+ */
+export function userCurrentDeleteStar(owner: string, repo: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/user/starred/${owner}/${repo}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * Get list of all existing stopwatches
+ */
+export function userGetStopWatches({ page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: StopWatch[];
+    }>(`/user/stopwatches${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * List repositories watched by the authenticated user
+ */
+export function userCurrentListSubscriptions({ page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Repository[];
+    }>(`/user/subscriptions${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * List all the teams a user belongs to
+ */
+export function userListTeams({ page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Team[];
+    }>(`/user/teams${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * List the current user's tracked times
+ */
+export function userCurrentTrackedTimes({ since, before }: {
+    since?: string;
+    before?: string;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: TrackedTime[];
+    }>(`/user/times${QS.query(QS.form({
+        since,
+        before
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Search for users
+ */
+export function userSearch({ q, uid, lang, page, limit }: {
+    q?: string;
+    uid?: number;
+    lang?: string;
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: {
+            data?: User[];
+            ok?: boolean;
+        };
+    }>(`/users/search${QS.query(QS.form({
+        q,
+        uid,
+        lang,
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Check if one user is following another user
+ */
+export function userCheckFollowing(follower: string, followee: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/users/${follower}/following/${followee}`, {
+        ...opts
+    });
+}
+/**
+ * Get a user
+ */
+export function userGet(username: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: User;
+    } | {
+        status: 404;
+    }>(`/users/${username}`, {
+        ...opts
+    });
+}
+/**
+ * List the given user's followers
+ */
+export function userListFollowers(username: string, { page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: User[];
+    }>(`/users/${username}/followers${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * List the users that the given user is following
+ */
+export function userListFollowing(username: string, { page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: User[];
+    }>(`/users/${username}/following${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * List the given user's GPG keys
+ */
+export function userListGpgKeys(username: string, { page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: GpgKey[];
+    }>(`/users/${username}/gpg_keys${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Get a user's heatmap
+ */
+export function userGetHeatmapData(username: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: UserHeatmapData[];
+    } | {
+        status: 404;
+    }>(`/users/${username}/heatmap`, {
+        ...opts
+    });
+}
+/**
+ * List the given user's public keys
+ */
+export function userListKeys(username: string, { fingerprint, page, limit }: {
+    fingerprint?: string;
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: PublicKey[];
+    }>(`/users/${username}/keys${QS.query(QS.form({
+        fingerprint,
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * List a user's organizations
+ */
+export function orgListUserOrgs(username: string, { page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Organization[];
+    }>(`/users/${username}/orgs${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Get user permissions in organization
+ */
+export function orgGetUserPermissions(username: string, org: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: OrganizationPermissions;
+    } | {
+        status: 403;
+    } | {
+        status: 404;
+    }>(`/users/${username}/orgs/${org}/permissions`, {
+        ...opts
+    });
+}
+/**
+ * List the repos owned by the given user
+ */
+export function userListRepos(username: string, { page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Repository[];
+    }>(`/users/${username}/repos${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * The repos that the given user has starred
+ */
+export function userListStarred(username: string, { page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Repository[];
+    }>(`/users/${username}/starred${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * List the repositories watched by a user
+ */
+export function userListSubscriptions(username: string, { page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: Repository[];
+    }>(`/users/${username}/subscriptions${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * List the authenticated user's access tokens
+ */
+export function userGetTokens(username: string, { page, limit }: {
+    page?: number;
+    limit?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: AccessTokenRepresentsAnApiAccessToken[];
+    }>(`/users/${username}/tokens${QS.query(QS.form({
+        page,
+        limit
+    }))}`, {
+        ...opts
+    });
+}
+/**
+ * Create an access token
+ */
+export function userCreateToken(username: string, createAccessTokenOption?: CreateAccessTokenOption, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 201;
+        data: AccessTokenRepresentsAnApiAccessToken;
+    } | {
+        status: 400;
+    }>(`/users/${username}/tokens`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: createAccessTokenOption
+    }));
+}
+/**
+ * delete an access token
+ */
+export function userDeleteAccessToken(username: string, token: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchText(`/users/${username}/tokens/${token}`, {
+        ...opts,
+        method: "DELETE"
+    });
+}
+/**
+ * Returns the version of the Gitea application
+ */
+export function getVersion(opts?: Oazapfts.RequestOpts) {
+    return oazapfts.fetchJson<{
+        status: 200;
+        data: ServerVersion;
+    }>("/version", {
+        ...opts
+    });
+}

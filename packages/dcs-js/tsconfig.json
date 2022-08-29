@@ -1,12 +1,14 @@
 {
   "compilerOptions": {
+    "isolatedModules": true,
     "declaration": true,
     "emitDeclarationOnly": true,
     "target": "es5",
     "module": "commonjs",
     "noImplicitAny": true,
     "declarationDir": "dist",
-    "rootDir": "src/",
+    "outDir": "dist/",
+    "rootDirs": ["src/service/base", "src/service/catalog-next"],
     "lib": ["es6", "dom"],
     "typeRoots": ["node_modules/@types"]
   },

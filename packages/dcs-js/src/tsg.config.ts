@@ -10,6 +10,14 @@ import catalogAdapters from "./adapters/catalog-next";
 type Adapters = typeof baseAdapters | typeof catalogAdapters;
 type T = keyof Adapters;
 
+type GenerateRequestFunction = GenerateRequestFunctionNameParameter & {
+  parameterRequired: boolean;
+  parameterTypeName: string;
+  responseSuccessTypeName: string;
+  project: Project;
+  originSource: string;
+};
+
 const functionNameGenerator =
   (adapters: Adapters) =>
   (arg: GenerateRequestFunctionNameParameter): string => {
@@ -17,7 +25,7 @@ const functionNameGenerator =
     const method = arg.httpMethod;
     const data = arg.schema.paths[pathname];
     const dataKeys = Object.keys(data);
-    const key = <T>data[method].operationId;
+    const key = <T>data[method]?.operationId;
     return dataKeys.length
       ? adapters[key]
       : method +
@@ -34,17 +42,21 @@ const projects: Project[] = [
     name: "base",
     dest: "service",
     source: "https://git.door43.org/swagger.v1.json",
-    importRequesterStatement: 'import { requester } from "../../requester"',
-    simplifyRequestOption: true,
+    importRequesterStatement:
+      'import { requester, RequestParameters } from "../../requester"',
+    withBasePath: true,
     generateRequestFunctionName: functionNameGenerator(baseAdapters),
+    requestOptionUnionType: "RequestParameters",
   },
   {
     name: "catalog-next",
     dest: "service",
     source: "https://git.door43.org/swagger.catalog.json",
-    importRequesterStatement: 'import { requester } from "../../requester"',
-    simplifyRequestOption: true,
+    importRequesterStatement:
+      'import { requester, RequestParameters } from "../../requester"',
+    withBasePath: true,
     generateRequestFunctionName: functionNameGenerator(catalogAdapters),
+    requestOptionUnionType: "RequestParameters",
   },
 ];
 

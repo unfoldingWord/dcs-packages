@@ -1,0 +1,10 @@
+{
+  "name": "dcs-ts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "abelpz",
+  "license": "MIT",
+  "dependencies": {
+    "oazapfts": "^3.6.0"
+  }
+}

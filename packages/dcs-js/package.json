@@ -1,11 +1,14 @@
 {
   "name": "dcs-js",
-  "version": "1.2.2-beta.1",
+  "version": "0.2.0",
   "description": "OpenAPI client for DCS (Door43 Content Service)",
   "author": "OpenAPI-Generator Contributors",
   "type": "module",
   "files": [
-    "dist/*"
+    "dist/*",
+    "index.d.ts",
+    "base.d.ts",
+    "catalog-next.d.ts"
   ],
   "exports": {
     "./base": {
@@ -25,11 +28,10 @@
     "dcs"
   ],
   "license": "MIT",
-  "typings": "./dist/index.d.ts",
-  "types": "./dist/index.d.ts",
+  "types": "./index.d.ts",
   "scripts": {
     "dev": "vite serve",
-    "build": "node scripts/build.mjs && tsc --outDir dist/",
+    "build": "npx tsg & node scripts/build.mjs && tsc",
     "preview": "vite preview",
     "prepublishOnly": "yarn run build",
     "docmd": "npx typedoc --plugin typedoc-plugin-markdown --out documentation/ ./ --name dcs-js --namedAnchors true",
